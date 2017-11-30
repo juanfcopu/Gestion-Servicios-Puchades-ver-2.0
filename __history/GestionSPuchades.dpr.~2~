@@ -1,0 +1,18 @@
+program GestionSPuchades;
+
+uses
+  Vcl.Forms,
+  FPrincipal in 'FPrincipal.pas' {Form1},
+  DModule1 in 'DModule1.pas' {DataModule1: TDataModule},
+  BOTONES in 'BOTONES.pas' {Form2};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TForm2, Form2);
+  Application.Run;
+end.

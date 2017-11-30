@@ -1,0 +1,12 @@
+﻿[fdClientes]
+Coordinates=10,10,64,87
+
+[FDGUIxWaitCursor1]
+Coordinates=192,1,113,33
+
+[FDPhysMySQLDriverLink1]
+Coordinates=192,53,144,33
+
+[FDConnection1]
+Coordinates=84,10,90,33
+
