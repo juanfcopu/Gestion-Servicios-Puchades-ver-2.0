@@ -20,8 +20,6 @@ type
     PageControl2: TPageControl;
     Panel1: TPanel;
     Splitter1: TSplitter;
-    DBGrid1: TDBGrid;
-    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -36,7 +34,7 @@ implementation
 
 {$R *.dfm}
 
-uses BOTONES, listaclientes, DModule1;
+uses BOTONES, listaclientes;
 
 procedure Tprincipal.FormCreate(Sender: TObject);
 var botons:Tmenuseleccion;  lclient: Tlistclientes ;

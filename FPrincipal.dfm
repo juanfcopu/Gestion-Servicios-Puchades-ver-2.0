@@ -38,8 +38,6 @@ object principal: Tprincipal
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
-    ExplicitLeft = 233
-    ExplicitWidth = 951
     object PageControl2: TPageControl
       Left = 1
       Top = 1
@@ -48,20 +46,6 @@ object principal: Tprincipal
       Align = alClient
       DockSite = True
       TabOrder = 0
-      ExplicitWidth = 949
-    end
-    object DBGrid1: TDBGrid
-      Left = 208
-      Top = 144
-      Width = 353
-      Height = 297
-      DataSource = DataSource1
-      TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
     end
   end
   object Panel1: TPanel
@@ -73,7 +57,6 @@ object principal: Tprincipal
     DockSite = True
     DragMode = dmAutomatic
     TabOrder = 2
-    ExplicitLeft = 1
   end
   object MainMenuPrincipal: TMainMenu
     Left = 520
@@ -90,10 +73,5 @@ object principal: Tprincipal
     object rabajadores1: TMenuItem
       Caption = 'Trabajadores'
     end
-  end
-  object DataSource1: TDataSource
-    DataSet = DataModule1.fdClientes
-    Left = 426
-    Top = 296
   end
 end

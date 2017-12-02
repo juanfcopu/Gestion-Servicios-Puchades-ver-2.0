@@ -3,17 +3,17 @@
 	<Transactions>
     <Transaction>2017/11/12 22:19:48.000.322,=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2017/11/29 13:49:16.000.474,=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2017/11/29 14:01:48.000.187,C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\FPrincipal.dfm</Transaction>
-    <Transaction>2017/11/29 14:01:48.000.187,C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\FPrincipal.pas</Transaction>
-    <Transaction>2017/11/29 14:02:09.000.202,C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\GestionSPuchades.dproj</Transaction>
+    <Transaction>2017/11/29 14:01:48.000.187,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\FPrincipal.dfm=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2017/11/29 14:01:48.000.187,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\FPrincipal.pas=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/11/29 14:02:09.000.202,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\GestionSPuchades.dproj=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2017/11/29 18:10:31.000.835,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.dfm</Transaction>
-    <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.pas</Transaction>
+    <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
+    <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2017/11/29 18:14:01.000.437,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
-    <Transaction>2017/11/29 18:35:41.000.720,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\BOTONES.dfm</Transaction>
-    <Transaction>2017/11/29 18:35:41.000.720,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\BOTONES.pas</Transaction>
-    <Transaction>2017/11/29 20:19:18.731,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2017/11/29 20:22:07.921,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
-    <Transaction>2017/11/29 20:22:07.921,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
+    <Transaction>2017/11/29 18:35:41.000.720,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\BOTONES.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.dfm</Transaction>
+    <Transaction>2017/11/29 18:35:41.000.720,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\BOTONES.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
+    <Transaction>2017/11/29 20:19:18.000.731,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
+    <Transaction>2017/11/29 20:22:07.000.921,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas</Transaction>
+    <Transaction>2017/11/29 20:22:07.000.921,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.dfm</Transaction>
   </Transactions>
 </BorlandProject>
