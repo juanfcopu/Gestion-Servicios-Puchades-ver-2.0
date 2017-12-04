@@ -47,6 +47,19 @@ object principal: Tprincipal
       DockSite = True
       TabOrder = 0
     end
+    object DBGrid1: TDBGrid
+      Left = 232
+      Top = 200
+      Width = 401
+      Height = 265
+      DataSource = DataSource1
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
   end
   object Panel1: TPanel
     Left = 0
@@ -73,5 +86,10 @@ object principal: Tprincipal
     object rabajadores1: TMenuItem
       Caption = 'Trabajadores'
     end
+  end
+  object DataSource1: TDataSource
+    DataSet = DataModule1.fdClientes
+    Left = 986
+    Top = 272
   end
 end

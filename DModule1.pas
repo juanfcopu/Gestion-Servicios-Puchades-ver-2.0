@@ -16,6 +16,10 @@ type
     FDConnection1: TFDConnection;
     fdClientes: TFDQuery;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    fdClientesnombre: TStringField;
+    fdClientesidAdministrador: TIntegerField;
+    fdClientesidContactos: TFDAutoIncField;
+    fdClientesnombreapellidos: TStringField;
   private
     { Private declarations }
   public

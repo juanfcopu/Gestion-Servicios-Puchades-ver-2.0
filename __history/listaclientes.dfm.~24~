@@ -1,0 +1,2448 @@
+object listclientes: Tlistclientes
+  Left = 0
+  Top = 0
+  Align = alCustom
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  BorderWidth = 1
+  Caption = 'Lista Clientes'
+  ClientHeight = 615
+  ClientWidth = 239
+  Color = clBtnFace
+  DragKind = dkDock
+  DragMode = dmAutomatic
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ListView1: TListView
+    Left = 0
+    Top = 38
+    Width = 239
+    Height = 577
+    Align = alClient
+    Columns = <
+      item
+        AutoSize = True
+        Caption = 'Cliente'
+      end>
+    DoubleBuffered = True
+    Groups = <
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 0
+        State = [lgsNormal, lgsSelected]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 1
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 2
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA  SERRANO AMADOR'
+        GroupID = 3
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'CARLOS  ORRICO'
+        GroupID = 4
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 5
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 6
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 7
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 8
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 9
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 10
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 11
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 12
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 13
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 14
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 15
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 16
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 17
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 18
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 19
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 20
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 21
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 22
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 23
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 24
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 25
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 26
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA  SERRANO AMADOR'
+        GroupID = 27
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 28
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 29
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 30
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 31
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 32
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 33
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'PABLO  BELLIDO'
+        GroupID = 34
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 35
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 36
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 37
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 38
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 39
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 40
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 41
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 42
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 43
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 44
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 45
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 46
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 47
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ADMINISTRACI'#211'N F.M PORTA'#209'A'
+        GroupID = 48
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 49
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 50
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 51
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 52
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 53
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 54
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 55
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 56
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 57
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 58
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 59
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 60
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 61
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 62
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 63
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 64
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 65
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'JUAN  QUINTO'
+        GroupID = 66
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 67
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 68
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 69
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 70
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ADMINISTRACIONES RIVELLES'
+        GroupID = 71
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 72
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 73
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 74
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 75
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 76
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 77
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 78
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'JUAN LUIS  MARQU'#201'S ROMERO'
+        GroupID = 79
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 80
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 81
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 82
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 83
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ADMINISTRACIONES FELIU'
+        GroupID = 84
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 85
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ADMINISTRACIONES FELIU'
+        GroupID = 86
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA  SERRANO AMADOR'
+        GroupID = 87
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 88
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 89
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 90
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 91
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 92
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 93
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 94
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 95
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 96
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 97
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 98
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 99
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 100
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 101
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 102
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 103
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 104
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 105
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 106
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 107
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 108
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 109
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 110
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 111
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 112
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 113
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'CAROLINA GALVEZ'
+        GroupID = 114
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 115
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 116
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 117
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ENRIQUE MARTIN'
+        GroupID = 118
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 119
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 120
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 121
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 122
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 123
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 124
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ADMINISTRACI'#211'N F.M PORTA'#209'A'
+        GroupID = 125
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 126
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 127
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 128
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA LOPEZ'
+        GroupID = 129
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 130
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'PABLO  BELLIDO'
+        GroupID = 131
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 132
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 133
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 134
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 135
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 136
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 137
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 138
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 139
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 140
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 141
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 142
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 143
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 144
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 145
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 146
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 147
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 148
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 149
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 150
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 151
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 152
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 153
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 154
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 155
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 156
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 157
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 158
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 159
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 160
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 161
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 162
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 163
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 164
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 165
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 166
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 167
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'NURIA L'#211'PEZ RIBELLES'
+        GroupID = 168
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 169
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'LDCOMUNIDADES '
+        GroupID = 170
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 171
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 172
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 173
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 174
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 175
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 176
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 177
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 178
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 179
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 180
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 181
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 182
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 183
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 184
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 185
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 186
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 187
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 188
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 189
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 190
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 191
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 192
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 193
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 194
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 195
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA  SERRANO AMADOR'
+        GroupID = 196
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RAM'#211'N GUILLOT'
+        GroupID = 197
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 198
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 199
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 200
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'ESPERANZA  SERRANO AMADOR'
+        GroupID = 201
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'EMILIA PICAZO'
+        GroupID = 202
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'RUIZ   MAURI S.L'
+        GroupID = 203
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SAN JUAN  S.L'
+        GroupID = 204
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TOMAS  MU'#209'OZ'
+        GroupID = 205
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 206
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'PABLO  BELLIDO'
+        GroupID = 207
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'TERESA DE LA CAMARA'
+        GroupID = 208
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'PABLO  BELLIDO'
+        GroupID = 209
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'SIN ADMINISTRADOR'
+        GroupID = 210
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end
+      item
+        Header = 'MIGUEL  GURREA LLOPIS'
+        GroupID = 211
+        State = [lgsNormal]
+        HeaderAlign = taLeftJustify
+        FooterAlign = taLeftJustify
+        TitleImage = -1
+      end>
+    Items.ItemData = {
+      057A5000002C01000000000000FFFFFFFFFFFFFFFF0100000000000000260B00
+      000D3200200044004500200041004200520049004C0020003300310000000000
+      0000000000FFFFFFFFFFFFFFFF0100000001000000270B000010410044004500
+      4C004100200050004100520044004F002000500049004300D300000000000000
+      000000FFFFFFFFFFFFFFFF0100000002000000280B000007410044004F005200
+      200036003900000000000000000000FFFFFFFFFFFFFFFF010000000300000029
+      0B00000B4100470055004C004C0045004E005400200031003200000000000000
+      000000FFFFFFFFFFFFFFFF01000000040000002A0B00000B41004C0042004100
+      4300450054004500200031003900000000000000000000FFFFFFFFFFFFFFFF01
+      000000050000002B0B00000B41004C0042004100430045005400450020003400
+      3500000000000000000000FFFFFFFFFFFFFFFF01000000050000002C0B00000D
+      41004C0042004500520049005100550045002000200033003500000000000000
+      000000FFFFFFFFFFFFFFFF01000000060000002D0B00000C41004C0042004F00
+      43004100430045005200200033003400000000000000000000FFFFFFFFFFFFFF
+      FF01000000070000002E0B00000B41004C0042004F0052004100590041002000
+      34003900000000000000000000FFFFFFFFFFFFFFFF01000000080000002F0B00
+      001041004C00430041004C004400450020004700550052005200450041002000
+      3300000000000000000000FFFFFFFFFFFFFFFF0100000009000000300B000007
+      41004C0043004F00590020003300000000000000000000FFFFFFFFFFFFFFFF01
+      0000000A000000310B00000A41004C004D004100430045005200410020003800
+      000000000000000000FFFFFFFFFFFFFFFF010000000B000000320B00000C4100
+      4C004D004100530053004F0052004100200033003900000000000000000000FF
+      FFFFFFFFFFFFFF010000000C000000330B00000F41004C005400410020004400
+      45004C0020004D0041005200200037003100000000000000000000FFFFFFFFFF
+      FFFFFF010000000D000000340B00000F41004C00540041002000440045004C00
+      20004D0041005200200038003600000000000000000000FFFFFFFFFFFFFFFF01
+      0000000E000000350B00000941004D0049005300540041005400200037000000
+      00000000000000FFFFFFFFFFFFFFFF010000000F000000360B000013C1004E00
+      470045004C002000440045004C00200041004C00430041005A00410052002000
+      3800000000000000000000FFFFFFFFFFFFFFFF010000000F000000370B000010
+      41004E00470045004C0020004700550049004D00450052004100200032003000
+      000000000000000000FFFFFFFFFFFFFFFF010000000F000000380B0000104100
+      4E00470045004C0020004700550049004D004500520041002000340034000000
+      00000000000000FFFFFFFFFFFFFFFF010000000F000000390B00001041004E00
+      470045004C0020004700550049004D0045005200410020003600320000000000
+      0000000000FFFFFFFFFFFFFFFF01000000100000003A0B00001041004E004700
+      45004C0020004700550049004D00450052004100200036003700000000000000
+      000000FFFFFFFFFFFFFFFF01000000110000003B0B00001041004E0047004500
+      4C0020004700550049004D004500520041002000370037000000000000000000
+      00FFFFFFFFFFFFFFFF01000000120000003C0B00001341005000410052004900
+      430049004F00200041004C0042004900D10041004E0041002000370000000000
+      0000000000FFFFFFFFFFFFFFFF01000000120000003D0B000013410050004100
+      52004900430049004F00200041004C0042004900D10041004E00410020003900
+      000000000000000000FFFFFFFFFFFFFFFF01000000130000003E0B0000134100
+      52004100530020004400450020004C004F00530020004F004C004D004F005300
+      20003200000000000000000000FFFFFFFFFFFFFFFF01000000140000003F0B00
+      0014410052004300480049004400550051005500450020004300410052004C00
+      4F005300200031003500000000000000000000FFFFFFFFFFFFFFFF0100000015
+      000000400B000014410052004300480049004400550051005500450020004300
+      410052004C004F005300200036003100000000000000000000FFFFFFFFFFFFFF
+      FF0100000016000000410B000014410052004300480049004400550051005500
+      450020004300410052004C004F005300200037003300000000000000000000FF
+      FFFFFFFFFFFFFF0100000017000000420B000014410052005100550049005400
+      4500430054004F00200041004C004600410052004F0020003300310000000000
+      0000000000FFFFFFFFFFFFFFFF0100000018000000430B000012410052005100
+      5500490054004500430054004F00200054004F004C0053004100200039000000
+      00000000000000FFFFFFFFFFFFFFFF0100000019000000440B00001141005200
+      5400450053002000470052004100460049004300410053002000310036000000
+      00000000000000FFFFFFFFFFFFFFFF0100000019000000450B00000F41005500
+      530049004100530020004D004100520043004800200033003900000000000000
+      000000FFFFFFFFFFFFFFFF010000001A000000460B00000F4100550053004900
+      4100530020004D004100520043004800200038003100000000000000000000FF
+      FFFFFFFFFFFFFF010000001B000000470B000014410056004400200044004500
+      200041004C004900430041004E00540045002000330036002000410000000000
+      0000000000FFFFFFFFFFFFFFFF010000001B000000480B000008420041004900
+      4C0045004E0020003400000000000000000000FFFFFFFFFFFFFFFF010000001C
+      000000490B00000A4200410049005800410044004F0052002000330000000000
+      0000000000FFFFFFFFFFFFFFFF010000001D0000004A0B000009420041004C00
+      44004F005600490020003300000000000000000000FFFFFFFFFFFFFFFF010000
+      001E0000004B0B000012420041005200D3004E00200044004500200050004100
+      5400520041004900580020003700000000000000000000FFFFFFFFFFFFFFFF01
+      0000001F0000004C0B000018420041005200D3004E0020004400450020005300
+      41004E002000500045005400520049004C004C004F0020003600330000000000
+      0000000000FFFFFFFFFFFFFFFF01000000200000004D0B000019420041005200
+      D3004E002000440045002000530041004E005400410020004200410052004200
+      410052004100200034003600000000000000000000FFFFFFFFFFFFFFFF010000
+      00210000004E0B000013420041005200520049004F0020005400520041004E00
+      56004900450052004F00530020003600000000000000000000FFFFFFFFFFFFFF
+      FF01000000220000004F0B00000E42004500410054004F002000470041004C00
+      560045005A0020003300000000000000000000FFFFFFFFFFFFFFFF0100000023
+      000000500B00001642004500410054004F0020004E00490043004F004C004100
+      5300200046004100430054004F00520020003800000000000000000000FFFFFF
+      FFFFFFFFFF0100000024000000510B0000124200450041005400520049005A00
+      200054004F00520054004F0053004100200031003000000000000000000000FF
+      FFFFFFFFFFFFFF0100000025000000520B00000B420045004E00490046004500
+      52005200490020003600000000000000000000FFFFFFFFFFFFFFFF0100000026
+      000000530B00001542004500520045004E00470055004500520020004D004100
+      4C004C004F004C0020003400300020004300000000000000000000FFFFFFFFFF
+      FFFFFF0100000027000000540B00001242004500520047004900540054002000
+      570049004500440045004E004D0041004E004E00000000000000000000FFFFFF
+      FFFFFFFFFF0100000028000000550B0000114200450052005400410020004700
+      410052004300CD00410020004D00490052004100000000000000000000FFFFFF
+      FFFFFFFFFF0100000029000000560B000009420049004C00420041004F002000
+      32003300000000000000000000FFFFFFFFFFFFFFFF010000002A000000570B00
+      001542004C0041005300200047004F004E005A0041004C0045005A0020004400
+      45004C002000560041004C00000000000000000000FFFFFFFFFFFFFFFF010000
+      002B000000580B00001042004C004100530043004F002000490042004100D100
+      45005A00200038003000000000000000000000FFFFFFFFFFFFFFFF010000002C
+      000000590B00001042004C004100530043004F002000490042004100D1004500
+      5A00200039003700000000000000000000FFFFFFFFFFFFFFFF010000002D0000
+      005A0B00000A42004F005200520055004C004C00200031003000000000000000
+      000000FFFFFFFFFFFFFFFF010000002E0000005B0B0000094200520041005300
+      49004C00200032003200000000000000000000FFFFFFFFFFFFFFFF010000002F
+      0000005C0B00000F4200550045004E004F005300200041004900520045005300
+      200032003000000000000000000000FFFFFFFFFFFFFFFF01000000300000005D
+      0B00000D4200550052004A004100530053004F00540020003100300033000000
+      00000000000000FFFFFFFFFFFFFFFF01000000310000005E0B00000C42005500
+      52004A004100530053004F005400200031003400000000000000000000FFFFFF
+      FFFFFFFFFF01000000310000005F0B00000C4200550052004A00410053005300
+      4F005400200033003100000000000000000000FFFFFFFFFFFFFFFF0100000031
+      000000600B00000C4200550052004A004100530053004F005400200035003000
+      000000000000000000FFFFFFFFFFFFFFFF0100000032000000610B00000D4300
+      41004C004900580054004F002000490049004900200031000000000000000000
+      00FFFFFFFFFFFFFFFF0100000033000000620B00000E430041004C0049005800
+      54004F002000490049004900200032003100000000000000000000FFFFFFFFFF
+      FFFFFF0100000034000000630B00000D430041004C004900580054004F002000
+      49004900490020003600000000000000000000FFFFFFFFFFFFFFFF0100000035
+      000000640B000015430041004C004C004F005300410020004400B40045004E00
+      530041005200520049004100200031003300000000000000000000FFFFFFFFFF
+      FFFFFF0100000035000000650B00000D430041004D0049002000520045004100
+      4C002000310031003500000000000000000000FFFFFFFFFFFFFFFF0100000036
+      000000660B000015430041004D0049004E004F0020004400450020004D004F00
+      4E0043004100440041002000310032003900000000000000000000FFFFFFFFFF
+      FFFFFF0100000037000000670B00001A430041004D0049004E004F0020005600
+      490045004A004F00200044004500200041004C0042004F005200410059004100
+      20003200000000000000000000FFFFFFFFFFFFFFFF0100000038000000680B00
+      001B430041004D0049004E004F0020005600490045004A004F00200044004500
+      200041004C0042004F0052004100590041002000320034000000000000000000
+      00FFFFFFFFFFFFFFFF0100000039000000690B00001C430041004D0049004E00
+      4F0020005600490045004A004F00200044004500200058004900520049005600
+      45004C004C004100200032003600000000000000000000FFFFFFFFFFFFFFFF01
+      0000003A0000006A0B00000C430041004D00500041004E004100520020003100
+      31003200000000000000000000FFFFFFFFFFFFFFFF010000003A0000006B0B00
+      000B430041004D00500041004E00410052002000310034000000000000000000
+      00FFFFFFFFFFFFFFFF010000003B0000006C0B00000F430041004D0050004F00
+      53002000430052004500530050004F0020003700000000000000000000FFFFFF
+      FFFFFFFFFF010000003C0000006D0B000015430041005200440045004E004100
+      4C002000420045004E004C004C004F0043004800200031003100300000000000
+      0000000000FFFFFFFFFFFFFFFF010000003D0000006E0B000018430041005200
+      4D0045004E002000420041005200520041004300480049004E00410020004D00
+      41005400410049005800000000000000000000FFFFFFFFFFFFFFFF010000003D
+      0000006F0B0000254300410052004D0045004E00200048005500520054004100
+      44004F002000520045005100550045004E00410020005900200043004F004D00
+      50004100D10049004100200043002E004200000000000000000000FFFFFFFFFF
+      FFFFFF010000003D000000700B0000254300410052004D0045004E0020005900
+      200043004F004E005300550045004C004F002000480055005200540041004400
+      4F002000520045005100550045004E004100200043002E004200000000000000
+      000000FFFFFFFFFFFFFFFF010000003E000000710B0000174300410052005200
+      41004E005A004100200048004F005300540045004C0045005200490041002000
+      53002E004C00000000000000000000FFFFFFFFFFFFFFFF010000003F00000072
+      0B00000E43004100520052004100530051005500450054004100200031003300
+      000000000000000000FFFFFFFFFFFFFFFF010000003F000000730B0000154300
+      410052005200450054004500520041002000440045004C002000520049005500
+      2000320039003500000000000000000000FFFFFFFFFFFFFFFF010000003F0000
+      00740B0000154300410052005200450054004500520041002000440045004C00
+      20005200490055002000330032003000000000000000000000FFFFFFFFFFFFFF
+      FF0100000040000000750B00000B4300410052005400450052004F0053002000
+      37003500000000000000000000FFFFFFFFFFFFFFFF0100000041000000760B00
+      0014430041005300540045004C004C00D3004E00200044004500200052005500
+      47004100540020003400000000000000000000FFFFFFFFFFFFFFFF0100000042
+      000000770B00000D43004100560041004E0049004C004C004500530020003100
+      3600000000000000000000FFFFFFFFFFFFFFFF0100000043000000780B000008
+      430041005900550043004F0020003500000000000000000000FFFFFFFFFFFFFF
+      FF0100000044000000790B00000C43004500490042004F002D00310030002000
+      53002E004C00000000000000000000FFFFFFFFFFFFFFFF01000000450000007A
+      0B00001043004500520041004D004900530054004100200052004F0053002000
+      31003100000000000000000000FFFFFFFFFFFFFFFF01000000460000007B0B00
+      000E430048004500520041002000310030002000500054004100200031000000
+      00000000000000FFFFFFFFFFFFFFFF01000000460000007C0B00000743004800
+      4900560045004C004900000000000000000000FFFFFFFFFFFFFFFF0100000047
+      0000007D0B0000074300490045005A00410020003400000000000000000000FF
+      FFFFFFFFFFFFFF01000000480000007E0B000016430049005200430055004C00
+      4F002000420045004C004C004100530020004100520054004500530020003300
+      000000000000000000FFFFFFFFFFFFFFFF01000000490000007F0B0000094300
+      49005300430041005200200031003400000000000000000000FFFFFFFFFFFFFF
+      FF0100000049000000800B000013430049005500540041005400200044004500
+      20004D0045004C0049004C004C00410020003900000000000000000000FFFFFF
+      FFFFFFFFFF010000004A000000810B00001043004F004D0050004C0045004A00
+      4F0020004D0049005200410053004F004C00000000000000000000FFFFFFFFFF
+      FFFFFF010000004B000000820B00000B43004F004E0043004F00520044004900
+      410020003400000000000000000000FFFFFFFFFFFFFFFF010000004C00000083
+      0B00000D43004F004E0044004500200041004C00540045004100200036000000
+      00000000000000FFFFFFFFFFFFFFFF010000004D000000840B00001143004F00
+      4E004400450020004400450020004F004C004F00430041005500200033000000
+      00000000000000FFFFFFFFFFFFFFFF010000004D000000850B00001843004F00
+      4E00560045004E0054004F0020004400450020004A0045005200550053004100
+      4C0045004E00200035003100000000000000000000FFFFFFFFFFFFFFFF010000
+      004E000000860B00001543004F0052005400450053002000560041004C004500
+      4E004300490041004E0041005300200032003800000000000000000000FFFFFF
+      FFFFFFFFFF010000004F000000870B00001543004F0052005400450053002000
+      560041004C0045004E004300490041004E004100530020003300300000000000
+      0000000000FFFFFFFFFFFFFFFF0100000050000000880B00001543004F005300
+      41004C0055004400200053004500520056004900430049004F00530020005300
+      2E004100000000000000000000FFFFFFFFFFFFFFFF0100000051000000890B00
+      0011440041004F0049005A00200049002000560045004C004100520044004500
+      20003400000000000000000000FFFFFFFFFFFFFFFF01000000510000008A0B00
+      0011440041004F0049005A00200049002000560045004C004100520044004500
+      20003600000000000000000000FFFFFFFFFFFFFFFF01000000510000008B0B00
+      0011440041004F0049005A00200049002000560045004C004100520044004500
+      20003800000000000000000000FFFFFFFFFFFFFFFF01000000520000008C0B00
+      0009440045004C0020004D004100520020003100000000000000000000FFFFFF
+      FFFFFFFFFF01000000530000008D0B00001844004900420055004A0041004E00
+      5400450020004D0041004E00550045004C0020004700410047004F0020003100
+      3200000000000000000000FFFFFFFFFFFFFFFF01000000530000008E0B000019
+      44004900500055005400410044004F0020005200490043004100520044004F00
+      2000530041004D0050004500520020003100000000000000000000FFFFFFFFFF
+      FFFFFF01000000540000008F0B00001744004F00430054004F00520020004300
+      41004C0041005400410059005500440020004200410059004100200031000000
+      00000000000000FFFFFFFFFFFFFFFF0100000055000000900B00001744004F00
+      430054004F0052002000430041004C0041005400410059005500440020004200
+      41005900410020003200000000000000000000FFFFFFFFFFFFFFFF0100000056
+      000000910B00001744004F00430054004F0052002000430041004C0041005400
+      41005900550044002000420041005900410020003300000000000000000000FF
+      FFFFFFFFFFFFFF0100000057000000920B00001444004F00430054004F005200
+      20004C004F00500045005A00200054005200490047004F002000370000000000
+      0000000000FFFFFFFFFFFFFFFF0100000058000000930B00001544004F004300
+      54004F00520020004D0041004E00550045004C0020004700410047004F002000
+      31003200000000000000000000FFFFFFFFFFFFFFFF0100000059000000940B00
+      001544004F00430054004F005200200050004500520045005A00200046004500
+      4C0049005500200031003600000000000000000000FFFFFFFFFFFFFFFF010000
+      005A000000950B00001444004F00430054004F00520020005000450052004500
+      5A002000460045004C004900550020003700000000000000000000FFFFFFFFFF
+      FFFFFF010000005A000000960B00001744004F00430054004F00520020005300
+      41004E0043004800490053002000530049005600450052004100200033000000
+      00000000000000FFFFFFFFFFFFFFFF010000005B000000970B00000F44004F00
+      430054004F0052002000530055004D0053004900200032003600000000000000
+      000000FFFFFFFFFFFFFFFF010000005C000000980B00001744004F0043005400
+      4F005200200056004900430045004E0054004500200043004C00410056004500
+      4C0020003800000000000000000000FFFFFFFFFFFFFFFF010000005D00000099
+      0B00001944004F00430054004F005200200056004900430045004E0054004500
+      20005A0041005200410047004F005A00410020003700000000000000000000FF
+      FFFFFFFFFFFFFF010000005E0000009A0B00001244004F00430054004F005200
+      20005A0041004D0045004E0048004F0046002000310031000000000000000000
+      00FFFFFFFFFFFFFFFF010000005F0000009B0B00001244004F004C004F005200
+      4500530020004D00410052005100550045005300200034003300000000000000
+      000000FFFFFFFFFFFFFFFF01000000600000009C0B00001044004F004D004900
+      4E0047004F00200047004F004D0045005A002000310030000000000000000000
+      00FFFFFFFFFFFFFFFF01000000610000009D0B00000F44004F004D0049004E00
+      47004F00200047004F004D0045005A0020003200000000000000000000FFFFFF
+      FFFFFFFFFF01000000620000009E0B0000134400550051005500450020004400
+      450020004D0041004E0044004100530020003200330044000000000000000000
+      00FFFFFFFFFFFFFFFF01000000630000009F0B00001045004400490046004900
+      430049004F00200045005800410047004F004E004F00000000000000000000FF
+      FFFFFFFFFFFFFF0100000064000000A00B000010450044004900460049004300
+      49004F0020004D004F00520045004C004C004100000000000000000000FFFFFF
+      FFFFFFFFFF0100000065000000A10B00000A45004C0020005000550049004700
+      200034003800000000000000000000FFFFFFFFFFFFFFFF0100000066000000A2
+      0B00000E45004D0049004C0049004F002000420041005200D300200034003000
+      000000000000000000FFFFFFFFFFFFFFFF0100000066000000A30B00000E4500
+      4D0049004C0049004F0020004200410052004F00200034003100000000000000
+      000000FFFFFFFFFFFFFFFF0100000067000000A40B00000F45004D0049004C00
+      49004F0020004C004C00550043004800200032003600000000000000000000FF
+      FFFFFFFFFFFFFF0100000068000000A50B00001345004E005200490051005500
+      450020004700520041004E00410044004F005300200031003700000000000000
+      000000FFFFFFFFFFFFFFFF0100000069000000A60B0000164500530043005500
+      4C0054004F005200200047004100520043004900410020004D00410053002000
+      31003500000000000000000000FFFFFFFFFFFFFFFF0100000069000000A70B00
+      001545005300430055004C0054004F0052002000470041005200430049004100
+      20004D004100530020003300000000000000000000FFFFFFFFFFFFFFFF010000
+      006A000000A80B00001845005300430055004C0054004F00520020004D004F00
+      52004100200043004900520055004A0045004400410020003200000000000000
+      000000FFFFFFFFFFFFFFFF010000006A000000A90B0000184500530043005500
+      4C0054004F00520020004D004F0052004100200043004900520055004A004500
+      4400410020003800000000000000000000FFFFFFFFFFFFFFFF010000006B0000
+      00AA0B00001A45005300430055004C0054004F00520020005600490043004500
+      4E0054004500200052004F00440049004C004C00410020003500000000000000
+      000000FFFFFFFFFFFFFFFF010000006C000000AB0B00000F4500530050004500
+      520041004E005A00410020004C004F00500045005A00000000000000000000FF
+      FFFFFFFFFFFFFF010000006C000000AC0B000009450055005300540041005100
+      550049004F00000000000000000000FFFFFFFFFFFFFFFF010000006D000000AD
+      0B000011460045004C00490058002000500049005A0043005500450054004100
+      200032003100000000000000000000FFFFFFFFFFFFFFFF010000006D000000AE
+      0B000011460045004C00490058002000500049005A0043005500450054004100
+      200032003500000000000000000000FFFFFFFFFFFFFFFF010000006D000000AF
+      0B000011460045004C00490058002000500049005A0043005500450054004100
+      200032003700000000000000000000FFFFFFFFFFFFFFFF010000006E000000B0
+      0B0000174600450052004E0041004E0044004F00200045004C00200043004100
+      5400D3004C00490043004F00200031003200000000000000000000FFFFFFFFFF
+      FFFFFF010000006F000000B10B00000C460049004C004900500049004E004100
+      5300200032003300000000000000000000FFFFFFFFFFFFFFFF010000006F0000
+      00B20B000012460049004C004F004C004F0047004F002000530041004E004500
+      4C004F00200031003100000000000000000000FFFFFFFFFFFFFFFF010000006F
+      000000B30B000011460049004C004F004C004F0047004F002000530041004E00
+      45004C004F0020003700000000000000000000FFFFFFFFFFFFFFFF010000006F
+      000000B40B000011460049004C004F004C004F0047004F002000530041004E00
+      45004C004F0020003900000000000000000000FFFFFFFFFFFFFFFF0100000070
+      000000B50B000016460049004E004100200042004500520054004F004C004900
+      4E0020004200450052004E004100440045005300000000000000000000FFFFFF
+      FFFFFFFFFF0100000071000000B60B00000C46004F004E00540041004E004100
+      52004500530020003100000000000000000000FFFFFFFFFFFFFFFF0100000071
+      000000B70B00000D46004F004E00540041004E00410052004500530020003100
+      3500000000000000000000FFFFFFFFFFFFFFFF0100000071000000B80B000019
+      46004F004E00540041004E0041005200450053002000310035002C0020003100
+      37002C00200047004100520041004A004500000000000000000000FFFFFFFFFF
+      FFFFFF0100000071000000B90B00000D46004F004E00540041004E0041005200
+      45005300200032003100000000000000000000FFFFFFFFFFFFFFFF0100000071
+      000000BA0B00000D46004F004E00540041004E00410052004500530020003300
+      3600000000000000000000FFFFFFFFFFFFFFFF0100000071000000BB0B00000D
+      46004F004E00540041004E004100520045005300200033003800000000000000
+      000000FFFFFFFFFFFFFFFF0100000071000000BC0B00000D46004F004E005400
+      41004E004100520045005300200033003900000000000000000000FFFFFFFFFF
+      FFFFFF0100000071000000BD0B00000D46004F004E00540041004E0041005200
+      45005300200034003000000000000000000000FFFFFFFFFFFFFFFF0100000071
+      000000BE0B00000D46004F004E00540041004E00410052004500530020003500
+      3800000000000000000000FFFFFFFFFFFFFFFF0100000071000000BF0B00000D
+      46004F004E00540041004E004100520045005300200037003000000000000000
+      000000FFFFFFFFFFFFFFFF0100000071000000C00B00000D46004F004E005400
+      41004E004100520045005300200037003400000000000000000000FFFFFFFFFF
+      FFFFFF0100000071000000C10B00000C46004F004E00540041004E0041005200
+      4500530020003900000000000000000000FFFFFFFFFFFFFFFF01000000720000
+      00C20B00000D46004F0052004D0045004E005400450052004100200031003400
+      000000000000000000FFFFFFFFFFFFFFFF0100000073000000C30B0000144600
+      520041004E0043004900530043004F0020004D0041005200540049004E004500
+      5A0020003200000000000000000000FFFFFFFFFFFFFFFF0100000073000000C4
+      0B0000194600520041004E0043004900530043004F002000520041004D004F00
+      5300200049002000520049004F004A00410020003200000000000000000000FF
+      FFFFFFFFFFFFFF0100000073000000C50B00001F4600520041004E0043004900
+      530043004F002000520041004D004F005300200049002000520049004F004A00
+      4100200032002C0034002C0036002C003800000000000000000000FFFFFFFFFF
+      FFFFFF0100000073000000C60B0000194600520041004E004300490053004300
+      4F002000520041004D004F005300200049002000520049004F004A0041002000
+      3400000000000000000000FFFFFFFFFFFFFFFF0100000073000000C70B000019
+      4600520041004E0043004900530043004F002000520041004D004F0053002000
+      49002000520049004F004A00410020003600000000000000000000FFFFFFFFFF
+      FFFFFF0100000073000000C80B0000194600520041004E004300490053004300
+      4F002000520041004D004F005300200049002000520049004F004A0041002000
+      3800000000000000000000FFFFFFFFFFFFFFFF0100000074000000C90B00000F
+      4600520041004E0043004F00200054004F0052004D004F002000310033000000
+      00000000000000FFFFFFFFFFFFFFFF0100000074000000CA0B00000F46005200
+      41004E0043004F00200054004F0052004D004F00200031003500000000000000
+      000000FFFFFFFFFFFFFFFF0100000074000000CB0B00000E4600520041004E00
+      43004F00200054004F0052004D004F0020003900000000000000000000FFFFFF
+      FFFFFFFFFF0100000074000000CC0B000017460052004100590020004A005500
+      4E0049005000450052004F002000530045005200520041002000330020004400
+      000000000000000000FFFFFFFFFFFFFFFF0100000075000000CD0B0000094700
+      410049004200490045004C0020003300000000000000000000FFFFFFFFFFFFFF
+      FF0100000076000000CE0B00002947004100520041004A00450020003200BA00
+      200053004F00540041004E004F0020004D0045004400490043004F0020005600
+      4900430045004E0054004500200054004F005200520045004E00540020003800
+      000000000000000000FFFFFFFFFFFFFFFF0100000077000000CF0B0000174700
+      4100520041004A004500200041004E00470045004C0020004700550049004D00
+      450052004100200036003700000000000000000000FFFFFFFFFFFFFFFF010000
+      0077000000D00B00002147004100520041004A0045002000430041004D004900
+      4E004F0020005600490045004A004F00200044004500200041004C0042004F00
+      520041005900410020003200000000000000000000FFFFFFFFFFFFFFFF010000
+      0077000000D10B00001C47004100520041004A0045002000440041004F004900
+      5A00200049002000560045004C004100520044004500200034002C0036002C00
+      3800000000000000000000FFFFFFFFFFFFFFFF0100000078000000D20B000010
+      47004100520041004A0045002000440045004C0046004F005300200037003700
+      000000000000000000FFFFFFFFFFFFFFFF0100000079000000D30B0000264700
+      4100520041004A00450020004600520041004E0043004900530043004F002000
+      520041004D004F005300200049002000520049004F004A004100200032002C00
+      34002C0036002C003800000000000000000000FFFFFFFFFFFFFFFF010000007A
+      000000D40B00001C47004100520041004A00450020004600520041004E004300
+      4F00200054004F0052004D004F002000310031002C00310033002C0031003500
+      000000000000000000FFFFFFFFFFFFFFFF010000007A000000D50B0000154700
+      4100520041004A00450020004600520041004E0043004F00200054004F005200
+      4D004F0020003900000000000000000000FFFFFFFFFFFFFFFF010000007A0000
+      00D60B00001847004100520041004A0045002000470041005300500041005200
+      200041004700550049004C0041005200200036003300000000000000000000FF
+      FFFFFFFFFFFFFF010000007B000000D70B00001347004100520041004A004500
+      200047004F004D0045005A002000460045005200520045005200000000000000
+      000000FFFFFFFFFFFFFFFF010000007C000000D80B00001D4700410052004100
+      4A00450020004700520041004200410044004F005200200045004E0047005500
+      4900440041004E004F005300200032003500000000000000000000FFFFFFFFFF
+      FFFFFF010000007C000000D90B00002147004100520041004A00450020004A00
+      4F0041005100550049004E002000420041004C004C0045005300540045005200
+      2000320033002D00320035002D0032003700000000000000000000FFFFFFFFFF
+      FFFFFF010000007C000000DA0B00001E47004100520041004A00450020004D00
+      45004400490043004F002000520041004D00D3004E0020005400410052004100
+      5A004F004E00410020003400000000000000000000FFFFFFFFFFFFFFFF010000
+      007D000000DB0B00001247004100520041004A0045002000500041004C004C00
+      4500540045005200200034003700000000000000000000FFFFFFFFFFFFFFFF01
+      0000007E000000DC0B00001547004100520041004A0045002000500049004F00
+      200058004900490020003100350020002D0031003700000000000000000000FF
+      FFFFFFFFFFFFFF010000007E000000DD0B00001447004100520041004A004500
+      200050004C0041005A004100200042004100440041004A004F005A0000000000
+      0000000000FFFFFFFFFFFFFFFF010000007E000000DE0B000016470041005200
+      41004A004500200052004100530043004100D100410020003100310020002D00
+      200031003300000000000000000000FFFFFFFFFFFFFFFF010000007F000000DF
+      0B00002547004100520041004A0045002000530041004E002000560049004300
+      45004E00540045002000310031003800200050004C0041005A00410020004500
+      530050004100D100410020003500000000000000000000FFFFFFFFFFFFFFFF01
+      00000080000000E00B00001347004100520041004A0045002000530045005200
+      52004100540045004C004C00410020003700000000000000000000FFFFFFFFFF
+      FFFFFF0100000081000000E10B00001A47004100520041004A00450020005400
+      4900520053004F0020004400450020004D004F004C0049004E00410020003400
+      2D003500000000000000000000FFFFFFFFFFFFFFFF0100000082000000E20B00
+      000F47004100520041004A004500200058004100540049005600410020003400
+      000000000000000000FFFFFFFFFFFFFFFF0100000083000000E30B00000F4700
+      4100520052004900470055004500530020004E00BA0020003100370000000000
+      0000000000FFFFFFFFFFFFFFFF0100000084000000E40B00000D470041005300
+      4300D30020004F004C0049004100470020003600000000000000000000FFFFFF
+      FFFFFFFFFF0100000085000000E50B0000114700410053005000410052002000
+      41004700550049004C0041005200200033003400000000000000000000FFFFFF
+      FFFFFFFFFF0100000085000000E60B0000114700410053005000410052002000
+      41004700550049004C0041005200200036003300000000000000000000FFFFFF
+      FFFFFFFFFF0100000086000000E70B000013470041005500440045004E004300
+      49004100200054004F0052005200450053002000310035000000000000000000
+      00FFFFFFFFFFFFFFFF0100000086000000E80B00001247004100550044004500
+      4E00430049004100200054004F00520052004500530020003200000000000000
+      000000FFFFFFFFFFFFFFFF0100000086000000E90B0000124700410055004400
+      45004E00430049004100200054004F0052005200450053002000340000000000
+      0000000000FFFFFFFFFFFFFFFF0100000087000000EA0B000011470045004E00
+      4500520041004C0020004100560049004C004500530020003400300000000000
+      0000000000FFFFFFFFFFFFFFFF0100000087000000EB0B000011470045004E00
+      4500520041004C0020004100560049004C004500530020003400320000000000
+      0000000000FFFFFFFFFFFFFFFF0100000087000000EC0B00001B470045004E00
+      4500520041004C0020004100560049004C004500530020003400320020004400
+      550050004C0049004300410044004F00000000000000000000FFFFFFFFFFFFFF
+      FF0100000088000000ED0B000011470045004E004500520041004C0020004100
+      560049004C0045005300200034003800000000000000000000FFFFFFFFFFFFFF
+      FF0100000088000000EE0B000011470045004E004500520041004C0020004100
+      560049004C0045005300200034003900000000000000000000FFFFFFFFFFFFFF
+      FF0100000089000000EF0B000011470045004E004500520041004C0020004100
+      560049004C0045005300200035003300000000000000000000FFFFFFFFFFFFFF
+      FF010000008A000000F00B000011470045004E004500520041004C0020004100
+      560049004C0045005300200035003900000000000000000000FFFFFFFFFFFFFF
+      FF010000008B000000F10B00000647004C004F00520049004100000000000000
+      000000FFFFFFFFFFFFFFFF010000008C000000F20B0000164700520041004200
+      410044004F005200200045004E00470055004900440041004E004F0053002000
+      34003600000000000000000000FFFFFFFFFFFFFFFF010000008C000000F30B00
+      00164700520041004200410044004F005200200045004E004700550049004400
+      41004E004F005300200035003100000000000000000000FFFFFFFFFFFFFFFF01
+      0000008D000000F40B0000124700520041004200410044004F00520020004500
+      53005400450056004500200032003400000000000000000000FFFFFFFFFFFFFF
+      FF010000008E000000F50B0000124700520041004200410044004F0052002000
+      450053005400450056004500200032003600000000000000000000FFFFFFFFFF
+      FFFFFF010000008F000000F60B0000154700520041004E002000560049004100
+      20004700450052004D0041004E00490041005300200033003600000000000000
+      000000FFFFFFFFFFFFFFFF0100000090000000F70B00001D4700520041004E00
+      200056004900410020004D004100520051005500450053002000440045004C00
+      200054005500520049004100200031003800000000000000000000FFFFFFFFFF
+      FFFFFF0100000090000000F80B0000184700520041004E002000560049004100
+      2000520041004D004F004E00200049002000430041004A0041004C0020003100
+      000000000000000000FFFFFFFFFFFFFFFF0100000091000000F90B0000194700
+      520041004E0020005600490041002000520041004D00D3004E00200059002000
+      430041004A0041004C00200032003800000000000000000000FFFFFFFFFFFFFF
+      FF0100000092000000FA0B00001947005200450047004F005200490041002000
+      4100520041004E00440049004400410020004800550052005400410044004F00
+      000000000000000000FFFFFFFFFFFFFFFF0100000093000000FB0B00000E4700
+      5200450047004F00520049004F00200047004500410020003500000000000000
+      000000FFFFFFFFFFFFFFFF0100000094000000FC0B0000104700550041005200
+      440049004100200043004900560049004C002000320036000000000000000000
+      00FFFFFFFFFFFFFFFF0100000094000000FD0B00001047005500410052004400
+      49004100200043004900560049004C00200033003000000000000000000000FF
+      FFFFFFFFFFFFFF0100000095000000FE0B0000144700550049004C004C004500
+      4D002000440045002000430041005300540052004F0020003600370000000000
+      0000000000FFFFFFFFFFFFFFFF0100000096000000FF0B000012470055004900
+      4C004C0045004D00200053004F0052004F004C004C0041002000330033000000
+      00000000000000FFFFFFFFFFFFFFFF0100000097000000000C00001847005500
+      49004C004C00450052004D004F00200041004C00430041004900440045002000
+      430055004500530054004100000000000000000000FFFFFFFFFFFFFFFF010000
+      0098000000010C00000F4800450052004E0041004E00200043004F0052005400
+      4500530020003400000000000000000000FFFFFFFFFFFFFFFF01000000990000
+      00020C00000B48004F0052004300480041005400410020003100380000000000
+      0000000000FFFFFFFFFFFFFFFF010000009A000000030C000014480055004D00
+      41004E00490053005400410020004D004100520049004E004500520020003100
+      3300000000000000000000FFFFFFFFFFFFFFFF010000009A000000040C000014
+      480055004D0041004E00490053005400410020004D004100520049004E004500
+      5200200031003500000000000000000000FFFFFFFFFFFFFFFF010000009A0000
+      00050C000014480055004D0041004E00490053005400410020004D0041005200
+      49004E0045005200200031003700000000000000000000FFFFFFFFFFFFFFFF01
+      0000009A000000060C000014480055004D0041004E0049005300540041002000
+      4D004100520049004E0045005200200032003100000000000000000000FFFFFF
+      FFFFFFFFFF010000009B000000070C00001949004E00470045004E0049004500
+      52004F00200056004900430045004E0054004500200050004900430048004F00
+      20003500000000000000000000FFFFFFFFFFFFFFFF010000009C000000080C00
+      001A49004E005300410020004F004200520041005300200049004E0054004500
+      4700520041004C00450053002C00200053002E004C00000000000000000000FF
+      FFFFFFFFFFFFFF010000009C000000090C00001A49004F0041004E0041002000
+      530049004D004F004E00410020004300520041004300490055004E0020005400
+      4F0052004A004100000000000000000000FFFFFFFFFFFFFFFF010000009D0000
+      000A0C000015490053004100420045004C0020004C0041002000430041005400
+      D3004C00490043004100200031003100000000000000000000FFFFFFFFFFFFFF
+      FF010000009D0000000B0C000015490053004100420045004C0020004C004100
+      20004300410054004F004C004900430041002000320032000000000000000000
+      00FFFFFFFFFFFFFFFF010000009E0000000C0C00001449005300410042004500
+      4C0020005300410049005A002000470049004F00520047004500540041000000
+      00000000000000FFFFFFFFFFFFFFFF010000009E0000000D0C00000649005300
+      4100560041004C00000000000000000000FFFFFFFFFFFFFFFF010000009F0000
+      000E0C000011490053004C00410053002000430041004E004100520049004100
+      5300200032003500000000000000000000FFFFFFFFFFFFFFFF010000009F0000
+      000F0C0000124A004100430049004E0054004F0020004C004100420041004900
+      4C004100200033003100000000000000000000FFFFFFFFFFFFFFFF010000009F
+      000000100C0000124A004100430049004E0054004F0020004C00410042004100
+      49004C004100200034003700000000000000000000FFFFFFFFFFFFFFFF010000
+      009F000000110C0000124A004100430049004E0054004F0020004C0041004200
+      410049004C004100200034003900000000000000000000FFFFFFFFFFFFFFFF01
+      0000009F000000120C0000114A004100430049004E0054004F0020004C004100
+      4200410049004C00410020003900000000000000000000FFFFFFFFFFFFFFFF01
+      000000A0000000130C00000A4A00410043004F004D0041005200200036003100
+      000000000000000000FFFFFFFFFFFFFFFF01000000A1000000140C0000144A00
+      410049004D0045002000530045005200520041004E004F00200041004C004F00
+      4E0053004F00000000000000000000FFFFFFFFFFFFFFFF01000000A200000015
+      0C0000094A0045005300550053002000310031003600000000000000000000FF
+      FFFFFFFFFFFFFF01000000A3000000160C0000084A0045005300550053002000
+      33003800000000000000000000FFFFFFFFFFFFFFFF01000000A4000000170C00
+      000B4A0049004E004A004F004C00450052005300200031000000000000000000
+      00FFFFFFFFFFFFFFFF01000000A5000000180C0000144A004F00410051005500
+      49004E002000420041004C004C00450053005400450052002000320035000000
+      00000000000000FFFFFFFFFFFFFFFF01000000A6000000190C0000134A004F00
+      41005100550049004E002000420041004C004C00450053005400450052002000
+      3300000000000000000000FFFFFFFFFFFFFFFF01000000A70000001A0C000010
+      4A004F0041005100550049004E00200043004F00530054004100200032003000
+      000000000000000000FFFFFFFFFFFFFFFF01000000A70000001B0C0000104A00
+      4F0041005100550049004E00200043004F005300540041002000350030000000
+      00000000000000FFFFFFFFFFFFFFFF01000000A80000001C0C00000F4A004F00
+      41005100550049004E00200043004F0053005400410020003900000000000000
+      000000FFFFFFFFFFFFFFFF01000000A90000001D0C00000D4A004F0052004700
+      450020004A00550041004E00200031003100000000000000000000FFFFFFFFFF
+      FFFFFF01000000AA0000001E0C0000164A004F0053004500200041004E004400
+      520045005500200041004C004200410052005400410020003100370000000000
+      0000000000FFFFFFFFFFFFFFFF01000000AB0000001F0C00001A4A004F005300
+      4500200050004500520045005A00200046005500530054004500520020004D00
+      4500540047004500200031003800000000000000000000FFFFFFFFFFFFFFFF01
+      000000AB000000200C00001A4A004F0053004500200050004500520045005A00
+      200046005500530054004500520020004D004500540047004500200032003000
+      000000000000000000FFFFFFFFFFFFFFFF01000000AC000000210C0000114A00
+      4F0053004500200052004F0043004100200043004F004C004C00200031003900
+      000000000000000000FFFFFFFFFFFFFFFF01000000AD000000220C0000174A00
+      4F0053004500460041002000530041004E004300480045005A0020004D004100
+      5200540049004E0045005A00000000000000000000FFFFFFFFFFFFFFFF010000
+      00AE000000230C00000F4A00550041004E00200041004700550049004C004100
+      5200200031003000000000000000000000FFFFFFFFFFFFFFFF01000000AF0000
+      00240C00000F4A00550041004E00200044004500200047004100520041005900
+      20003300000000000000000000FFFFFFFFFFFFFFFF01000000AF000000250C00
+      00104A00550041004E0020004400450020004700410052004100590020003300
+      3000000000000000000000FFFFFFFFFFFFFFFF01000000B0000000260C00000F
+      4A00550041004E0020004C004C004F00520045004E0053002000350037000000
+      00000000000000FFFFFFFFFFFFFFFF01000000B1000000270C0000104A005500
+      41004E00200058005800490049004900200031002D0033002D00350000000000
+      0000000000FFFFFFFFFFFFFFFF01000000B2000000280C0000114A0055005200
+      410044004F00200042004C0041004E0051005500450052002000330000000000
+      0000000000FFFFFFFFFFFFFFFF01000000B3000000290C0000284C0045004F00
+      50004F004C0044004F00200050004F004E0053002000410042004F0047004100
+      44004F005300200059002000450043004F004E004F004D004900530054004100
+      5300200053002E004C00000000000000000000FFFFFFFFFFFFFFFF01000000B4
+      0000002A0C0000094C004500500041004E0054004F0020003500000000000000
+      000000FFFFFFFFFFFFFFFF01000000B50000002B0C00000A4C0049004E004100
+      520045005300200031003100000000000000000000FFFFFFFFFFFFFFFF010000
+      00B50000002C0C0000094C0049004E0041005200450053002000370000000000
+      0000000000FFFFFFFFFFFFFFFF01000000B60000002D0C00001E4C0049005400
+      45005200410054004F0020004700410042005200490045004C0020004D004900
+      52004F00200034003200200050005400410020003700000000000000000000FF
+      FFFFFFFFFFFFFF01000000B70000002E0C0000134C004C0041004E0045005200
+      41002000440045002000520041004E0045005300200031003200000000000000
+      000000FFFFFFFFFFFFFFFF01000000B80000002F0C0000104C004C004F005300
+      4100460041004D0049004C0049004100200053002E004C000000000000000000
+      00FFFFFFFFFFFFFFFF01000000B9000000300C00000F4C004F00530020004300
+      45004E00540045004C004C004500530020003300000000000000000000FFFFFF
+      FFFFFFFFFF01000000BA000000310C00000E4C004F0053002000500045004400
+      52004F004E004500530020003700000000000000000000FFFFFFFFFFFFFFFF01
+      000000BB000000320C0000164C00550049005300200047004100520043004900
+      410020004200450052004C0041004E0047004100200037000000000000000000
+      00FFFFFFFFFFFFFFFF01000000BC000000330C0000134C005500490053002000
+      47005200410044004F004C00490020004E004100430048004500520000000000
+      0000000000FFFFFFFFFFFFFFFF01000000BD000000340C0000114C0055004900
+      53002000530041004E00540041004E00470045004C0020003200380000000000
+      0000000000FFFFFFFFFFFFFFFF01000000BE000000350C0000114D0041004500
+      5300540052004F00200042004100470041004E00540020003200310000000000
+      0000000000FFFFFFFFFFFFFFFF01000000BE000000360C0000114D0041004500
+      5300540052004F00200042004100470041004E00540020003200350000000000
+      0000000000FFFFFFFFFFFFFFFF01000000BF000000370C0000124D0041004500
+      5300540052004F002000420045004C004C005600450052002000320032000000
+      00000000000000FFFFFFFFFFFFFFFF01000000C0000000380C00000F4D004100
+      45005300540052004F00200043004C0041005600450020003300000000000000
+      000000FFFFFFFFFFFFFFFF01000000C1000000390C00001A4D00410045005300
+      540052004F0020004600450052004E0041004E0044004F0020004D0041005200
+      540049004E00200034003400000000000000000000FFFFFFFFFFFFFFFF010000
+      00C20000003A0C0000124D00410045005300540052004F00200047004F005A00
+      41004C0042004F00200031003200000000000000000000FFFFFFFFFFFFFFFF01
+      000000C30000003B0C00000F4D00410045005300540052004F00200050004100
+      4C004100550020003800000000000000000000FFFFFFFFFFFFFFFF01000000C4
+      0000003C0C0000104D00410045005300540052004F002000500041004C004100
+      5500200039003800000000000000000000FFFFFFFFFFFFFFFF01000000C50000
+      003D0C0000124D00410045005300540052004F00200052004F00440052004900
+      47004F00200033003200000000000000000000FFFFFFFFFFFFFFFF01000000C6
+      0000003E0C00000A4D0041004C0049004C004C00410020003100310000000000
+      0000000000FFFFFFFFFFFFFFFF01000000C70000003F0C0000124D0041004E00
+      4F004C004F002000540041004200450052004E00450052002000310030000000
+      00000000000000FFFFFFFFFFFFFFFF01000000C8000000400C0000184D004100
+      4E00550045004C0020004D0045004C0049004100200049002000460055005300
+      540045005200200031003100000000000000000000FFFFFFFFFFFFFFFF010000
+      00C8000000410C0000124D0041005200430045004C0049004E004F0020004700
+      49004E0045005200200031003000000000000000000000FFFFFFFFFFFFFFFF01
+      000000C8000000420C0000114D0041005200430045004C0049004E004F002000
+      470049004E004500520020003400000000000000000000FFFFFFFFFFFFFFFF01
+      000000C9000000430C0000104D0041005200490041004E004100200050004900
+      4E0045004400410020003200000000000000000000FFFFFFFFFFFFFFFF010000
+      00CA000000440C0000104D0041005200490041004E004F002000430055004200
+      45005200200033003000000000000000000000FFFFFFFFFFFFFFFF01000000CB
+      000000450C0000114D0041005200490041004E004F0020005200490042004500
+      52004100200033003300000000000000000000FFFFFFFFFFFFFFFF01000000CC
+      000000460C00000E4D004100520049004E004100200042004100490058004100
+      20003500000000000000000000FFFFFFFFFFFFFFFF01000000CD000000470C00
+      00164D00410052005100550045005300200044004500200044004F0053002000
+      41004700DC004100530020003400000000000000000000FFFFFFFFFFFFFFFF01
+      000000CE000000480C0000164D00410052005100550045005300200044004500
+      2000470055004100440041004C00450053005400200033000000000000000000
+      00FFFFFFFFFFFFFFFF01000000CF000000490C0000144D004100520051005500
+      4500530020004400450020005A0045004E004500540045002000320031000000
+      00000000000000FFFFFFFFFFFFFFFF01000000D00000004A0C0000134D004100
+      5200540049004E00200045004C002000480055004D0041004E004F0020003100
+      3900000000000000000000FFFFFFFFFFFFFFFF01000000D10000004B0C000012
+      4D00410052005400CD004E00200045004C002000480055004D0041004E004F00
+      20003500000000000000000000FFFFFFFFFFFFFFFF01000000D10000004C0C00
+      00084D004100520056004100200032003800000000000000000000FFFFFFFFFF
+      FFFFFF01000000D10000004D0C0000084D004100520056004100200033003000
+      000000000000000000FFFFFFFFFFFFFFFF01000000D20000004E0C0000104D00
+      410053002000430041004D004100520045004E00410020003100310032000000
+      00000000000000FFFFFFFFFFFFFFFF01000000D30000004F0C00000B4D004100
+      530051005500450046004100200033003300000000000000000000FFFFFFFFFF
+      FFFFFF01000000D3000000500C00000B4D004100530051005500450046004100
+      200034003100000000000000000000FFFFFFFFFFFFFFFF01000000D300000051
+      0C00000B4D0041005300510055004500460041002000340034000000000000FF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    ParentDoubleBuffered = False
+    ShowWorkAreas = True
+    TabOrder = 0
+    ViewStyle = vsReport
+  end
+  object beBuscar: TButtonedEdit
+    Left = 0
+    Top = 0
+    Width = 239
+    Height = 21
+    Align = alTop
+    CharCase = ecUpperCase
+    TabOrder = 1
+    OnChange = beBuscarChange
+  end
+  object cbAgruparAdmin: TCheckBox
+    Left = 0
+    Top = 21
+    Width = 239
+    Height = 17
+    Align = alTop
+    Caption = 'Agrupar porAministrador'
+    TabOrder = 2
+    OnClick = cbAgruparAdminClick
+  end
+  object Button1: TButton
+    Left = 96
+    Top = 76
+    Width = 113
+    Height = 41
+    Caption = 'Button1'
+    TabOrder = 3
+    OnClick = Button1Click
+  end
+  object Edit1: TEdit
+    Left = 144
+    Top = 152
+    Width = 65
+    Height = 21
+    TabOrder = 4
+    Text = 'Edit1'
+  end
+  object Edit2: TEdit
+    Left = 144
+    Top = 200
+    Width = 65
+    Height = 21
+    TabOrder = 5
+    Text = 'Edit2'
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DataModule1.fdClientes
+    ScopeMappings = <>
+    Left = 96
+    Top = 184
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 140
+    Top = 73
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'nombre'
+      Control = ListView1
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'nombreapellidos'
+      FillBreakGroups = <>
+    end
+    object LinkControlToPropertyGroupView: TLinkControlToProperty
+      Category = 'Quick Bindings'
+      Control = cbAgruparAdmin
+      Track = True
+      Component = ListView1
+      ComponentProperty = 'GroupView'
+      OnAssignedValue = LinkControlToPropertyGroupViewAssignedValue
+    end
+  end
+end

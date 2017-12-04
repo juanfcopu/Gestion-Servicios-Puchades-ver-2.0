@@ -23,15 +23,54 @@ object DataModule1: TDataModule1
   end
   object fdClientes: TFDQuery
     Active = True
-    IndexFieldNames = 'idAdministrador;nombre'
+    Indexes = <
+      item
+        Active = True
+        Name = 'id1'
+        Fields = 'nombre'
+        Options = [soDescending]
+        Distinct = True
+        FilterOptions = [ekPartial]
+      end>
+    IndexesActive = False
+    IndexFieldNames = 'idAdministrador,nombre'
     Connection = FDConnection1
+    FetchOptions.AssignedValues = [evMode, evRecsSkip, evRecsMax, evRowsetSize, evLiveWindowFastFirst]
+    FetchOptions.RecsSkip = 0
+    FetchOptions.LiveWindowFastFirst = True
     SQL.Strings = (
       
-        'Select c.nombre, a.nombreApellidos, c.idAdministrador from clien' +
-        'tes c,administradores a where c.idAdministrador=a.idAdministrado' +
-        'r ')
+        'Select c.idContactos, c.nombre, a.nombreapellidos,c.idAdministra' +
+        'dor from clientes c, administradores a where c.idAdministrador=a' +
+        '.idAdministrador'
+      'order by c.idAdministrador,c.nombre')
     Left = 288
     Top = 32
+    object fdClientesidContactos: TFDAutoIncField
+      FieldName = 'idContactos'
+      Origin = 'IdContactos'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object fdClientesnombre: TStringField
+      FieldName = 'nombre'
+      Origin = 'Nombre'
+      Required = True
+      Size = 100
+    end
+    object fdClientesidAdministrador: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'idAdministrador'
+      Origin = 'idAdministrador'
+    end
+    object fdClientesnombreapellidos: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nombreapellidos'
+      Origin = 'NombreApellidos'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'

@@ -20,6 +20,8 @@ type
     PageControl2: TPageControl;
     Panel1: TPanel;
     Splitter1: TSplitter;
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -34,17 +36,17 @@ implementation
 
 {$R *.dfm}
 
-uses BOTONES, listaclientes;
+uses BOTONES, listaclientes, DModule1;
 
 procedure Tprincipal.FormCreate(Sender: TObject);
 var botons:Tmenuseleccion;  lclient: Tlistclientes ;
 begin
     botons:=Tmenuseleccion.Create(principal);
     botons.Show;
-    panel1.Width:=botons.Width;
+    panel1.Width:=botons.Width-10;
     botons.ManualDock(panel1);
     lclient:=Tlistclientes.Create(principal);
-    lclient.Width:=botons.Width;
+    lclient.Width:=botons.Width-10;
     lclient.Show;
     lclient.ManualDock(panel1);
 end;

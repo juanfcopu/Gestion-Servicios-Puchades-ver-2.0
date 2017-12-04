@@ -1,25 +1,35 @@
 ﻿[ListView1]
-Coordinates=10,10,116,256
+Coordinates=10,10,97,195
 Visible=True
 ExplicitSubNodes=GroupView
 
 [DataModule1.fdClientes]
-Coordinates=290,50,139,160
+Coordinates=290,60,116,141
 Visible=False
 
 []
-Coordinates=135,122,91,36
+Coordinates=550,80,103,33
+Visible=True
 
 [BindSourceDB1]
-Coordinates=290,50,139,160
+Coordinates=290,60,116,141
 Visible=True
 
 [BindingsList1]
 Coordinates=145,153,91,36
 
 [beBuscar]
-Coordinates=190,0,69,58
+Coordinates=190,0,61,51
 
 [cbAgruparAdmin]
-Coordinates=340,240,114,58
+Coordinates=370,230,98,51
+
+[Edit2]
+Coordinates=145,1,40,51
+
+[Edit1]
+Coordinates=145,208,40,51
+
+[Button1]
+Coordinates=530,120,53,51
 
