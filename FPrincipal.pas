@@ -22,7 +22,16 @@ type
     Splitter1: TSplitter;
     DBGrid1: TDBGrid;
     DataSource1: TDataSource;
+    ControlBar1: TControlBar;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
     procedure FormCreate(Sender: TObject);
+    procedure PageControl2DockOver(Sender: TObject; Source: TDragDockObject; X,
+      Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure Panel1DockOver(Sender: TObject; Source: TDragDockObject; X,
+      Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure PageControl2DockDrop(Sender: TObject; Source: TDragDockObject; X,
+      Y: Integer);
   private
     { Private declarations }
   public
@@ -50,5 +59,49 @@ begin
     lclient.Show;
     lclient.ManualDock(panel1);
 end;
+
+
+
+procedure Tprincipal.PageControl2DockDrop(Sender: TObject;
+  Source: TDragDockObject; X, Y: Integer);
+begin
+         if (Source.Control is Tlistclientes) then
+         if PageControl2.PageCount > 0 then PageControl2.Pages[PageControl2.PageCount-1].ImageIndex:=6;
+end;
+
+procedure Tprincipal.PageControl2DockOver(Sender: TObject;
+  Source: TDragDockObject; X, Y: Integer; State: TDragState;
+  var Accept: Boolean);
+  var FClientes:Tlistclientes;  i:integer;
+begin
+   if (Source.Control is Tlistclientes) then              //
+begin
+      FClientes:=(Source.Control as Tlistclientes) ;
+      for i:= 1 to FClientes.ListView1.Columns.Count - 1   do
+      begin
+          FClientes.ListView1.Column[i].AutoSize:=true;
+      end;
+
+
+end;
+end;
+
+
+procedure Tprincipal.Panel1DockOver(Sender: TObject; Source: TDragDockObject; X,
+  Y: Integer; State: TDragState; var Accept: Boolean);
+var FClientes:Tlistclientes;  i:integer;
+begin
+   if (Source.Control is Tlistclientes) then              //
+   begin
+      FClientes:=(Source.Control as Tlistclientes) ;
+      for i:= 1 to FClientes.ListView1.Columns.Count - 1   do
+      begin
+          FClientes.ListView1.Column[i].AutoSize:=false;
+          FClientes.ListView1.Column[i].width:=0;
+      end;
+
+      end;
+end;
+
 
 end.

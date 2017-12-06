@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, Vcl.ImgList, Vcl.Controls;
 
 type
   TDataModule1 = class(TDataModule)
@@ -20,6 +20,11 @@ type
     fdClientesidAdministrador: TIntegerField;
     fdClientesidContactos: TFDAutoIncField;
     fdClientesnombreapellidos: TStringField;
+    fdClientesCIF: TStringField;
+    fdClientesdireccion: TStringField;
+    fdClientesCodigoPostal: TStringField;
+    fdClientesCiudad: TStringField;
+    ImageList1: TImageList;
   private
     { Private declarations }
   public

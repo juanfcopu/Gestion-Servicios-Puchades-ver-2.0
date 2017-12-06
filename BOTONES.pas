@@ -32,4 +32,6 @@ implementation
 
 {$R *.dfm}
 
+uses DModule1;
+
 end.

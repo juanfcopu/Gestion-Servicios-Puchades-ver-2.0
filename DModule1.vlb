@@ -1,5 +1,5 @@
 ﻿[fdClientes]
-Coordinates=10,10,81,123
+Coordinates=10,10,81,195
 
 [FDGUIxWaitCursor1]
 Coordinates=192,1,113,33
@@ -24,4 +24,16 @@ Coordinates=274,105,123,33
 
 [fdClientesnombreapellidos]
 Coordinates=125,134,146,33
+
+[fdClientesCodigoPostal]
+Coordinates=110,1,130,33
+
+[fdClientesdireccion]
+Coordinates=110,53,109,33
+
+[fdClientesCiudad]
+Coordinates=110,105,99,33
+
+[fdClientesCIF]
+Coordinates=91,152,80,33
 

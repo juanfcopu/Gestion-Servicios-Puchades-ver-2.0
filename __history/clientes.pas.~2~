@@ -1,0 +1,31 @@
+unit clientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TFClientes = class(TForm)
+    GroupBox1: TGroupBox;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    ComboBox1: TComboBox;
+    GridPanel1: TGridPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FClientes: TFClientes;
+
+implementation
+
+{$R *.dfm}
+
+end.

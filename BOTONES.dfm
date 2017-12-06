@@ -30,8 +30,13 @@ object menuseleccion: Tmenuseleccion
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
+    ImageIndex = 6
+    ImageMargins.Left = 30
+    ImageMargins.Right = -70
+    Images = DataModule1.ImageList1
     ParentBiDiMode = False
     ParentFont = False
+    SelectedImageIndex = 6
     TabOrder = 0
   end
   object Button2: TButton
@@ -50,7 +55,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 1
-    ExplicitTop = 400
   end
   object Button3: TButton
     Left = 0
@@ -68,7 +72,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 200
   end
   object Button4: TButton
     Left = 0
@@ -86,7 +89,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 3
-    ExplicitTop = 150
   end
   object Button5: TButton
     Left = 0
@@ -104,7 +106,7 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 4
-    ExplicitTop = 100
+    ExplicitTop = 44
   end
   object Button6: TButton
     Left = 0
@@ -122,8 +124,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 5
-    ExplicitLeft = 8
-    ExplicitTop = 466
   end
   object Button7: TButton
     Left = 0
@@ -141,7 +141,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 6
-    ExplicitTop = 250
   end
   object Button8: TButton
     Left = 0
@@ -159,7 +158,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 7
-    ExplicitTop = 350
   end
   object Button9: TButton
     Left = 0
@@ -177,7 +175,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 8
-    ExplicitTop = 300
   end
   object Button10: TButton
     Left = 0
@@ -195,6 +192,5 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 9
-    ExplicitTop = 450
   end
 end

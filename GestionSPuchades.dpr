@@ -5,7 +5,8 @@ uses
   FPrincipal in 'FPrincipal.pas' {principal},
   DModule1 in 'DModule1.pas' {DataModule1: TDataModule},
   BOTONES in 'BOTONES.pas' {menuseleccion},
-  listaclientes in 'listaclientes.pas' {listclientes};
+  listaclientes in 'listaclientes.pas' {listclientes},
+  clientes in 'clientes.pas' {FClientes};
 
 {$R *.res}
 
@@ -14,5 +15,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(Tprincipal, principal);
+  Application.CreateForm(TFClientes, FClientes);
   Application.Run;
 end.
