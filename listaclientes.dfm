@@ -34,20 +34,21 @@ object listclientes: Tlistclientes
         MaxWidth = 188
       end
       item
+        AutoSize = True
         Caption = 'CIF'
-        Width = 0
       end
       item
+        AutoSize = True
         Caption = 'Direcci'#243'n'
-        Width = 0
       end
       item
+        Alignment = taCenter
+        AutoSize = True
         Caption = 'Codigo Postal'
-        Width = 0
       end
       item
+        AutoSize = True
         Caption = 'Ciudad'
-        Width = 0
       end>
     DoubleBuffered = True
     FlatScrollBars = True
@@ -58,7 +59,7 @@ object listclientes: Tlistclientes
         State = [lgsNormal, lgsSelected]
         HeaderAlign = taLeftJustify
         FooterAlign = taLeftJustify
-        TitleImage = 31
+        TitleImage = -1
       end
       item
         Header = 'MIGUEL  GURREA LLOPIS'
@@ -1887,7 +1888,6 @@ object listclientes: Tlistclientes
     TabOrder = 0
     ViewStyle = vsReport
     OnDblClick = ListView1DblClick
-    ExplicitTop = 59
   end
   object Panel1: TPanel
     Left = 0

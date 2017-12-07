@@ -1,0 +1,33 @@
+object Frame1: TFrame1
+  Left = 0
+  Top = 0
+  Width = 570
+  Height = 350
+  Align = alClient
+  TabOrder = 0
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 570
+    Height = 350
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 40
+    ExplicitTop = 48
+    ExplicitWidth = 129
+    ExplicitHeight = 81
+    object HeaderControl1: THeaderControl
+      Left = 1
+      Top = 1
+      Width = 568
+      Height = 48
+      Sections = <
+        item
+          AutoSize = True
+          ImageIndex = -1
+          Text = 'Presupuestos'
+          Width = 100
+        end>
+    end
+  end
+end

@@ -45,19 +45,19 @@ implementation
 
 {$R *.dfm}
 
-uses BOTONES, listaclientes, DModule1;
+uses BOTONES, listaclientes, DModule1, clientes, navegador;
 
 procedure Tprincipal.FormCreate(Sender: TObject);
-var botons:Tmenuseleccion;  lclient: Tlistclientes ;
+var botons:Tmenuseleccion;  navegador: TFNavegador ;
 begin
     botons:=Tmenuseleccion.Create(principal);
     botons.Show;
     panel1.Width:=botons.Width-10;
     botons.ManualDock(panel1);
-    lclient:=Tlistclientes.Create(principal);
-    lclient.Width:=botons.Width-10;
-    lclient.Show;
-    lclient.ManualDock(panel1);
+    navegador:=TFNavegador.Create(principal);
+    navegador.Width:=botons.Width-10;
+    navegador.Show;
+    navegador.ManualDock(panel1);
 end;
 
 
@@ -74,6 +74,7 @@ procedure Tprincipal.PageControl2DockOver(Sender: TObject;
   var Accept: Boolean);
   var FClientes:Tlistclientes;  i:integer;
 begin
+
    if (Source.Control is Tlistclientes) then              //
 begin
       FClientes:=(Source.Control as Tlistclientes) ;
@@ -82,8 +83,7 @@ begin
           FClientes.ListView1.Column[i].AutoSize:=true;
       end;
 
-
-end;
+   end;
 end;
 
 
@@ -101,6 +101,8 @@ begin
       end;
 
       end;
+
+      if (Source.Control is TFClientes) then   Accept:= False;
 end;
 
 

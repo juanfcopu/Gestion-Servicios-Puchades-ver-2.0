@@ -1,0 +1,34 @@
+unit framePresupuestos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls, Vcl.StdCtrls;
+
+type
+  TFrame1 = class(TFrame)
+    Panel1: TPanel;
+    HeaderControl1: THeaderControl;
+    ListView1: TListView;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    procedure FrameResize(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrame1.FrameResize(Sender: TObject);
+begin
+Button1.Left:=HeaderControl1.Width-30;
+end;
+
+end.

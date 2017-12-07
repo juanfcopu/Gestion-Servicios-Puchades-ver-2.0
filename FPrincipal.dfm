@@ -40,8 +40,6 @@ object principal: Tprincipal
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
-    ExplicitTop = 0
-    ExplicitHeight = 715
     object DBGrid1: TDBGrid
       Left = 232
       Top = 200
@@ -66,8 +64,6 @@ object principal: Tprincipal
     DragMode = dmAutomatic
     TabOrder = 2
     OnDockOver = Panel1DockOver
-    ExplicitTop = 0
-    ExplicitHeight = 715
   end
   object PageControl2: TPageControl
     Left = 234
@@ -80,8 +76,6 @@ object principal: Tprincipal
     TabOrder = 3
     OnDockDrop = PageControl2DockDrop
     OnDockOver = PageControl2DockOver
-    ExplicitLeft = 238
-    ExplicitTop = 58
   end
   object ControlBar1: TControlBar
     Left = 0

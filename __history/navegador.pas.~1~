@@ -1,0 +1,25 @@
+unit navegador;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls;
+
+type
+  Tfnavegador = class(TForm)
+    TreeView1: TTreeView;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fnavegador: Tfnavegador;
+
+implementation
+
+{$R *.dfm}
+
+end.

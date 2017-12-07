@@ -1,0 +1,43 @@
+unit clientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
+  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.TeeProcs, VCLTee.Chart,
+  VCLTee.DBChart;
+
+type
+  TFClientes = class(TForm)
+    GroupBox1: TGroupBox;
+    GridPanel1: TGridPanel;
+    GroupBox4: TGroupBox;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
+    ComboBox1: TComboBox;
+    Label1: TLabel;
+    GroupBox2: TGroupBox;
+    LabeledEdit4: TLabeledEdit;
+    LabeledEdit5: TLabeledEdit;
+    GroupBox3: TGroupBox;
+    LabeledEdit6: TLabeledEdit;
+    LabeledEdit7: TLabeledEdit;
+    LabeledEdit8: TLabeledEdit;
+    Panel1: TPanel;
+    DBChart1: TDBChart;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FClientes: TFClientes;
+
+implementation
+
+{$R *.dfm}
+
+end.
