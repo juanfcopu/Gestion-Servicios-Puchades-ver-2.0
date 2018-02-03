@@ -15,13 +15,15 @@ object principal: Tprincipal
   Position = poMainFormCenter
   ScreenSnap = True
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
-    Left = 232
+    Left = 238
     Top = 57
     Width = 2
     Height = 658
+    ExplicitLeft = 232
     ExplicitTop = 0
     ExplicitHeight = 715
   end
@@ -33,13 +35,15 @@ object principal: Tprincipal
     Panels = <>
   end
   object Panel2: TPanel
-    Left = 234
+    Left = 240
     Top = 57
-    Width = 950
+    Width = 944
     Height = 658
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
+    ExplicitLeft = 234
+    ExplicitWidth = 950
     object DBGrid1: TDBGrid
       Left = 232
       Top = 200
@@ -55,20 +59,28 @@ object principal: Tprincipal
     end
   end
   object Panel1: TPanel
-    Left = 0
-    Top = 57
+    AlignWithMargins = True
+    Left = 3
+    Top = 60
     Width = 232
-    Height = 658
+    Height = 652
     Align = alLeft
+    Alignment = taLeftJustify
+    AutoSize = True
     DockSite = True
     DragMode = dmAutomatic
+    ShowCaption = False
     TabOrder = 2
+    VerticalAlignment = taAlignTop
     OnDockOver = Panel1DockOver
+    ExplicitLeft = -4
+    ExplicitTop = 58
+    ExplicitHeight = 658
   end
   object PageControl2: TPageControl
-    Left = 234
+    Left = 240
     Top = 57
-    Width = 950
+    Width = 944
     Height = 658
     Align = alClient
     DockSite = True
@@ -76,6 +88,8 @@ object principal: Tprincipal
     TabOrder = 3
     OnDockDrop = PageControl2DockDrop
     OnDockOver = PageControl2DockOver
+    ExplicitLeft = 234
+    ExplicitWidth = 950
   end
   object ControlBar1: TControlBar
     Left = 0
@@ -120,7 +134,7 @@ object principal: Tprincipal
   end
   object DataSource1: TDataSource
     DataSet = DataModule1.fdClientes
-    Left = 986
-    Top = 272
+    Left = 626
+    Top = 40
   end
 end

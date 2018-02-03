@@ -1,0 +1,70 @@
+object Frame3: TFrame3
+  Left = 0
+  Top = 0
+  Width = 532
+  Height = 361
+  Align = alClient
+  TabOrder = 0
+  OnResize = FrameResize
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 532
+    Height = 361
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 88
+    ExplicitTop = 96
+    ExplicitWidth = 161
+    ExplicitHeight = 73
+    object ListView1: TListView
+      Left = 1
+      Top = 37
+      Width = 530
+      Height = 323
+      Align = alClient
+      Columns = <>
+      TabOrder = 0
+      ExplicitLeft = 120
+      ExplicitTop = 128
+      ExplicitWidth = 233
+      ExplicitHeight = 113
+    end
+    object HeaderControl1: THeaderControl
+      Left = 1
+      Top = 1
+      Width = 530
+      Height = 36
+      Sections = <
+        item
+          ImageIndex = -1
+          Text = 'Obras'
+          Width = 120
+        end>
+    end
+    object Button1: TButton
+      Left = 404
+      Top = 1
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 442
+      Top = 1
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 3
+    end
+    object Button3: TButton
+      Left = 480
+      Top = 1
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 4
+    end
+  end
+end

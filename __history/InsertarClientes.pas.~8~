@@ -1,0 +1,64 @@
+unit InsertarClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
+  System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
+  Data.Bind.DBScope, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TFinsertarClientes = class(TForm)
+    GridPanel1: TGridPanel;
+    GroupBox4: TGroupBox;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
+    GroupBox3: TGroupBox;
+    ListView1: TListView;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    GroupBox2: TGroupBox;
+    LabeledEdit4: TLabeledEdit;
+    LabeledEdit5: TLabeledEdit;
+    GroupBox5: TGroupBox;
+    Label2: TLabel;
+    ComboBox1: TComboBox;
+    Button3: TButton;
+    Button4: TButton;
+    GridPanel2: TGridPanel;
+    fdinsertarClientes: TFDQuery;
+    FDQuery1: TFDQuery;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    LinkFillControlToField: TLinkFillControlToField;
+    BindSourceDB2: TBindSourceDB;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
+    LinkControlToField3: TLinkControlToField;
+    LinkControlToField4: TLinkControlToField;
+    LinkControlToField5: TLinkControlToField;
+    ComboBox2: TComboBox;
+    Label1: TLabel;
+    LinkPropertyToFieldItemIndex: TLinkPropertyToField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FinsertarClientes: TFinsertarClientes;
+
+implementation
+
+{$R *.dfm}
+
+uses DModule1;
+
+end.

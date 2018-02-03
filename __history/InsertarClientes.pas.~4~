@@ -1,0 +1,45 @@
+unit InsertarClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TFinsertarClientes = class(TForm)
+    GridPanel1: TGridPanel;
+    GroupBox4: TGroupBox;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
+    GroupBox3: TGroupBox;
+    ListView1: TListView;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    GroupBox2: TGroupBox;
+    LabeledEdit4: TLabeledEdit;
+    LabeledEdit5: TLabeledEdit;
+    GroupBox5: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    Button3: TButton;
+    Button4: TButton;
+    GridPanel2: TGridPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FinsertarClientes: TFinsertarClientes;
+
+implementation
+
+{$R *.dfm}
+
+end.

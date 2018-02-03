@@ -9,16 +9,18 @@ uses
 
 type
   Tmenuseleccion = class(TForm)
-    Button1: TButton;
+    btclientes: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
-    Button7: TButton;
+    btpresupuestos: TButton;
     Button8: TButton;
     Button9: TButton;
     Button10: TButton;
+    procedure btclientesClick(Sender: TObject);
+    procedure btpresupuestosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,6 +34,16 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1;
+uses DModule1, navegador;
+
+procedure Tmenuseleccion.btclientesClick(Sender: TObject);
+begin
+     fnavegador.NodosClientes;
+end;
+
+procedure Tmenuseleccion.btpresupuestosClick(Sender: TObject);
+begin
+     fnavegador.NodosPresupuestos;
+end;
 
 end.

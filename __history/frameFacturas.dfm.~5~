@@ -1,0 +1,77 @@
+object Frame2: TFrame2
+  Left = 0
+  Top = 0
+  Width = 467
+  Height = 299
+  Align = alClient
+  TabOrder = 0
+  OnResize = FrameResize
+  ExplicitWidth = 320
+  ExplicitHeight = 240
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 467
+    Height = 299
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 200
+    ExplicitTop = 152
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object HeaderControl1: THeaderControl
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 459
+      Height = 36
+      Sections = <
+        item
+          ImageIndex = -1
+          Text = 'Facturas'
+          Width = 130
+        end>
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 465
+    end
+    object Button1: TButton
+      Left = 347
+      Top = 2
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 1
+    end
+    object Button2: TButton
+      Left = 385
+      Top = 2
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 2
+    end
+    object Button3: TButton
+      Left = 423
+      Top = 2
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 3
+    end
+    object ListView1: TListView
+      AlignWithMargins = True
+      Left = 4
+      Top = 46
+      Width = 459
+      Height = 249
+      Align = alClient
+      Columns = <>
+      TabOrder = 4
+      ExplicitLeft = 120
+      ExplicitTop = 88
+      ExplicitWidth = 129
+      ExplicitHeight = 73
+    end
+  end
+end

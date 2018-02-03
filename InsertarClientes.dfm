@@ -1,0 +1,537 @@
+object FinsertarClientes: TFinsertarClientes
+  Left = 0
+  Top = 0
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Insertar Clientes'
+  ClientHeight = 527
+  ClientWidth = 603
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PrintScale = poNone
+  Scaled = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GridPanel1: TGridPanel
+    Left = 0
+    Top = 0
+    Width = 603
+    Height = 527
+    Align = alClient
+    ColumnCollection = <
+      item
+        Value = 77.792553191489360000
+      end
+      item
+        Value = 22.207446808510640000
+      end>
+    ControlCollection = <
+      item
+        Column = 0
+        Control = GroupBox4
+        Row = 0
+      end
+      item
+        Column = 0
+        Control = GroupBox3
+        Row = 1
+      end
+      item
+        Column = 0
+        Control = GroupBox2
+        Row = 2
+      end
+      item
+        Column = 0
+        Control = GroupBox5
+        Row = 3
+      end
+      item
+        Column = 1
+        Control = GridPanel2
+        Row = 1
+      end>
+    RowCollection = <
+      item
+        Value = 17.294286729216840000
+      end
+      item
+        Value = 32.589531590662450000
+      end
+      item
+        Value = 21.509090849837220000
+      end
+      item
+        Value = 28.607090830283500000
+      end>
+    TabOrder = 0
+    object GroupBox4: TGroupBox
+      AlignWithMargins = True
+      Left = 11
+      Top = 4
+      Width = 454
+      Height = 77
+      Margins.Left = 10
+      Margins.Bottom = 10
+      Align = alClient
+      Caption = 'Datos'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      ExplicitLeft = 8
+      object LabeledEdit1: TLabeledEdit
+        AlignWithMargins = True
+        Left = 9
+        Top = 40
+        Width = 41
+        Height = 21
+        EditLabel.Width = 33
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Codigo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Text = '29'
+      end
+      object LabeledEdit2: TLabeledEdit
+        AlignWithMargins = True
+        Left = 56
+        Top = 40
+        Width = 235
+        Height = 21
+        EditLabel.Width = 37
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Nombre'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Tahoma'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Text = 'EDIFICIO MORELLA'
+      end
+      object LabeledEdit3: TLabeledEdit
+        AlignWithMargins = True
+        Left = 305
+        Top = 40
+        Width = 91
+        Height = 21
+        EditLabel.Width = 25
+        EditLabel.Height = 13
+        EditLabel.Caption = 'C.I.F'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Tahoma'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        Text = 'H-98.003.874'
+      end
+    end
+    object GroupBox3: TGroupBox
+      AlignWithMargins = True
+      Left = 11
+      Top = 94
+      Width = 454
+      Height = 158
+      Margins.Left = 10
+      Margins.Bottom = 10
+      Align = alClient
+      Caption = 'Direcci'#243'n '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      object LabeledEdit6: TLabeledEdit
+        Left = 72
+        Top = 20
+        Width = 281
+        Height = 21
+        EditLabel.Width = 43
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Direcci'#243'n'
+        LabelPosition = lpLeft
+        TabOrder = 0
+        Text = 'CALLE SAN ANTONIO N'#186' 44'
+      end
+      object LabeledEdit7: TLabeledEdit
+        Left = 72
+        Top = 61
+        Width = 77
+        Height = 21
+        EditLabel.Width = 65
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Codigo Postal'
+        LabelPosition = lpLeft
+        TabOrder = 1
+        Text = '46910'
+      end
+      object LabeledEdit8: TLabeledEdit
+        Left = 232
+        Top = 61
+        Width = 121
+        Height = 21
+        EditLabel.Width = 33
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Ciudad'
+        LabelPosition = lpLeft
+        TabOrder = 2
+        Text = 'SEDAVI'
+      end
+    end
+    object GroupBox2: TGroupBox
+      AlignWithMargins = True
+      Left = 11
+      Top = 265
+      Width = 447
+      Height = 99
+      Margins.Left = 10
+      Margins.Right = 10
+      Margins.Bottom = 10
+      Align = alClient
+      Caption = 'Datos Bancarios'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      object LabeledEdit4: TLabeledEdit
+        Left = 62
+        Top = 54
+        Width = 334
+        Height = 21
+        EditLabel.Width = 50
+        EditLabel.Height = 13
+        EditLabel.Caption = 'N'#186' Cuenta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        LabelPosition = lpLeft
+        ParentFont = False
+        TabOrder = 0
+      end
+      object LabeledEdit5: TLabeledEdit
+        Left = 62
+        Top = 17
+        Width = 334
+        Height = 21
+        CharCase = ecUpperCase
+        EditLabel.Width = 29
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Banco'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        LabelPosition = lpLeft
+        ParentFont = False
+        TabOrder = 1
+      end
+    end
+    object GroupBox5: TGroupBox
+      AlignWithMargins = True
+      Left = 4
+      Top = 377
+      Width = 461
+      Height = 146
+      Align = alClient
+      Caption = 'Familia y Administrador'
+      TabOrder = 3
+      object Label2: TLabel
+        AlignWithMargins = True
+        Left = 11
+        Top = 57
+        Width = 66
+        Height = 13
+        Caption = 'Administrador'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label1: TLabel
+        AlignWithMargins = True
+        Left = 19
+        Top = 25
+        Width = 32
+        Height = 13
+        Caption = 'Familia'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object ComboBox1: TComboBox
+        AlignWithMargins = True
+        Left = 91
+        Top = 55
+        Width = 312
+        Height = 21
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ItemIndex = 5
+        ParentFont = False
+        TabOrder = 0
+        Text = 'EMILIA PICAZO'
+        Items.Strings = (
+          'ADMINISTRACI'#211'N F.M PORTA'#209'A'
+          'ADMINISTRACIONES FELIU'
+          'ADMINISTRACIONES RIVELLES'
+          'CARLOS  ORRICO'
+          'CAROLINA GALVEZ'
+          'EMILIA PICAZO'
+          'ENRIQUE MARTIN'
+          'ESPERANZA  SERRANO AMADOR'
+          'ESPERANZA LOPEZ'
+          'JOSE  IGNACIO'
+          'JUAN  QUINTO'
+          'JUAN LUIS  MARQU'#201'S ROMERO'
+          'LDCOMUNIDADES '
+          'MIGUEL  GURREA LLOPIS'
+          'NURIA L'#211'PEZ RIBELLES'
+          'PABLO  BELLIDO'
+          'PILAR '
+          'RAM'#211'N GUILLOT'
+          'RUIZ   MAURI S.L'
+          'SAN JUAN  S.L'
+          'SIN ADMINISTRADOR'
+          'TERESA DE LA CAMARA'
+          'TOMAS  MU'#209'OZ'
+          'VILLANUEVA ROIG S.L S.L')
+      end
+      object ComboBox2: TComboBox
+        Left = 91
+        Top = 22
+        Width = 312
+        Height = 21
+        CharCase = ecUpperCase
+        TabOrder = 1
+        Text = 'COMUNIDAD DE PROPIETARIOS'
+        Items.Strings = (
+          'COMUNIDAD DE PROPIETARIOS'
+          'COMUNIDAD DE BIENES'
+          'PROPIETARIO  RESIDENCIA'
+          'PROPIETARIO 2'#186' RESIDENCIA')
+      end
+    end
+    object GridPanel2: TGridPanel
+      Left = 468
+      Top = 91
+      Width = 134
+      Height = 171
+      Align = alClient
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = Button3
+          Row = 0
+        end
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = Button4
+          Row = 1
+        end>
+      RowCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      TabOrder = 4
+      DesignSize = (
+        134
+        171)
+      object Button3: TButton
+        AlignWithMargins = True
+        Left = 18
+        Top = 23
+        Width = 97
+        Height = 39
+        Anchors = []
+        Caption = 'Guardar'
+        ModalResult = 1
+        TabOrder = 0
+        OnClick = Button3Click
+      end
+      object Button4: TButton
+        AlignWithMargins = True
+        Left = 18
+        Top = 106
+        Width = 97
+        Height = 42
+        Anchors = []
+        Caption = 'Cerrar'
+        ModalResult = 2
+        TabOrder = 1
+        OnClick = Button4Click
+      end
+    end
+  end
+  object fdinsertarClientes: TFDQuery
+    Active = True
+    AfterPost = fdinsertarClientesAfterPost
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from clientes')
+    Left = 528
+    Top = 16
+  end
+  object fdadministradores: TFDQuery
+    Active = True
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select idadministrador, nombreapellidos from administradores')
+    Left = 512
+    Top = 400
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = fdadministradores
+    ScopeMappings = <>
+    Left = 288
+    Top = 264
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkFillControlToField: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'idAdministrador'
+      Control = ComboBox1
+      Track = False
+      FillDataSource = BindSourceDB1
+      FillValueFieldName = 'idAdministrador'
+      FillDisplayFieldName = 'nombreapellidos'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'IdContactos'
+      Control = LabeledEdit1
+      Track = True
+    end
+    object LinkControlToField2: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'Nombre'
+      Control = LabeledEdit2
+      Track = True
+    end
+    object LinkControlToField3: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'CIF'
+      Control = LabeledEdit3
+      Track = True
+    end
+    object LinkControlToField4: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'IBAN'
+      Control = LabeledEdit4
+      Track = True
+    end
+    object LinkControlToField5: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'banco'
+      Control = LabeledEdit5
+      Track = True
+    end
+    object LinkPropertyToFieldItemIndex: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'familia'
+      Component = ComboBox2
+      ComponentProperty = 'ItemIndex'
+    end
+    object LinkControlToField6: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'Ciudad'
+      Control = LabeledEdit8
+      Track = True
+    end
+    object LinkControlToField7: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'CodigoPostal'
+      Control = LabeledEdit7
+      Track = True
+    end
+    object LinkControlToField8: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'Direccion'
+      Control = LabeledEdit6
+      Track = True
+    end
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = fdinsertarClientes
+    ScopeMappings = <>
+    Left = 328
+    Top = 272
+  end
+end

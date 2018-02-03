@@ -13,9 +13,11 @@ type
     procedure TreeView1DblClick(Sender: TObject);
   private
     { Private declarations }
-    procedure NodosClientes;
+
   public
     { Public declarations }
+    procedure NodosClientes;
+    procedure NodosPresupuestos;
   end;
 
 var
@@ -25,11 +27,12 @@ implementation
 
 {$R *.dfm}
 
-uses listaclientes, FPrincipal;
+uses listaclientes, FPrincipal, DModule1;
 
 procedure Tfnavegador.FormCreate(Sender: TObject);
 
 begin
+    fnavegador:=Self;
     NodosClientes;
 end;
 
@@ -41,21 +44,46 @@ begin
      TreeView1.Items.AddChild(node1,'Lista Clientes');
      TreeView1.Items.AddChild(node1,'Añadir Cliente');
      TreeView1.Items.AddChild(node1,'Editar Clientes');
-     TreeView1.AutoExpand:=true;
+     node1.Expand(true);
+end;
+
+
+procedure Tfnavegador.NodosPresupuestos;
+var node1:TTreeNode;
+begin
+     TreeView1.Items.Clear;
+     node1:=TreeView1.Items.Add(nil,'Presupuestos');
+     TreeView1.Items.AddChild(node1,'Lista Presupuestos');
+     TreeView1.Items.AddChild(node1,'Añadir Presupuesto');
+     TreeView1.Items.AddChild(node1,'Editar Presupuesto');
+     node1.Expand(true);
 end;
 
 procedure Tfnavegador.TreeView1DblClick(Sender: TObject);
-var listaclientes:TlistClientes;
+
 begin
     if (Sender is TTreeView) then
     begin
        if (Sender as TTreeView).Selected.Text='Lista Clientes' then
        begin
-            listaclientes:=TlistClientes.Create(principal);
-            listaclientes.Width:=principal.Panel1.Width-10;
-            listaclientes.Show;
-            listaclientes.ManualDock(principal.PageControl2);
+           DataModule1.listaclientesExecute(TreeView1);
        end;
+       if (Sender as TTreeView).Selected.Text='Añadir Cliente' then
+       begin
+            DataModule1.crearclientesExecute(TreeView1);
+       end;
+
+
+       if (Sender as TTreeView).Selected.Text='Lista Presupuestos' then
+       begin
+           DataModule1.listapresupuestosExecute(TreeView1);
+       end;
+
+       if (Sender as TTreeView).Selected.Text='Añadir Presupuesto' then
+       begin
+           DataModule1.insertarpresupuestoExecute(TreeView1);
+       end;
+
     end;
 end;
 

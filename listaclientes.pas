@@ -7,7 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, Vcl.StdCtrls,DB,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.ToolWin, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   Tlistclientes = class(TForm)
@@ -22,14 +25,13 @@ type
     GroupBox2: TGroupBox;
     beBuscar: TButtonedEdit;
     Label1: TLabel;
-    GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     cbOrdenarC: TCheckBox;
-    GroupBox5: TGroupBox;
+    ControlBar1: TControlBar;
+    ToolBar1: TToolBar;
     procedure FormCreate(Sender: TObject);
     procedure cbAgruparAdminClick(Sender: TObject);
     procedure beBuscarChange(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure cbOrdenarCClick(Sender: TObject);
     procedure ListView1DblClick(Sender: TObject);
 
@@ -60,15 +62,6 @@ if li <> nil then
 else     showmessage('No existen resultados.');
 end;
 
-procedure Tlistclientes.Button1Click(Sender: TObject);
-begin
-DataModule1.fdClientes.Disconnect;
-DataModule1.fdClientes.FetchOptions.RecsMax:=40;
-DataModule1.fdClientes.FetchOptions.RecsSkip:=DataModule1.fdClientes.FetchOptions.RecsSkip+1 ;
-DataModule1.fdClientes.open;
-
-end;
-
 procedure Tlistclientes.cbAgruparAdminClick(Sender: TObject);
 begin
 
@@ -97,7 +90,7 @@ begin
         LinkListControlToField1.Active:=false;
         LinkListControlToField1.FillHeaderFieldName:='';
         DataModule1.fdClientes.IndexFieldNames:='nombre';
-        DataModule1.fdClientes.IndexesActive:=true;
+        DataModule1.fdClientes.indexesActive:=true;
        cbOrdenarC.Enabled:=false;
         LinkListControlToField1.Active:=true;
    end;
@@ -107,6 +100,7 @@ procedure Tlistclientes.FormCreate(Sender: TObject);
 begin
      cbAgruparAdmin.Checked:=listview1.GroupView;
      cbOrdenarC.Checked:=false;
+     DataModule1.fdClientes.Active:=true;
 end;
 
 
@@ -114,7 +108,7 @@ end;
 procedure Tlistclientes.ListView1DblClick(Sender: TObject);
 var cliente:TFclientes;
 begin
-     cliente:=TFclientes.Create(principal);
+     cliente:=TFclientes.Create(Self);
      cliente.Show;
      cliente.ManualDock(principal.PageControl2);
 end;

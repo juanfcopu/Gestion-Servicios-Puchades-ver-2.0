@@ -1,9 +1,10 @@
 object fnavegador: Tfnavegador
   Left = 0
   Top = 0
-  BorderStyle = bsToolWindow
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Navegador'
-  ClientHeight = 383
+  ClientHeight = 379
   ClientWidth = 244
   Color = clBtnFace
   DragKind = dkDock
@@ -14,6 +15,8 @@ object fnavegador: Tfnavegador
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDefault
+  PrintScale = poNone
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -21,14 +24,11 @@ object fnavegador: Tfnavegador
     Left = 0
     Top = 0
     Width = 244
-    Height = 383
+    Height = 379
     Align = alClient
     Indent = 19
     TabOrder = 0
     OnDblClick = TreeView1DblClick
-    ExplicitLeft = 56
-    ExplicitTop = 64
-    ExplicitWidth = 81
-    ExplicitHeight = 81
+    ExplicitHeight = 383
   end
 end

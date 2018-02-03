@@ -1,0 +1,38 @@
+object Frame2: TFrame2
+  Left = 0
+  Top = 0
+  Width = 467
+  Height = 299
+  Align = alClient
+  TabOrder = 0
+  ExplicitWidth = 320
+  ExplicitHeight = 240
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 467
+    Height = 299
+    Align = alClient
+    Caption = 'Panel1'
+    TabOrder = 0
+    ExplicitLeft = 200
+    ExplicitTop = 152
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object HeaderControl1: THeaderControl
+      Left = 1
+      Top = 1
+      Width = 465
+      Height = 33
+      Sections = <
+        item
+          ImageIndex = -1
+          Text = 'Facturas'
+          Width = 130
+        end>
+      ExplicitLeft = 56
+      ExplicitTop = 80
+      ExplicitWidth = 185
+    end
+  end
+end

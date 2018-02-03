@@ -1,7 +1,4 @@
-﻿[fdClientes]
-Coordinates=10,10,81,195
-
-[FDGUIxWaitCursor1]
+﻿[FDGUIxWaitCursor1]
 Coordinates=192,1,113,33
 
 [FDPhysMySQLDriverLink1]
@@ -10,30 +7,91 @@ Coordinates=192,53,144,33
 [FDConnection1]
 Coordinates=84,10,90,33
 
-[fdClientesidAdministrador]
-Coordinates=112,1,143,33
-
-[fdClientesnombre]
-Coordinates=112,53,101,33
-
 []
-Coordinates=274,1,148,33
+Coordinates=10,10,148,213
+Visible=False
 
-[fdClientesidContactos]
-Coordinates=274,105,123,33
+[ImageList1]
+Coordinates=110,186,68,33
 
-[fdClientesnombreapellidos]
-Coordinates=125,134,146,33
+[listaclientes]
+Coordinates=91,224,73,33
+
+[crearclientes]
+Coordinates=12,224,77,33
+
+[navegador]
+Coordinates=193,186,94,33
+
+[FPresupuestos.fdCliente]
+Visible=False
+Coordinates=498,429,170,69
+
+[FPresupuestos.fdpresupuesto]
+Visible=False
+Coordinates=290,157,170,69
+
+[FPresupuestos.fdlineas]
+Visible=False
+Coordinates=498,215,170,195
+
+[listclientes.BindSourceDB1]
+Coordinates=10,10,148,213
+
+[FPresupuestos.BindSourceDB2]
+Coordinates=10,215,170,69
+
+[FPresupuestos.BindSourceDB1]
+Coordinates=190,215,170,69
+
+[insertarpresupuesto]
+Coordinates=171,242,113,33
+
+[editarpresupuesto]
+Coordinates=250,462,104,33
+
+[principal.DataSource1]
+Coordinates=498,1,123,195
+
+[accionespresupuestos]
+Coordinates=706,1,125,33
+
+[FPresupuestos.BindSourceDB3]
+Coordinates=101,10,170,195
 
 [fdClientesCodigoPostal]
-Coordinates=110,1,130,33
+Coordinates=193,105,130,33
+
+[fdClientesidAdministrador]
+Coordinates=374,1,143,33
 
 [fdClientesdireccion]
-Coordinates=110,53,109,33
+Coordinates=374,53,109,33
+
+[fdClientes]
+Coordinates=10,10,81,195
 
 [fdClientesCiudad]
-Coordinates=110,105,99,33
+Coordinates=374,105,99,33
+
+[fdClientesidContactos]
+Coordinates=374,157,123,33
 
 [fdClientesCIF]
-Coordinates=91,152,80,33
+Coordinates=100,62,80,33
+
+[fdClientesnombre]
+Coordinates=374,209,101,33
+
+[fdClientesnombreapellidos]
+Coordinates=374,261,146,33
+
+[FPresupuestos.DataSource1]
+Coordinates=374,313,154,177
+
+[FPresupuestos.FDQuery1]
+Coordinates=383,10,140,177
+
+[fdpresupuestos]
+Coordinates=281,10,92,177
 

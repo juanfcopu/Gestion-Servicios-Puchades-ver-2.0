@@ -22,9 +22,9 @@ object listclientes: Tlistclientes
   TextHeight = 13
   object ListView1: TListView
     Left = 0
-    Top = 57
+    Top = 113
     Width = 1414
-    Height = 558
+    Height = 502
     Align = alClient
     Columns = <
       item
@@ -1888,23 +1888,26 @@ object listclientes: Tlistclientes
     TabOrder = 0
     ViewStyle = vsReport
     OnDblClick = ListView1DblClick
+    ExplicitTop = 105
+    ExplicitHeight = 510
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 1414
-    Height = 57
+    Height = 113
     Align = alTop
     TabOrder = 1
     object GroupBox1: TGroupBox
       AlignWithMargins = True
       Left = 447
-      Top = 4
+      Top = 65
       Width = 161
-      Height = 49
+      Height = 44
       Align = alLeft
       Caption = 'Agrupar'
       TabOrder = 0
+      ExplicitHeight = 36
       object cbAgruparAdmin: TCheckBox
         AlignWithMargins = True
         Left = 5
@@ -1916,26 +1919,17 @@ object listclientes: Tlistclientes
         TabOrder = 0
         OnClick = cbAgruparAdminClick
       end
-      object GroupBox3: TGroupBox
-        AlignWithMargins = True
-        Left = 5
-        Top = 41
-        Width = 161
-        Height = 3
-        Align = alLeft
-        Caption = 'Agrupar'
-        TabOrder = 1
-      end
     end
     object GroupBox2: TGroupBox
       AlignWithMargins = True
       Left = 4
-      Top = 4
+      Top = 65
       Width = 293
-      Height = 49
+      Height = 44
       Align = alLeft
       Caption = 'Buscar'
       TabOrder = 1
+      ExplicitHeight = 36
       object Label1: TLabel
         Left = 16
         Top = 19
@@ -1957,12 +1951,13 @@ object listclientes: Tlistclientes
     object GroupBox4: TGroupBox
       AlignWithMargins = True
       Left = 303
-      Top = 4
+      Top = 65
       Width = 138
-      Height = 49
+      Height = 44
       Align = alLeft
       Caption = 'Ordenar'
       TabOrder = 2
+      ExplicitHeight = 36
       object cbOrdenarC: TCheckBox
         AlignWithMargins = True
         Left = 5
@@ -1974,15 +1969,21 @@ object listclientes: Tlistclientes
         TabOrder = 0
         OnClick = cbOrdenarCClick
       end
-      object GroupBox5: TGroupBox
-        AlignWithMargins = True
-        Left = 5
-        Top = 41
-        Width = 161
-        Height = 3
-        Align = alLeft
-        Caption = 'Agrupar'
-        TabOrder = 1
+    end
+    object ControlBar1: TControlBar
+      Left = 1
+      Top = 1
+      Width = 1412
+      Height = 61
+      Align = alTop
+      TabOrder = 3
+      object ToolBar1: TToolBar
+        Left = 88
+        Top = 2
+        Width = 217
+        Height = 48
+        Caption = 'ToolBar1'
+        TabOrder = 0
       end
     end
   end

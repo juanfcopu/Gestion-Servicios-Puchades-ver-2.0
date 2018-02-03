@@ -32,6 +32,7 @@ type
       Y: Integer; State: TDragState; var Accept: Boolean);
     procedure PageControl2DockDrop(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,9 +59,15 @@ begin
     navegador.Width:=botons.Width-10;
     navegador.Show;
     navegador.ManualDock(panel1);
+
 end;
 
 
+
+procedure Tprincipal.FormShow(Sender: TObject);
+begin
+principal.Resizing(wsMaximized);
+end;
 
 procedure Tprincipal.PageControl2DockDrop(Sender: TObject;
   Source: TDragDockObject; X, Y: Integer);
@@ -102,7 +109,8 @@ begin
 
       end;
 
-      if (Source.Control is TFClientes) then   Accept:= False;
+      Accept:=false;
+      if (Source.Control is Tfnavegador) or (Source.Control is Tmenuseleccion) then   Accept:= true;
 end;
 
 

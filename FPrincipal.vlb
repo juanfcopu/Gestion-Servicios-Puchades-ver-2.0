@@ -44,3 +44,12 @@ Visible=False
 []
 Coordinates=0,0,73,33
 
+[ToolBar1]
+Coordinates=41,214,58,33
+
+[ToolButton1]
+Coordinates=269,157,74,33
+
+[ControlBar1]
+Coordinates=269,209,73,33
+
