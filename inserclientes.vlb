@@ -1,131 +1,141 @@
 ﻿[GridPanel3]
-Coordinates=480,490,68,51
+Coordinates=499,1812,68,51
 
 [LabeledEdit7]
-Coordinates=340,170,78,51
+Coordinates=434,1492,78,51
 
 [GroupBox4]
-Coordinates=506,408,70,51
+Coordinates=788,1812,70,51
 
 [ComboBox2]
-Coordinates=0,470,84,123
+Coordinates=10,858,84,123
 ExplicitSubNodes=ItemIndex
 
 [Label1]
-Coordinates=351,476,46,51
+Coordinates=604,1812,46,51
 
 [LabeledEdit2]
-Coordinates=340,90,78,51
+Coordinates=434,312,78,51
 
 [PageControl1]
-Coordinates=244,544,81,33
+Coordinates=1253,1812,81,33
 
 [LabeledEdit6]
-Coordinates=340,310,78,51
+Coordinates=434,430,78,51
 
 [Button1]
-Coordinates=574,10,53,51
+Coordinates=1329,10,53,51
 
 [LabeledEdit14]
-Coordinates=210,440,84,51
+Coordinates=431,1610,84,51
 
 [fdinsertarClientes]
-Coordinates=10,10,95,447
+Coordinates=40,90,95,447
 Visible=False
 
 [fdadministradores]
-Coordinates=740,220,92,105
+Coordinates=680,0,92,105
 Visible=False
 
 [ComboBox1]
-Coordinates=930,190,84,105
+Coordinates=480,10,84,105
+Visible=True
 
 [GridPanel2]
-Coordinates=660,630,68,51
+Coordinates=683,1812,68,51
 
 [LabeledEdit10]
-Coordinates=370,370,84,51
+Coordinates=431,902,84,51
 
 [LabeledEdit5]
-Coordinates=150,310,78,51
+Coordinates=434,548,78,51
 
 [Label2]
-Coordinates=420,460,46,51
+Coordinates=1519,10,46,51
 
 [StringGrid1]
-Coordinates=1370,170,70,159
+Coordinates=1004,128,70,159
 Visible=True
 
 [LabeledEdit9]
-Coordinates=240,-20,78,51
+Coordinates=434,1138,78,51
 
 [LabeledEdit1]
-Coordinates=350,10,78,51
+Coordinates=434,784,78,51
 
 [datoscontactos]
-Coordinates=620,550,90,33
+Coordinates=893,1812,90,33
 
 [GroupBox5]
-Coordinates=611,476,70,51
+Coordinates=394,1812,70,51
 
 [GroupBox2]
-Coordinates=891,408,70,51
+Coordinates=1414,10,70,51
 
 [LabeledEdit3]
-Coordinates=340,250,78,51
+Coordinates=434,1256,78,51
 
 [datosFacturacion]
-Coordinates=210,620,100,33
+Coordinates=1020,1812,100,33
 
 [fdcontactos]
-Coordinates=1170,30,92,213
+Coordinates=778,58,92,177
 Visible=False
 
 [LabeledEdit8]
-Coordinates=220,130,78,51
+Coordinates=434,1728,78,51
 
 [LabeledEdit12]
-Coordinates=200,480,84,51
+Coordinates=431,194,84,51
 
 [GroupBox1]
-Coordinates=800,500,70,51
+Coordinates=115,1812,70,51
 
 [LabeledEdit4]
-Coordinates=470,340,78,51
+Coordinates=434,666,78,51
 
 [LabeledEdit11]
-Coordinates=210,380,84,51
+Coordinates=431,1020,84,51
 
 [GridPanel1]
-Coordinates=800,400,68,51
+Coordinates=10,1812,68,51
 
 [LabeledEdit13]
-Coordinates=130,530,84,51
+Coordinates=431,1374,84,51
 
 []
 Coordinates=843,10,53,51
 
 [BindSourceDB1]
-Coordinates=1170,30,92,213
+Coordinates=778,58,92,177
 
 [BindingsList1]
 Coordinates=144,153,91,36
 
 [CoolBar1]
-Coordinates=144,1,60,33
-
-[NavigatorBindSourceDB1]
-Coordinates=1320,40,140,51
+Coordinates=1159,1812,60,33
 
 [BindSourceDB2]
-Coordinates=10,10,95,447
+Coordinates=40,90,95,447
 
 [BindSourceDB3]
-Coordinates=740,220,92,105
+Coordinates=680,0,92,105
 
 [DataModule1.fdClientes]
-Coordinates=363,546,131,195
+Coordinates=1151,10,131,195
 
 [DataModule1.fdpresupuestos]
-Coordinates=466,80,158,51
+Coordinates=1598,10,158,51
+
+[btcancelar]
+Coordinates=1806,10,65,51
+
+[btaceptar]
+Coordinates=220,1812,60,51
+
+[Panel1]
+Coordinates=314,1812,47,51
+
+[NavigatorBindSourceDB1]
+Coordinates=0,0,140,51
 

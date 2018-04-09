@@ -25,24 +25,24 @@ Coordinates=193,186,94,33
 
 [FPresupuestos.fdCliente]
 Visible=False
-Coordinates=498,429,170,69
+Coordinates=198,215,170,69
 
 [FPresupuestos.fdpresupuesto]
 Visible=False
-Coordinates=290,157,170,69
+Coordinates=431,10,170,69
 
 [FPresupuestos.fdlineas]
+Coordinates=10,10,170,195
 Visible=False
-Coordinates=498,215,170,195
 
 [listclientes.BindSourceDB1]
 Coordinates=10,10,148,213
 
 [FPresupuestos.BindSourceDB2]
-Coordinates=10,215,170,69
+Coordinates=431,10,170,69
 
 [FPresupuestos.BindSourceDB1]
-Coordinates=190,215,170,69
+Coordinates=198,215,170,69
 
 [insertarpresupuesto]
 Coordinates=171,242,113,33
@@ -50,14 +50,8 @@ Coordinates=171,242,113,33
 [editarpresupuesto]
 Coordinates=250,462,104,33
 
-[principal.DataSource1]
-Coordinates=498,1,123,195
-
 [accionespresupuestos]
 Coordinates=706,1,125,33
-
-[FPresupuestos.BindSourceDB3]
-Coordinates=101,10,170,195
 
 [fdClientesCodigoPostal]
 Coordinates=193,105,130,33
@@ -69,7 +63,9 @@ Coordinates=374,1,143,33
 Coordinates=374,53,109,33
 
 [fdClientes]
-Coordinates=10,10,81,195
+Coordinates=190,10,81,195
+Visible=True
+LayerNames=
 
 [fdClientesCiudad]
 Coordinates=374,105,99,33
@@ -90,8 +86,62 @@ Coordinates=374,261,146,33
 Coordinates=374,313,154,177
 
 [FPresupuestos.FDQuery1]
-Coordinates=383,10,140,177
+Coordinates=281,10,140,177
 
 [fdpresupuestos]
-Coordinates=281,10,92,177
+Coordinates=10,215,178,69
+Visible=False
+
+[borrarpresupuestos]
+Coordinates=410,313,112,33
+
+[icopeque]
+Coordinates=110,114,59,33
+
+[listapresupuestos]
+Coordinates=301,313,102,33
+
+[editarcliente]
+Coordinates=218,294,75,33
+
+[FInsertarCliente.fdcontactos]
+Visible=False
+Coordinates=231,365,174,69
+
+[FInsertarCliente.fdinsertarClientes]
+Visible=False
+Coordinates=52,365,174,429
+
+[FInsertarCliente.fdadministradores]
+Visible=False
+Coordinates=410,365,174,105
+
+[FInsertarCliente.BindSourceDB2]
+Coordinates=52,365,174,429
+
+[FInsertarCliente.BindSourceDB3]
+Coordinates=410,365,174,105
+
+[FInsertarCliente.BindSourceDB1]
+Coordinates=231,365,174,69
+
+[FPresupuestos.]
+Coordinates=498,215,170,195
+
+[timercambios]
+Coordinates=72,263,91,36
+
+[FPresupuestos.BindSourceDB3]
+Coordinates=10,10,170,195
+
+[listpresupuestos.BindSourceDB1]
+Coordinates=10,215,178,69
+
+[Module Settings]
+ModelLayerNames=
+ActiveLayerNames=
+EditingLayerName=
+
+[principal.]
+Coordinates=498,1,123,195
 

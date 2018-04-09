@@ -14,7 +14,7 @@ object DataModule1: TDataModule1
     Params.Strings = (
       'Database=puchades2'
       'User_Name=juanfcopu'
-      'Password=daf5ne55'
+      'Password=Daf5ne55'
       'Server=delldebian'
       'DriverID=MySQL')
     Connected = True
@@ -36,7 +36,7 @@ object DataModule1: TDataModule1
     Left = 488
     Top = 32
     Bitmap = {
-      494C010112001800A40020002000FFFFFFFF2000FFFFFFFFFFFFFFFF424D3600
+      494C010112001800D80020002000FFFFFFFF2000FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000080000000A000000001002000000000000040
       0100000000000000000000000000000000000000000000000000060606377777
       77FE0E0E107F0000000600000000000000000000000000000000000000000000
@@ -2660,7 +2660,7 @@ object DataModule1: TDataModule1
         'al, c.Ciudad, a.nombreapellidos,c.idAdministrador from clientes ' +
         'c, administradores a where c.idAdministrador=a.idAdministrador'
       'order by c.idAdministrador,c.nombre')
-    Left = 792
+    Left = 808
     Top = 32
     object fdClientesidContactos: TFDAutoIncField
       FieldName = 'idContactos'
@@ -2717,7 +2717,8 @@ object DataModule1: TDataModule1
     SQL.Strings = (
       
         'Select C.nombre, P.Id_ClientePrev, P.id_presupuesto, P.descripci' +
-        'on, P.Aprovado, P.FechaPresupuesto, P.Total, P.TotalAprobado'
+        'on, P.Aprovado, P.FechaPresupuesto, P.grupo, P.Total, P.TotalApr' +
+        'obado'
       
         'From presupuestos P, clientes C where C.idContactos=P.id_Cliente' +
         'Prev')
@@ -2731,7 +2732,7 @@ object DataModule1: TDataModule1
     Left = 432
     Top = 240
     Bitmap = {
-      494C0101040020003C0018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010104002000700018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3331,5 +3332,12 @@ object DataModule1: TDataModule1
       8000FF000000000000000000E001FF000000000000000000E001FF0000000000
       00000000F807FF00000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object timercambios: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = timercambiosTimer
+    Left = 680
+    Top = 256
   end
 end

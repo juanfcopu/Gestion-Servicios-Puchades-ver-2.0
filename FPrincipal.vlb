@@ -4,52 +4,16 @@ Coordinates=282,10,68,51
 [Panel2]
 Coordinates=225,10,47,51
 
-[rabajadores1]
-Coordinates=132,71,78,33
-
-[MainMenuPrincipal]
-Coordinates=23,71,108,33
-
-[Administradores1]
-Coordinates=248,1,101,33
-
-[Panel1]
-Coordinates=168,10,47,51
-
-[ddd1]
-Coordinates=120,142,40,33
-
 [PageControl2]
 Coordinates=10,125,81,33
 
-[Provedores1]
-Coordinates=248,105,76,33
-
 [listclientes.BindSourceDB1]
 Coordinates=100,123,148,213
-
-[Splitter1]
-Coordinates=177,80,55,33
-
-[DBGrid1]
-Coordinates=100,1,56,33
-
-[DataSource1]
-Coordinates=0,0,81,123
 
 [DataModule1.fdClientes]
 Coordinates=100,123,148,213
 Visible=False
 
 []
-Coordinates=0,0,73,33
-
-[ToolBar1]
-Coordinates=41,214,58,33
-
-[ToolButton1]
-Coordinates=269,157,74,33
-
-[ControlBar1]
-Coordinates=269,209,73,33
+Coordinates=132,71,78,33
 

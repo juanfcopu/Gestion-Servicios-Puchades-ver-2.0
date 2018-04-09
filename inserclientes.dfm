@@ -14,6 +14,7 @@ object FInsertarCliente: TFInsertarCliente
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object GridPanel1: TGridPanel
@@ -54,10 +55,6 @@ object FInsertarCliente: TFInsertarCliente
         Value = 68.558402766860550000
       end>
     TabOrder = 0
-    ExplicitLeft = 67
-    ExplicitTop = 264
-    ExplicitWidth = 777
-    ExplicitHeight = 273
     object GroupBox4: TGroupBox
       AlignWithMargins = True
       Left = 4
@@ -73,9 +70,6 @@ object FInsertarCliente: TFInsertarCliente
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 11
-      ExplicitWidth = 529
-      ExplicitHeight = 182
       object LabeledEdit1: TLabeledEdit
         AlignWithMargins = True
         Left = 9
@@ -147,7 +141,7 @@ object FInsertarCliente: TFInsertarCliente
         EditLabel.Width = 43
         EditLabel.Height = 13
         EditLabel.Caption = 'Direcci'#243'n'
-        TabOrder = 3
+        TabOrder = 4
       end
       object LabeledEdit7: TLabeledEdit
         Left = 9
@@ -157,7 +151,7 @@ object FInsertarCliente: TFInsertarCliente
         EditLabel.Width = 65
         EditLabel.Height = 13
         EditLabel.Caption = 'Codigo Postal'
-        TabOrder = 4
+        TabOrder = 3
       end
       object LabeledEdit8: TLabeledEdit
         Left = 388
@@ -199,10 +193,6 @@ object FInsertarCliente: TFInsertarCliente
           Value = 50.000000000000000000
         end>
       TabOrder = 1
-      ExplicitLeft = 560
-      ExplicitTop = 48
-      ExplicitWidth = 273
-      ExplicitHeight = 169
       object GroupBox5: TGroupBox
         AlignWithMargins = True
         Left = 4
@@ -212,8 +202,6 @@ object FInsertarCliente: TFInsertarCliente
         Align = alClient
         Caption = 'Familia y Administrador'
         TabOrder = 0
-        ExplicitWidth = 490
-        ExplicitHeight = 94
         object Label2: TLabel
           AlignWithMargins = True
           Left = 11
@@ -245,7 +233,7 @@ object FInsertarCliente: TFInsertarCliente
         object ComboBox1: TComboBox
           AlignWithMargins = True
           Left = 91
-          Top = 55
+          Top = 59
           Width = 312
           Height = 21
           Font.Charset = DEFAULT_CHARSET
@@ -289,10 +277,6 @@ object FInsertarCliente: TFInsertarCliente
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        ExplicitLeft = 10
-        ExplicitTop = 123
-        ExplicitWidth = 476
-        ExplicitHeight = 106
         object LabeledEdit4: TLabeledEdit
           Left = 62
           Top = 54
@@ -359,10 +343,6 @@ object FInsertarCliente: TFInsertarCliente
           Value = 21.047314362687320000
         end>
       TabOrder = 2
-      ExplicitLeft = 144
-      ExplicitTop = 248
-      ExplicitWidth = 497
-      ExplicitHeight = 145
       object PageControl1: TPageControl
         Left = 1
         Top = 1
@@ -373,12 +353,8 @@ object FInsertarCliente: TFInsertarCliente
         TabOrder = 0
         OnChange = PageControl1Change
         OnChanging = PageControl1Changing
-        ExplicitWidth = 993
-        ExplicitHeight = 337
         object datosFacturacion: TTabSheet
           Caption = 'Datos Facturaci'#243'n'
-          ExplicitWidth = 985
-          ExplicitHeight = 309
           object GroupBox1: TGroupBox
             AlignWithMargins = True
             Left = 3
@@ -394,10 +370,6 @@ object FInsertarCliente: TFInsertarCliente
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitLeft = 11
-            ExplicitTop = 4
-            ExplicitWidth = 529
-            ExplicitHeight = 182
             DesignSize = (
               928
               277)
@@ -442,6 +414,7 @@ object FInsertarCliente: TFInsertarCliente
               LabelPosition = lpLeft
               ParentFont = False
               TabOrder = 1
+              OnChange = LabeledEdit10Change
             end
             object LabeledEdit11: TLabeledEdit
               AlignWithMargins = True
@@ -509,15 +482,12 @@ object FInsertarCliente: TFInsertarCliente
               Caption = 'Copiar Datos'
               TabOrder = 6
               OnClick = Button1Click
-              ExplicitLeft = 856
             end
           end
         end
         object datoscontactos: TTabSheet
           Caption = 'Contactos'
           ImageIndex = 1
-          ExplicitWidth = 985
-          ExplicitHeight = 309
           object StringGrid1: TStringGrid
             Tag = 6
             Left = 0
@@ -529,10 +499,6 @@ object FInsertarCliente: TFInsertarCliente
             FixedCols = 0
             RowCount = 2
             TabOrder = 0
-            ExplicitLeft = 120
-            ExplicitTop = 136
-            ExplicitWidth = 320
-            ExplicitHeight = 120
             ColWidths = (
               64
               64
@@ -552,7 +518,6 @@ object FInsertarCliente: TFInsertarCliente
                 ImageIndex = -1
                 Width = 928
               end>
-            ExplicitWidth = 985
             object NavigatorBindSourceDB1: TBindNavigator
               Left = 11
               Top = 0
@@ -572,10 +537,7 @@ object FInsertarCliente: TFInsertarCliente
         Height = 84
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 288
-        ExplicitTop = 360
-        ExplicitWidth = 449
-        ExplicitHeight = 33
+        ExplicitTop = 314
         DesignSize = (
           942
           84)
@@ -585,12 +547,11 @@ object FInsertarCliente: TFInsertarCliente
           Width = 105
           Height = 33
           Anchors = [akTop, akRight]
-          Caption = 'Aceptar'
+          Caption = 'Guardar'
           TabOrder = 0
           OnClick = btaceptarClick
-          ExplicitLeft = 736
         end
-        object Button2: TButton
+        object btcancelar: TButton
           Left = 815
           Top = 16
           Width = 105
@@ -599,7 +560,7 @@ object FInsertarCliente: TFInsertarCliente
           Cancel = True
           Caption = 'Cancelar'
           TabOrder = 1
-          OnClick = Button2Click
+          OnClick = btcancelarClick
         end
       end
     end
@@ -736,7 +697,7 @@ object FInsertarCliente: TFInsertarCliente
       Control = LabeledEdit4
       Track = True
     end
-    object LinkFillControlToField: TLinkFillControlToField
+    object linklistaadministradores: TLinkFillControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB2
       FieldName = 'idAdministrador'

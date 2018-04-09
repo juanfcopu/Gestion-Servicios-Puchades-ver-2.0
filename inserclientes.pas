@@ -63,7 +63,7 @@ type
     LinkControlToField7: TLinkControlToField;
     LinkControlToField8: TLinkControlToField;
     BindSourceDB3: TBindSourceDB;
-    LinkFillControlToField: TLinkFillControlToField;
+    linklistaadministradores: TLinkFillControlToField;
     LinkPropertyToFieldItemIndex: TLinkPropertyToField;
     LinkControlToField9: TLinkControlToField;
     LinkControlToField10: TLinkControlToField;
@@ -73,13 +73,15 @@ type
     LinkControlToField14: TLinkControlToField;
     Panel1: TPanel;
     btaceptar: TButton;
-    Button2: TButton;
+    btcancelar: TButton;
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btcancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btaceptarClick(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure PageControl1Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure LabeledEdit10Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -97,11 +99,17 @@ uses DModule1;
 
 procedure TFInsertarCliente.btaceptarClick(Sender: TObject);
 begin
-    if fdinsertarClientes.State in [dsInsert] then fdinsertarClientes.Post;
+    if fdinsertarClientes.State in [dsInsert,dsEdit] then
+    begin
+       fdinsertarClientes.Post;
+       btcancelar.Caption:='Cerrar';
+    end;
 end;
 
 procedure TFInsertarCliente.Button1Click(Sender: TObject);
 begin
+
+
 LabeledEdit10.Text:=LabeledEdit2.text;
 LabeledEdit11.Text:=LabeledEdit3.text;
 LabeledEdit12.Text:=LabeledEdit6.text;
@@ -111,7 +119,7 @@ LabeledEdit14.Text:=LabeledEdit8.text;
 
 end;
 
-procedure TFInsertarCliente.Button2Click(Sender: TObject);
+procedure TFInsertarCliente.btcancelarClick(Sender: TObject);
 begin
 Close;
 end;
@@ -119,11 +127,24 @@ end;
 procedure TFInsertarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if fdinsertarClientes.State in [dsInsert] then fdinsertarClientes.cancel;
+  if fdinsertarClientes.State in [dsInsert,dsEdit] then fdinsertarClientes.cancel;
   fdinsertarClientes.close;
   fdadministradores.close;
   fdcontactos.close;
   Action:=caFree;
+end;
+
+procedure TFInsertarCliente.FormCreate(Sender: TObject);
+begin
+     ComboBox1.Clear;
+     if not fdadministradores.Active then fdadministradores.Active:=true;
+
+end;
+
+procedure TFInsertarCliente.LabeledEdit10Change(Sender: TObject);
+var suma:integer;
+begin
+
 end;
 
 procedure TFInsertarCliente.PageControl1Change(Sender: TObject);

@@ -6,25 +6,19 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, Vcl.ExtCtrls,
   Vcl.ActnMan, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.ToolWin, Data.DB, Vcl.Grids,
-  Vcl.DBGrids;
+  Vcl.DBGrids, Vcl.StdCtrls;
 
 type
   Tprincipal = class(TForm)
     StatusBar1: TStatusBar;
-    MainMenuPrincipal: TMainMenu;
-    ddd1: TMenuItem;
-    Provedores1: TMenuItem;
-    Administradores1: TMenuItem;
-    rabajadores1: TMenuItem;
     Panel2: TPanel;
     PageControl2: TPageControl;
-    Panel1: TPanel;
+    Panel3: TPanel;
     Splitter1: TSplitter;
-    DBGrid1: TDBGrid;
-    DataSource1: TDataSource;
+    Panel1: TPanel;
+    MainMenu1: TMainMenu;
+    Clientes1: TMenuItem;
     ControlBar1: TControlBar;
-    ToolBar1: TToolBar;
-    ToolButton1: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure PageControl2DockOver(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer; State: TDragState; var Accept: Boolean);
@@ -58,7 +52,7 @@ begin
     navegador:=TFNavegador.Create(principal);
     navegador.Width:=botons.Width-10;
     navegador.Show;
-    navegador.ManualDock(panel1);
+    navegador.ManualDock(Panel1,nil,alTop);
 
 end;
 
@@ -98,8 +92,10 @@ procedure Tprincipal.Panel1DockOver(Sender: TObject; Source: TDragDockObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 var FClientes:Tlistclientes;  i:integer;
 begin
+ Accept:=false;
    if (Source.Control is Tlistclientes) then              //
    begin
+       Accept:= true;
       FClientes:=(Source.Control as Tlistclientes) ;
       for i:= 1 to FClientes.ListView1.Columns.Count - 1   do
       begin
@@ -109,7 +105,7 @@ begin
 
       end;
 
-      Accept:=false;
+
       if (Source.Control is Tfnavegador) or (Source.Control is Tmenuseleccion) then   Accept:= true;
 end;
 

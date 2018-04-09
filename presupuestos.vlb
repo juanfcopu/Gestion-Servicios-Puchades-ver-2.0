@@ -1,108 +1,92 @@
 ﻿[]
-Coordinates=1330,802,50,51
+Coordinates=273,802,49,58
 Visible=True
 
 [Panel1]
-Coordinates=1535,802,47,51
+Coordinates=1479,1038,54,58
 
 [GroupBox1]
-Coordinates=481,802,70,51
+Coordinates=891,1038,79,58
 
 [GroupBox4]
-Coordinates=291,802,70,51
+Coordinates=253,1122,79,58
+Visible=True
 
 [LabeledEdit2]
-Coordinates=953,10,78,51
+Coordinates=1015,10,90,58
 
 [LabeledEdit3]
-Coordinates=953,128,78,51
+Coordinates=1015,128,90,58
 
 [LabeledEdit1]
-Coordinates=953,246,78,51
+Coordinates=1015,246,90,58
 
 [GroupBox2]
-Coordinates=1225,802,70,51
+Coordinates=10,1038,79,58
+Visible=True
 
 [LabeledEdit4]
-Coordinates=255,600,78,51
+Coordinates=255,718,90,58
 Visible=True
 
 [LabeledEdit6]
-Coordinates=255,246,78,51
+Coordinates=255,482,90,58
 
 [LabeledEdit7]
-Coordinates=255,364,78,51
+Coordinates=255,836,90,58
 
 [LabeledEdit8]
-Coordinates=255,128,78,51
+Coordinates=255,128,90,58
 
 [PageControl1]
-Coordinates=487,970,81,33
+Coordinates=505,1206,93,36
 
 [lineas]
-Coordinates=1155,886,43,33
+Coordinates=1247,1206,48,36
 
 [documentacion]
-Coordinates=1020,970,90,33
+Coordinates=1336,1122,102,36
 
 [fotografias]
-Coordinates=809,970,67,33
+Coordinates=1938,1122,75,36
 
 [StringGrid1]
-Coordinates=613,364,70,177
+Coordinates=675,128,80,212
 Visible=True
 ExplicitSubNodes=Row;RowCount
 
 [fdpresupuesto]
-Coordinates=10,280,129,195
+Coordinates=10,380,124,416
 Visible=False
 
 [fdlineas]
-Coordinates=383,85,92,231
-Visible=False
+Coordinates=400,1236,59,36
+Visible=True
 
 [fdCliente]
-Coordinates=1533,926,58,33
+Coordinates=1459,1246,66,36
 Visible=True
 
 [BindSourceDB1]
-Coordinates=1457,916,95,123
+Coordinates=1383,1236,113,146
 
 [BindingsList1]
 Coordinates=291,1,91,36
 
 [BindSourceDB2]
-Coordinates=10,280,129,195
-
-[BindSourceDB3]
-Coordinates=383,85,92,231
-Visible=True
+Coordinates=10,380,124,416
 
 [DateTimePicker1]
-Coordinates=244,482,97,51
+Coordinates=244,364,113,58
 
 [Label1]
-Coordinates=92,886,46,51
-
-[CheckBox1]
-Coordinates=596,246,95,51
-Visible=True
-
-[CheckBox2]
-Coordinates=596,128,95,51
-Visible=True
+Coordinates=996,1038,53,58
 
 [fdlineasEjecutado]
 Coordinates=271,1,102,33
 
-[fdlineasFechaPresupuesto]
-Coordinates=411,1,145,33
-
 [fdlineasAprovado]
 Coordinates=271,141,101,33
-
-[fdlineasId_Presupuesto]
-Coordinates=0,127,130,33
 
 [fdlineasId_Partida]
 Coordinates=411,212,103,33
@@ -114,68 +98,56 @@ Coordinates=362,261,112,33
 Coordinates=283,261,77,33
 
 [LabeledEdit10]
-Coordinates=252,718,84,51
+Coordinates=252,600,97,58
 Visible=True
 
 [LabeledEdit11]
-Coordinates=1412,802,84,51
+Coordinates=683,1038,97,58
 
 [ShellListView2]
-Coordinates=362,970,86,33
+Coordinates=1689,1122,99,36
 
 [ControlBar2]
-Coordinates=623,886,73,33
+Coordinates=560,1122,83,36
 
 [LabeledEdit9]
-Coordinates=986,802,78,51
+Coordinates=1277,1038,90,58
 
 [LabeledEdit5]
-Coordinates=255,10,78,51
+Coordinates=255,10,90,58
 Visible=True
 
-[Aceptar]
-Coordinates=396,802,52,51
-
-[Guardar]
-Coordinates=665,802,54,51
-
 [ShellListView1]
-Coordinates=237,970,86,33
-
-[cerrar]
-Coordinates=911,802,43,51
+Coordinates=624,1206,99,36
 
 [dialruta]
 Coordinates=81,167,57,36
 
 [Label3]
-Coordinates=10,802,46,51
+Coordinates=604,1038,53,58
 
 [Label2]
-Coordinates=753,802,46,51
+Coordinates=174,1122,53,58
 Visible=True
 
 [Label4]
-Coordinates=586,802,46,51
-
-[Shape1]
-Coordinates=606,970,50,33
+Coordinates=194,1038,53,58
 
 [spaprobado]
-Coordinates=281,886,73,33
+Coordinates=1581,1122,82,36
 
 [spNoaprobado]
-Coordinates=499,886,87,33
+Coordinates=1814,1122,98,36
 
 [DataModule1.]
 Coordinates=480,250,131,195
 
 [DataModule1.fdClientes]
 Visible=False
-Coordinates=914,10,148,213
+Coordinates=740,10,148,213
 
 [listclientes.BindSourceDB1]
-Coordinates=914,10,148,213
+Coordinates=740,10,148,213
 
 [DateTimeField1]
 Coordinates=490,347,105,36
@@ -184,10 +156,10 @@ Coordinates=490,347,105,36
 Coordinates=17,77,40,36
 
 [LabeledEdit13]
-Coordinates=168,802,84,51
+Coordinates=481,1038,97,58
 
 [ToolButton9]
-Coordinates=1431,886,74,33
+Coordinates=395,1206,84,36
 
 [carpetadocumentacion]
 Coordinates=666,309,144,36
@@ -196,19 +168,19 @@ Coordinates=666,309,144,36
 Coordinates=666,1,90,36
 
 [FDQuery1]
-Coordinates=1069,10,92,177
+Coordinates=1131,10,110,212
 
 [ToolBar1]
-Coordinates=952,886,58,33
+Coordinates=969,1206,67,36
 
 [abrirpresupuesto]
 Coordinates=616,347,111,36
 
 [ToolButton3]
-Coordinates=171,886,74,33
+Coordinates=859,1206,84,36
 
 [ToolButton1]
-Coordinates=910,970,74,33
+Coordinates=1431,1206,84,36
 
 [BooleanField1]
 Coordinates=666,457,97,36
@@ -220,20 +192,20 @@ Coordinates=666,512,90,36
 Coordinates=577,535,83,36
 
 [Label5]
-Coordinates=870,350,46,51
+Coordinates=1645,1038,53,58
 Visible=True
 
 [ToolButton5]
-Coordinates=127,970,74,33
+Coordinates=889,1122,84,36
 
 [LabeledEdit12]
-Coordinates=1102,802,84,51
+Coordinates=2012,1038,97,58
 
 [guardarPDF]
 Coordinates=399,535,84,36
 
 [ToolButton10]
-Coordinates=10,970,80,33
+Coordinates=278,1206,91,36
 
 [BooleanField2]
 Coordinates=30,535,97,36
@@ -248,16 +220,16 @@ Coordinates=848,364,108,36
 Coordinates=848,419,84,36
 
 [ToolButton8]
-Coordinates=1321,886,74,33
+Coordinates=1226,1122,84,36
 
 [ToolButton2]
-Coordinates=1045,886,74,33
+Coordinates=1541,1206,84,36
 
 [ToolButton6]
-Coordinates=842,886,74,33
+Coordinates=999,1122,84,36
 
 [ToolButton4]
-Coordinates=732,886,74,33
+Coordinates=1321,1206,84,36
 
 [cerrarpres]
 Coordinates=204,297,73,36
@@ -266,26 +238,128 @@ Coordinates=204,297,73,36
 Coordinates=1104,1,129,36
 
 [ToolButton7]
-Coordinates=389,886,74,33
+Coordinates=749,1206,84,36
 
 [Label7]
-Coordinates=870,500,46,51
+Coordinates=115,1038,53,58
 
 [Label6]
-Coordinates=870,430,46,51
+Coordinates=95,1122,53,58
 
 [Label8]
-Coordinates=0,0,46,51
+Coordinates=1198,1038,53,58
 
 [DataSource1]
 Coordinates=72,1,89,58
 
 [DBGrid1]
-Coordinates=72,1,56,33
-
-[NavigatorBindSourceDB3]
-Coordinates=341,335,140,51
+Coordinates=10,1206,64,36
 
 [spcarpetas]
-Coordinates=691,970,68,33
+Coordinates=669,1122,77,36
+
+[DataModule1.fdpresupuestos]
+Coordinates=273,1038,182,58
+
+[Button1]
+Coordinates=806,1038,59,58
+
+[Button2]
+Coordinates=10,1122,59,58
+
+[BindSourceDB3]
+Coordinates=331,1226,172,234
+
+[fdlineaspresupuestos_grupo]
+Coordinates=183,80,155,33
+
+[fdlineaspresupuestos_id_presupuesto]
+Coordinates=411,141,203,33
+
+[LabeledEdit14]
+Coordinates=1075,1038,97,58
+
+[LabeledEdit15]
+Coordinates=1724,1038,97,58
+
+[Label9]
+Coordinates=1933,1038,53,58
+
+[LabeledEdit16]
+Coordinates=252,246,97,58
+Visible=True
+
+[Shape2]
+Coordinates=2039,1122,59,36
+
+[LabeledEdit17]
+Coordinates=252,954,97,58
+Visible=True
+
+[Label10]
+Coordinates=1847,1038,60,58
+
+[Label11]
+Coordinates=1559,1038,60,58
+
+[EditCopy]
+Coordinates=282,205,67,36
+
+[EditCut]
+Coordinates=196,251,57,36
+
+[ActionManager2]
+Coordinates=87,232,108,36
+
+[EditPaste]
+Coordinates=320,558,70,36
+
+[ToolBar2]
+Coordinates=1062,1206,67,36
+
+[ImageList1]
+Coordinates=304,342,77,36
+
+[ToolButton12]
+Coordinates=1464,1122,91,36
+
+[ToolButton11]
+Coordinates=772,1122,91,36
+
+[ToolButton13]
+Coordinates=443,1122,91,36
+
+[ToolBar3]
+Coordinates=100,1206,67,36
+
+[AprobarTodos]
+Coordinates=930,205,96,36
+
+[ToolButton14]
+Coordinates=1109,1122,91,36
+
+[Label12]
+Coordinates=1393,1038,60,58
+
+[GroupBox5]
+Coordinates=1440,10,79,58
+
+[Guardar]
+Coordinates=1267,10,62,58
+
+[Memo1]
+Coordinates=470,510,64,58
+Visible=True
+
+[Shape1]
+Coordinates=358,1122,59,36
+
+[cerrar]
+Coordinates=1740,10,49,58
+
+[GroupBox3]
+Coordinates=1545,10,79,58
+
+[Aceptar]
+Coordinates=1355,10,59,58
 

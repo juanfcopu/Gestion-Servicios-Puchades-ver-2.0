@@ -1,10 +1,11 @@
 object menuseleccion: Tmenuseleccion
   Left = 0
   Top = 0
-  BorderStyle = bsToolWindow
+  Width = 222
+  Height = 524
+  AutoScroll = True
+  BorderStyle = bsSizeToolWin
   Caption = 'Menu selecci'#243'n'
-  ClientHeight = 500
-  ClientWidth = 216
   Color = clBtnFace
   DragKind = dkDock
   DragMode = dmAutomatic
@@ -20,7 +21,7 @@ object menuseleccion: Tmenuseleccion
   object btclientes: TButton
     Left = 0
     Top = 0
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -39,11 +40,12 @@ object menuseleccion: Tmenuseleccion
     SelectedImageIndex = 6
     TabOrder = 0
     OnClick = btclientesClick
+    ExplicitWidth = 216
   end
   object Button2: TButton
     Left = 0
     Top = 350
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -56,11 +58,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 216
   end
   object Button3: TButton
     Left = 0
     Top = 150
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -73,11 +76,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 2
+    ExplicitWidth = 216
   end
   object Button4: TButton
     Left = 0
     Top = 100
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -90,11 +94,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 3
+    ExplicitWidth = 216
   end
   object Button5: TButton
     Left = 0
     Top = 50
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -107,11 +112,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 4
+    ExplicitWidth = 216
   end
   object Button6: TButton
     Left = 0
     Top = 450
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -124,11 +130,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 5
+    ExplicitWidth = 216
   end
   object btpresupuestos: TButton
     Left = 0
     Top = 200
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -142,11 +149,12 @@ object menuseleccion: Tmenuseleccion
     ParentFont = False
     TabOrder = 6
     OnClick = btpresupuestosClick
+    ExplicitWidth = 216
   end
   object Button8: TButton
     Left = 0
     Top = 300
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -159,11 +167,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 7
+    ExplicitWidth = 216
   end
   object Button9: TButton
     Left = 0
     Top = 250
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -176,11 +185,12 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 8
+    ExplicitWidth = 216
   end
   object Button10: TButton
     Left = 0
     Top = 400
-    Width = 216
+    Width = 189
     Height = 50
     Align = alTop
     BiDiMode = bdLeftToRight
@@ -193,5 +203,6 @@ object menuseleccion: Tmenuseleccion
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 9
+    ExplicitWidth = 216
   end
 end

@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet,System.DateUtils ,
   FireDAC.Comp.Client, Vcl.ImgList, Vcl.Controls, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,Vcl.Graphics,Vcl.ComCtrls;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,Vcl.Graphics,Vcl.ComCtrls,
+  Vcl.ExtCtrls;
 
 type
   TDataModule1 = class(TDataModule)
@@ -37,6 +38,7 @@ type
     editarcliente: TAction;
     icopeque: TImageList;
     borrarpresupuestos: TAction;
+    timercambios: TTimer;
     procedure crearclientesExecute(Sender: TObject);
     procedure listaclientesExecute(Sender: TObject);
     procedure insertarpresupuestoExecute(Sender: TObject);
@@ -45,15 +47,19 @@ type
     procedure listapresupuestosExecute(Sender: TObject);
     procedure editarclienteExecute(Sender: TObject);
     procedure borrarpresupuestosExecute(Sender: TObject);
+    procedure timercambiosTimer(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    ultcambio:TDateTime;
     function IVA(tipo:integer):real;
     function cambiarbarras(str:string):string;
     function ObtenerNPresupuesto(fd:TFDQuery):integer;
     function ObtenerPathPresupuesto(cliente:string;numero:integer;fecha:TDateTime):string;
-
+    function EstadoInsertEdit:boolean;
+    procedure haycambios(var cambios:boolean;ultfecha:TDateTime);
+    procedure RefrescarDataSet(Modo:integer);
 
   end;
 
@@ -61,6 +67,7 @@ var
 PATHUSER:string;
 PATHPLANTILLAS:string;
 PATHDOCPRESUPUESTOS:string;
+IVADEFECTO:double;
 DataModule1:TDataModule1;
 
 implementation
@@ -74,12 +81,12 @@ uses InsertarClientes, FPrincipal, listaclientes, presupuestos,
 
 procedure TDataModule1.borrarpresupuestosExecute(Sender: TObject);
 begin
- try
+{ try
     if  ((Sender as TFDQuery).active) and ((Sender as TFDQuery).RecordCount > 0)   then
                      (Sender as TFDQuery).Delete;
  except
       on E:Exception do ErrorDialog(E.Message,E.HelpContext) ;
- end;
+ end;   }
 end;
 
 function TDataModule1.cambiarbarras(str:string):string;
@@ -105,7 +112,7 @@ var inserCliente:TFinsertarCliente;
 begin
       inserCliente:=TFInsertarCliente.Create(Sender as TComponent);
       if not inserCliente.fdinsertarClientes.Active then  inserCliente.fdinsertarClientes.Active:=true;
-      if not inserCliente.fdadministradores.Active then inserCliente.fdadministradores.Active:=true;
+
 
        if (Sender is TTreeview) then
          if inserCliente.fdinsertarClientes.State in [dsbrowse] then inserCliente.fdinsertarClientes.Insert;
@@ -120,6 +127,7 @@ PATHUSER:=GetEnvironmentVariable('USERPROFILE');
 PATHUSER:=PATHUSER+'\Dropbox\SERVICIOS INTEGRALES PUCHADES';
 PATHPLANTILLAS:='\Plantillas\Presupuestos.dot';
 PATHDOCPRESUPUESTOS:=PATHUSER+'\PRESUPUESTOS' ;
+IVADEFECTO:=1.1;
 end;
 
 procedure TDataModule1.editarclienteExecute(Sender: TObject);
@@ -141,7 +149,7 @@ begin
 pres:=TFPresupuestos.Create(Self);
     with pres do
     begin
-
+         cargando:=true;
          fdcliente.ParamByName('id_cliente').AsInteger:=(Sender as TFDQuery).FieldByName('id_ClientePrev').AsInteger;
               fdcliente.Active:=true;
 
@@ -154,17 +162,14 @@ pres:=TFPresupuestos.Create(Self);
                begin
                fdpresupuesto.ParamByName('id_cliente').AsInteger:=fdcliente.FieldByName('idContactos').AsInteger;
                fdpresupuesto.ParamByName('id_Presupuesto').AsInteger:=(Sender as TFDQuery).FieldByName('id_Presupuesto').AsInteger;
-               fdpresupuesto.ParamByName('fecha').AsDateTime:=(Sender as TFDQuery).FieldByName('FechaPresupuesto').AsDateTime;
+               fdpresupuesto.ParamByName('grupo').Asinteger:=(Sender as TFDQuery).FieldByName('grupo').Asinteger;
                fdpresupuesto.Active:=true;
+               fdpresupuesto.Edit;
+
+               pres.luces(fdpresupuesto.FieldByName('Aprovado').AsBoolean);
 
 
-              if fdpresupuesto.FieldByName('Aprovado').AsBoolean then spaprobado.Brush.Color:=cllime
-                     else begin
-                      spaprobado.Brush.Color:=clred;
-                      spnoaprobado.Brush.Color:=cllime;
-                      end;
-
-                ruta:= PATHDOCPRESUPUESTOS+'\'+fdpresupuesto.fieldbyname('id_presupuesto').asstring+IntToStr(YearOf(fdpresupuesto.fieldbyname('FechaPresupuesto').asdatetime));
+                ruta:= PATHDOCPRESUPUESTOS+'\'+fdpresupuesto.fieldbyname('id_presupuesto').asstring+fdpresupuesto.fieldbyname('grupo').asstring;
 
                 if DirectoryExists(ruta) then
                 begin
@@ -182,16 +187,18 @@ pres:=TFPresupuestos.Create(Self);
          if not fdlineas.Active then
          begin
              fdlineas.ParamByName('id_presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
-             fdlineas.ParamByName('fechapresupuesto').AsDateTime:=fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime;
+             fdlineas.ParamByName('grupopresupuesto').Asinteger:=YearOf(fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime);
              fdlineas.Active:=true;
+             fdlineas.AggregatesActive:=true;
 
          end;
+           
 
             Show;
             ManualDock(principal.PageControl2);
          end;
       end;
-
+    pres.cargando:=false;
 end;
 
 function TDataModule1.ObtenerPathPresupuesto(cliente:string;numero:integer;fecha:TDateTime):string;
@@ -200,6 +207,88 @@ begin
 
 end;
 
+procedure TDataModule1.haycambios(var cambios:boolean;ultfecha:TDateTime);
+var qry: TFDQuery;
+begin
+     ultfecha:=ultcambio;
+     qry:=TFDQuery.Create(Self);
+     qry.Connection:=FDConnection1;
+     qry.SQL.Clear;
+     qry.SQL.Add('Select tabla,fechahora from cambios where fechahora > :ultcambio');
+     qry.Params.ParamByName('ultcambio').AsDateTime:=ultcambio;
+     qry.Params.ParamByName('ultcambio').ParamType:=ptInput;
+     qry.Params.ParamByName('ultcambio').DataType:=ftDateTime;
+     qry.Params.ParamByName('ultcambio').asDateTime:=ultcambio;
+     qry.Open;
+     cambios:=(qry.RecordCount > 0);
+     if cambios then  ultfecha:= qry.Fields[1].AsDateTime;
+     qry.Close;
+     qry.destroy;
+
+end;
+
+
+
+function TDataModule1.EstadoInsertEdit:boolean;
+var i:integer; enestado:boolean;
+begin
+     i:=0;
+     enestado:=false;
+     while (i < FDConnection1.DataSetCount) and (not enestado) do
+     begin
+          if (FDConnection1.DataSets[i].State in [dsInsert,dsEdit]) or (FDConnection1.DataSets[i].ChangeCount > 0) then
+          enestado:=true;
+          i:=i+1;
+     end;
+     Result:=enestado;
+
+end;
+
+
+procedure TDataModule1.RefrescarDataSet(Modo:integer);
+var i: integer;  cambios:boolean;
+begin
+     try
+        i:=0;
+     case Modo of
+       0: begin
+          while (i < FDConnection1.DataSetCount) do
+          begin
+              if not ((FDConnection1.DataSets[i].State in [dsInsert,dsEdit]) or (FDConnection1.DataSets[i].ChangeCount > 0)) then
+              FDConnection1.DataSets[i].Refresh;
+              i:=i+1;
+          end;
+          haycambios(cambios,ultcambio)
+          end;
+
+
+       1: begin
+          if not EstadoInsertEdit then
+          while (i < FDConnection1.DataSetCount) do
+          begin
+          FDConnection1.DataSets[i].Refresh;
+          i:=i+1;
+          end;
+          end;
+     end;
+     finally
+     timercambios.Enabled:=true;
+     end;
+end;
+
+
+procedure TDataModule1.timercambiosTimer(Sender: TObject);
+var  cambios:boolean;
+begin
+     haycambios(cambios,ultcambio);
+
+     if cambios then
+     begin
+          timercambios.enabled:=false;
+          RefrescarDataSet(1);
+     end;
+
+end;
 
 function TDataModule1.ObtenerNPresupuesto(fd:TFDQuery):integer;
 begin
@@ -214,38 +303,34 @@ end;
 
 
 procedure TDataModule1.insertarpresupuestoExecute(Sender: TObject);
-  var pres:TFPresupuestos;  fd:TFDQuery;
+  var pres:TFPresupuestos;   fd:TFDQuery;
 begin
 pres:=TFPresupuestos.Create(TControl(Sender));
     with pres do
     begin
+         if not fdpresupuesto.Active then
+              begin
+                   fd:=TFDQuery.Create(Self);
+                   fdpresupuesto.Active:=true;
+                   fdpresupuesto.Insert;
+                   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
+                   fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+                   fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
+                   fdpresupuesto.FieldByName('partidas').asinteger:=0;
+                   fdpresupuesto.FieldByName('Total').AsFloat:=0;
+                   fdpresupuesto.FieldByName('TotalAprobado').AsFloat:=0;
+                   if not fdlineas.Active then  fdlineas.Active:=true;
+                   GroupBox2.Enabled:=True;
+                   PageControl1.Enabled:=true;
+
+              end;
+
          if Sender.ClassName='TFDQuery' then
          begin
          fdcliente.ParamByName('id_cliente').AsInteger:=fdClientes.FieldByName('IdContactos').AsInteger;
          fdcliente.Active:=true;
          end;
-         if fdcliente.RecordCount > 0 then
-         begin
-              GroupBox2.Enabled:=True;
-              PageControl1.Enabled:=true;
-              if not fdpresupuesto.Active then
-              begin
-                   fd:=TFDQuery.Create(Self);
-                   fdpresupuesto.Active:=true;
-                   fdpresupuesto.Insert;
-                   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=ObtenerNPresupuesto(fd);
-                   fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
-                   fdpresupuesto.FieldByName('Id_ClientePrev').AsInteger:=fdcliente.FieldByName('idContactos').AsInteger;
 
-                   fdpresupuesto.FieldByName('path').AsString:=ObtenerPathPresupuesto(fdcliente.fieldByName('nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
-              end;
-
-              if not fdlineas.Active then
-              begin
-              fdlineas.Active:=true;
-
-              end;
-          end;
       Show;
             ManualDock(principal.PageControl2);
       end;

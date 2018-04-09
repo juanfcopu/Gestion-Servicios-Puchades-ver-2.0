@@ -23,6 +23,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(Tprincipal, principal);
-  Application.CreateForm(TFInsertarCliente, FInsertarCliente);
   Application.Run;
 end.

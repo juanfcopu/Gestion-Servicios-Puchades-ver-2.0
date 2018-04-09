@@ -50,9 +50,6 @@ Visible=False
 [DataModule1.fdClientes]
 Coordinates=930,50,131,195
 
-[principal.DataSource1]
-Coordinates=145,1,141,234
-
 [CoolBar1]
 Coordinates=145,254,60,33
 
@@ -113,4 +110,7 @@ Coordinates=237,234,62,33
 
 [Button1]
 Coordinates=91,52,53,51
+
+[principal.]
+Coordinates=145,1,141,234
 
