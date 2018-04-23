@@ -1,7 +1,4 @@
-﻿[ListView1]
-Coordinates=10,10,97,177
-
-[Button1]
+﻿[Button1]
 Coordinates=10,197,53,51
 
 [Button3]
@@ -15,4 +12,7 @@ Coordinates=73,197,91,33
 
 [Button2]
 Coordinates=180,10,53,51
+
+[ListViewContactos]
+Coordinates=10,10,106,177
 

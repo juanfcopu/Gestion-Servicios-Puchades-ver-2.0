@@ -14,9 +14,9 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    ListView1: TListView;
+    ListViewFacturas: TListView;
     procedure FrameResize(Sender: TObject);
-    procedure ListView1Resize(Sender: TObject);
+    procedure ListViewFacturasResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,9 +34,9 @@ Button2.Left:=HeaderControl1.Width-64;
 Button3.Left:=HeaderControl1.Width-32;
 end;
 
-procedure TFrame2.ListView1Resize(Sender: TObject);
+procedure TFrame2.ListViewFacturasResize(Sender: TObject);
 begin
-(Sender as TListView).Columns[1].Width:= HeaderControl1.Width - 180;
+     (Sender as TListView).Columns[2].Width:= HeaderControl1.Width - 180;
 end;
 
 end.

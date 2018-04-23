@@ -1,0 +1,42 @@
+unit frameFacturas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Vcl.StdCtrls;
+
+type
+  TFrame2 = class(TFrame)
+    Panel1: TPanel;
+    HeaderControl1: THeaderControl;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    ListViewFacturas: TListView;
+    procedure FrameResize(Sender: TObject);
+    procedure ListView1Resize(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrame2.FrameResize(Sender: TObject);
+begin
+Button1.Left:=HeaderControl1.Width-96;
+Button2.Left:=HeaderControl1.Width-64;
+Button3.Left:=HeaderControl1.Width-32;
+end;
+
+procedure TFrame2.ListView1Resize(Sender: TObject);
+begin
+(Sender as TListView).Columns[1].Width:= HeaderControl1.Width - 180;
+end;
+
+end.

@@ -146,6 +146,8 @@ type
     Aceptar: TButton;
     cerrar: TButton;
     LinkControlToField11: TLinkControlToField;
+    LabeledEdit18: TLabeledEdit;
+    LinkControlToField14: TLinkControlToField;
 
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
@@ -213,9 +215,11 @@ type
     procedure guardarPDFUpdate(Sender: TObject);
     procedure mailUpdate(Sender: TObject);
     procedure carpetadocumentacionUpdate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-
+     lst:TStringlist;
 
   public
     { Public declarations }
@@ -326,7 +330,6 @@ begin
 end;
 
 procedure TFPresupuestos.AprobarTodosExecute(Sender: TObject);
-var cb:TObject;  row:integer;
 begin
       fdlineas.First;
       while not fdlineas.eof do
@@ -339,16 +342,7 @@ begin
 
       StringGrid1.Repaint;
 
-     { for row:=1 to StringGrid1.RowCount-1 do
-      begin
-          if StringGrid1.Objects[3,row] <> nil then
-           begin
-               fdlineas.RecNo:=row;
-               cb:=StringGrid1.Objects[3,row];
-               (cb as TCheckBox).Checked:=True;
-           end;
-
-      end;   }
+    
 end;
 
 procedure TFPresupuestos.BitBtn1Click(Sender: TObject);
@@ -597,24 +591,24 @@ if DataSet.RecordCount > 0 then
               if fdpresupuesto.State in [dsInsert] then
               begin
                    fdpresupuesto.FieldByName('Id_ClientePrev').AsInteger:=fdcliente.FieldByName('idContactos').AsInteger;
-                   fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
-              end;
+               end;
          end;
 end;
 
 procedure TFPresupuestos.fdlineasAfterApplyUpdates(DataSet: TFDDataSet;
   AErrors: Integer);
+
 begin
       if AErrors = 0 then
          begin
           fdlineas.CommitUpdates;
          if not fdpresupuesto.UpdatesPending then
             begin
-
-            guardarpresupuesto.Enabled:=false;
+             guardarpresupuesto.Enabled:=false;
              guardar.Enabled:=false;
              shape1.Brush.Color:=clwhite;
-              DataModule1.RefrescarDataSet(0);
+             DataModule1.RefrescarDataSet(lst);
+
             end;
 
          end;
@@ -668,13 +662,14 @@ end;
 
 procedure TFPresupuestos.fdlineasAfterInsert(DataSet: TDataSet);
 begin
+
    DataSet.FieldByName('presupuestos_Id_Presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
    DataSet.FieldByName('presupuestos_grupo').asinteger:= YearOf(fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime);
    DataSet.FieldByName('Id_partida').AsInteger:=StringGrid1.rowcount-1;
    DataSet.FieldByName('Aprovado').AsBoolean:=false;
    DataSet.FieldByName('Ejecutado').asboolean:=false;
    DataSet.FieldByName('Total').AsFloat:=0;
- //  totalold:=DataSet.FieldByName('Total').asfloat;
+
 
      guardarpresupuesto.Enabled:=True;
      Guardar.Enabled:=true;
@@ -706,13 +701,13 @@ end;
 
 procedure TFPresupuestos.fdlineasAprovadoChange(Sender: TField);
 begin
-     if not (fdpresupuesto.state in [dsInsert,dsEdit]) then  fdpresupuesto.Edit;
+    { if not (fdpresupuesto.state in [dsInsert,dsEdit]) then  fdpresupuesto.Edit;
 
      if Sender.AsBoolean then
                  fdpresupuesto.FieldByName('TotalAprobado').asfloat:=fdpresupuesto.FieldByName('TotalAprobado').asfloat+Sender.DataSet.FieldByName('Total').asfloat
                  else
                  fdpresupuesto.FieldByName('TotalAprobado').asfloat:=fdpresupuesto.FieldByName('TotalAprobado').asfloat-Sender.DataSet.FieldByName('Total').asfloat;
-
+  }
 end;
 
 procedure TFPresupuestos.fdlineasBeforeDelete(DataSet: TDataSet);
@@ -737,7 +732,7 @@ end;
 
 procedure TFPresupuestos.fdpresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
   AErrors: Integer);
-  var ruta:string; existe:boolean;
+  var ruta:string; existe:boolean;  fichero:string; MSWord:Variant;
 begin
 if AErrors = 0 then
     begin
@@ -748,7 +743,7 @@ if AErrors = 0 then
             guardarpresupuesto.Enabled:=false;
             guardar.Enabled:=false;
             shape1.Brush.Color:=clwhite;
-            DataModule1.RefrescarDataSet(0);
+            DataModule1.RefrescarDataSet(lst);
             end;
 
             carpetasdocumentacion(ruta,existe);
@@ -766,6 +761,25 @@ if AErrors = 0 then
             else  begin
                  spcarpetas.brush.color:=clred;
                   end;
+
+                  fichero:=PATHUSER+fdpresupuesto.FieldByName('path').AsString;
+
+           if not FileExists(fichero) then
+            if application.MessageBox('El presupuesto no existe. ¿Desea crearlo?', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))=IDOK      then
+            begin
+
+
+                 try
+                    MSWord:=GetActiveOleOBject('Word.Application');
+                 except
+                 MsWord:=CreateOleObject('Word.Application');
+
+                  MSWord.Documents.Add(ExtractFilePath(application.ExeName)+PATHPLANTILLAS);
+                  MSWord.ActiveDocument.SaveAs(fichero);
+                  MsWord.Visible:=True;
+
+            end;
+end;
 
     end;
 end;
@@ -805,8 +819,29 @@ begin
 end;
 
 procedure TFPresupuestos.GuardarClick(Sender: TObject);
-
+var         fd:TFDQuery;
 begin
+
+if fdpresupuesto.state in [dsInsert] then
+begin
+  fd:=TFDQuery.Create(Self);
+  fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
+  fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+
+  fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
+
+
+  fdlineas.First ;
+  while not fdlineas.eof do
+  begin
+      fdlineas.edit;
+      fdlineas.FieldByName('presupuestos_id_presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
+      fdlineas.FieldByName('presupuestos_grupo').asinteger:=yearof(date);
+      fdlineas.post;
+      fdlineas.next;
+  end;
+
+end;
 
 
 if (fdpresupuesto.state in [dsInsert, dsEdit]) then
@@ -1005,7 +1040,7 @@ end;
 
 procedure TFPresupuestos.StringGrid1DrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
-  var cb:TObject; Dr:TRect; Valor:Extended;
+  var cb:TObject; Valor:Extended;
 begin
 
 
@@ -1169,7 +1204,7 @@ end;
 
 procedure TFPresupuestos.StringGrid1SelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
-var  Rect:TRect;  cb:TObject;
+
 begin
 
   CanSelect:=true;
@@ -1187,6 +1222,18 @@ end;
 procedure TFPresupuestos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 action:=caFree;
+end;
+
+procedure TFPresupuestos.FormCreate(Sender: TObject);
+begin
+lst:=TStringList.Create;
+lst.add('fdpresupuestos');
+lst.add('fdlineaspresupuesto')
+end;
+
+procedure TFPresupuestos.FormDestroy(Sender: TObject);
+begin
+lst.destroy;
 end;
 
 procedure TFPresupuestos.FormResize(Sender: TObject);

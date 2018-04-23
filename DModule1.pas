@@ -57,9 +57,10 @@ type
     function cambiarbarras(str:string):string;
     function ObtenerNPresupuesto(fd:TFDQuery):integer;
     function ObtenerPathPresupuesto(cliente:string;numero:integer;fecha:TDateTime):string;
-    function EstadoInsertEdit:boolean;
+  //  function EstadoInsertEdit:boolean;
     procedure haycambios(var cambios:boolean;ultfecha:TDateTime);
-    procedure RefrescarDataSet(Modo:integer);
+    procedure RefrescarDataSet(lquery:TStringlist);
+    procedure RefrescarDataSetTodos;
 
   end;
 
@@ -188,8 +189,9 @@ pres:=TFPresupuestos.Create(Self);
          begin
              fdlineas.ParamByName('id_presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
              fdlineas.ParamByName('grupopresupuesto').Asinteger:=YearOf(fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime);
-             fdlineas.Active:=true;
+
              fdlineas.AggregatesActive:=true;
+             fdlineas.Active:=true;
 
          end;
            
@@ -228,7 +230,7 @@ begin
 end;
 
 
-
+ {
 function TDataModule1.EstadoInsertEdit:boolean;
 var i:integer; enestado:boolean;
 begin
@@ -243,49 +245,54 @@ begin
      Result:=enestado;
 
 end;
+  }
 
-
-procedure TDataModule1.RefrescarDataSet(Modo:integer);
+procedure TDataModule1.RefrescarDataSet(lquery:TStringlist);
 var i: integer;  cambios:boolean;
 begin
-     try
-        i:=0;
-     case Modo of
-       0: begin
+         haycambios(cambios,ultcambio);
+
+         if cambios then
+         begin
+         i:=0;
+          while (i < FDConnection1.DataSetCount) do
+          begin
+              if  lquery.indexOf(FDConnection1.DataSets[i].Name) > -1  then
+              if not ((FDConnection1.DataSets[i].State in [dsInsert,dsEdit]) or (FDConnection1.DataSets[i].ChangeCount > 0)) then
+              FDConnection1.DataSets[i].Refresh;
+              i:=i+1;
+          end;
+         end;
+
+
+end;
+
+ procedure TDataModule1.RefrescarDataSetTodos;
+ var i:integer;
+ begin
+       i:=0;
           while (i < FDConnection1.DataSetCount) do
           begin
               if not ((FDConnection1.DataSets[i].State in [dsInsert,dsEdit]) or (FDConnection1.DataSets[i].ChangeCount > 0)) then
               FDConnection1.DataSets[i].Refresh;
               i:=i+1;
           end;
-          haycambios(cambios,ultcambio)
-          end;
-
-
-       1: begin
-          if not EstadoInsertEdit then
-          while (i < FDConnection1.DataSetCount) do
-          begin
-          FDConnection1.DataSets[i].Refresh;
-          i:=i+1;
-          end;
-          end;
-     end;
-     finally
-     timercambios.Enabled:=true;
-     end;
-end;
-
+ end;
 
 procedure TDataModule1.timercambiosTimer(Sender: TObject);
 var  cambios:boolean;
 begin
      haycambios(cambios,ultcambio);
-
+     try
      if cambios then
      begin
+
           timercambios.enabled:=false;
-          RefrescarDataSet(1);
+          RefrescarDataSetTodos;
+
+     end;
+     finally
+          timercambios.Enabled:=true;
      end;
 
 end;
@@ -303,23 +310,29 @@ end;
 
 
 procedure TDataModule1.insertarpresupuestoExecute(Sender: TObject);
-  var pres:TFPresupuestos;   fd:TFDQuery;
+  var pres:TFPresupuestos;
 begin
 pres:=TFPresupuestos.Create(TControl(Sender));
     with pres do
     begin
          if not fdpresupuesto.Active then
               begin
-                   fd:=TFDQuery.Create(Self);
+
                    fdpresupuesto.Active:=true;
                    fdpresupuesto.Insert;
-                   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
+                  // fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
+                   //fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+                   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=-1;
                    fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+
                    fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
                    fdpresupuesto.FieldByName('partidas').asinteger:=0;
                    fdpresupuesto.FieldByName('Total').AsFloat:=0;
                    fdpresupuesto.FieldByName('TotalAprobado').AsFloat:=0;
-                   if not fdlineas.Active then  fdlineas.Active:=true;
+
+                   if not fdlineas.Active then   fdlineas.Active:=true;
+                   fdlineas.AggregatesActive:=true;
+
                    GroupBox2.Enabled:=True;
                    PageControl1.Enabled:=true;
 

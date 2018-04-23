@@ -60,15 +60,15 @@ Coordinates=10,380,124,416
 Visible=False
 
 [fdlineas]
-Coordinates=400,1236,59,36
+Coordinates=607,1266,59,36
 Visible=True
 
 [fdCliente]
-Coordinates=1459,1246,66,36
+Coordinates=1763,1286,66,36
 Visible=True
 
 [BindSourceDB1]
-Coordinates=1383,1236,113,146
+Coordinates=1687,1276,113,146
 
 [BindingsList1]
 Coordinates=291,1,91,36
@@ -268,7 +268,7 @@ Coordinates=806,1038,59,58
 Coordinates=10,1122,59,58
 
 [BindSourceDB3]
-Coordinates=331,1226,172,234
+Coordinates=538,1256,172,234
 
 [fdlineaspresupuestos_grupo]
 Coordinates=183,80,155,33
@@ -362,4 +362,8 @@ Coordinates=1545,10,79,58
 
 [Aceptar]
 Coordinates=1355,10,59,58
+
+[LabeledEdit18]
+Coordinates=440,400,97,58
+Visible=True
 

@@ -15,7 +15,8 @@ Coordinates=48,70,123,195
 Coordinates=0,273,73,33
 
 [ListView1]
-Coordinates=880,280,97,267
+Coordinates=450,440,97,267
+Visible=True
 
 [BindSourceDB1]
 Coordinates=158,284,116,213
@@ -54,7 +55,7 @@ Coordinates=420,245,141,69
 
 [FClientes.fdpresupuestos]
 Visible=False
-Coordinates=599,89,141,69
+Coordinates=599,89,144,447
 
 [FClientes.fdfacturas]
 Visible=False
@@ -82,7 +83,7 @@ Coordinates=599,265,141,69
 Coordinates=420,245,141,69
 
 [FClientes.BindSourceDB2]
-Coordinates=599,89,141,69
+Coordinates=599,89,144,447
 
 [FClientes.BindSourceDB6]
 Coordinates=599,177,141,69

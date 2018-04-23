@@ -430,6 +430,52 @@ object FClientes: TFClientes
       Height = 130
       Align = alClient
       TabOrder = 0
+      object Label3: TLabel
+        Left = 816
+        Top = 80
+        Width = 42
+        Height = 16
+        Caption = 'Label3'
+      end
+      object DBGrid1: TDBGrid
+        Left = 41
+        Top = 6
+        Width = 320
+        Height = 120
+        DataSource = dsfdpresupuestos
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+      end
+      object DBGrid2: TDBGrid
+        Left = 388
+        Top = 6
+        Width = 320
+        Height = 120
+        DataSource = dsfdlineaspresupuesto
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+      end
+      object rDBRecordSelection1: TrDBRecordSelection
+        Left = 768
+        Top = 32
+        Width = 129
+        Height = 24
+        AutoDropDown = True
+        DropDownCount = 15
+        Enabled = False
+        TabOrder = 2
+        DataSource = dsfdpresupuestos
+        RecIdField = 'id_presupuesto'
+        DBEditLabel.ShowRequiredMark = False
+      end
     end
     inline Frame11: TFrame1
       Left = 1
@@ -457,29 +503,6 @@ object FClientes: TFClientes
               Width = 120
             end>
           ExplicitWidth = 662
-        end
-        inherited ListView1: TListView
-          Width = 662
-          Height = 166
-          Columns = <
-            item
-              Caption = 'Numero'
-              Width = 65
-            end
-            item
-              AutoSize = True
-              Caption = 'Descripci'#243'n'
-            end
-            item
-              Caption = 'Fecha'
-              Width = 94
-            end>
-          Font.Height = -13
-          HotTrackStyles = [htHandPoint, htUnderlineHot]
-          ViewStyle = vsReport
-          OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
-          ExplicitWidth = 662
-          ExplicitHeight = 166
         end
         inherited Button1: TButton
           Top = 5
@@ -513,6 +536,37 @@ object FClientes: TFClientes
           OnClick = Frame11Button3Click
           ExplicitLeft = 398
           ExplicitTop = 5
+        end
+        inherited ListViewPresupuestos: TListView
+          Width = 662
+          Height = 166
+          Checkboxes = True
+          Columns = <
+            item
+              Caption = 'N'#250'mero'
+              Width = 65
+            end
+            item
+              Caption = 'Grupo'
+            end
+            item
+              Caption = 'Descripci'#243'n'
+            end
+            item
+              Caption = 'Total'
+            end>
+          DragMode = dmAutomatic
+          Font.Height = -13
+          Font.Style = [fsBold]
+          RowSelect = True
+          ParentFont = False
+          ViewStyle = vsReport
+          OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
+          OnDblClick = Frame11ListView1DblClick
+          ExplicitLeft = 4
+          ExplicitTop = 46
+          ExplicitWidth = 662
+          ExplicitHeight = 166
         end
       end
     end
@@ -558,12 +612,12 @@ object FClientes: TFClientes
           Font.Style = [fsBold]
           Visible = True
         end
-        inherited ListView1: TListView
+        inherited ListViewFacturas: TListView
           Width = 662
           Height = 166
           Columns = <
             item
-              Caption = 'Numero'
+              Caption = 'N'#250'mero'
               Width = 70
             end
             item
@@ -578,7 +632,6 @@ object FClientes: TFClientes
           ViewStyle = vsReport
           Visible = True
           OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
-          OnResize = Frame21ListView1Resize
           ExplicitWidth = 662
           ExplicitHeight = 166
         end
@@ -600,12 +653,12 @@ object FClientes: TFClientes
         Height = 216
         ExplicitWidth = 670
         ExplicitHeight = 216
-        inherited ListView1: TListView
+        inherited ListViewObras: TListView
           Width = 662
           Height = 166
           Columns = <
             item
-              Caption = 'Numero'
+              Caption = 'N'#250'mero'
               Width = 65
             end
             item
@@ -615,10 +668,13 @@ object FClientes: TFClientes
               Caption = 'Fecha Origen'
               Width = 96
             end>
+          DragKind = dkDock
           Font.Height = -13
           RowSelect = True
           ViewStyle = vsReport
           OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
+          OnDragDrop = Frame31ListViewObrasDragDrop
+          OnDragOver = Frame31ListViewObrasDragOver
           ExplicitWidth = 662
           ExplicitHeight = 166
         end
@@ -652,7 +708,7 @@ object FClientes: TFClientes
         Height = 210
         ExplicitWidth = 664
         ExplicitHeight = 210
-        inherited ListView1: TListView
+        inherited ListViewContactos: TListView
           Width = 656
           Height = 160
           Columns = <
@@ -690,15 +746,6 @@ object FClientes: TFClientes
         end
       end
     end
-  end
-  object NavigatorBindSourceDB2: TBindNavigator
-    Left = 96
-    Top = 308
-    Width = 240
-    Height = 25
-    DataSource = BindSourceDB2
-    Orientation = orHorizontal
-    TabOrder = 2
   end
   object CoolBar1: TCoolBar
     Left = 0
@@ -744,13 +791,14 @@ object FClientes: TFClientes
       end>
   end
   object fdpresupuestos: TFDQuery
+    IndexFieldNames = 'id_presupuesto;grupo'
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
-      
-        'select * from presupuestos where id_clienteprev=:id_cliente orde' +
-        'r by id_presupuesto DESC, FechaPresupuesto DESC ')
+      'select * from presupuestos P '
+      'where P.id_clienteprev=:id_cliente '
+      'order by P.id_presupuesto DESC, P.grupo DESC ')
     Left = 397
-    Top = 267
+    Top = 283
     ParamData = <
       item
         Name = 'ID_CLIENTE'
@@ -827,6 +875,7 @@ object FClientes: TFClientes
       DataSource = BindSourceDB1
       FieldName = 'Ciudad'
       Control = LabeledEdit8
+      AutoActivate = False
       Track = True
     end
     object LinkControlToField3: TLinkControlToField
@@ -878,29 +927,11 @@ object FClientes: TFClientes
       Component = ComboBox1
       ComponentProperty = 'ItemIndex'
     end
-    object LinkListControlToField2: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'id_presupuesto'
-      Control = Frame11.ListView1
-      AutoActivate = False
-      FillExpressions = <
-        item
-          SourceMemberName = 'Descripcion'
-          ControlMemberName = 'SubItems[0]'
-        end
-        item
-          SourceMemberName = 'FechaPresupuesto'
-          ControlMemberName = 'SubItems[1]'
-        end>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
     object LinkListControlToField1: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB3
       FieldName = 'idFactura'
-      Control = Frame21.ListView1
+      Control = Frame21.ListViewFacturas
       AutoActivate = False
       FillExpressions = <
         item
@@ -918,7 +949,7 @@ object FClientes: TFClientes
       Category = 'Quick Bindings'
       DataSource = BindSourceDB4
       FieldName = 'ID_obra'
-      Control = Frame31.ListView1
+      Control = Frame31.ListViewObras
       AutoActivate = False
       FillExpressions = <
         item
@@ -936,7 +967,7 @@ object FClientes: TFClientes
       Category = 'Quick Bindings'
       DataSource = BindSourceDB5
       FieldName = 'pta'
-      Control = Frame41.ListView1
+      Control = Frame41.ListViewContactos
       AutoActivate = False
       FillExpressions = <
         item
@@ -976,6 +1007,27 @@ object FClientes: TFClientes
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
+    object LinkListControlToField2: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'id_presupuesto'
+      Control = Frame11.ListViewPresupuestos
+      FillExpressions = <
+        item
+          SourceMemberName = 'grupo'
+          ControlMemberName = 'SubItems[0]'
+        end
+        item
+          SourceMemberName = 'Descripcion'
+          ControlMemberName = 'SubItems[1]'
+        end
+        item
+          SourceMemberName = 'Total'
+          ControlMemberName = 'SubItems[2]'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
   end
   object fdAdministradores: TFDQuery
     Connection = DataModule1.FDConnection1
@@ -988,8 +1040,8 @@ object FClientes: TFClientes
     DataSource.AutoEdit = False
     DataSet = fdpresupuestos
     ScopeMappings = <>
-    Left = 328
-    Top = 296
+    Left = 304
+    Top = 280
   end
   object BindSourceDB3: TBindSourceDB
     DataSource.AutoEdit = False
@@ -1016,5 +1068,54 @@ object FClientes: TFClientes
     ScopeMappings = <>
     Left = 1184
     Top = 8
+  end
+  object dsfdpresupuestos: TDataSource
+    DataSet = fdpresupuestos
+    Left = 209
+    Top = 282
+  end
+  object fdlineaspresupuesto: TFDQuery
+    IndexFieldNames = 'presupuestos_id_presupuesto;presupuestos_grupo'
+    MasterSource = dsfdpresupuestos
+    MasterFields = 'id_presupuesto;grupo'
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from lineaspresupuesto where'
+      'presupuestos_id_presupuesto=:id_presupuesto and'
+      'presupuestos_grupo=:grupo')
+    Left = 505
+    Top = 282
+    ParamData = <
+      item
+        Name = 'ID_PRESUPUESTO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'GRUPO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsfdlineaspresupuesto: TDataSource
+    DataSet = fdlineaspresupuesto
+    Left = 585
+    Top = 650
+  end
+  object FDlineasObras: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from lineasobras where id_lineaobra=:ID_OBRA')
+    Left = 440
+    Top = 513
+    ParamData = <
+      item
+        Name = 'ID_OBRA'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end

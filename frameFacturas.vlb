@@ -1,7 +1,4 @@
-﻿[ListView1]
-Coordinates=10,10,97,177
-
-[HeaderControl1]
+﻿[HeaderControl1]
 Coordinates=73,197,91,33
 
 [Button1]
@@ -15,4 +12,7 @@ Coordinates=117,10,53,51
 
 [Panel1]
 Coordinates=243,10,47,51
+
+[ListViewFacturas]
+Coordinates=10,10,99,177
 

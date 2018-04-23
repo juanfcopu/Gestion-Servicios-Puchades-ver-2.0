@@ -20,7 +20,7 @@ object Frame4: TFrame4
     Align = alClient
     Alignment = taLeftJustify
     TabOrder = 0
-    object ListView1: TListView
+    object ListViewContactos: TListView
       AlignWithMargins = True
       Left = 4
       Top = 46

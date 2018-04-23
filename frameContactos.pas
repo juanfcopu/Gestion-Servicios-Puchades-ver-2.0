@@ -10,7 +10,7 @@ uses
 type
   TFrame4 = class(TFrame)
     Panel1: TPanel;
-    ListView1: TListView;
+    ListViewContactos: TListView;
     HeaderControl1: THeaderControl;
     Button1: TButton;
     Button2: TButton;

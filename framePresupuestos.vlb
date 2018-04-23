@@ -13,6 +13,9 @@ Coordinates=117,10,47,51
 [Button1]
 Coordinates=237,10,53,51
 
-[ListView1]
+[]
 Coordinates=10,10,97,177
+
+[ListViewPresupuestos]
+Coordinates=0,0,124,177
 

@@ -7,12 +7,12 @@ Coordinates=180,10,53,51
 [Button2]
 Coordinates=10,197,53,51
 
-[ListView1]
-Coordinates=10,10,97,177
-
 [Panel1]
 Coordinates=243,10,47,51
 
 [Button1]
 Coordinates=117,10,53,51
+
+[ListViewObras]
+Coordinates=10,10,97,177
 
