@@ -8,7 +8,7 @@ Coordinates=192,53,144,33
 Coordinates=84,10,90,33
 
 []
-Coordinates=10,10,148,213
+Coordinates=0,0,82,33
 Visible=False
 
 [ImageList1]
@@ -144,4 +144,17 @@ EditingLayerName=
 
 [principal.]
 Coordinates=498,1,123,195
+
+[editarobra]
+Coordinates=139,224,52,33
+
+[insertarobra]
+Coordinates=0,0,74,33
+
+[fdobras]
+Coordinates=45,52,77,177
+Visible=True
+
+[listaObras]
+Coordinates=0,0,52,33
 

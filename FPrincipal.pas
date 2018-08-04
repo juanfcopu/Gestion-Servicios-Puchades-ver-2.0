@@ -53,7 +53,7 @@ begin
     navegador.Width:=botons.Width-10;
     navegador.Show;
     navegador.ManualDock(Panel1,nil,alTop);
-
+    DataModule1.FDConnection1.Connected:=True;
 end;
 
 

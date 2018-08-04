@@ -10,7 +10,7 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet,System.DateUtils ,
   FireDAC.Comp.Client, Vcl.ImgList, Vcl.Controls, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,Vcl.Graphics,Vcl.ComCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls,System.StrUtils;
 
 type
   TDataModule1 = class(TDataModule)
@@ -39,6 +39,10 @@ type
     icopeque: TImageList;
     borrarpresupuestos: TAction;
     timercambios: TTimer;
+    editarobra: TAction;
+    insertarobra: TAction;
+    fdobras: TFDQuery;
+    listaObras: TAction;
     procedure crearclientesExecute(Sender: TObject);
     procedure listaclientesExecute(Sender: TObject);
     procedure insertarpresupuestoExecute(Sender: TObject);
@@ -48,6 +52,9 @@ type
     procedure editarclienteExecute(Sender: TObject);
     procedure borrarpresupuestosExecute(Sender: TObject);
     procedure timercambiosTimer(Sender: TObject);
+    procedure editarobraExecute(Sender: TObject);
+    procedure insertarobraExecute(Sender: TObject);
+    procedure listaObrasExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,17 +64,20 @@ type
     function cambiarbarras(str:string):string;
     function ObtenerNPresupuesto(fd:TFDQuery):integer;
     function ObtenerPathPresupuesto(cliente:string;numero:integer;fecha:TDateTime):string;
+    function ObtenerPathObra(cliente:string;numero:integer):string;
   //  function EstadoInsertEdit:boolean;
     procedure haycambios(var cambios:boolean;ultfecha:TDateTime);
     procedure RefrescarDataSet(lquery:TStringlist);
     procedure RefrescarDataSetTodos;
-
+     function BuscarSubItem(lv: TListView; const S: string; column: Integer): TListItem;
   end;
 
 var
+
 PATHUSER:string;
 PATHPLANTILLAS:string;
 PATHDOCPRESUPUESTOS:string;
+PATHDOCOBRAS:string;
 IVADEFECTO:double;
 DataModule1:TDataModule1;
 
@@ -76,9 +86,29 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses InsertarClientes, FPrincipal, listaclientes, presupuestos,
-  listapresupuestos, inserclientes;
+  listapresupuestos, inserclientes, obras, listaobras;
 
 {$R *.dfm}
+
+
+
+function TDataModule1.BuscarSubItem(lv: TListView; const S: string; column: Integer): TListItem;
+var
+  i: Integer;
+  found: Boolean; s1:string;
+begin
+  for i := 0 to lv.Items.Count - 1 do
+  begin
+    Result := lv.Items[i];
+    s1:=LeftStr(Result.SubItems[column - 1],Length(S));
+    found:=AnsicompareStr(S,s1)=0;
+
+    if found then
+      Exit;
+  end;
+
+  Result := nil;
+end;
 
 procedure TDataModule1.borrarpresupuestosExecute(Sender: TObject);
 begin
@@ -128,6 +158,7 @@ PATHUSER:=GetEnvironmentVariable('USERPROFILE');
 PATHUSER:=PATHUSER+'\Dropbox\SERVICIOS INTEGRALES PUCHADES';
 PATHPLANTILLAS:='\Plantillas\Presupuestos.dot';
 PATHDOCPRESUPUESTOS:=PATHUSER+'\PRESUPUESTOS' ;
+PATHDOCOBRAS:=PATHUSER+'\OBRAS';
 IVADEFECTO:=1.1;
 end;
 
@@ -143,8 +174,66 @@ begin
      inserCliente.ShowModal;
 end;
 
+procedure TDataModule1.editarobraExecute(Sender: TObject);
+var obr:TFObras;  ruta:string;
+begin
+
+obr:=TFObras.Create(Self);
+    with obr do
+    begin
+         cargando:=true;
+         fdcliente.ParamByName('id_cliente').AsInteger:=(Sender as TFDQuery).FieldByName('id_Cliente').AsInteger;
+              fdcliente.Active:=true;
+
+         if fdcliente.RecordCount > 0 then
+         begin
+              GroupBox2.Enabled:=True;
+              PageControl1.Enabled:=true;
+
+               if not fdobra.active then
+               begin
+               fdobra.ParamByName('id_cliente').AsInteger:=fdcliente.FieldByName('idContactos').AsInteger;
+               fdobra.ParamByName('id_Obra').AsInteger:=(Sender as TFDQuery).FieldByName('id_Obra').AsInteger;
+               fdobra.Active:=true;
+               fdobra.Edit;
+
+               //obr.luces(fdpresupuesto.FieldByName('Aprovado').AsBoolean);
+
+
+                ruta:= PATHDOCOBRAS+'\'+fdcliente.FieldByName('nombre').asstring+'\'+fdobra.fieldbyname('id_obra').asstring;
+
+                if DirectoryExists(ruta) then
+                begin
+                  spcarpetas.brush.color:=cllime;
+                  ShellListView1.Visible:=True;
+                  ShellListView2.Visible:=True;
+                  ShellListView1.Root:=ruta+'\Documentacion';
+                  ShellListView2.Root:=ruta+'\Fotos';
+                end
+                else  spcarpetas.brush.color:=clred;
+             end;
+
+
+
+         if not fdlineasobra.Active then
+         begin
+             fdlineasobra.ParamByName('ID_obra').AsInteger:=fdobra.FieldByName('id_Obra').AsInteger;
+
+             //fdlineasobra.AggregatesActive:=true;
+             fdlineasobra.Active:=true;
+
+         end;
+
+
+            Show;
+            ManualDock(principal.PageControl2);
+         end;
+      end;
+    obr.cargando:=false;
+end;
+
 procedure TDataModule1.editarpresupuestoExecute(Sender: TObject);
-var pres:TFPresupuestos;  ruta:string;
+var pres:TFPresupuestos; fichero, ruta:string;
 begin
 
 pres:=TFPresupuestos.Create(Self);
@@ -183,7 +272,10 @@ pres:=TFPresupuestos.Create(Self);
                 else  spcarpetas.brush.color:=clred;
              end;
 
+              fichero:=PATHUSER+fdpresupuesto.FieldByName('path').AsString;
 
+              if FileExists(fichero) then spdocumento.Brush.color:=cllime
+                 else spdocumento.Brush.color:=clred;
 
          if not fdlineas.Active then
          begin
@@ -194,7 +286,7 @@ pres:=TFPresupuestos.Create(Self);
              fdlineas.Active:=true;
 
          end;
-           
+
 
             Show;
             ManualDock(principal.PageControl2);
@@ -202,6 +294,11 @@ pres:=TFPresupuestos.Create(Self);
       end;
     pres.cargando:=false;
 end;
+
+ function TDataModule1.ObtenerPathObra(cliente:string;numero:integer):string;
+ begin
+     Result:='\OBRAS'+'\'+cliente+'\'+inttostr(numero);
+ end;
 
 function TDataModule1.ObtenerPathPresupuesto(cliente:string;numero:integer;fecha:TDateTime):string;
 begin
@@ -309,6 +406,43 @@ begin
 end;
 
 
+procedure TDataModule1.insertarobraExecute(Sender: TObject);
+var obr:TFobras;
+begin
+obr:=TFObras.Create(TControl(Sender));
+    with obr do
+    begin
+         if not fdobra.Active then
+              begin
+
+                  if Sender.ClassName='TFDQuery' then
+                  begin
+                       fdcliente.ParamByName('id_cliente').AsInteger:=fdClientes.FieldByName('IdContactos').AsInteger;
+                       fdcliente.Active:=true;
+                  end;
+
+                   fdobra.Active:=true;
+                   fdobra.Insert;
+                   fdobra.FieldByName('FechaComienzo').AsDateTime:=date;
+                   fdobra.FieldByName('partidas').asinteger:=0;
+                   fdobra.FieldByName('ImporteObra').AsFloat:=0;
+                   fdobra.FieldByName('Ejecutado').Asboolean:=false;
+
+                   if not fdlineasobra.Active then   fdlineasobra.Active:=true;
+                   fdlineasobra.AggregatesActive:=true;
+
+                   GroupBox2.Enabled:=True;
+                   PageControl1.Enabled:=true;
+
+              end;
+
+
+
+      Show;
+            ManualDock(principal.PageControl2);
+      end;
+end;
+
 procedure TDataModule1.insertarpresupuestoExecute(Sender: TObject);
   var pres:TFPresupuestos;
 begin
@@ -318,13 +452,18 @@ pres:=TFPresupuestos.Create(TControl(Sender));
          if not fdpresupuesto.Active then
               begin
 
+                 if Sender.ClassName='TFDQuery' then
+                 begin
+                      fdcliente.ParamByName('id_cliente').AsInteger:=fdClientes.FieldByName('IdContactos').AsInteger;
+                       fdcliente.Active:=true;
+                 end;
+
                    fdpresupuesto.Active:=true;
                    fdpresupuesto.Insert;
-                  // fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
-                   //fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+                  
                    fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=-1;
                    fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
-
+                   
                    fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
                    fdpresupuesto.FieldByName('partidas').asinteger:=0;
                    fdpresupuesto.FieldByName('Total').AsFloat:=0;
@@ -338,11 +477,7 @@ pres:=TFPresupuestos.Create(TControl(Sender));
 
               end;
 
-         if Sender.ClassName='TFDQuery' then
-         begin
-         fdcliente.ParamByName('id_cliente').AsInteger:=fdClientes.FieldByName('IdContactos').AsInteger;
-         fdcliente.Active:=true;
-         end;
+
 
       Show;
             ManualDock(principal.PageControl2);
@@ -360,6 +495,16 @@ begin
 end;
 
 
+
+procedure TDataModule1.listaObrasExecute(Sender: TObject);
+var listaObras:TlistObras;
+begin
+
+            listaObras:=TlistObras.Create(principal);
+            listaObras.Width:=principal.Panel1.Width-10;
+            listaObras.Show;
+            listaObras.ManualDock(principal.PageControl2);
+end;
 
 procedure TDataModule1.listapresupuestosExecute(Sender: TObject);
 var listapresupuestos:Tlistpresupuestos;

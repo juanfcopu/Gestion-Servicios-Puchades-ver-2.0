@@ -126,7 +126,7 @@ object FPresupuestos: TFPresupuestos
           ParentFont = False
           TabOrder = 1
         end
-        object Button1: TButton
+        object BTBuscarCliente: TButton
           Left = 701
           Top = 16
           Width = 32
@@ -139,7 +139,7 @@ object FPresupuestos: TFPresupuestos
           Style = bsCommandLink
           TabOrder = 3
           StyleElements = []
-          OnClick = Button1Click
+          OnClick = BTBuscarClienteClick
         end
       end
     end
@@ -219,6 +219,20 @@ object FPresupuestos: TFPresupuestos
         Top = 59
         Width = 1
         Height = 81
+      end
+      object spdocumento: TShape
+        Left = 1020
+        Top = 52
+        Width = 25
+        Height = 17
+        Shape = stCircle
+      end
+      object Label13: TLabel
+        Left = 1056
+        Top = 53
+        Width = 65
+        Height = 13
+        Caption = 'Documento'
       end
       object LabeledEdit4: TLabeledEdit
         Left = 84
@@ -328,7 +342,7 @@ object FPresupuestos: TFPresupuestos
         TabOrder = 4
         OnChange = DateTimePicker1Change
       end
-      object Button2: TButton
+      object btpath: TButton
         Left = 713
         Top = 107
         Width = 32
@@ -338,7 +352,7 @@ object FPresupuestos: TFPresupuestos
         Style = bsCommandLink
         TabOrder = 5
         StyleElements = []
-        OnClick = Button2Click
+        OnClick = btpathClick
       end
       object LabeledEdit16: TLabeledEdit
         Left = 862
@@ -390,7 +404,7 @@ object FPresupuestos: TFPresupuestos
       object LabeledEdit18: TLabeledEdit
         Left = 303
         Top = 32
-        Width = 824
+        Width = 688
         Height = 21
         EditLabel.Width = 65
         EditLabel.Height = 13
@@ -1047,6 +1061,28 @@ object FPresupuestos: TFPresupuestos
         ParamType = ptInput
         Value = Null
       end>
+    object fdClienteidcontactos: TFDAutoIncField
+      FieldName = 'idcontactos'
+      Origin = 'IdContactos'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object fdClientenombre: TStringField
+      FieldName = 'nombre'
+      Origin = 'Nombre'
+      Required = True
+      Size = 100
+    end
+    object fdClientecif: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cif'
+      Origin = 'CIF'
+      Size = 50
+    end
+    object fdClientefamilia: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'familia'
+      Origin = 'familia'
+    end
   end
   object fdpresupuesto: TFDQuery
     AfterInsert = fdpresupuestoAfterInsert
@@ -1440,7 +1476,7 @@ object FPresupuestos: TFPresupuestos
     Left = 664
     Top = 433
     Bitmap = {
-      494C010104000800380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

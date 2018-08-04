@@ -14,7 +14,9 @@ uses
   frameContactos in 'frameContactos.pas' {Frame4: TFrame},
   presupuestos in 'presupuestos.pas' {FPresupuestos},
   listaclientes in 'listaclientes.pas' {listclientes},
-  inserclientes in 'inserclientes.pas' {FInsertarCliente};
+  inserclientes in 'inserclientes.pas' {FInsertarCliente},
+  obras in 'obras.pas' {FObras},
+  listaobras in 'listaobras.pas' {listobras};
 
 {$R *.res}
 
@@ -23,5 +25,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(Tprincipal, principal);
+  Application.CreateForm(Tlistobras, listobras);
   Application.Run;
 end.

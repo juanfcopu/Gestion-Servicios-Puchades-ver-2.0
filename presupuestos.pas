@@ -109,8 +109,8 @@ type
     Label8: TLabel;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
-    Button1: TButton;
-    Button2: TButton;
+    BTBuscarCliente: TButton;
+    btpath: TButton;
     BindSourceDB3: TBindSourceDB;
     LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
     fdlineaspresupuestos_id_presupuesto: TIntegerField;
@@ -148,6 +148,12 @@ type
     LinkControlToField11: TLinkControlToField;
     LabeledEdit18: TLabeledEdit;
     LinkControlToField14: TLinkControlToField;
+    spdocumento: TShape;
+    Label13: TLabel;
+    fdClienteidcontactos: TFDAutoIncField;
+    fdClientenombre: TStringField;
+    fdClientecif: TStringField;
+    fdClientefamilia: TIntegerField;
 
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
@@ -164,11 +170,11 @@ type
     procedure fdlineasAfterApplyUpdates(DataSet: TFDDataSet; AErrors: Integer);
     procedure fdpresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
       AErrors: Integer);
-    procedure BitBtn1Click(Sender: TObject);
+
     procedure LabeledEdit10Change(Sender: TObject);
     procedure LabeledEdit5Change(Sender: TObject);
 
-    procedure BitBtn2Click(Sender: TObject);
+
     procedure PageControl1Resize(Sender: TObject);
     procedure StringGrid1Exit(Sender: TObject);
 
@@ -186,8 +192,8 @@ type
       Shift: TShiftState);
     procedure fdlineasBeforePost(DataSet: TDataSet);
     procedure fdlineasAfterDelete(DataSet: TDataSet);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure BTBuscarClienteClick(Sender: TObject);
+    procedure btpathClick(Sender: TObject);
     procedure fdClienteAfterOpen(DataSet: TDataSet);
     procedure fdlineasAfterPost(DataSet: TDataSet);
     procedure NavigatorBindSourceDB3BeforeAction(Sender: TObject;
@@ -228,6 +234,8 @@ type
     procedure carpetasdocumentacion(var ruta:string; var ok:boolean);
     procedure existelineasaprobados(dataset:TDataSet; var nlineas:integer);
     procedure luces(aprobado:boolean);
+    function AbrirFicheroPresupuesto(fichero:string):boolean;
+    function CrearFicheroPresupuesto(fichero:string):boolean;
   end;
 
 
@@ -286,13 +294,11 @@ begin
    ToolButton8.Enabled:=FileExists(PATHUSER+fdpresupuesto.FieldByName('path').AsString);
 end;
 
-procedure TFPresupuestos.abrirpresupuestoExecute(Sender: TObject);
-var fichero:string; MSWord:Variant;
+function TFPresupuestos.AbrirFicheroPresupuesto(fichero:string):boolean;
+var MSWord:Variant;
 begin
-
- fichero:=PATHUSER+fdpresupuesto.FieldByName('path').AsString;
-
-if FileExists(fichero) then
+   Result:=false;
+   if FileExists(fichero) then
   begin
   try
     MSWord:=GetActiveOleOBject('Word.Application');
@@ -302,10 +308,16 @@ if FileExists(fichero) then
     end;
      MSWord.Documents.Open(fichero);
      MsWord.Visible:=True;
+     Result:=true;
   end
-  else if application.MessageBox('El presupuesto no existe. ¿Desea crearlo?', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))=IDOK      then
-      begin
-         try
+
+end;
+
+function TFPresupuestos.CrearFicheroPresupuesto(fichero:string):boolean;
+var MSWord:Variant;
+begin
+      Result:=false;
+     try
             MSWord:=GetActiveOleOBject('Word.Application');
          except
             MsWord:=CreateOleObject('Word.Application');
@@ -315,6 +327,20 @@ if FileExists(fichero) then
          MSWord.Documents.Add(ExtractFilePath(application.ExeName)+PATHPLANTILLAS);
          MSWord.ActiveDocument.SaveAs(fichero);
          MsWord.Visible:=True;
+         Result:=true;
+end;
+
+
+procedure TFPresupuestos.abrirpresupuestoExecute(Sender: TObject);
+var fichero:string;
+begin
+
+ fichero:=PATHUSER+fdpresupuesto.FieldByName('path').AsString;
+
+if not AbrirFicheroPresupuesto(fichero) then
+   if application.MessageBox('El presupuesto no existe. ¿Desea crearlo?', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))=IDOK      then
+      begin
+         if CrearFicheroPresupuesto(fichero) then  spdocumento.Brush.color:=cllime;
       end;
 end;
 
@@ -345,80 +371,8 @@ begin
     
 end;
 
-procedure TFPresupuestos.BitBtn1Click(Sender: TObject);
-var posicion:integer; ruta:string;
-begin
-  if dialruta.Execute then
-          begin
-               if fdpresupuesto.State in [dsbrowse] then
-               begin
-                    fdpresupuesto.Edit;
-               end;
-               if fdpresupuesto.State in [dsEdit, dsInsert] then
-               begin
-                    posicion:=pos('PRESUPUESTOS', dialruta.FileName);
-                    ruta:=copy(dialruta.FileName,posicion-1,length(dialruta.FileName));
-                    fdpresupuesto.FieldByName('path').Asstring:=ruta;
-                    labelededit8.Text:=ruta;
 
-               end;
-
-              if fdpresupuesto.State in [dsEdit] then fdpresupuesto.Post;
-
-
-          end;
-end;
-
-procedure TFPresupuestos.BitBtn2Click(Sender: TObject);
-var lclientes:Tlistclientes; fd,fdclen:TfdQuery;
-begin
-    fdclen:=TFDQuery.Create(Sender as TControl);
-    fdclen.Connection:=DataModule1.FDConnection1;
-    fdclen.SQL.Add('Select c.idContactos, c.nombre, c.CIF, c.direccion, c.CodigoPostal, c.Ciudad, a.nombreapellidos,c.idAdministrador from clientes c, administradores a where c.idAdministrador=a.idAdministrador order by c.idAdministrador,c.nombre');
-    fdclen.IndexFieldNames:='idAdministrador;nombre';
-    fdclen.Active:=true;
-
-    lclientes:=Tlistclientes.Create(Sender as TControl);
-    lclientes.DragMode:=dmManual;
-    lclientes.BindSourceDB1.DataSet:=fdclen;
-    lclientes.ShowModal;
-
-    fdcliente.Close;
-    fdcliente.ParamByName('id_cliente').AsInteger:=fdclen.FieldByName('IdContactos').AsInteger;
-    fdcliente.Active:=true;
-
-    if fdcliente.RecordCount >0 then
-    begin
-         if fdpresupuesto.State in [dsBrowse] then
-         begin
-         fdpresupuesto.Edit;
-         fdpresupuesto.FieldByName('id_ClientePrev').AsInteger:=fdcliente.FieldByName('IdContactos').AsInteger;
-         fdpresupuesto.Post;
-         end
-         else begin
-                   if not fdpresupuesto.Active then  fdpresupuesto.Active:=true;
-
-                   fd:=TFDQuery.Create(Self);
-                   fdpresupuesto.Insert;
-                   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
-                   fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
-                   fdpresupuesto.FieldByName('Id_ClientePrev').AsInteger:=fdcliente.FieldByName('idContactos').AsInteger;
-                   fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
-              end;
-
-              if not fdlineas.Active then
-              begin
-              fdlineas.Active:=true;
-
-         end;
-    end;
-
-    fdclen.Close;
-    fdclen.Free;
-    lclientes.Free;
-end;
-
-procedure TFPresupuestos.Button1Click(Sender: TObject);
+procedure TFPresupuestos.BTBuscarClienteClick(Sender: TObject);
 var lclientes:Tlistclientes; fdclen:TfdQuery;
 begin
     fdclen:=TFDQuery.Create(Sender as TControl);
@@ -446,9 +400,12 @@ begin
 
 end;
 
-procedure TFPresupuestos.Button2Click(Sender: TObject);
+procedure TFPresupuestos.btpathClick(Sender: TObject);
 var posicion:integer; ruta:string;
 begin
+
+dialruta.InitialDir:=PATHDOCPRESUPUESTOS;
+
   if dialruta.Execute then
           begin
                if fdpresupuesto.State in [dsbrowse] then
@@ -680,9 +637,9 @@ procedure TFPresupuestos.fdlineasAfterPost(DataSet: TDataSet);
  var nl:integer;
 begin
 
-     fdpresupuesto.FieldByName('partidas').asinteger:=fdlineas.RecordCount;
-     fdpresupuesto.FieldByName('descripcion').asstring:='descripcion';
+      if not (fdpresupuesto.state in [dsInsert, dsEdit]) then fdpresupuesto.edit;
 
+      fdpresupuesto.FieldByName('partidas').asinteger:=fdlineas.RecordCount;
       fdpresupuesto.FieldByName('total').asstring:=VarToStr(fdlineas.Aggregates.AggregateByName('SUMATOTAL').Value);
       fdpresupuesto.FieldByName('totalAprobado').asstring:=VarToStr(fdlineas.Aggregates.AggregateByName('SUMAPROBADOS').Value);
 
@@ -732,7 +689,7 @@ end;
 
 procedure TFPresupuestos.fdpresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
   AErrors: Integer);
-  var ruta:string; existe:boolean;  fichero:string; MSWord:Variant;
+  var ruta:string; existe:boolean;  fichero:string;
 begin
 if AErrors = 0 then
     begin
@@ -768,18 +725,11 @@ if AErrors = 0 then
             if application.MessageBox('El presupuesto no existe. ¿Desea crearlo?', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))=IDOK      then
             begin
 
-
-                 try
-                    MSWord:=GetActiveOleOBject('Word.Application');
-                 except
-                 MsWord:=CreateOleObject('Word.Application');
-
-                  MSWord.Documents.Add(ExtractFilePath(application.ExeName)+PATHPLANTILLAS);
-                  MSWord.ActiveDocument.SaveAs(fichero);
-                  MsWord.Visible:=True;
+                 if CrearFicheroPresupuesto(fichero) then
+                  spdocumento.Brush.Color:=clLime;
 
             end;
-end;
+
 
     end;
 end;
@@ -827,8 +777,9 @@ begin
   fd:=TFDQuery.Create(Self);
   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
   fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+  fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('Nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
 
-  fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
+  if Length(fdpresupuesto.FieldByName('descripcion').asstring)=0 then fdpresupuesto.FieldByName('descripcion').asstring:='descripción';
 
 
   fdlineas.First ;
@@ -1131,7 +1082,7 @@ if Arow = 0 then
 
   if ((Acol <> 3) and (Acol<>4)) or (ARow = 0) then (Sender as TStringGrid).Canvas.TextRect(Rect,Rect.Left,Rect.Top+3,(Sender as TStringGrid).Cells[Acol,Arow]);
 
-  // (Sender as TStringGrid).Canvas.TextRect(Rect,Rect.Left,Rect.Top+3,(Sender as TStringGrid).Cells[Acol,Arow]);
+
 
 
 end;

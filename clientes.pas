@@ -93,6 +93,8 @@ type
       Y: Integer; State: TDragState; var Accept: Boolean);
     procedure Frame31ListViewObrasDragDrop(Sender, Source: TObject; X,
       Y: Integer);
+    procedure Frame31Button2Click(Sender: TObject);
+    procedure Frame31ListViewObrasDblClick(Sender: TObject);
 
 
   private
@@ -114,9 +116,15 @@ uses DModule1, presupuestos, FPrincipal, listaclientes;
 procedure TFClientes.FormCreate(Sender: TObject);
 begin
 
+     frame11.ListViewPresupuestos.Clear;
+     frame21.ListViewFacturas.clear;
+     Frame31.ListViewObras.clear;
+     Frame41.ListViewContactos.clear;
+
      lstobras:=TStringList.Create;
      lstobras.Add('fdobras');
      lstobras.Add('fdlineasobras')  ;
+
 
       fdclientes.ParamByName('id_cliente').AsInteger:=DataModule1.fdClientes.FieldByName('IdContactos').AsInteger;
       fdclientes.Active:=true;
@@ -208,6 +216,16 @@ begin
       DataModule1.editarpresupuestoExecute(fdpresupuestos);
 end;
 
+procedure TFClientes.Frame31Button2Click(Sender: TObject);
+begin
+DataModule1.editarObraExecute(fdobras);
+end;
+
+procedure TFClientes.Frame31ListViewObrasDblClick(Sender: TObject);
+begin
+DataModule1.editarobraExecute(fdobras);
+end;
+
 procedure TFClientes.Frame31ListViewObrasDragDrop(Sender, Source: TObject; X,
   Y: Integer);
   var i:integer;
@@ -215,8 +233,8 @@ begin
      if fdpresupuestos.FieldByName('Aprovado').asboolean then
      begin
 
-      fdobras.Append;
-      fdobras.Fieldbyname('Descripcion').asstring:=fdpresupuestos.FieldByName('DescripcionAprovado').asstring;
+      fdobras.Insert;
+      fdobras.Fieldbyname('Descripcion').asstring:=fdpresupuestos.FieldByName('Descripcion').asstring;
       fdobras.Fieldbyname('Ejecutado').asboolean:=false;
       fdobras.Fieldbyname('ImporteObra').asfloat:=fdpresupuestos.FieldByName('TotalAprobado').asfloat;
       fdobras.Fieldbyname('Id_Cliente').asinteger:=fdpresupuestos.FieldByName('Id_ClientePrev').asinteger;
@@ -242,7 +260,10 @@ begin
     end;
       fdlineaspresupuesto.next;
     end;
-    DataModule1.RefrescarDataSet(lstobras);
+    LinkListControlToField3.Active:=false;
+      DataModule1.RefrescarDataSet(lstobras);
+      linkListControlToField3.Active:=true;
+
   end
      else showmessage('El presupuesto no esta aprobado, no se puede crear la obra.');
 end;

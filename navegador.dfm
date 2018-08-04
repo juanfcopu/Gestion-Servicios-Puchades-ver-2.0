@@ -29,7 +29,5 @@ object fnavegador: Tfnavegador
     Indent = 19
     TabOrder = 0
     OnDblClick = TreeView1DblClick
-    ExplicitWidth = 244
-    ExplicitHeight = 379
   end
 end

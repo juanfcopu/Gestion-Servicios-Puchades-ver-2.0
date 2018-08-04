@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, System.Rtti,
-  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,System.StrUtils ,
+  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, Vcl.StdCtrls,DB,
   Vcl.ExtCtrls, Vcl.ToolWin, FireDAC.Stan.Intf, FireDAC.Stan.Option, System.DateUtils ,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
@@ -51,7 +51,7 @@ type
 
 var
   listpresupuestos: Tlistpresupuestos;
-  function BuscarSubItem(lv: TListView; const S: string; column: Integer): TListItem;
+
 
 
 implementation
@@ -77,7 +77,7 @@ begin
      if rbcliente.Checked then
      begin
 
-    li:=BuscarSubItem(listView1,beBuscar.Text,1);
+    li:=DataModule1.BuscarSubItem(listView1,beBuscar.Text,1);
      if li <> nil then
          begin
          listview1.Selected:=li;
@@ -89,23 +89,6 @@ begin
 
 end;
 
-function BuscarSubItem(lv: TListView; const S: string; column: Integer): TListItem;
-var
-  i: Integer;
-  found: Boolean; s1:string;
-begin
-  for i := 0 to lv.Items.Count - 1 do
-  begin
-    Result := lv.Items[i];
-    s1:=LeftStr(Result.SubItems[column - 1],Length(S));
-    found:=AnsicompareStr(S,s1)=0;
-
-    if found then
-      Exit;
-  end;
-
-  Result := nil;
-end;
 
 
 procedure Tlistpresupuestos.Button1Click(Sender: TObject);

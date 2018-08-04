@@ -158,7 +158,7 @@ Coordinates=1040,10,114,249
 Visible=False
 
 [fdpresupuestos]
-Coordinates=1740,160,104,321
+Coordinates=1740,160,113,141
 Visible=False
 
 [fdfacturas]
@@ -166,7 +166,7 @@ Coordinates=630,460,106,123
 Visible=False
 
 [fdobras]
-Coordinates=70,450,117,123
+Coordinates=670,700,117,123
 Visible=False
 
 [fdContactos]
@@ -184,14 +184,14 @@ Coordinates=1592,40,121,105
 Visible=False
 
 [BindSourceDB2]
-Coordinates=1740,160,104,321
+Coordinates=1740,160,113,141
 Visible=True
 
 [BindSourceDB3]
 Coordinates=630,460,106,123
 
 [BindSourceDB4]
-Coordinates=70,450,117,123
+Coordinates=670,700,117,123
 
 [BindSourceDB5]
 Coordinates=1390,440,92,177
@@ -205,7 +205,7 @@ Coordinates=142,1,170,69
 
 [FPresupuestos.fdpresupuesto]
 Visible=False
-Coordinates=558,602,170,321
+Coordinates=558,602,170,69
 
 [FPresupuestos.fdlineas]
 Visible=False
@@ -218,7 +218,7 @@ Coordinates=142,1,170,69
 Coordinates=331,1,170,195
 
 [FPresupuestos.BindSourceDB2]
-Coordinates=558,602,170,321
+Coordinates=558,602,170,69
 
 [principal.DataSource1]
 Coordinates=0,0,123,195
@@ -228,7 +228,7 @@ Coordinates=1190,390,131,195
 
 [DataModule1.fdClientes]
 Visible=False
-Coordinates=409,711,148,213
+Coordinates=409,711,170,256
 
 [FPresupuestos.FDQuery1]
 Coordinates=399,389,140,177
@@ -249,7 +249,7 @@ Coordinates=729,604,74,33
 Coordinates=150,1,154,177
 
 [listclientes.BindSourceDB1]
-Coordinates=409,711,148,213
+Coordinates=409,711,170,256
 
 [DBGrid1]
 Coordinates=0,0,56,33
@@ -273,14 +273,18 @@ Coordinates=338,1,120,33
 Coordinates=209,1,46,51
 
 [Frame31.ListViewObras]
-Coordinates=336,160,131,213
+Coordinates=1110,630,131,213
+Visible=True
 
 [Frame21.ListViewFacturas]
-Coordinates=77,347,144,213
+Coordinates=250,260,144,213
 
 [Frame11.ListViewPresupuestos]
 Coordinates=98,598,169,231
 
 [Frame41.ListViewContactos]
 Coordinates=277,408,151,267
+
+[FDlineasObras]
+Coordinates=61,129,87,51
 

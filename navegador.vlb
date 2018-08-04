@@ -1,3 +1,12 @@
 ﻿[DataModule1.fdClientes]
 Visible=False
 
+[TreeView1]
+Coordinates=150,71,65,33
+
+[DataModule1.fdpresupuestos]
+Coordinates=150,1,158,51
+
+[DataModule1.fdobras]
+Coordinates=150,71,119,177
+

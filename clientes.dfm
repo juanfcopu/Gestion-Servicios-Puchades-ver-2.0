@@ -673,14 +673,32 @@ object FClientes: TFClientes
           RowSelect = True
           ViewStyle = vsReport
           OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
+          OnDblClick = Frame31ListViewObrasDblClick
           OnDragDrop = Frame31ListViewObrasDragDrop
           OnDragOver = Frame31ListViewObrasDragOver
+          ExplicitLeft = 5
           ExplicitWidth = 662
           ExplicitHeight = 166
         end
         inherited HeaderControl1: THeaderControl
           Width = 662
           ExplicitWidth = 662
+        end
+        inherited Button1: TButton
+          Caption = ''
+          ImageIndex = 1
+          Images = DataModule1.icopeque
+        end
+        inherited Button2: TButton
+          Caption = ''
+          ImageIndex = 3
+          Images = DataModule1.icopeque
+          OnClick = Frame31Button2Click
+        end
+        inherited Button3: TButton
+          Caption = ''
+          ImageIndex = 2
+          Images = DataModule1.icopeque
         end
       end
     end

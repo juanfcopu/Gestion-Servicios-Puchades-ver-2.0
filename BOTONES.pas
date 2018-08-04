@@ -21,6 +21,7 @@ type
     Button10: TButton;
     procedure btclientesClick(Sender: TObject);
     procedure btpresupuestosClick(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +45,11 @@ end;
 procedure Tmenuseleccion.btpresupuestosClick(Sender: TObject);
 begin
      fnavegador.NodosPresupuestos;
+end;
+
+procedure Tmenuseleccion.Button9Click(Sender: TObject);
+begin
+fnavegador.NodosObras;
 end;
 
 end.
