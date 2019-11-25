@@ -16,6 +16,7 @@ object menuseleccion: Tmenuseleccion
   Font.Style = []
   OldCreateOrder = False
   Scaled = False
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object btclientes: TButton
@@ -56,7 +57,8 @@ object menuseleccion: Tmenuseleccion
     Font.Style = [fsBold]
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 7
+    OnClick = Button2Click
   end
   object Button3: TButton
     Left = 0
@@ -73,7 +75,7 @@ object menuseleccion: Tmenuseleccion
     Font.Style = [fsBold]
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 3
   end
   object Button4: TButton
     Left = 0
@@ -88,9 +90,14 @@ object menuseleccion: Tmenuseleccion
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
+    ImageIndex = 5
+    ImageMargins.Left = 20
+    ImageMargins.Right = -30
+    Images = DataModule1.ImageList1
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
+    OnClick = Button4Click
   end
   object Button5: TButton
     Left = 0
@@ -107,7 +114,7 @@ object menuseleccion: Tmenuseleccion
     Font.Style = [fsBold]
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 1
   end
   object Button6: TButton
     Left = 0
@@ -122,9 +129,14 @@ object menuseleccion: Tmenuseleccion
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
+    ImageIndex = 21
+    ImageMargins.Left = 20
+    ImageMargins.Right = -40
+    Images = DataModule1.ImageList1
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 9
+    OnClick = Button6Click
   end
   object btpresupuestos: TButton
     Left = 0
@@ -139,9 +151,13 @@ object menuseleccion: Tmenuseleccion
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
+    ImageIndex = 30
+    ImageMargins.Left = 20
+    ImageMargins.Right = -45
+    Images = DataModule1.ImageList1
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 4
     OnClick = btpresupuestosClick
   end
   object Button8: TButton
@@ -159,7 +175,7 @@ object menuseleccion: Tmenuseleccion
     Font.Style = [fsBold]
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
   end
   object Button9: TButton
     Left = 0
@@ -174,9 +190,13 @@ object menuseleccion: Tmenuseleccion
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
+    ImageIndex = 22
+    ImageMargins.Left = 30
+    ImageMargins.Right = -70
+    Images = DataModule1.ImageList1
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 5
     OnClick = Button9Click
   end
   object Button10: TButton
@@ -194,6 +214,6 @@ object menuseleccion: Tmenuseleccion
     Font.Style = [fsBold]
     ParentBiDiMode = False
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 8
   end
 end

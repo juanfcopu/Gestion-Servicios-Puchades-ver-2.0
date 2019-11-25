@@ -6,27 +6,33 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, Vcl.ExtCtrls,
   Vcl.ActnMan, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.ToolWin, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls;
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.AppEvnts, RzGroupBar, RzTabs, RzSplit, RzPanel,
+  RzStatus, RzDBStat;
 
 type
   Tprincipal = class(TForm)
-    StatusBar1: TStatusBar;
-    Panel2: TPanel;
-    PageControl2: TPageControl;
-    Panel3: TPanel;
-    Splitter1: TSplitter;
-    Panel1: TPanel;
-    MainMenu1: TMainMenu;
-    Clientes1: TMenuItem;
-    ControlBar1: TControlBar;
+    AppEvent1: TApplicationEvents;
+    RzStatusBar1: TRzStatusBar;
+    RzToolbar1: TRzToolbar;
+    RzSplitter1: TRzSplitter;
+    RzGroupBar1: TRzGroupBar;
+    pagecontrol2: TRzPageControl;
+    RzClientes: TRzGroup;
+    RzGroup1: TRzGroup;
+    RzGroup2: TRzGroup;
+    RzGroup3: TRzGroup;
+    RzGroup4: TRzGroup;
+    RzDBStatusPane1: TRzDBStatusPane;
+    RzProgressStatus1: TRzProgressStatus;
+    RzDBStateStatus1: TRzDBStateStatus;
+    RzFieldStatus1: TRzFieldStatus;
+    RzVersionInfoStatus1: TRzVersionInfoStatus;
+    RzClockStatus1: TRzClockStatus;
     procedure FormCreate(Sender: TObject);
-    procedure PageControl2DockOver(Sender: TObject; Source: TDragDockObject; X,
-      Y: Integer; State: TDragState; var Accept: Boolean);
-    procedure Panel1DockOver(Sender: TObject; Source: TDragDockObject; X,
-      Y: Integer; State: TDragState; var Accept: Boolean);
-    procedure PageControl2DockDrop(Sender: TObject; Source: TDragDockObject; X,
-      Y: Integer);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure pagecontrol2Close(Sender: TObject; var AllowClose: Boolean);
+    procedure RzClientesItems0Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,19 +46,21 @@ implementation
 
 {$R *.dfm}
 
-uses BOTONES, listaclientes, DModule1, clientes, navegador;
+uses  listaclientes, DModule1;
+
+procedure Tprincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+var I:Integer; f:TCustomForm;
+begin
+for I :=0 to PageControl2.PageCount - 1 do
+   begin
+     f:=TCustomForm(PageControl2.Pages[I].Controls[0]);
+    f.Close;
+   end;
+end;
 
 procedure Tprincipal.FormCreate(Sender: TObject);
-var botons:Tmenuseleccion;  navegador: TFNavegador ;
 begin
-    botons:=Tmenuseleccion.Create(principal);
-    botons.Show;
-    panel1.Width:=botons.Width-10;
-    botons.ManualDock(panel1);
-    navegador:=TFNavegador.Create(principal);
-    navegador.Width:=botons.Width-10;
-    navegador.Show;
-    navegador.ManualDock(Panel1,nil,alTop);
+
     DataModule1.FDConnection1.Connected:=True;
 end;
 
@@ -63,51 +71,21 @@ begin
 principal.Resizing(wsMaximized);
 end;
 
-procedure Tprincipal.PageControl2DockDrop(Sender: TObject;
-  Source: TDragDockObject; X, Y: Integer);
+procedure Tprincipal.pagecontrol2Close(Sender: TObject;
+  var AllowClose: Boolean);
+var f:TCustomForm;
 begin
-         if (Source.Control is Tlistclientes) then
-         if PageControl2.PageCount > 0 then PageControl2.Pages[PageControl2.PageCount-1].ImageIndex:=6;
-end;
-
-procedure Tprincipal.PageControl2DockOver(Sender: TObject;
-  Source: TDragDockObject; X, Y: Integer; State: TDragState;
-  var Accept: Boolean);
-  var FClientes:Tlistclientes;  i:integer;
-begin
-
-   if (Source.Control is Tlistclientes) then              //
-begin
-      FClientes:=(Source.Control as Tlistclientes) ;
-      for i:= 1 to FClientes.ListView1.Columns.Count - 1   do
-      begin
-          FClientes.ListView1.Column[i].AutoSize:=true;
-      end;
-
-   end;
+f:=TCustomForm((Sender as TRzPageControl).ActivePage.Controls[0]);
+f.Close;
+AllowClose:=True;
 end;
 
 
-procedure Tprincipal.Panel1DockOver(Sender: TObject; Source: TDragDockObject; X,
-  Y: Integer; State: TDragState; var Accept: Boolean);
-var FClientes:Tlistclientes;  i:integer;
+
+
+procedure Tprincipal.RzClientesItems0Click(Sender: TObject);
 begin
- Accept:=false;
-   if (Source.Control is Tlistclientes) then              //
-   begin
-       Accept:= true;
-      FClientes:=(Source.Control as Tlistclientes) ;
-      for i:= 1 to FClientes.ListView1.Columns.Count - 1   do
-      begin
-          FClientes.ListView1.Column[i].AutoSize:=false;
-          FClientes.ListView1.Column[i].width:=0;
-      end;
-
-      end;
-
-
-      if (Source.Control is Tfnavegador) or (Source.Control is Tmenuseleccion) then   Accept:= true;
+DataModule1.listaclientesExecute(DataModule1.fdClientes)
 end;
-
 
 end.

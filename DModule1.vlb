@@ -8,7 +8,7 @@ Coordinates=192,53,144,33
 Coordinates=84,10,90,33
 
 []
-Coordinates=0,0,82,33
+Coordinates=558,53,95,33
 Visible=False
 
 [ImageList1]
@@ -21,28 +21,25 @@ Coordinates=91,224,73,33
 Coordinates=12,224,77,33
 
 [navegador]
-Coordinates=193,186,94,33
+Coordinates=193,186,66,33
 
 [FPresupuestos.fdCliente]
 Visible=False
-Coordinates=198,215,170,69
+Coordinates=198,215,135,33
 
 [FPresupuestos.fdpresupuesto]
 Visible=False
-Coordinates=431,10,170,69
+Coordinates=431,10,163,33
 
 [FPresupuestos.fdlineas]
-Coordinates=10,10,170,195
+Coordinates=10,10,130,33
 Visible=False
-
-[listclientes.BindSourceDB1]
-Coordinates=10,10,148,213
 
 [FPresupuestos.BindSourceDB2]
 Coordinates=431,10,170,69
 
 [FPresupuestos.BindSourceDB1]
-Coordinates=198,215,170,69
+Coordinates=198,215,170,141
 
 [insertarpresupuesto]
 Coordinates=171,242,113,33
@@ -63,9 +60,9 @@ Coordinates=374,1,143,33
 Coordinates=374,53,109,33
 
 [fdClientes]
-Coordinates=190,10,81,195
-Visible=True
+Coordinates=264,20,64,33
 LayerNames=
+Visible=False
 
 [fdClientesCiudad]
 Coordinates=374,105,99,33
@@ -83,13 +80,13 @@ Coordinates=374,209,101,33
 Coordinates=374,261,146,33
 
 [FPresupuestos.DataSource1]
-Coordinates=374,313,154,177
+Coordinates=374,313,154,33
 
 [FPresupuestos.FDQuery1]
 Coordinates=281,10,140,177
 
 [fdpresupuestos]
-Coordinates=10,215,178,69
+Coordinates=10,215,91,33
 Visible=False
 
 [borrarpresupuestos]
@@ -106,21 +103,21 @@ Coordinates=218,294,75,33
 
 [FInsertarCliente.fdcontactos]
 Visible=False
-Coordinates=231,365,174,69
+Coordinates=231,365,153,33
 
 [FInsertarCliente.fdinsertarClientes]
 Visible=False
-Coordinates=52,365,174,429
+Coordinates=52,365,183,33
 
 [FInsertarCliente.fdadministradores]
 Visible=False
-Coordinates=410,365,174,105
+Coordinates=410,365,185,33
 
 [FInsertarCliente.BindSourceDB2]
-Coordinates=52,365,174,429
+Coordinates=52,365,174,69
 
 [FInsertarCliente.BindSourceDB3]
-Coordinates=410,365,174,105
+Coordinates=410,365,174,69
 
 [FInsertarCliente.BindSourceDB1]
 Coordinates=231,365,174,69
@@ -129,10 +126,10 @@ Coordinates=231,365,174,69
 Coordinates=498,215,170,195
 
 [timercambios]
-Coordinates=72,263,91,36
+Coordinates=72,263,81,33
 
 [FPresupuestos.BindSourceDB3]
-Coordinates=10,10,170,195
+Coordinates=10,10,170,213
 
 [listpresupuestos.BindSourceDB1]
 Coordinates=10,215,178,69
@@ -146,15 +143,250 @@ EditingLayerName=
 Coordinates=498,1,123,195
 
 [editarobra]
-Coordinates=139,224,52,33
+Coordinates=139,224,64,33
 
 [insertarobra]
 Coordinates=0,0,74,33
 
 [fdobras]
-Coordinates=45,52,77,177
+Coordinates=45,52,52,51
 Visible=True
 
 [listaObras]
-Coordinates=0,0,52,33
+Coordinates=0,0,64,33
+
+[actconfPATH]
+Coordinates=31,141,78,33
+
+[actconfServidor]
+Coordinates=558,1,92,33
+
+[actconfigIVA]
+Coordinates=293,243,77,33
+
+[VerCliente]
+Coordinates=558,105,65,33
+
+[fdLogin]
+Coordinates=558,157,52,33
+
+[actConfiguracion]
+Coordinates=558,209,99,33
+
+[ConvertirEnObra]
+Coordinates=558,261,97,33
+
+[FClientes.fdclientes]
+Visible=False
+Coordinates=885,123,111,33
+
+[FClientes.fdpresupuestos]
+Visible=False
+Coordinates=885,175,140,33
+
+[FClientes.fdfacturas]
+Visible=False
+Coordinates=149,546,113,33
+
+[FClientes.fdobras]
+Visible=False
+Coordinates=40,546,101,33
+
+[FClientes.fdContactos]
+Visible=False
+Coordinates=885,71,123,33
+
+[FClientes.fdAdministradores]
+Visible=False
+Coordinates=1099,1,155,33
+
+[FClientes.fdlineaspresupuesto]
+Coordinates=442,556,164,51
+
+[FClientes.dslineasobras]
+Coordinates=695,123,132,33
+
+[FClientes.BindSourceDB6]
+Coordinates=1099,1,141,69
+
+[FClientes.BindSourceDB5]
+Coordinates=885,71,141,69
+
+[FClientes.dsfdpresupuestos]
+Coordinates=695,281,152,33
+
+[FClientes.FDlineasObras]
+Coordinates=695,53,136,33
+
+[fdadministradores]
+Coordinates=265,394,104,33
+Visible=False
+
+[FClientes.dsobras]
+Coordinates=437,546,103,33
+
+[FClientes.dsfdlineaspresupuesto]
+Coordinates=885,1,176,33
+
+[FClientes.BindSourceDB2]
+Coordinates=885,175,141,69
+
+[FClientes.BindSourceDB1]
+Coordinates=885,123,141,69
+
+[FClientes.BindSourceDB3]
+Coordinates=149,546,141,69
+
+[FClientes.BindSourceDB4]
+Coordinates=40,546,141,69
+
+[FAdministradores.bndsrcdb1]
+Coordinates=264,20,158,213
+
+[FAdministradores.fdclientes]
+Visible=False
+Coordinates=119,591,153,33
+
+[listadministradores.bndsrcdb1]
+Coordinates=265,394,164,159
+
+[lstadmnistradores]
+Coordinates=885,297,103,33
+
+[FAdministradores.bndsrcdb2]
+Coordinates=278,546,158,69
+
+[VerAdministrador]
+Coordinates=885,349,101,33
+
+[FAdministradores.fdadministrador]
+Coordinates=885,227,183,51
+
+[listclientes.BindSourceDB1]
+Coordinates=695,615,148,195
+
+[editarAdministrador]
+Coordinates=558,313,112,33
+
+[navegad]
+Coordinates=173,141,56,33
+
+[crearadministrador]
+Coordinates=192,334,108,33
+
+[botonera]
+Coordinates=133,334,58,33
+
+[FObras.BindSourceDB1]
+Coordinates=264,20,131,213
+
+[FObras.FDObra]
+Visible=False
+Coordinates=714,281,91,33
+
+[FObras.FDlineasobra]
+Visible=False
+Coordinates=14,365,118,33
+
+[FObras.FDCliente]
+Visible=False
+Coordinates=714,229,101,33
+
+[listobras.BindSourceDB1]
+Coordinates=107,52,138,69
+
+[FObras.BindSourceDB2]
+Coordinates=714,281,131,267
+
+[FObras.BindSourceDB3]
+Coordinates=14,365,131,69
+
+[FObras.DataSource1]
+Coordinates=560,365,116,33
+
+[FObras.bndsrcdb1]
+Coordinates=714,229,105,141
+
+[listobras.]
+Coordinates=186,384,77,33
+
+[editarpresupuesto2]
+Coordinates=14,334,109,33
+
+[FObras.fdlineasCertificaciones]
+Visible=False
+Coordinates=695,105,166,33
+
+[FObras.fdCertificacion]
+Visible=False
+Coordinates=695,53,125,33
+
+[FObras.bndsrcdb2]
+Coordinates=950,50,146,231
+
+[FObras.DataSource2]
+Coordinates=441,615,116,33
+
+[FObras.dsobras]
+Coordinates=151,405,93,33
+
+[FObras.bndsrcdb3]
+Coordinates=510,50,108,159
+
+[FObras.dscertificacion]
+Coordinates=22,405,125,33
+
+[actSeguros]
+Coordinates=0,0,70,33
+
+[actEmpresa]
+Coordinates=0,0,72,33
+
+[insertarFactura]
+Coordinates=708,53,89,33
+
+[FFacturas.fdCliente]
+Visible=False
+Coordinates=890,1,110,33
+
+[FFacturas.fdfacturas]
+Visible=False
+Coordinates=589,652,116,33
+
+[FFacturas.fdlineas]
+Visible=False
+Coordinates=42,652,105,33
+
+[FFacturas.dsFacturas]
+Coordinates=433,365,121,33
+
+[fdfacturas]
+Coordinates=639,692,64,51
+
+[FFacturas.BindSourceDB3]
+Coordinates=433,633,144,213
+
+[FFacturas.dsCliente]
+Coordinates=592,355,112,33
+
+[FFacturas.BindSourceDB2]
+Coordinates=281,584,144,267
+
+[FFacturas.BindSourceDB1]
+Coordinates=708,567,144,141
+
+[listafacturas]
+Coordinates=0,0,75,33
+
+[editarFactura]
+Coordinates=708,105,79,33
+
+[rDBGridSorter_FireDac1]
+Coordinates=708,157,133,33
+
+[ConvertirEnFactura]
+Coordinates=708,209,110,33
+
+[FFacturas.dslineas]
+Coordinates=141,405,107,33
 

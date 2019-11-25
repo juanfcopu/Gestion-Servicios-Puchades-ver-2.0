@@ -1,0 +1,86 @@
+unit insernominas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, rDBRecView, Vcl.StdCtrls;
+
+type
+  TinsertNominas = class(TForm)
+    rDBRecView1: TrDBRecView;
+    btn1: TButton;
+    cbb1: TComboBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure rDBRecView1KeyPress(Sender: TObject; var Key: Char);
+    procedure btn1Click(Sender: TObject);
+    procedure rDBRecView1Click(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  insertNominas: TinsertNominas;
+
+implementation
+
+uses
+  listanominas, FPrincipal;
+
+{$R *.dfm}
+
+
+
+
+procedure TinsertNominas.btn1Click(Sender: TObject);
+var i: Integer;
+begin
+for i := 0 to rDBRecView1.ControlCount-1 do
+
+cbb1.Items.Add(rDBRecView1.Controls[i].ClassName);
+
+end;
+
+procedure TinsertNominas.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+Tlistnominas(Self.Owner).ds1.DataSet.Cancel;
+Action:=caFree;
+end;
+
+procedure TinsertNominas.FormShow(Sender: TObject);
+begin
+
+
+  Self.Left:=principal.Left+(principal.Width div 2)-(Self.Width div 2);
+  Self.Top:=principal.Top+(principal.Height div 2)-(Self.Height div 2);
+  Tlistnominas(Self.Owner).ds1.DataSet.Insert;
+end;
+
+procedure TinsertNominas.rDBRecView1Click(Sender: TObject);
+var i:Integer;
+begin
+    for i := 0 to Tlistnominas(Self.Owner).rDBGridClientes1.ControlCount-1 do
+
+cbb1.Items.Add(Tlistnominas(Self.Owner).rDBGridClientes1.Controls[i].ClassName);
+
+    for i := 0 to Tlistnominas(Self.Owner).rDBGridClientes1.ComponentCount-1 do
+
+cbb1.Items.Add(Tlistnominas(Self.Owner).rDBGridClientes1.Components[i].ClassName);
+
+
+end;
+
+procedure TinsertNominas.rDBRecView1KeyPress(Sender: TObject; var Key: Char);
+begin
+if Key=#13 then begin
+            Tlistnominas(Self.Owner).ds1.DataSet.Post;
+            Tlistnominas(Self.Owner).ds1.DataSet.Insert;
+            //rDBRecView1.
+                 end;
+end;
+
+end.

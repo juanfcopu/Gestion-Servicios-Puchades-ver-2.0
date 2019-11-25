@@ -15,6 +15,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    btncrearfactura: TButton;
     procedure FrameResize(Sender: TObject);
     procedure ListViewObrasResize(Sender: TObject);
   private
@@ -32,6 +33,7 @@ begin
 Button1.Left:=HeaderControl1.Width-96;
 Button2.Left:=HeaderControl1.Width-64;
 Button3.Left:=HeaderControl1.Width-32;
+btncrearfactura.Left:=HeaderControl1.Width-128;
 end;
 
 procedure TFrame3.ListViewObrasResize(Sender: TObject);

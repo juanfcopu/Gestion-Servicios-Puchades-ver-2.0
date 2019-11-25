@@ -1,0 +1,88 @@
+unit administradores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ToolWin, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, Data.Bind.EngExt, Vcl.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
+  Data.Bind.DBScope, Vcl.Menus;
+
+type
+  TFAdministradores = class(TForm)
+    grp1: TGroupBox;
+    gridpanel: TGridPanel;
+    grp2: TGroupBox;
+    lbledt1: TLabeledEdit;
+    lbledt2: TLabeledEdit;
+    lbledt3: TLabeledEdit;
+    grp3: TGroupBox;
+    lbledt4: TLabeledEdit;
+    lbledt5: TLabeledEdit;
+    grp5: TGroupBox;
+    lbledt6: TLabeledEdit;
+    lbledt7: TLabeledEdit;
+    lbledt8: TLabeledEdit;
+    coolbar: TCoolBar;
+    gridpanel11: TGridPanel;
+    lv1: TListView;
+    lbledt9: TLabeledEdit;
+    fdadministrador: TFDQuery;
+    fdclientes: TFDQuery;
+    bndsrcdb1: TBindSourceDB;
+    bndngslst1: TBindingsList;
+    bndsrcdb2: TBindSourceDB;
+    LinkClientes: TLinkListControlToField;
+    bndsrcdb3: TBindSourceDB;
+    lnkcntrltfld1: TLinkControlToField;
+    lnkcntrltfld2: TLinkControlToField;
+    lnkcntrltfld3: TLinkControlToField;
+    lnkcntrltfld4: TLinkControlToField;
+    lnkcntrltfld5: TLinkControlToField;
+    lnkcntrltfld6: TLinkControlToField;
+    lnkcntrltfld7: TLinkControlToField;
+    lnkcntrltfld8: TLinkControlToField;
+    lnkcntrltfld9: TLinkControlToField;
+    lbledt10: TLabeledEdit;
+    lnkcntrltfld10: TLinkControlToField;
+    lbledt11: TLabeledEdit;
+    lnkcntrltfld11: TLinkControlToField;
+    mm1: TMainMenu;
+    tlb1: TToolBar;
+    btn1: TToolButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FAdministradores: TFAdministradores;
+
+implementation
+
+uses
+  DModule1;
+
+{$R *.dfm}
+
+procedure TFAdministradores.btn1Click(Sender: TObject);
+begin
+DataModule1.editarAdministradorExecute(fdadministrador);
+end;
+
+procedure TFAdministradores.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+fdclientes.Close;
+fdadministrador.Close;
+Action:=caFree;
+end;
+
+end.

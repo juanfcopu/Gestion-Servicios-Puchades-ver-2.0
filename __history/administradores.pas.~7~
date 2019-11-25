@@ -1,0 +1,42 @@
+unit administradores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ToolWin, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  TFAdministradores = class(TForm)
+    grp1: TGroupBox;
+    gridpanel: TGridPanel;
+    grp2: TGroupBox;
+    lbledt1: TLabeledEdit;
+    lbledt2: TLabeledEdit;
+    lbledt3: TLabeledEdit;
+    grp3: TGroupBox;
+    lbledt4: TLabeledEdit;
+    lbledt5: TLabeledEdit;
+    grp5: TGroupBox;
+    lbledt6: TLabeledEdit;
+    lbledt7: TLabeledEdit;
+    lbledt8: TLabeledEdit;
+    coolbar: TCoolBar;
+    gridpanel11: TGridPanel;
+    lv1: TListView;
+    lbledt9: TLabeledEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FAdministradores: TFAdministradores;
+
+implementation
+
+{$R *.dfm}
+
+end.

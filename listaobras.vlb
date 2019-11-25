@@ -4,30 +4,17 @@ Coordinates=372,71,70,51
 [Button1]
 Coordinates=0,273,53,51
 
-[rbnumero]
-Coordinates=372,403,62,33
-
 [DateTimePicker2]
 Coordinates=106,305,97,51
 
 [Panel1]
 Coordinates=224,71,47,51
 
-[CoolBar1]
-Coordinates=303,413,60,33
-
 [GroupBox1]
 Coordinates=372,281,70,51
 
-[ListView1]
-Coordinates=690,90,97,285
-Visible=True
-
 [GroupBox4]
 Coordinates=0,0,70,51
-
-[beBuscar]
-Coordinates=20,70,61,51
 
 [DateTimePicker1]
 Coordinates=372,211,97,51
@@ -35,14 +22,12 @@ Coordinates=372,211,97,51
 [Label2]
 Coordinates=372,1,46,51
 
-[rbcliente]
-Coordinates=244,413,57,33
-
 [Label3]
 Coordinates=57,324,46,51
 
 []
-Coordinates=372,141,95,51
+Coordinates=244,413,57,33
+Visible=True
 
 [Label1]
 Coordinates=243,225,46,51
@@ -63,20 +48,13 @@ Coordinates=55,383,53,51
 Coordinates=409,458,70,51
 
 [DataModule1.fdobras]
-Coordinates=490,100,104,195
-Visible=False
+Coordinates=619,110,119,33
 
 [DataModule1.fdpresupuestos]
 Coordinates=65,197,158,51
 
 [DataModule1.fdClientes]
 Coordinates=22,472,131,195
-
-[BindSourceDB1]
-Coordinates=490,100,104,195
-
-[BindingsList1]
-Coordinates=507,1,82,33
 
 [rbNoEjecutado]
 Coordinates=89,53,87,33
@@ -86,4 +64,28 @@ Coordinates=89,1,73,33
 
 [rbTodas]
 Coordinates=214,1,54,33
+
+[btn2]
+Coordinates=227,148,40,33
+
+[btn5]
+Coordinates=16,170,40,33
+
+[btn4]
+Coordinates=317,1,40,33
+
+[btn3]
+Coordinates=317,56,40,33
+
+[DataModule1.fdadministradores]
+Coordinates=489,15,171,51
+
+[btn1]
+Coordinates=317,111,40,33
+
+[stat1]
+Coordinates=900,60,57,69
+
+[tlb1]
+Coordinates=317,166,40,33
 

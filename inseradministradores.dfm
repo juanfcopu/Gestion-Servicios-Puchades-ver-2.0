@@ -1,0 +1,495 @@
+object FInsetarAdministrador: TFInsetarAdministrador
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Insertar Administrador'
+  ClientHeight = 225
+  ClientWidth = 881
+  Color = clBtnFace
+  DragKind = dkDock
+  DragMode = dmAutomatic
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object gridpanel: TGridPanel
+    Left = 0
+    Top = 0
+    Width = 881
+    Height = 225
+    Align = alClient
+    ColumnCollection = <
+      item
+        Value = 54.545454545454540000
+      end
+      item
+        Value = 45.454545454545450000
+      end>
+    ControlCollection = <
+      item
+        Column = 0
+        Control = grp1
+        Row = 0
+      end
+      item
+        Column = 1
+        Control = gridpanel4
+        Row = 0
+      end>
+    RowCollection = <
+      item
+        Value = 100.000000000000000000
+      end>
+    TabOrder = 0
+    object grp1: TGroupBox
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 473
+      Height = 217
+      Align = alClient
+      Caption = 'Datos Generales'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      DesignSize = (
+        473
+        217)
+      object lbledt1: TLabeledEdit
+        AlignWithMargins = True
+        Left = 9
+        Top = 40
+        Width = 41
+        Height = 21
+        EditLabel.Width = 33
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Codigo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+      end
+      object lbledt2: TLabeledEdit
+        AlignWithMargins = True
+        Left = 56
+        Top = 40
+        Width = 235
+        Height = 21
+        CharCase = ecUpperCase
+        EditLabel.Width = 37
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Nombre'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Tahoma'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object lbledt3: TLabeledEdit
+        AlignWithMargins = True
+        Left = 305
+        Top = 40
+        Width = 165
+        Height = 21
+        CharCase = ecUpperCase
+        EditLabel.Width = 42
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Apellidos'
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Tahoma'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+      end
+      object lbledt11: TLabeledEdit
+        Left = 44
+        Top = 83
+        Width = 426
+        Height = 21
+        CharCase = ecUpperCase
+        EditLabel.Width = 37
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Nombre'
+        LabelPosition = lpLeft
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object btnAceptar: TButton
+        Left = 253
+        Top = 160
+        Width = 81
+        Height = 33
+        Anchors = [akRight, akBottom]
+        Caption = 'Guardar'
+        TabOrder = 4
+        OnClick = btnAceptarClick
+      end
+      object btnCancelar: TButton
+        Left = 354
+        Top = 160
+        Width = 81
+        Height = 33
+        Anchors = [akRight, akBottom]
+        Caption = 'Cancelar'
+        TabOrder = 5
+        OnClick = btnCancelarClick
+      end
+    end
+    object gridpanel4: TGridPanel
+      Left = 480
+      Top = 1
+      Width = 400
+      Height = 223
+      Align = alClient
+      ColumnCollection = <
+        item
+          Value = 100.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          Control = grp2
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = grp3
+          Row = 1
+        end>
+      RowCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      TabOrder = 1
+      object grp2: TGroupBox
+        AlignWithMargins = True
+        Left = 4
+        Top = 4
+        Width = 392
+        Height = 104
+        Align = alClient
+        Caption = 'Direcci'#243'n'
+        TabOrder = 0
+        object lbledt5: TLabeledEdit
+          Left = 36
+          Top = 69
+          Width = 77
+          Height = 21
+          CharCase = ecUpperCase
+          EditLabel.Width = 65
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Codigo Postal'
+          TabOrder = 0
+        end
+        object lbledt4: TLabeledEdit
+          Left = 36
+          Top = 29
+          Width = 341
+          Height = 21
+          CharCase = ecUpperCase
+          EditLabel.Width = 43
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Direcci'#243'n'
+          TabOrder = 1
+        end
+        object lbledt6: TLabeledEdit
+          Left = 187
+          Top = 69
+          Width = 121
+          Height = 21
+          CharCase = ecUpperCase
+          EditLabel.Width = 33
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Ciudad'
+          TabOrder = 2
+        end
+      end
+      object grp3: TGroupBox
+        AlignWithMargins = True
+        Left = 4
+        Top = 114
+        Width = 392
+        Height = 105
+        Align = alClient
+        Caption = 'Datos Bancarios'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        object lbledt7: TLabeledEdit
+          Left = 182
+          Top = 17
+          Width = 67
+          Height = 21
+          EditLabel.Width = 51
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Tel'#233'fono 2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          LabelPosition = lpLeft
+          ParentFont = False
+          TabOrder = 0
+        end
+        object lbledt8: TLabeledEdit
+          Left = 54
+          Top = 17
+          Width = 67
+          Height = 21
+          CharCase = ecUpperCase
+          EditLabel.Width = 51
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Tel'#233'fono 1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          LabelPosition = lpLeft
+          ParentFont = False
+          TabOrder = 1
+        end
+        object lbledt9: TLabeledEdit
+          Left = 310
+          Top = 17
+          Width = 67
+          Height = 21
+          EditLabel.Width = 18
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Fax'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          LabelPosition = lpLeft
+          ParentFont = False
+          TabOrder = 2
+        end
+        object lbledt10: TLabeledEdit
+          Left = 54
+          Top = 65
+          Width = 323
+          Height = 21
+          CharCase = ecUpperCase
+          EditLabel.Width = 18
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Mail'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          LabelPosition = lpLeft
+          ParentFont = False
+          TabOrder = 3
+        end
+      end
+    end
+  end
+  object fdinsertarAdministradores: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      
+        'select * from administradores where idAdministrador=:idAdministr' +
+        'ador')
+    Left = 132
+    Top = 132
+    ParamData = <
+      item
+        Name = 'IDADMINISTRADOR'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object fdinsertarAdministradoresIdAdministrador: TFDAutoIncField
+      FieldName = 'IdAdministrador'
+      Origin = 'IdAdministrador'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object fdinsertarAdministradoresNombre: TStringField
+      FieldName = 'Nombre'
+      Origin = 'Nombre'
+      Required = True
+      Size = 50
+    end
+    object fdinsertarAdministradoresApellidos: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Apellidos'
+      Origin = 'Apellidos'
+      Size = 50
+    end
+    object fdinsertarAdministradoresDireccion: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Direccion'
+      Origin = 'Direccion'
+      Size = 255
+    end
+    object fdinsertarAdministradoresCiudad: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Ciudad'
+      Origin = 'Ciudad'
+      Size = 50
+    end
+    object fdinsertarAdministradoresCodPostal: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CodPostal'
+      Origin = 'CodPostal'
+    end
+    object fdinsertarAdministradoresNombreApellidos: TStringField
+      FieldName = 'NombreApellidos'
+      Origin = 'NombreApellidos'
+      Required = True
+      Size = 50
+    end
+    object fdinsertarAdministradoresTelefonoTrabajo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TelefonoTrabajo'
+      Origin = 'TelefonoTrabajo'
+      Size = 30
+    end
+    object fdinsertarAdministradoresTelefonoMovil: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TelefonoMovil'
+      Origin = 'TelefonoMovil'
+      Size = 30
+    end
+    object fdinsertarAdministradoresNumFax: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NumFax'
+      Origin = 'NumFax'
+      Size = 30
+    end
+    object fdinsertarAdministradorescorreo: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'correo'
+      Origin = 'correo'
+      BlobType = ftMemo
+    end
+  end
+  object bndsrcdb1: TBindSourceDB
+    DataSet = fdinsertarAdministradores
+    ScopeMappings = <>
+    Left = 336
+    Top = 104
+  end
+  object bndngslst1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 76
+    Top = 13
+    object lnkcntrltfld1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'Direccion'
+      Control = lbledt4
+      Track = True
+    end
+    object lnkcntrltfld2: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'IdAdministrador'
+      Control = lbledt1
+      Track = True
+    end
+    object lnkcntrltfld3: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'TelefonoMovil'
+      Control = lbledt7
+      Track = True
+    end
+    object lnkcntrltfld4: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'Apellidos'
+      Control = lbledt3
+      Track = True
+    end
+    object lnkcntrltfld5: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'NombreApellidos'
+      Control = lbledt11
+      Track = True
+    end
+    object lnkcntrltfld6: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'Ciudad'
+      Control = lbledt6
+      Track = True
+    end
+    object lnkcntrltfld7: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'correo'
+      Control = lbledt10
+      Track = True
+    end
+    object lnkcntrltfld8: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'TelefonoTrabajo'
+      Control = lbledt8
+      Track = True
+    end
+    object lnkcntrltfld9: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'NumFax'
+      Control = lbledt9
+      Track = True
+    end
+    object lnkcntrltfld10: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'Nombre'
+      Control = lbledt2
+      Track = True
+    end
+    object lnkcntrltfld11: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdb1
+      FieldName = 'CodPostal'
+      Control = lbledt5
+      Track = True
+    end
+  end
+end

@@ -6,23 +6,19 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,System.DateUtils,
-  Data.Bind.DBScope, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls;
+  Data.Bind.DBScope, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS;
 
 type
   Tlistobras = class(TForm)
-    ListView1: TListView;
     Panel1: TPanel;
     GroupBox2: TGroupBox;
-    beBuscar: TButtonedEdit;
-    rbcliente: TRadioButton;
-    rbnumero: TRadioButton;
     GroupBox4: TGroupBox;
     Label2: TLabel;
     Label3: TLabel;
     DateTimePicker1: TDateTimePicker;
     DateTimePicker2: TDateTimePicker;
     Button1: TButton;
-    CoolBar1: TCoolBar;
     GroupBox1: TGroupBox;
     GroupBox3: TGroupBox;
     Label1: TLabel;
@@ -30,20 +26,32 @@ type
     DateTimePicker3: TDateTimePicker;
     DateTimePicker4: TDateTimePicker;
     Button2: TButton;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    LinkFillControlToField1: TLinkFillControlToField;
     rbEjecutado: TRadioButton;
     rbNoEjecutado: TRadioButton;
     rbTodas: TRadioButton;
+    stat1: TStatusBar;
+    tlb1: TToolBar;
+    btn1: TToolButton;
+    btn2: TToolButton;
+    btn3: TToolButton;
+    btn4: TToolButton;
+    btn5: TToolButton;
+    ds1: TDataSource;
+    lbed1: TLabeledEdit;
+    rDBGridClientes1: TrDBGrid_MS;
     procedure FormCreate(Sender: TObject);
-    procedure beBuscarChange(Sender: TObject);
+
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure ListView1ColumnClick(Sender: TObject; Column: TListColumn);
     procedure rbEjecutadoClick(Sender: TObject);
     procedure rbNoEjecutadoClick(Sender: TObject);
     procedure rbTodasClick(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn3Click(Sender: TObject);
+    procedure btn4Click(Sender: TObject);
+    procedure btn5Click(Sender: TObject);
+    procedure lbed1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,38 +67,37 @@ implementation
 
 uses DModule1;
 
-procedure Tlistobras.beBuscarChange(Sender: TObject);
-var li:TListItem;
+
+
+
+procedure Tlistobras.btn1Click(Sender: TObject);
 begin
-      if rbnumero.Checked then
-     begin
-     li:=listview1.FindCaption(0,beBuscar.Text,true,true,false);
-     if li <> nil then
-         begin
-         listview1.Selected:=li;
-         li.MakeVisible(True);
-         end
-     else     showmessage('No existen resultados.');
-    end;
-
-     if rbcliente.Checked then
-     begin
-
-    li:=DataModule1.BuscarSubItem(listView1,beBuscar.Text,1);
-     if li <> nil then
-         begin
-         listview1.Selected:=li;
-         li.MakeVisible(True);
-         end
-     else     showmessage('No existen resultados.');
-    end;
+Close;
 end;
 
+procedure Tlistobras.btn3Click(Sender: TObject);
+begin
+DataModule1.insertarObraExecute(Self);
+end;
+
+procedure Tlistobras.btn4Click(Sender: TObject);
+begin
+DataModule1.editarObraexecute(DataModule1.fdobras)
+end;
+
+procedure Tlistobras.btn5Click(Sender: TObject);
+begin
+if Application.MessageBox('¿Esta seguro de borrar la obra?','Borrar',MB_YESNO)=IDYES then
+       begin
+           DataModule1.fdobras.Delete;
+       end
+
+   end;
 
 procedure Tlistobras.Button1Click(Sender: TObject);
 var SQLstr,SQLstr2:string;
 begin
-LinkFillControlToField1.Active:=false;
+
  SQLstr:='Select C.nombre, O.Id_Cliente, O.id_Obra, O.descripcion, O.Ejecutado, O.FechaComienzo, O.ImporteObra, O.FechaFin ';
  SQLstr2:='From obras O, clientes C where C.idContactos=O.id_Cliente and O.FechaComienzo>=:FechaIni and O.FechaComienzo<=:FechaFin';
  DataModule1.fdObras.Close;
@@ -99,13 +106,13 @@ LinkFillControlToField1.Active:=false;
  DataModule1.fdObras.ParamByName('FechaIni').AsDateTime:=DateTimePicker1.DateTime;
  DataModule1.fdObras.ParamByName('FechaFin').AsDateTime:=DateTimePicker2.DateTime;
  DataModule1.fdObras.Active:=true;
- LinkFillControlToField1.Active:=true;
+
 end;
 
 procedure Tlistobras.Button2Click(Sender: TObject);
 var SQLstr,SQLstr2:string;
 begin
-LinkFillControlToField1.Active:=false;
+
  SQLstr:='Select C.nombre, O.Id_Cliente, O.id_Obra, O.descripcion, O.Ejecutado, O.FechaComienzo, O.ImporteObra, O.FechaFin ';
  SQLstr2:='From obras O, clientes C where C.idContactos=O.id_Cliente and O.FechaFin>=:FechaIni and O.FechaFin<=:FechaFin';
  DataModule1.fdObras.Close;
@@ -114,9 +121,15 @@ LinkFillControlToField1.Active:=false;
  DataModule1.fdObras.ParamByName('FechaIni').AsDateTime:=DateTimePicker3.DateTime;
  DataModule1.fdObras.ParamByName('FechaFin').AsDateTime:=DateTimePicker4.DateTime;
  DataModule1.fdObras.Active:=true;
- LinkFillControlToField1.Active:=true;
+
 end;
 
+
+procedure Tlistobras.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+DataModule1.fdobras.Close;
+Action:=caFree;
+end;
 
 procedure Tlistobras.FormCreate(Sender: TObject);
 begin
@@ -125,53 +138,27 @@ begin
      DateTimePicker3.Date:=Date;
      DateTimePicker4.Date:=Date;
 
-     rbcliente.checked:=true;
+
      DataModule1.fdobras.Active:=true;
 end;
 
-procedure Tlistobras.ListView1ColumnClick(Sender: TObject; Column: TListColumn);
+procedure Tlistobras.lbed1Change(Sender: TObject);
 begin
-  if Column.Caption='Cliente' then
-        begin
-        LinkFillControlToField1.Active:=false;
-        DataModule1.fdObras.IndexFieldNames:='nombre';
-        DataModule1.fdObras.indexesActive:=true;
-        LinkFillControlToField1.Active:=true;
-        end;
-
-        if Column.Caption='Fecha Comienzo' then
-        begin
-        LinkFillControlToField1.Active:=false;
-        DataModule1.fdObras.IndexFieldNames:='FechaComienzo';
-        DataModule1.fdObras.indexesActive:=true;
-        LinkFillControlToField1.Active:=true;
-        end;
-
-         if Column.Caption='Fecha Fin' then
-        begin
-        LinkFillControlToField1.Active:=false;
-        DataModule1.fdObras.IndexFieldNames:='FechaFin';
-        DataModule1.fdObras.indexesActive:=true;
-        LinkFillControlToField1.Active:=true;
-        end;
-
-        if Column.Caption='Nº Obra' then
-        begin
-        LinkFillControlToField1.Active:=false;
-        DataModule1.fdObras.IndexFieldNames:='id_Obra';
-        DataModule1.fdObras.indexesActive:=true;
-        LinkFillControlToField1.Active:=true;
-        end;
+rDBGridClientes1.DataSource.DataSet.DisableControls;
+rDBGridClientes1.DataSource.DataSet.Filtered:=False;
+rDBGridClientes1.DataSource.DataSet.Filter:='nombre LIKE ''%'+TLabeledEdit(Sender).Text+'%''';
+rDBGridClientes1.DataSource.DataSet.Filtered:=True;
+rDBGridClientes1.DataSource.DataSet.EnableControls;
 end;
 
 procedure Tlistobras.rbEjecutadoClick(Sender: TObject);
 begin
     if rbEjecutado.Checked then
        begin
-       LinkFillControlToField1.Active:=false;
-       DataModule1.fdobras.filter:= 'Ejecutado=True';
-       DataModule1.fdobras.filtered:=True;
-       LinkFillControlToField1.Active:=True;
+       rDBGridClientes1.DataSource.DataSet.Filtered:=False;
+       rDBGridClientes1.DataSource.DataSet.filter:= 'Ejecutado=True';
+      rDBGridClientes1.DataSource.DataSet.filtered:=True;
+
        end;
 
 end;
@@ -180,10 +167,10 @@ procedure Tlistobras.rbNoEjecutadoClick(Sender: TObject);
 begin
        if rbNoEjecutado.Checked then
        begin
-       LinkFillControlToField1.Active:=false;
-       DataModule1.fdobras.filter:= 'Ejecutado=False';
-       DataModule1.fdobras.filtered:=True;
-       LinkFillControlToField1.Active:=True;
+       rDBGridClientes1.DataSource.DataSet.Filtered:=False;
+      rDBGridClientes1.DataSource.DataSet.filter:= 'Ejecutado=False';
+       rDBGridClientes1.DataSource.DataSet.filtered:=True;
+
        end;
 end;
 
@@ -191,9 +178,9 @@ procedure Tlistobras.rbTodasClick(Sender: TObject);
 begin
       if rbTodas.Checked then
        begin
-       LinkFillControlToField1.Active:=false;
-       DataModule1.fdobras.filtered:=False;
-       LinkFillControlToField1.Active:=True;
+         rDBGridClientes1.DataSource.DataSet.Filtered:=False;
+         rDBGridClientes1.DataSource.DataSet.Filter:='';
+         
        end;
 
 end;

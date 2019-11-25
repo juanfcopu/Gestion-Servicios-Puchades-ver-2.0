@@ -1,0 +1,93 @@
+object insertNominas: TinsertNominas
+  Left = 5000
+  Top = 10000
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  Caption = 'Insertar N'#243'minas'
+  ClientHeight = 309
+  ClientWidth = 387
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object rToolBar1: TrToolBar
+    Left = 0
+    Top = 0
+    Width = 387
+    Height = 28
+    ButtonHeight = 28
+    Caption = 'rToolBar1'
+    TabOrder = 0
+    object dbnvgr1: TDBNavigator
+      Left = 0
+      Top = 0
+      Width = 240
+      Height = 28
+      DataSource = listnominas.ds1
+      TabOrder = 0
+    end
+  end
+  object rDBRecView1: TrDBRecView
+    AlignWithMargins = True
+    Left = 3
+    Top = 31
+    Width = 381
+    Height = 254
+    DataSource = listnominas.ds1
+    DBGrid = listnominas.rDBGridClientes1
+    FieldsAsLink.Strings = (
+      'nombre=user_defined')
+    OptionsEx = [goUseGridPickList]
+    Fields.Strings = (
+      'nombre=Trabajador'
+      'fechanomina=Fecha'
+      'importedevengado=Devengado'
+      'BaseCotizacion=Base Cotizaci'#243'n'
+      'ssocialEmpresa=Seg. Social Trabajador'
+      'ssocialEmpresa=Seg. Social Empresa'
+      'irpf=I.R.P.F'
+      'TotalPercibir=Total a Pagar')
+    SpecFields.Strings = (
+      'nombre=0')
+    SpecFont.Charset = DEFAULT_CHARSET
+    SpecFont.Color = clWindowText
+    SpecFont.Height = -11
+    SpecFont.Name = 'Tahoma'
+    SpecFont.Style = []
+    Align = alClient
+    DefaultColWidth = 175
+    DefaultRowHeight = 30
+    DefaultDrawing = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSizing, goEditing, goTabs]
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 1
+    OnKeyPress = rDBRecView1KeyPress
+    ExplicitWidth = 385
+  end
+  object RzStatusBar1: TRzStatusBar
+    Left = 0
+    Top = 288
+    Width = 387
+    Height = 21
+    SimpleStatus = True
+    BorderInner = fsNone
+    BorderOuter = fsNone
+    BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
+    BorderWidth = 0
+    TabOrder = 2
+  end
+end

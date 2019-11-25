@@ -1,0 +1,271 @@
+unit clientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
+  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.TeeProcs, VCLTee.Chart,
+  VCLTee.DBChart, framePresupuestos, frameFacturas, frameObras, frameContactos,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, System.Rtti, System.Bindings.Outputs,
+  Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
+  Data.Bind.DBScope, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Data.Bind.Controls, Vcl.Buttons, Vcl.Bind.Navigator, Vcl.ToolWin, Vcl.Grids,
+  Vcl.DBGrids;
+
+type
+  TFClientes = class(TForm)
+    GroupBox1: TGroupBox;
+    GridPanel1: TGridPanel;
+    Panel1: TPanel;
+    GridPanel2: TGridPanel;
+    GroupBox4: TGroupBox;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
+    GroupBox2: TGroupBox;
+    LabeledEdit4: TLabeledEdit;
+    LabeledEdit5: TLabeledEdit;
+    GroupBox5: TGroupBox;
+    ComboBox1: TComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    ComboBox2: TComboBox;
+    Frame11: TFrame1;
+    Frame21: TFrame2;
+    Frame31: TFrame3;
+    Frame41: TFrame4;
+    GroupBox3: TGroupBox;
+    LabeledEdit6: TLabeledEdit;
+    LabeledEdit7: TLabeledEdit;
+    LabeledEdit8: TLabeledEdit;
+    fdclientes: TFDQuery;
+    fdpresupuestos: TFDQuery;
+    fdfacturas: TFDQuery;
+    fdobras: TFDQuery;
+    fdContactos: TFDQuery;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
+    LinkControlToField3: TLinkControlToField;
+    LinkControlToField4: TLinkControlToField;
+    LinkControlToField5: TLinkControlToField;
+    LinkControlToField6: TLinkControlToField;
+    LinkControlToField7: TLinkControlToField;
+    LinkControlToField8: TLinkControlToField;
+    fdAdministradores: TFDQuery;
+    LinkPropertyToFieldItemIndex: TLinkPropertyToField;
+    BindSourceDB2: TBindSourceDB;
+    BindSourceDB3: TBindSourceDB;
+    LinkListControlToField1: TLinkListControlToField;
+    BindSourceDB4: TBindSourceDB;
+    LinkListControlToField3: TLinkListControlToField;
+    BindSourceDB5: TBindSourceDB;
+    LinkListControlToField4: TLinkListControlToField;
+    BindSourceDB6: TBindSourceDB;
+    LinkFillControlToField1: TLinkFillControlToField;
+    CoolBar1: TCoolBar;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    DBGrid1: TDBGrid;
+    dsfdpresupuestos: TDataSource;
+    fdlineaspresupuesto: TFDQuery;
+    dsfdlineaspresupuesto: TDataSource;
+    DBGrid2: TDBGrid;
+    Label3: TLabel;
+    LinkListControlToField2: TLinkListControlToField;
+    FDlineasObras: TFDQuery;
+    dsobras: TDataSource;
+    dbgrd1: TDBGrid;
+    dslineasobras: TDataSource;
+    dblineasobras: TDBGrid;
+    procedure GridPanel2Resize(Sender: TObject);
+    procedure Frame11ListView1AdvancedCustomDrawItem(Sender: TCustomListView;
+      Item: TListItem; State: TCustomDrawState; Stage: TCustomDrawStage;
+      var DefaultDraw: Boolean);
+    procedure Frame11Button2Click(Sender: TObject);
+    procedure Frame11Button1Click(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure Frame11Button3Click(Sender: TObject);
+    procedure Frame11ListView1DblClick(Sender: TObject);
+    procedure Frame31ListViewObrasDragOver(Sender, Source: TObject; X,
+      Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure Frame31ListViewObrasDragDrop(Sender, Source: TObject; X,
+      Y: Integer);
+    procedure Frame31Button2Click(Sender: TObject);
+    procedure Frame31ListViewObrasDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Frame11btnobraClick(Sender: TObject);
+    procedure Frame21ListViewFacturasDblClick(Sender: TObject);
+    procedure Frame21Button2Click(Sender: TObject);
+    procedure Frame31Button3Click(Sender: TObject);
+    procedure Frame31Button1Click(Sender: TObject);
+    procedure Frame31btncrearfacturaClick(Sender: TObject);
+
+
+  private
+    { Private declarations }
+
+  public
+    { Public declarations }
+    lstobras:TStringList;
+  end;
+
+var
+  FClientes: TFClientes;
+
+implementation
+
+{$R *.dfm}
+
+uses DModule1, presupuestos, FPrincipal, listaclientes, SelectLineasPresupuestos;
+
+procedure TFClientes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+FDlineasObras.Close;
+fdlineaspresupuesto.Close;
+fdpresupuestos.Close;
+fdobras.Close;
+fdclientes.Close;
+Action:=caFree;
+end;
+
+procedure TFClientes.Frame11btnobraClick(Sender: TObject);
+begin
+DataModule1.ConvertirEnObraExecute(Self);
+end;
+
+procedure TFClientes.Frame11Button1Click(Sender: TObject);
+begin
+DataModule1.insertarpresupuestoExecute(fdclientes);
+end;
+
+procedure TFClientes.Frame11Button2Click(Sender: TObject);
+begin
+  DataModule1.editarpresupuestoExecute(fdpresupuestos);
+end;
+
+procedure TFClientes.Frame11Button3Click(Sender: TObject);
+begin
+if Application.MessageBox('¿Esta seguro de borrar el presupuesto?','Borrar Presupuesto',MB_YESNO)=IDYES then
+       begin
+        if not (fdpresupuestos.State in [dsInsert,dsEdit]) then fdpresupuestos.Delete;
+
+       end;
+
+end;
+
+procedure TFClientes.Frame11ListView1AdvancedCustomDrawItem(
+  Sender: TCustomListView; Item: TListItem; State: TCustomDrawState;
+  Stage: TCustomDrawStage; var DefaultDraw: Boolean);
+  var i:integer;
+begin
+
+for i:=0 to (Sender as TListView).Groups.count -1 do
+begin
+     (Sender as TListView).Groups.Items[i].state:=[lgsNormal,lgsCollapsed,lgsCollapsible];
+     (Sender as TListView).Groups.Items[i].FooterAlign:=taRightJustify ;
+
+
+
+end;
+ if item.Index mod 2 <> 0 then
+         begin
+        (Sender as TListview).Canvas.Brush.Color:=cl3DLight ;
+         end
+      else
+        (Sender as TListview).Canvas.Brush.Color:=clWindow;
+
+     if (cdsSelected in State) then
+        begin
+         (Sender as TListview).Canvas.font.Style:=[fsbold];
+        end;
+end;
+
+procedure TFClientes.Frame11ListView1DblClick(Sender: TObject);
+begin
+      DataModule1.editarpresupuestoExecute(fdpresupuestos);
+end;
+
+procedure TFClientes.Frame21Button2Click(Sender: TObject);
+begin
+DataModule1.editarFacturaExecute(fdfacturas);
+end;
+
+procedure TFClientes.Frame21ListViewFacturasDblClick(Sender: TObject);
+begin
+ DataModule1.editarFacturaexecute(fdFacturas);
+end;
+
+procedure TFClientes.Frame31btncrearfacturaClick(Sender: TObject);
+begin
+DataModule1.ConvertirEnFacturaExecute(FClientes);
+end;
+
+procedure TFClientes.Frame31Button1Click(Sender: TObject);
+begin
+   DataModule1.insertarobraExecute(fdobras);
+end;
+
+procedure TFClientes.Frame31Button2Click(Sender: TObject);
+begin
+DataModule1.editarObraExecute(fdobras);
+end;
+
+procedure TFClientes.Frame31Button3Click(Sender: TObject);
+begin
+ if Application.MessageBox('¿Esta seguro de borrar la obra?','Borrar Obra',MB_YESNO)=IDYES then
+       begin
+        if not (fdobras.State in [dsInsert,dsEdit]) then fdobras.Delete;
+
+       end;
+end;
+
+procedure TFClientes.Frame31ListViewObrasDblClick(Sender: TObject);
+begin
+DataModule1.editarobraExecute(fdobras);
+end;
+
+procedure TFClientes.Frame31ListViewObrasDragDrop(Sender, Source: TObject; X,
+  Y: Integer);
+  var SellineasPresu:TFLineasPresupuestoObra;
+begin
+
+   if fdpresupuestos.FieldByName('Aprovado').asboolean then
+             begin
+
+               SellineasPresu:=TFLineasPresupuestoObra.Create(Self);
+               SellineasPresu.ShowModal;
+               SellineasPresu.Close;
+
+             end
+   else showmessage('El presupuesto no esta aprobado, no se puede crear la obra.');
+end;
+
+procedure TFClientes.Frame31ListViewObrasDragOver(Sender, Source: TObject; X,
+  Y: Integer; State: TDragState; var Accept: Boolean);
+begin
+Accept:=false;
+
+ if (source is TListView) then
+            if (source as TListView).Name='ListViewPresupuestos' then
+               begin
+                  Accept:=True;
+               end;
+end;
+
+procedure TFClientes.GridPanel2Resize(Sender: TObject);
+begin
+     ComboBox1.Width:=GroupBox5.Width-100;
+      ComboBox2.Width:=GroupBox5.Width-100;
+end;
+
+procedure TFClientes.ToolButton1Click(Sender: TObject);
+begin
+  DataModule1.editarclienteExecute(fdclientes);
+end;
+
+end.

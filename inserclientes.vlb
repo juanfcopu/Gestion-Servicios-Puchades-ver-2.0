@@ -1,141 +1,141 @@
 ﻿[GridPanel3]
-Coordinates=499,1812,68,51
-
-[LabeledEdit7]
-Coordinates=434,1492,78,51
+Coordinates=499,1812,79,58
 
 [GroupBox4]
-Coordinates=788,1812,70,51
+Coordinates=788,1812,79,58
 
 [ComboBox2]
-Coordinates=10,858,84,123
+Coordinates=700,190,101,146
 ExplicitSubNodes=ItemIndex
 
 [Label1]
-Coordinates=604,1812,46,51
-
-[LabeledEdit2]
-Coordinates=434,312,78,51
+Coordinates=604,1812,53,58
 
 [PageControl1]
-Coordinates=1253,1812,81,33
-
-[LabeledEdit6]
-Coordinates=434,430,78,51
+Coordinates=1253,1812,93,36
 
 [Button1]
-Coordinates=1329,10,53,51
-
-[LabeledEdit14]
-Coordinates=431,1610,84,51
+Coordinates=1329,10,59,58
 
 [fdinsertarClientes]
-Coordinates=40,90,95,447
-Visible=False
+Coordinates=1130,220,115,498
 
 [fdadministradores]
-Coordinates=680,0,92,105
-Visible=False
-
-[ComboBox1]
-Coordinates=480,10,84,105
-Visible=True
+Coordinates=794,10,117,58
 
 [GridPanel2]
-Coordinates=683,1812,68,51
-
-[LabeledEdit10]
-Coordinates=431,902,84,51
-
-[LabeledEdit5]
-Coordinates=434,548,78,51
-
-[Label2]
-Coordinates=1519,10,46,51
-
-[StringGrid1]
-Coordinates=1004,128,70,159
-Visible=True
-
-[LabeledEdit9]
-Coordinates=434,1138,78,51
-
-[LabeledEdit1]
-Coordinates=434,784,78,51
+Coordinates=683,1812,79,58
 
 [datoscontactos]
-Coordinates=893,1812,90,33
+Coordinates=893,1812,101,36
 
 [GroupBox5]
-Coordinates=394,1812,70,51
+Coordinates=394,1812,79,58
 
 [GroupBox2]
-Coordinates=1414,10,70,51
-
-[LabeledEdit3]
-Coordinates=434,1256,78,51
+Coordinates=1414,10,79,58
 
 [datosFacturacion]
-Coordinates=1020,1812,100,33
+Coordinates=1020,1812,113,36
 
 [fdcontactos]
-Coordinates=778,58,92,177
-Visible=False
-
-[LabeledEdit8]
-Coordinates=434,1728,78,51
-
-[LabeledEdit12]
-Coordinates=431,194,84,51
+Coordinates=860,68,80,58
 
 [GroupBox1]
-Coordinates=115,1812,70,51
-
-[LabeledEdit4]
-Coordinates=434,666,78,51
-
-[LabeledEdit11]
-Coordinates=431,1020,84,51
+Coordinates=115,1812,79,58
+Visible=True
 
 [GridPanel1]
-Coordinates=10,1812,68,51
-
-[LabeledEdit13]
-Coordinates=431,1374,84,51
+Coordinates=10,1812,79,58
 
 []
-Coordinates=843,10,53,51
-
-[BindSourceDB1]
-Coordinates=778,58,92,177
-
-[BindingsList1]
-Coordinates=144,153,91,36
-
-[CoolBar1]
-Coordinates=1159,1812,60,33
-
-[BindSourceDB2]
-Coordinates=40,90,95,447
-
-[BindSourceDB3]
-Coordinates=680,0,92,105
+Coordinates=426,1,77,36
+Visible=True
 
 [DataModule1.fdClientes]
-Coordinates=1151,10,131,195
+Coordinates=1151,10,152,234
 
 [DataModule1.fdpresupuestos]
-Coordinates=1598,10,158,51
+Coordinates=1598,10,182,58
 
 [btcancelar]
-Coordinates=1806,10,65,51
+Coordinates=1806,10,74,58
 
 [btaceptar]
-Coordinates=220,1812,60,51
+Coordinates=220,1812,68,58
 
 [Panel1]
-Coordinates=314,1812,47,51
+Coordinates=314,1812,55,58
 
-[NavigatorBindSourceDB1]
-Coordinates=0,0,140,51
+[DataModule1.fdobras]
+Coordinates=400,134,137,58
+
+[DataModule1.fdadministradores]
+Coordinates=191,1,197,58
+
+[dscontactos]
+Coordinates=426,1,83,36
+
+[rDBEdit14]
+Coordinates=77,196,73,36
+
+[ctrlbr1]
+Coordinates=129,1,51,36
+
+[rDBEdit2]
+Coordinates=0,160,66,36
+
+[rDBGrid1]
+Coordinates=547,1,68,36
+
+[RzDBNavigator1]
+Coordinates=0,0,110,58
+
+[rDBEdit7]
+Coordinates=547,56,66,36
+
+[rDBEdit5]
+Coordinates=547,111,66,36
+
+[rDBEdit9]
+Coordinates=547,166,66,36
+
+[dsinsertarcliente]
+Coordinates=39,77,109,36
+
+[rDBEdit10]
+Coordinates=547,276,73,36
+
+[rDBEdit3]
+Coordinates=547,331,66,36
+
+[rDBEdit13]
+Coordinates=547,386,73,36
+
+[rDBEdit11]
+Coordinates=468,398,73,36
+
+[rDBLookupComboBox1]
+Coordinates=309,398,149,36
+
+[rDBEdit6]
+Coordinates=240,398,66,36
+
+[rDBEdit4]
+Coordinates=171,398,66,36
+
+[DataModule1.fdfacturas]
+Coordinates=285,82,151,278
+
+[rDBEdit12]
+Coordinates=92,398,73,36
+
+[rDBEdit1]
+Coordinates=23,398,66,36
+
+[dsadministradores]
+Coordinates=156,196,120,36
+
+[rDBEdit8]
+Coordinates=692,1,66,36
 

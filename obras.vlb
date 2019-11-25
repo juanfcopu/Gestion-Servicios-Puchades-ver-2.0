@@ -1,23 +1,11 @@
-﻿[ToolButton14]
-Coordinates=210,599,80,33
-
-[dialruta]
-Coordinates=0,233,57,36
+﻿[dialruta]
+Coordinates=0,233,51,33
 
 [abrircarpeta]
-Coordinates=819,364,83,36
-
-[LabeledEdit7]
-Coordinates=970,210,78,51
-
-[LabeledEdit6]
-Coordinates=1140,240,78,51
-
-[ShellListView1]
-Coordinates=1022,599,86,33
+Coordinates=819,364,73,33
 
 [ActionManager1]
-Coordinates=819,474,108,36
+Coordinates=819,474,94,33
 
 [ToolButton1]
 Coordinates=968,463,74,33
@@ -35,39 +23,17 @@ Coordinates=316,599,67,33
 [LabeledEdit14]
 Coordinates=859,309,84,51
 
-[DataSource1]
-Coordinates=0,0,89,58
-
-[LabeledEdit3]
-Coordinates=206,10,78,51
-
 [EditCopy]
-Coordinates=0,425,67,36
-
-[LabeledEdit4]
-Coordinates=910,90,78,51
-Visible=True
-
-[LabeledEdit18]
-Coordinates=930,150,84,51
+Coordinates=0,425,59,33
 
 [documentacion]
 Coordinates=10,599,90,33
-
-[ShellListView2]
-Coordinates=910,599,86,33
 
 [ToolButton9]
 Coordinates=987,540,74,33
 
 [cerrarpres]
-Coordinates=572,557,73,36
-
-[guardarpresupuesto]
-Coordinates=965,111,129,36
-
-[mail]
-Coordinates=523,557,40,36
+Coordinates=572,557,65,33
 
 [LabeledEdit13]
 Coordinates=398,10,84,51
@@ -82,26 +48,20 @@ Coordinates=1048,10,54,51
 Coordinates=976,10,46,51
 
 [EditCut]
-Coordinates=464,557,57,36
+Coordinates=464,557,50,33
 
 [ActionManager2]
-Coordinates=965,221,108,36
+Coordinates=965,221,94,33
 
 [Shape2]
 Coordinates=10,540,50,33
 
-[DateTimePicker1]
-Coordinates=1040,160,97,51
-
 [GroupBox2]
 Coordinates=10,386,70,51
+Visible=True
 
 [LabeledEdit11]
 Coordinates=114,309,84,51
-
-[StringGrid1]
-Coordinates=840,710,70,159
-Visible=True
 
 [ToolBar2]
 Coordinates=1068,463,58,33
@@ -110,13 +70,13 @@ Coordinates=1068,463,58,33
 Coordinates=186,540,73,33
 
 [LabeledEdit5]
-Coordinates=185,386,78,51
+Coordinates=570,100,78,51
 
 [Label2]
 Coordinates=826,10,46,51
 
 [AprobarTodos]
-Coordinates=965,276,96,36
+Coordinates=965,276,85,33
 
 [ToolButton6]
 Coordinates=86,540,74,33
@@ -125,25 +85,16 @@ Coordinates=86,540,74,33
 Coordinates=862,463,80,33
 
 [ImageList1]
-Coordinates=69,557,77,36
+Coordinates=69,557,68,33
 
 [ToolButton10]
 Coordinates=881,540,80,33
-
-[guardarPDF]
-Coordinates=965,441,84,36
-
-[LabeledEdit8]
-Coordinates=840,250,78,51
 
 [Memo1]
 Coordinates=610,260,53,51
 
 [carpetadocumentacion]
-Coordinates=946,482,144,36
-
-[DBGrid1]
-Coordinates=391,540,56,33
+Coordinates=946,482,127,33
 
 [ToolButton4]
 Coordinates=179,658,74,33
@@ -151,20 +102,11 @@ Coordinates=179,658,74,33
 [spcarpetas]
 Coordinates=709,599,68,33
 
-[LabeledEdit2]
-Coordinates=206,232,78,51
-
-[LabeledEdit1]
-Coordinates=206,121,78,51
-
 [GroupBox5]
 Coordinates=652,10,70,51
 
 [ToolButton5]
 Coordinates=609,599,74,33
-
-[BindingsList1]
-Coordinates=1132,1,91,36
 
 [GroupBox1]
 Coordinates=224,309,70,51
@@ -172,11 +114,8 @@ Coordinates=224,309,70,51
 [Panel1]
 Coordinates=1151,309,47,51
 
-[ToolBar3]
-Coordinates=126,599,58,33
-
 [abrirpresupuesto]
-Coordinates=1132,56,111,36
+Coordinates=1132,56,99,33
 
 [spaprobado]
 Coordinates=670,540,73,33
@@ -189,12 +128,6 @@ Coordinates=580,10,46,51
 
 [lineas]
 Coordinates=110,658,43,33
-
-[NavigatorBindSourceDB3]
-Coordinates=1099,386,140,51
-
-[Label1]
-Coordinates=237,463,46,51
 
 [ToolBar1]
 Coordinates=586,540,58,33
@@ -209,16 +142,13 @@ Coordinates=10,658,74,33
 Coordinates=320,309,43,51
 
 [EditPaste]
-Coordinates=255,631,70,36
+Coordinates=255,631,61,33
 
 [ToolButton12]
 Coordinates=285,540,80,33
 
 [GroupBox3]
 Coordinates=667,309,70,51
-
-[spNoaprobado]
-Coordinates=473,540,87,33
 
 [ToolButton3]
 Coordinates=409,599,74,33
@@ -230,44 +160,170 @@ Coordinates=769,540,86,33
 Coordinates=509,599,74,33
 
 [DataModule1.fdpresupuestos]
-Coordinates=634,386,158,51
+Coordinates=1250,370,158,51
 
 [DataModule1.fdClientes]
-Coordinates=10,40,116,213
-Visible=False
+Coordinates=151,50,131,33
 
 [FDCliente]
-Coordinates=310,10,62,123
+Coordinates=382,20,62,33
 
 [FDObra]
-Coordinates=710,100,92,249
-Visible=False
+Coordinates=772,110,52,33
 
 [FDlineasobra]
-Coordinates=600,660,144,195
-Visible=False
-
-[BindSourceDB1]
-Coordinates=10,40,116,213
+Coordinates=689,670,79,33
 
 []
-Coordinates=478,386,52,51
-
-[BindSourceDB2]
-Coordinates=710,100,92,249
-
-[DateTimePicker2]
-Coordinates=530,210,97,51
-
-[Label13]
-Coordinates=145,22,52,51
-
-[BindSourceDB3]
-Coordinates=600,660,144,195
+Coordinates=316,405,144,33
+Visible=True
+ExplicitSubNodes=Position
 
 [BTBuscarCliente]
-Coordinates=783,463,53,51
+Coordinates=783,463,97,51
 
-[BTpath]
-Coordinates=289,386,53,51
+[FDClientefamilia]
+Coordinates=235,191,95,33
+
+[DataModule1.fdobras]
+Coordinates=332,152,119,51
+
+[FDClientecif]
+Coordinates=235,80,74,33
+
+[FDClientenombre]
+Coordinates=489,80,100,33
+
+[listclientes.BindSourceDB1]
+Coordinates=36,272,148,195
+
+[Shape1]
+Coordinates=368,222,50,33
+
+[FDClienteidcontactos]
+Coordinates=322,274,120,33
+
+[shellFotos]
+Coordinates=480,132,65,33
+
+[DataModule1.fdadministradores]
+Coordinates=520,170,171,51
+
+[statFotos]
+Coordinates=160,22,60,51
+
+[btnAceptar]
+Coordinates=350,400,68,51
+
+[shellDocumentacion1]
+Coordinates=546,330,120,33
+
+[statDocumentacion]
+Coordinates=368,292,109,51
+
+[guardarobra]
+Coordinates=965,111,75,33
+
+[lbepartidasejecutadas]
+Coordinates=930,380,122,51
+Visible=True
+
+[spEjecutado]
+Coordinates=473,540,75,33
+
+[fdtncfldFDObraID_obra]
+Coordinates=485,405,128,33
+
+[intgrfldFDObraID_Cliente]
+Coordinates=120,405,137,33
+
+[mfldFDObraDescripcion]
+Coordinates=624,482,132,33
+
+[dtmfldFDObraFechaFin]
+Coordinates=465,482,128,33
+
+[dtmfldFDObraFechaComienzo]
+Coordinates=48,474,162,33
+
+[blnfldFDObraEjecutado]
+Coordinates=1191,111,129,33
+
+[fltfldFDObraImporteObra]
+Coordinates=1377,1,136,33
+
+[intgrfldFDObrapartidas]
+Coordinates=1191,166,127,33
+
+[mfldFDObraobservaciones]
+Coordinates=1377,56,145,33
+
+[mfldFDObraPath]
+Coordinates=0,298,96,33
+
+[intgrfldFDObrapartidasejecutadas]
+Coordinates=1191,386,180,33
+
+[fdCertificacion]
+Coordinates=2523,1060,86,33
+
+[fdlineasCertificaciones]
+Coordinates=2027,820,127,33
+
+[fdlineasCertificacionesIVA]
+Coordinates=465,405,144,33
+
+[fdCertificacionesImporteOrigen]
+Coordinates=1582,56,168,33
+
+[fdCertificacionescertificacion_id_certificacion]
+Coordinates=1582,276,239,33
+
+[fdCertificacionesimporte]
+Coordinates=1436,441,135,33
+
+[fdCertificacionesncertificacion]
+Coordinates=1582,221,164,33
+
+[fdCertificacionesid_lineacertificacion]
+Coordinates=1641,331,196,33
+
+[fdCertificacionesfechacertificacion]
+Coordinates=1641,386,185,33
+
+[fdlineasCertificacionestotal]
+Coordinates=455,405,148,33
+
+[fdlineasCertificacionesreten]
+Coordinates=1418,108,152,33
+
+[dsobras]
+Coordinates=261,526,54,33
+
+[DataSource2]
+Coordinates=40,160,77,33
+
+[actNuevaCertificacion]
+Coordinates=1409,212,122,33
+
+[FDSchemaCertificaciones]
+Coordinates=1409,264,141,33
+
+[dscertificacion]
+Coordinates=0,0,87,33
+
+[actBorrarLineaCertificacion]
+Coordinates=1129,595,149,33
+
+[actGuardarCertificacion]
+Coordinates=1129,650,131,33
+
+[actBorrarCertificacion]
+Coordinates=1129,705,123,33
+
+[actanadirlineaspresupuestos]
+Coordinates=523,557,40,33
+
+[actFacturar]
+Coordinates=965,441,73,33
 

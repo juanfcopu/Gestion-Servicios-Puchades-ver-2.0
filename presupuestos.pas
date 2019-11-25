@@ -11,9 +11,11 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, Vcl.Bind.Grid,
-  Data.Bind.Grid, Vcl.Shell.ShellCtrls, Vcl.ToolWin,shellapi, System.Actions,System.DateUtils,
+  Data.Bind.Grid, Vcl.ToolWin,shellapi, System.Actions,System.DateUtils,
   Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,System.Win.COMObj,
-  Vcl.DBGrids, Vcl.Bind.Navigator, Data.Bind.Controls, Vcl.StdActns, Vcl.ImgList;
+  Vcl.DBGrids, Vcl.Bind.Navigator, Data.Bind.Controls, Vcl.StdActns, Vcl.ImgList,
+  System.ImageList, ShellCtrls, rDBGrid, rDBGrid_MS, RzPanel, RzDBNav, Vcl.Mask,
+  Vcl.DBCtrls, rDBComponents;
 
 
 type
@@ -23,35 +25,14 @@ type
     Panel1: TPanel;
     GroupBox1: TGroupBox;
     GroupBox4: TGroupBox;
-    LabeledEdit1: TLabeledEdit;
-    LabeledEdit2: TLabeledEdit;
-    LabeledEdit3: TLabeledEdit;
     GroupBox2: TGroupBox;
-    LabeledEdit4: TLabeledEdit;
-    LabeledEdit6: TLabeledEdit;
-    LabeledEdit7: TLabeledEdit;
-    LabeledEdit8: TLabeledEdit;
     PageControl1: TPageControl;
     lineas: TTabSheet;
     documentacion: TTabSheet;
     fotografias: TTabSheet;
-    StringGrid1: TStringGrid;
     fdCliente: TFDQuery;
     fdpresupuesto: TFDQuery;
     fdlineas: TFDQuery;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    LinkControlToField2: TLinkControlToField;
-    LinkControlToField3: TLinkControlToField;
-    LinkControlToField1: TLinkControlToField;
-    BindSourceDB2: TBindSourceDB;
-    LinkControlToField4: TLinkControlToField;
-    LinkControlToField5: TLinkControlToField;
-    LinkControlToField6: TLinkControlToField;
-    LinkControlToField7: TLinkControlToField;
-    DateTimePicker1: TDateTimePicker;
-    Label1: TLabel;
-    LinkControlToField8: TLinkControlToField;
     fdlineasId_Partida: TIntegerField;
     fdlineasDescripcion: TStringField;
     fdlineasTotal: TFloatField;
@@ -64,9 +45,7 @@ type
     LabeledEdit9: TLabeledEdit;
     LabeledEdit5: TLabeledEdit;
     LabeledEdit11: TLabeledEdit;
-    LinkControlToField9: TLinkControlToField;
     dialruta: TOpenDialog;
-    LinkControlToField12: TLinkControlToField;
     spaprobado: TShape;
     spNoaprobado: TShape;
     spcarpetas: TShape;
@@ -88,42 +67,22 @@ type
     guardarpresupuesto: TAction;
     guardarPDF: TAction;
     mail: TAction;
-    FDQuery1: TFDQuery;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    StringField1: TStringField;
-    FloatField1: TFloatField;
-    BooleanField1: TBooleanField;
-    BooleanField2: TBooleanField;
-    DateTimeField1: TDateTimeField;
     ToolButton9: TToolButton;
     cerrarpres: TAction;
     ToolButton10: TToolButton;
     carpetadocumentacion: TAction;
     LabeledEdit12: TLabeledEdit;
     LabeledEdit13: TLabeledEdit;
-    Label5: TLabel;
-    NavigatorBindSourceDB3: TBindNavigator;
-    Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
-    DataSource1: TDataSource;
-    DBGrid1: TDBGrid;
+    dspresupuesto: TDataSource;
     BTBuscarCliente: TButton;
     btpath: TButton;
-    BindSourceDB3: TBindSourceDB;
-    LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
     fdlineaspresupuestos_id_presupuesto: TIntegerField;
     fdlineaspresupuestos_grupo: TIntegerField;
     LabeledEdit14: TLabeledEdit;
     LabeledEdit15: TLabeledEdit;
     Label9: TLabel;
-    LabeledEdit16: TLabeledEdit;
     Shape2: TShape;
-    LabeledEdit17: TLabeledEdit;
-    LinkControlToField13: TLinkControlToField;
-    Label10: TLabel;
-    Label11: TLabel;
     ToolBar2: TToolBar;
     ImageList1: TImageList;
     ActionManager2: TActionManager;
@@ -136,7 +95,6 @@ type
     ToolBar3: TToolBar;
     ToolButton14: TToolButton;
     AprobarTodos: TAction;
-    LinkControlToField10: TLinkControlToField;
     Label12: TLabel;
     GroupBox3: TGroupBox;
     Memo1: TMemo;
@@ -145,20 +103,69 @@ type
     Guardar: TButton;
     Aceptar: TButton;
     cerrar: TButton;
-    LinkControlToField11: TLinkControlToField;
-    LabeledEdit18: TLabeledEdit;
-    LinkControlToField14: TLinkControlToField;
     spdocumento: TShape;
     Label13: TLabel;
     fdClienteidcontactos: TFDAutoIncField;
     fdClientenombre: TStringField;
     fdClientecif: TStringField;
     fdClientefamilia: TIntegerField;
+    crearObra: TAction;
+    fdlineasobra: TIntegerField;
+    dslineas: TDataSource;
+    RzDBNavigator1: TRzDBNavigator;
+    rDBCodigo: TrDBEdit;
+    dscliente: TDataSource;
+    rDBCIF: TrDBEdit;
+    rDBNombre: TrDBEdit;
+    rDBTotalAprobado: TrDBEdit;
+    rDBPartidasAprobadas: TrDBEdit;
+    rDBNumero: TrDBEdit;
+    rDBTotalPresupuesto: TrDBEdit;
+    rDBPartidas: TrDBEdit;
+    rDBRutaPath: TrDBMemo;
+    rDBRutaDescripcion: TrDBMemo;
+    rDBDateTimePicker1: TrDBDateTimePicker;
+    btn1: TToolButton;
+    fdlineasfecha_aprobado: TDateField;
+    ts1: TTabSheet;
+    ctrlbr1: TControlBar;
+    tlb1: TToolBar;
+    btn2: TToolButton;
+    btn3: TToolButton;
+    btn4: TToolButton;
+    tlb2: TToolBar;
+    btn5: TToolButton;
+    RzDBNavigator2: TRzDBNavigator;
+    rDBGrid1: TrDBGrid;
+    rDBGridClientesDBGridLineas: TrDBGrid_MS;
+    fdqryContactosPresupuesto: TFDQuery;
+    fdpresupuestoid_presupuesto: TIntegerField;
+    fdpresupuestoId_ClientePrev: TIntegerField;
+    mfldDescripcion: TMemoField;
+    mfldPath: TMemoField;
+    blnfldAprovado: TBooleanField;
+    blnfldEjecutado: TBooleanField;
+    dtmfldFechaPresupuesto: TDateTimeField;
+    fltfldTotal: TFloatField;
+    fdpresupuestoPartidas: TIntegerField;
+    fltfldTotalAprobado: TFloatField;
+    mfldDescripcionAprovado: TMemoField;
+    fdpresupuestogrupo: TIntegerField;
+    fdpresupuestopartidasAprobadas: TIntegerField;
+    mfldfdpresupuestoobservaciones: TMemoField;
+    fdqryContactosPresupuestoid_presupuesto: TIntegerField;
+    fdqryContactosPresupuestoid_contacto: TIntegerField;
+    fdqrycontactoscliente: TFDQuery;
+    fdqryContactosPresupuestopta: TStringField;
+    fdqryContactosPresupuestonombre: TStringField;
+    fdqryContactosPresupuestotelefono1: TIntegerField;
+    fdqryContactosPresupuestotelefono2: TIntegerField;
+    fdqryContactosPresupuestotelefono3: TIntegerField;
+    fdqryContactosPresupuestomail: TStringField;
+    dsContactosPresupuesto: TDataSource;
 
-    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
-      Rect: TRect; State: TGridDrawState);
-    procedure StringGrid1SelectCell(Sender: TObject; ACol, ARow: Integer;
-      var CanSelect: Boolean);
+
+
     procedure GuardarClick(Sender: TObject);
     procedure AceptarClick(Sender: TObject);
     procedure cerrarClick(Sender: TObject);
@@ -173,14 +180,6 @@ type
 
     procedure LabeledEdit10Change(Sender: TObject);
     procedure LabeledEdit5Change(Sender: TObject);
-
-
-    procedure PageControl1Resize(Sender: TObject);
-    procedure StringGrid1Exit(Sender: TObject);
-
-
-    procedure StringGrid1MouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
     procedure abrircarpetaExecute(Sender: TObject);
     procedure abrirpresupuestoExecute(Sender: TObject);
     procedure guardarpresupuestoExecute(Sender: TObject);
@@ -188,32 +187,19 @@ type
     procedure mailExecute(Sender: TObject);
     procedure cerrarpresExecute(Sender: TObject);
     procedure carpetadocumentacionExecute(Sender: TObject);
-    procedure StringGrid1KeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure fdlineasBeforePost(DataSet: TDataSet);
     procedure fdlineasAfterDelete(DataSet: TDataSet);
     procedure BTBuscarClienteClick(Sender: TObject);
     procedure btpathClick(Sender: TObject);
     procedure fdClienteAfterOpen(DataSet: TDataSet);
     procedure fdlineasAfterPost(DataSet: TDataSet);
-    procedure NavigatorBindSourceDB3BeforeAction(Sender: TObject;
-      Button: TNavigateButton);
-    procedure StringGrid1KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure StringGrid1KeyPress(Sender: TObject; var Key: Char);
     procedure LinkGridToDataSourceBindSourceDB3AssigningValue(Sender: TObject;
       AssignValueRec: TBindingAssignValueRec; var Value: TValue;
       var Handled: Boolean);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
-    procedure fdlineasBeforeDelete(DataSet: TDataSet);
-    procedure fdlineasAprovadoChange(Sender: TField);
     procedure CheckBox1Mouseup(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure StringGrid1GetEditText(Sender: TObject; ACol, ARow: Integer;
-      var Value: string);
     procedure AprobarTodosExecute(Sender: TObject);
-    procedure StringGrid1Click(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure abrircarpetaUpdate(Sender: TObject);
@@ -223,6 +209,21 @@ type
     procedure carpetadocumentacionUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure crearObraUpdate(Sender: TObject);
+    procedure crearObraExecute(Sender: TObject);
+    procedure rDBGrid_MS1LoadPickList(Sender: TObject; DS: TDataSet;
+      FieldName: string; PickList: TStrings);
+    procedure btn1Click(Sender: TObject);
+    procedure fdlineasAprovadoChange(Sender: TField);
+    procedure fdlineasAfterOpen(DataSet: TDataSet);
+    procedure PageControl1Change(Sender: TObject);
+    procedure fdqryContactosPresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
+      AErrors: Integer);
+    procedure fdqryContactosPresupuestoAfterInsert(DataSet: TDataSet);
+    procedure fdqryContactosPresupuestoAfterEdit(DataSet: TDataSet);
+    procedure fdqryContactosPresupuestoAfterDelete(DataSet: TDataSet);
+    procedure rDBGridClientesDBGridLineasLoadPickList(Sender: TObject;
+      DS: TDataSet; FieldName: string; PickList: TStrings);
   private
     { Private declarations }
      lst:TStringlist;
@@ -247,7 +248,7 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, listaclientes;
+uses DModule1, listaclientes, SelectLineasPresupuestos;
 
 
  procedure TFPresupuestos.luces(aprobado:boolean);
@@ -331,6 +332,21 @@ begin
 end;
 
 
+procedure TFPresupuestos.crearObraExecute(Sender: TObject);
+var SelLinPres:TFLineasPresupuestoObra;
+begin
+    SelLinPres:=TFLineasPresupuestoObra.Create(Self);
+    SelLinPres.ShowModal;
+    SelLinPres.Close;
+
+
+end;
+
+procedure TFPresupuestos.crearObraUpdate(Sender: TObject);
+begin
+ToolButton5.Enabled:=fdpresupuesto.FieldByName('Aprovado').AsBoolean;
+end;
+
 procedure TFPresupuestos.abrirpresupuestoExecute(Sender: TObject);
 var fichero:string;
 begin
@@ -366,7 +382,7 @@ begin
         fdlineas.next;
       end;
 
-      StringGrid1.Repaint;
+
 
     
 end;
@@ -381,22 +397,33 @@ begin
     fdclen.IndexFieldNames:='idAdministrador;nombre';
     fdclen.Active:=true;
 
-    lclientes:=Tlistclientes.Create(Sender as TControl);
+    lclientes:=Tlistclientes.Create(fdclen);
     lclientes.DragMode:=dmManual;
-    lclientes.BindSourceDB1.DataSet:=fdclen;
-    if fdclen.RecordCount >0 then lclientes.linklistaclientes.active:=true;
     lclientes.ShowModal;
 
     fdcliente.Close;
     fdcliente.ParamByName('id_cliente').AsInteger:=fdclen.FieldByName('IdContactos').AsInteger;
     fdcliente.Active:=true;
-
-
     fdclen.Close;
-    fdclen.Free;
-    lclientes.Free;
-    labeledEdit5Change(Sender);
-    labeledEdit10Change(Sender);
+
+    if fdpresupuesto.State in [dsInsert,dsEdit] then
+    begin
+         fdpresupuesto.FieldByName('Id_clientePrev').AsInteger:=FDCliente.FieldByName('IdContactos').AsInteger
+    end
+    else begin
+              FDpresupuesto.Edit;
+              FDpresupuesto.FieldByName('Id_clientePrev').AsInteger:=FDCliente.FieldByName('IdContactos').AsInteger;
+              FDpresupuesto.Post;
+         end;
+
+     Self.Caption:='P. '+fdpresupuesto.FieldByName('id_presupuesto').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
+
+end;
+
+procedure TFPresupuestos.btn1Click(Sender: TObject);
+begin
+DataModule1.editarclienteExecute(fdcliente);
+
 
 end;
 
@@ -417,7 +444,7 @@ dialruta.InitialDir:=PATHDOCPRESUPUESTOS;
                     posicion:=pos('PRESUPUESTOS', dialruta.FileName);
                     ruta:=copy(dialruta.FileName,posicion-1,length(dialruta.FileName));
                     fdpresupuesto.FieldByName('path').Asstring:=ruta;
-                    labelededit8.Text:=ruta;
+
 
                end;
 
@@ -498,9 +525,15 @@ begin
        if not (fdlineas.State in [dsEdit,dsInsert]) and (not cargando) then
        begin
             fdlineas.RecNo:=RowAct;
+            if fdlineas.FieldByName('obra').isnull then
+            begin
             fdlineas.Edit;
             fdlineas.FieldByName('Aprovado').AsBoolean:=(Sender as TCheckBox).Checked;
             fdlineas.post;
+            end
+            else  ShowMessage('La partida ya tiene asignada una obra, no se puede modificar.');
+
+             (Sender as TCheckBox).Checked:= fdlineas.FieldByName('Aprovado').AsBoolean;
        end;
 end;
 
@@ -521,6 +554,7 @@ procedure TFPresupuestos.CheckBox2Click(Sender: TObject);
 begin
        if not (fdlineas.State in [dsEdit,dsInsert]) then
        begin
+             fdlineas.RecNo:=RowAct;
              fdlineas.Edit;
              fdlineas.FieldByName('Ejecutado').AsBoolean:=(Sender as TCheckBox).Checked;
              fdlineas.post;
@@ -564,7 +598,7 @@ begin
              guardarpresupuesto.Enabled:=false;
              guardar.Enabled:=false;
              shape1.Brush.Color:=clwhite;
-             DataModule1.RefrescarDataSet(lst);
+           //  DataModule1.RefrescarDataSet(lst);
 
             end;
 
@@ -598,7 +632,7 @@ begin
           DataSet.Next;
           end;
 
-
+     rDBGridClientesDBGridLineas.RecalculateSummaryResults(True);
      guardarpresupuesto.Enabled:=True;
      Guardar.Enabled:=true;
      shape1.Brush.Color:=cllime;
@@ -622,7 +656,7 @@ begin
 
    DataSet.FieldByName('presupuestos_Id_Presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
    DataSet.FieldByName('presupuestos_grupo').asinteger:= YearOf(fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime);
-   DataSet.FieldByName('Id_partida').AsInteger:=StringGrid1.rowcount-1;
+   DataSet.FieldByName('Id_partida').AsInteger:=DataSet.RecordCount+1;
    DataSet.FieldByName('Aprovado').AsBoolean:=false;
    DataSet.FieldByName('Ejecutado').asboolean:=false;
    DataSet.FieldByName('Total').AsFloat:=0;
@@ -631,6 +665,11 @@ begin
      guardarpresupuesto.Enabled:=True;
      Guardar.Enabled:=true;
      shape1.Brush.Color:=cllime;
+end;
+
+procedure TFPresupuestos.fdlineasAfterOpen(DataSet: TDataSet);
+begin
+rDBGridClientesDBGridLineas.RecalculateSummaryResults(True);
 end;
 
 procedure TFPresupuestos.fdlineasAfterPost(DataSet: TDataSet);
@@ -652,38 +691,16 @@ begin
              else             fdpresupuesto.FieldByName('Aprovado').AsBoolean:=false;
 
 
-
+          rDBGridClientesDBGridLineas.RecalculateSummaryResults(True);
           luces(fdpresupuesto.FieldByName('Aprovado').AsBoolean);
 end;
 
 procedure TFPresupuestos.fdlineasAprovadoChange(Sender: TField);
 begin
-    { if not (fdpresupuesto.state in [dsInsert,dsEdit]) then  fdpresupuesto.Edit;
+if Sender.AsBoolean then fdlineasfecha_aprobado.AsDateTime:=Date;
+if not Sender.AsBoolean then
+fdlineasfecha_aprobado.clear;
 
-     if Sender.AsBoolean then
-                 fdpresupuesto.FieldByName('TotalAprobado').asfloat:=fdpresupuesto.FieldByName('TotalAprobado').asfloat+Sender.DataSet.FieldByName('Total').asfloat
-                 else
-                 fdpresupuesto.FieldByName('TotalAprobado').asfloat:=fdpresupuesto.FieldByName('TotalAprobado').asfloat-Sender.DataSet.FieldByName('Total').asfloat;
-  }
-end;
-
-procedure TFPresupuestos.fdlineasBeforeDelete(DataSet: TDataSet);
-begin
-     StringGrid1.Objects[3,DataSet.RecordCount].Free;
-     StringGrid1.Objects[4,DataSet.RecordCount].Free;
-
-end;
-
-procedure TFPresupuestos.fdlineasBeforePost(DataSet: TDataSet);
-begin
-if StringGrid1.EditorMode then StringGrid1.EditorMode:=false;
-
-
-
-label8.caption:=inttostr(fdlineas.RecordCount);
-label5.Caption:=inttostr(fdlineas.RecNo);
-label6.Caption:=inttostr(StringGrid1.Row);
-label7.Caption:=inttostr(StringGrid1.RowCount);
 
 end;
 
@@ -736,6 +753,8 @@ end;
 
 procedure TFPresupuestos.fdpresupuestoAfterEdit(DataSet: TDataSet);
 begin
+ guardarpresupuesto.Enabled:=True;
+Shape1.Brush.Color:=clLime;
 Guardar.Enabled:=true;
 end;
 
@@ -795,10 +814,20 @@ begin
 end;
 
 
+
+if (fdlineas.state in [dsEdit,dsInsert]) then
+ begin
+   fdlineas.post;
+ end;
+
+
+
 if (fdpresupuesto.state in [dsInsert, dsEdit]) then
  begin
    fdpresupuesto.post;
  end;
+
+
 
  if fdpresupuesto.UpdatesPending then
  begin
@@ -806,14 +835,20 @@ if (fdpresupuesto.state in [dsInsert, dsEdit]) then
 
  end;
 
-if (fdlineas.state in [dsEdit,dsInsert]) then
- begin
-   fdlineas.post;
- end;
-
  if fdlineas.UpdatesPending then
     begin
          fdlineas.ApplyUpdates(1);
+
+    end;
+
+    if (fdqryContactosPresupuesto.state in [dsEdit,dsInsert]) then
+ begin
+   fdqryContactosPresupuesto.post;
+ end;
+
+ if fdqryContactosPresupuesto.UpdatesPending then
+    begin
+    fdqryContactosPresupuesto.ApplyUpdates(1);
 
     end;
 
@@ -950,222 +985,97 @@ begin
 ToolButton3.Enabled:= FileExists(PATHUSER+fdpresupuesto.FieldByName('path').AsString);
 end;
 
-procedure TFPresupuestos.NavigatorBindSourceDB3BeforeAction(Sender: TObject;
-  Button: TNavigateButton);
-
+procedure TFPresupuestos.PageControl1Change(Sender: TObject);
 begin
- if Button = nbInsert then
-    begin
-         BindSourceDB3.DataSet.Append;
-         Abort;
-    end;
-
- if Button =nbDelete then
-    begin
-       if MessageDlg('Esta seguro de borrar la linea de presupuesto?', mtConfirmation, [mbYes,mbNo], 0) = mrYes then
-        begin
-
-           if BindSourceDB3.DataSet.FieldByName('Aprovado').AsBoolean then
-              begin
-               ShowMessage('La linea de presupuesto esta aprobada, no se puede eliminar.');
-               Abort;
-              end;
-
-        end
-        else Abort;
-    end;
-
-end;
-
-procedure TFPresupuestos.PageControl1Resize(Sender: TObject);
-begin
-LinkGridToDataSourceBindSourceDB3.Columns[1].Width:=StringGrid1.Width-LinkGridToDataSourceBindSourceDB3.Columns[0].Width-20-LinkGridToDataSourceBindSourceDB3.Columns[4].Width-LinkGridToDataSourceBindSourceDB3.Columns[2].Width-LinkGridToDataSourceBindSourceDB3.Columns[3].Width;
-
-end;
-
-procedure TFPresupuestos.StringGrid1Click(Sender: TObject);
-begin
-   // (Sender as TStringGrid).EditorMode:=not  (Sender as TStringGrid).EditorMode;
-                         //(Sender as TStringGrid).Options:= (Sender as TStringGrid).Options+[goRowSelect];
-end;
-
-procedure TFPresupuestos.StringGrid1DrawCell(Sender: TObject; ACol,
-  ARow: Integer; Rect: TRect; State: TGridDrawState);
-  var cb:TObject; Valor:Extended;
-begin
-
-
-if Arow = 0 then
+   if TPageControl(Sender).ActivePageIndex = 3 then
    begin
- (Sender as TStringGrid).Canvas.Brush.Color:=cl3DLight;
-   (Sender as TStringGrid).Canvas.Font.Style:=[fsbold];
-   (Sender as TStringGrid).Canvas.Font.size:=10;
 
+   if not fdqrycontactoscliente.Active then
+   begin
+       fdqrycontactoscliente.ParamByName('idcliente').AsInteger:=fdCliente.FieldByName('idContactos').AsInteger;
+       fdqrycontactoscliente.Open;
+   end;
 
-    end
-   else begin
-           (Sender as TStringGrid).Canvas.Brush.Color:=clWindow;
-           (Sender as TStringGrid).Canvas.Font.Style:=[];
-           (Sender as TStringGrid).Canvas.Font.size:=9;
-
-        end;
-
-
-    if Arow mod 2 =0 then     (Sender as TStringGrid).Canvas.Brush.Color:=clSilver;
-
-    if (ACol=2) and (Arow >0)then
-              begin
-                   if tryStrToFloat((Sender as TStringGrid).Cells[Acol,Arow],Valor) then
-                      if Valor > 80 then
-                                          (Sender as TStringGrid).Canvas.Font.color:=clblue;
-              end
-    else   (Sender as TStringGrid).Canvas.Font.color:=clblack ;
+   if not fdqryContactosPresupuesto.Active then
+   begin
+       fdqryContactosPresupuesto.ParamByName('idpresupuesto').AsInteger:=fdpresupuestoid_presupuesto.AsInteger;
+       fdqryContactosPresupuesto.Open;
+   end;
 
 
 
-  if (gdSelected in state) or (gdFocused in state) then
-      begin
-         (Sender as TStringGrid).Canvas.Font.style:=[fsBold];
-         (Sender as TStringGrid).Canvas.Brush.Color:=clMenu;
-      end;
-
-
-
-     if (Sender as TStringGrid).Cells[3,Arow] = 'True' then
-                    begin
-                        (Sender as TStringGrid).Canvas.Font.color:=clred;
-                        (Sender as TStringGrid).canvas.font.Style:=[fsBold]
-
-
-
-                    end ;
-
-
-      if ((ACol=3) or (ACol=4)) and (Arow>0) then  begin
-
-                        if (Sender as TStringGrid).Objects[Acol,Arow]=nil then
-                        begin
-                             cb:=TCheckBox.Create(Sender as TControl);
-                             (Sender as TStringGrid).Objects[Acol,Arow]:=cb;
-                             (cb as TCheckBox).parent:=lineas;
-                              if ACol=3 then (cb as TCheckBox).OnClick:=CheckBox1Click;
-                               // if ACol=3 then  (cb as TCheckBox).OnMouseup:= CheckBox1Mouseup;
-
-                             if ACol=4 then (cb as TCheckBox).OnClick:=CheckBox2Click;
-                             (cb as TCheckBox).AllowGrayed:=False;
-                             (cb as TCheckBox).Checked:=False;
-                             (cb as TCheckBox).Height:=20;
-                             (cb as TCheckBox).Width:=15;
-
-
-                        end  else cb:=(Sender as TStringGrid).Objects[Acol,Arow];
-
-                            if ACol=3 then  if (Sender as TStringGrid).Cells[3,Arow] = 'True' then
-                            begin
-                                  RowAct:=Arow;
-                                (cb as TCheckBox).Checked:=true;
-
-                            end;
-
-                            if Acol=4 then  if (Sender as TStringGrid).Cells[4,Arow] = 'True' then (cb as TCheckBox).Checked:=True;
-
-
-
-                               (cb as TCheckBox).color:=(Sender as TStringGrid).Canvas.Brush.Color;
-                               (cb as TCheckBox).Left:=  Rect.Left+20;
-                               (cb as TCheckBox).Top:= Rect.Top+45;
-
-
-                        end;
-
-               (Sender as TStringGrid).Canvas.FillRect(Rect);
-
-  if ((Acol <> 3) and (Acol<>4)) or (ARow = 0) then (Sender as TStringGrid).Canvas.TextRect(Rect,Rect.Left,Rect.Top+3,(Sender as TStringGrid).Cells[Acol,Arow]);
-
-
-
-
+   end;
 end;
 
-procedure TFPresupuestos.StringGrid1Exit(Sender: TObject);
+procedure TFPresupuestos.rDBGridClientesDBGridLineasLoadPickList(
+  Sender: TObject; DS: TDataSet; FieldName: string; PickList: TStrings);
 begin
-if fdlineas.State in [dsEdit,dsInsert] then      fdlineas.Post;
+   PickList.LoadFromFile('p.txt');
 end;
 
-procedure TFPresupuestos.StringGrid1GetEditText(Sender: TObject; ACol,
-  ARow: Integer; var Value: string);
+procedure TFPresupuestos.rDBGrid_MS1LoadPickList(Sender: TObject; DS: TDataSet;
+  FieldName: string; PickList: TStrings);
 begin
-if not (fdlineas.State in [dsInsert,dsEdit]) then fdlineas.edit;
+//if FieldName='Descripcion' then PickList.Add('Fachada');
+//if FieldName='Descripcion' then PickList.Add('Bajante');
 
-Value:=Value;
-end;
-
-procedure TFPresupuestos.StringGrid1KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-     if key= VK_ESCAPE then fdlineas.cancel;
-
-     
-end;
-
-procedure TFPresupuestos.StringGrid1KeyPress(Sender: TObject; var Key: Char);
-begin
-if ((Sender as Tstringgrid).col=2) and (key='.') then
-      Key:=',';
-
-if (key=#13) then fdlineas.post;
-
-
-end;
-
-procedure TFPresupuestos.StringGrid1KeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-label8.caption:=inttostr(fdlineas.RecordCount);
-label5.Caption:=inttostr(fdlineas.RecNo);
-label6.Caption:=inttostr(StringGrid1.Row);
-label7.Caption:=inttostr(StringGrid1.RowCount);
-
-if key=40 then
-            if (Sender as TStringGrid).Row=(Sender as TStringGrid).RowCount-1 then
-                   if not (fdlineas.State  in [dsInsert]) then
-                      fdlineas.Append;
-
-end;
-
-procedure TFPresupuestos.StringGrid1MouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
-   var Col,Row:integer;
-begin
-
-     (Sender as TStringGrid).MouseToCell(X,Y,Col,Row);
-    if not (fdlineas.state in [dsInsert, dsEdit]) and (Row<>-1)then
-
-      begin
-            RowAct:=Row;
-            label10.caption:=inttostr(Col);
-            label11.caption:=inttostr(Row);
-          // fdlineas.RecNo:=Row;
-
-      end;
-
-
-
-end;
-
-procedure TFPresupuestos.StringGrid1SelectCell(Sender: TObject; ACol,
-  ARow: Integer; var CanSelect: Boolean);
-
-begin
-
-  CanSelect:=true;
-  if Acol=3 then CanSelect:=false;
 
 end;
 
 procedure TFPresupuestos.fdpresupuestoAfterInsert(DataSet: TDataSet);
 begin
-      guardarpresupuesto.Enabled:=True;
+     fdpresupuesto.FieldByName('Id_ClientePrev').Asinteger:=fdCliente.FieldByName('IdContactos').AsInteger;
+                   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=-1;
+                   fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+
+                   fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
+                   fdpresupuesto.FieldByName('partidas').asinteger:=0;
+                   fdpresupuesto.FieldByName('Total').AsFloat:=0;
+                   fdpresupuesto.FieldByName('TotalAprobado').AsFloat:=0;
+     guardarpresupuesto.Enabled:=True;
+     Guardar.Enabled:=true;
+     shape1.Brush.Color:=cllime;
+end;
+
+procedure TFPresupuestos.fdqryContactosPresupuestoAfterApplyUpdates(
+  DataSet: TFDDataSet; AErrors: Integer);
+begin
+ if AErrors = 0 then
+         begin
+          DataSet.CommitUpdates;
+         if (not fdpresupuesto.UpdatesPending) or (not fdlineas.UpdatesPending) then
+            begin
+             guardarpresupuesto.Enabled:=false;
+             guardar.Enabled:=false;
+             shape1.Brush.Color:=clwhite;
+           //  DataModule1.RefrescarDataSet(lst);
+
+            end;
+
+         end;
+end;
+
+procedure TFPresupuestos.fdqryContactosPresupuestoAfterDelete(
+  DataSet: TDataSet);
+begin
+guardarpresupuesto.Enabled:=True;
+     Guardar.Enabled:=true;
+     shape1.Brush.Color:=cllime;
+end;
+
+
+procedure TFPresupuestos.fdqryContactosPresupuestoAfterEdit(DataSet: TDataSet);
+begin
+guardarpresupuesto.Enabled:=True;
+     Guardar.Enabled:=true;
+     shape1.Brush.Color:=cllime;
+end;
+
+procedure TFPresupuestos.fdqryContactosPresupuestoAfterInsert(
+  DataSet: TDataSet);
+begin
+fdqryContactosPresupuestoid_presupuesto.AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
+guardarpresupuesto.Enabled:=True;
      Guardar.Enabled:=true;
      shape1.Brush.Color:=cllime;
 end;
@@ -1178,8 +1088,13 @@ end;
 procedure TFPresupuestos.FormCreate(Sender: TObject);
 begin
 lst:=TStringList.Create;
-lst.add('fdpresupuestos');
-lst.add('fdlineaspresupuesto')
+lst.add('fdpresupuesto');
+lst.add('fdlineas')           ;
+rDBGridClientesDBGridLineas.LoadAutoPickList;
+
+
+
+
 end;
 
 procedure TFPresupuestos.FormDestroy(Sender: TObject);

@@ -22,6 +22,10 @@ type
     procedure btclientesClick(Sender: TObject);
     procedure btpresupuestosClick(Sender: TObject);
     procedure Button9Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,9 +51,29 @@ begin
      fnavegador.NodosPresupuestos;
 end;
 
+procedure Tmenuseleccion.Button2Click(Sender: TObject);
+begin
+fnavegador.NodosFacturasEmitidas;
+end;
+
+procedure Tmenuseleccion.Button4Click(Sender: TObject);
+begin
+  fnavegador.NodosAdministrador;
+end;
+
+procedure Tmenuseleccion.Button6Click(Sender: TObject);
+begin
+      fnavegador.NodosConfiguracion;
+end;
+
 procedure Tmenuseleccion.Button9Click(Sender: TObject);
 begin
 fnavegador.NodosObras;
+end;
+
+procedure Tmenuseleccion.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+Action:=caFree;
 end;
 
 end.

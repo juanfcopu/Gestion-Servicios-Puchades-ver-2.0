@@ -4,8 +4,9 @@ object FPresupuestos: TFPresupuestos
   BorderStyle = bsToolWindow
   Caption = 'Presupuesto'
   ClientHeight = 782
-  ClientWidth = 1147
+  ClientWidth = 1129
   Color = clBtnFace
+  Constraints.MaxWidth = 1175
   DragKind = dkDock
   DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +24,7 @@ object FPresupuestos: TFPresupuestos
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1147
+    Width = 1129
     Height = 782
     Align = alClient
     TabOrder = 0
@@ -31,7 +32,7 @@ object FPresupuestos: TFPresupuestos
       AlignWithMargins = True
       Left = 4
       Top = 55
-      Width = 1139
+      Width = 1121
       Height = 93
       Align = alTop
       Anchors = [akTop, akRight]
@@ -42,12 +43,12 @@ object FPresupuestos: TFPresupuestos
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 1
       object GroupBox4: TGroupBox
         AlignWithMargins = True
         Left = 12
         Top = 18
-        Width = 1122
+        Width = 1104
         Height = 63
         Margins.Left = 10
         Margins.Bottom = 10
@@ -60,72 +61,6 @@ object FPresupuestos: TFPresupuestos
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        object LabeledEdit1: TLabeledEdit
-          AlignWithMargins = True
-          Left = 65
-          Top = 24
-          Width = 41
-          Height = 21
-          EditLabel.Width = 33
-          EditLabel.Height = 13
-          EditLabel.Caption = 'Codigo'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          LabelPosition = lpLeft
-          ParentFont = False
-          TabOrder = 0
-        end
-        object LabeledEdit2: TLabeledEdit
-          AlignWithMargins = True
-          Left = 361
-          Top = 24
-          Width = 337
-          Height = 21
-          EditLabel.Width = 37
-          EditLabel.Height = 13
-          EditLabel.Caption = 'Nombre'
-          EditLabel.Font.Charset = DEFAULT_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -11
-          EditLabel.Font.Name = 'Tahoma'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          LabelPosition = lpLeft
-          ParentFont = False
-          TabOrder = 2
-        end
-        object LabeledEdit3: TLabeledEdit
-          AlignWithMargins = True
-          Left = 160
-          Top = 24
-          Width = 140
-          Height = 21
-          EditLabel.Width = 25
-          EditLabel.Height = 13
-          EditLabel.Caption = 'C.I.F'
-          EditLabel.Font.Charset = DEFAULT_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -11
-          EditLabel.Font.Name = 'Tahoma'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          LabelPosition = lpLeft
-          ParentFont = False
-          TabOrder = 1
-        end
         object BTBuscarCliente: TButton
           Left = 701
           Top = 16
@@ -137,9 +72,50 @@ object FPresupuestos: TFPresupuestos
           Images = DataModule1.icopeque
           PressedImageIndex = 0
           Style = bsCommandLink
-          TabOrder = 3
+          TabOrder = 0
           StyleElements = []
           OnClick = BTBuscarClienteClick
+        end
+        object rDBCodigo: TrDBEdit
+          AlignWithMargins = True
+          Left = 56
+          Top = 24
+          Width = 41
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'idcontactos'
+          DataSource = dscliente
+          ReadOnly = True
+          TabOrder = 1
+          DBEditLabel.OwnCaption = 'Codigo'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBCIF: TrDBEdit
+          Left = 151
+          Top = 24
+          Width = 140
+          Height = 21
+          DataField = 'cif'
+          DataSource = dscliente
+          ReadOnly = True
+          TabOrder = 2
+          DBEditLabel.OwnCaption = 'C.I.F'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBNombre: TrDBEdit
+          Left = 360
+          Top = 24
+          Width = 335
+          Height = 21
+          DataField = 'nombre'
+          DataSource = dscliente
+          ReadOnly = True
+          TabOrder = 3
+          DBEditLabel.OwnCaption = 'Nombre'
+          DBEditLabel.ShowRequiredMark = False
+          DBEditLabel.Position = lpLeftCenter
+          DBEditLabel.Color = clWhite
+          DBEditLabel.ParentColor = False
         end
       end
     end
@@ -147,8 +123,8 @@ object FPresupuestos: TFPresupuestos
       AlignWithMargins = True
       Left = 4
       Top = 154
-      Width = 1139
-      Height = 151
+      Width = 1121
+      Height = 135
       Align = alTop
       Caption = 'Datos Presupuesto'
       Enabled = False
@@ -158,279 +134,299 @@ object FPresupuestos: TFPresupuestos
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 1
-      object Label1: TLabel
-        Left = 49
-        Top = 78
-        Width = 29
-        Height = 13
-        Caption = 'Fecha'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
+      TabOrder = 2
+      DesignSize = (
+        1121
+        135)
       object spaprobado: TShape
-        Left = 1020
-        Top = 75
+        Left = 980
+        Top = 51
         Width = 25
         Height = 17
+        Anchors = [akTop, akRight]
         Shape = stCircle
       end
       object spNoaprobado: TShape
-        Left = 1020
-        Top = 98
+        Left = 980
+        Top = 74
         Width = 25
         Height = 17
+        Anchors = [akTop, akRight]
         Shape = stCircle
       end
       object spcarpetas: TShape
-        Left = 1020
-        Top = 121
+        Left = 980
+        Top = 97
         Width = 25
         Height = 17
+        Anchors = [akTop, akRight]
         Shape = stCircle
       end
       object Label2: TLabel
-        Left = 1056
-        Top = 76
+        Left = 1016
+        Top = 52
         Width = 55
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = 'Aprobado'
       end
       object Label3: TLabel
-        Left = 1056
-        Top = 99
+        Left = 1016
+        Top = 75
         Width = 71
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = 'No aprobado'
       end
       object Label4: TLabel
-        Left = 1056
-        Top = 122
+        Left = 1016
+        Top = 98
         Width = 51
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = 'Carpetas'
       end
       object Shape2: TShape
-        Left = 757
-        Top = 59
-        Width = 1
-        Height = 81
+        Left = 41
+        Top = 97
+        Width = 932
+        Height = 2
+        Anchors = [akLeft, akTop, akRight]
+        Constraints.MaxWidth = 953
+        ExplicitWidth = 953
       end
       object spdocumento: TShape
-        Left = 1020
-        Top = 52
+        Left = 980
+        Top = 28
         Width = 25
         Height = 17
+        Anchors = [akTop, akRight]
         Shape = stCircle
       end
       object Label13: TLabel
-        Left = 1056
-        Top = 53
+        Left = 1016
+        Top = 29
         Width = 65
         Height = 13
+        Anchors = [akTop, akRight]
         Caption = 'Documento'
       end
-      object LabeledEdit4: TLabeledEdit
-        Left = 84
-        Top = 32
-        Width = 129
-        Height = 21
-        EditLabel.Width = 44
-        EditLabel.Height = 13
-        EditLabel.Caption = 'N'#250'mero'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = [fsBold]
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 0
-      end
-      object LabeledEdit6: TLabeledEdit
-        Left = 263
-        Top = 75
-        Width = 57
-        Height = 21
-        EditLabel.Width = 39
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Partidas'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 1
-      end
-      object LabeledEdit7: TLabeledEdit
-        Left = 424
-        Top = 75
-        Width = 129
-        Height = 21
-        EditLabel.Width = 87
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Total Presupuesto'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 2
-      end
-      object LabeledEdit8: TLabeledEdit
-        Left = 77
-        Top = 115
-        Width = 633
-        Height = 21
-        EditLabel.Width = 23
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Ruta'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 3
-      end
-      object DateTimePicker1: TDateTimePicker
-        Left = 84
-        Top = 75
-        Width = 113
-        Height = 21
-        Date = 43201.377841041660000000
-        Time = 43201.377841041660000000
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-        OnChange = DateTimePicker1Change
-      end
       object btpath: TButton
-        Left = 713
-        Top = 107
+        Left = 723
+        Top = 60
         Width = 32
-        Height = 32
+        Height = 25
+        Anchors = [akTop, akRight]
         ImageIndex = 0
         Images = DataModule1.icopeque
         Style = bsCommandLink
-        TabOrder = 5
+        TabOrder = 6
         StyleElements = []
         OnClick = btpathClick
       end
-      object LabeledEdit16: TLabeledEdit
-        Left = 862
-        Top = 75
-        Width = 129
+      object rDBTotalAprobado: TrDBEdit
+        Left = 116
+        Top = 105
+        Width = 121
         Height = 21
-        EditLabel.Width = 74
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Total Aprobado'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
+        DataField = 'TotalAprobado'
+        DataSource = dspresupuesto
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 6
-        OnChange = LabeledEdit10Change
-      end
-      object LabeledEdit17: TLabeledEdit
-        Left = 862
-        Top = 115
-        Width = 129
-        Height = 21
-        EditLabel.Width = 94
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Partidas Aprobadas'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        LabelPosition = lpLeft
-        ParentFont = False
-        TabOrder = 7
-      end
-      object LabeledEdit18: TLabeledEdit
-        Left = 303
-        Top = 32
-        Width = 688
-        Height = 21
-        EditLabel.Width = 65
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Descripci'#243'n'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = [fsBold]
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        LabelPosition = lpLeft
         ParentFont = False
         TabOrder = 8
+        DBEditLabel.OwnCaption = 'Total Aprobado'
+        DBEditLabel.ShowRequiredMark = False
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = []
+        DBEditLabel.ParentFont = False
+      end
+      object rDBPartidasAprobadas: TrDBEdit
+        Left = 425
+        Top = 105
+        Width = 121
+        Height = 21
+        DataField = 'partidasAprobadas'
+        DataSource = dspresupuesto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 9
+        DBEditLabel.OwnCaption = 'Partidas Aprobadas'
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = []
+        DBEditLabel.ParentFont = False
+      end
+      object rDBNumero: TrDBEdit
+        Left = 84
+        Top = 16
+        Width = 80
+        Height = 21
+        DataField = 'id_presupuesto'
+        DataSource = dspresupuesto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        DBEditLabel.OwnCaption = 'N'#250'mero'
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = [fsBold]
+        DBEditLabel.ParentFont = False
+      end
+      object rDBTotalPresupuesto: TrDBEdit
+        Left = 473
+        Top = 43
+        Width = 121
+        Height = 21
+        DataField = 'Total'
+        DataSource = dspresupuesto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 5
+        DBEditLabel.OwnCaption = 'Total Presupuesto'
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = []
+        DBEditLabel.ParentFont = False
+      end
+      object rDBPartidas: TrDBEdit
+        Left = 280
+        Top = 43
+        Width = 57
+        Height = 21
+        DataField = 'Partidas'
+        DataSource = dspresupuesto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 4
+        DBEditLabel.OwnCaption = 'Partidas'
+        DBEditLabel.ShowRequiredMark = False
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = []
+        DBEditLabel.ParentFont = False
+      end
+      object rDBRutaPath: TrDBMemo
+        Left = 84
+        Top = 70
+        Width = 600
+        Height = 21
+        DataField = 'Path'
+        DataSource = dspresupuesto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        PopupMenu = rDBRutaPath.pmSearch
+        ScrollBars = ssVertical
+        TabOrder = 7
+        DBEditLabel.OwnCaption = 'Ruta'
+        DBEditLabel.ShowRequiredMark = False
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = []
+        DBEditLabel.ParentFont = False
+      end
+      object rDBRutaDescripcion: TrDBMemo
+        Left = 280
+        Top = 16
+        Width = 600
+        Height = 21
+        DataField = 'Descripcion'
+        DataSource = dspresupuesto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        PopupMenu = rDBRutaPath.pmSearch
+        ScrollBars = ssVertical
+        TabOrder = 1
+        DBEditLabel.OwnCaption = 'Descripci'#243'n'
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = [fsBold]
+        DBEditLabel.ParentFont = False
+      end
+      object rDBDateTimePicker1: TrDBDateTimePicker
+        Left = 84
+        Top = 43
+        Width = 113
+        Height = 21
+        Date = 43617.635961863420000000
+        Time = 43617.635961863420000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        DataField = 'FechaPresupuesto'
+        DataSource = dspresupuesto
+        DBEditLabel.OwnCaption = 'Fecha'
+        DBEditLabel.Position = lpLeftCenter
+        DBEditLabel.Font.Charset = DEFAULT_CHARSET
+        DBEditLabel.Font.Color = clWindowText
+        DBEditLabel.Font.Height = -11
+        DBEditLabel.Font.Name = 'Tahoma'
+        DBEditLabel.Font.Style = []
+        DBEditLabel.ParentFont = False
+        FormatEmpty = '__.__.__'
       end
     end
     object PageControl1: TPageControl
       AlignWithMargins = True
       Left = 4
-      Top = 311
-      Width = 1139
-      Height = 419
+      Top = 295
+      Width = 1121
+      Height = 346
       ActivePage = lineas
       Align = alTop
       Enabled = False
@@ -440,8 +436,8 @@ object FPresupuestos: TFPresupuestos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
-      OnResize = PageControl1Resize
+      TabOrder = 3
+      OnChange = PageControl1Change
       object lineas: TTabSheet
         Caption = 'Lineas'
         Font.Charset = DEFAULT_CHARSET
@@ -450,30 +446,12 @@ object FPresupuestos: TFPresupuestos
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        object Label5: TLabel
-          Left = 828
-          Top = 292
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label6: TLabel
-          Left = 828
-          Top = 308
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
+        DesignSize = (
+          1113
+          318)
         object Label7: TLabel
           Left = 828
           Top = 339
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label8: TLabel
-          Left = 828
-          Top = 273
           Width = 31
           Height = 13
           Caption = 'Label5'
@@ -485,20 +463,6 @@ object FPresupuestos: TFPresupuestos
           Height = 13
           Caption = 'Label5'
         end
-        object Label10: TLabel
-          Left = 886
-          Top = 272
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label11: TLabel
-          Left = 886
-          Top = 305
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
         object Label12: TLabel
           Left = 886
           Top = 337
@@ -506,62 +470,18 @@ object FPresupuestos: TFPresupuestos
           Height = 13
           Caption = 'Label5'
         end
-        object StringGrid1: TStringGrid
-          Tag = 5
-          AlignWithMargins = True
-          Left = 3
-          Top = 41
-          Width = 1125
-          Height = 225
-          Align = alTop
-          Anchors = [akLeft, akTop, akRight, akBottom]
-          DefaultDrawing = False
-          FixedCols = 0
-          RowCount = 2
-          Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goDrawFocusSelected, goColSizing, goColMoving, goEditing, goTabs, goThumbTracking]
-          TabOrder = 0
-          OnClick = StringGrid1Click
-          OnDrawCell = StringGrid1DrawCell
-          OnExit = StringGrid1Exit
-          OnGetEditText = StringGrid1GetEditText
-          OnKeyDown = StringGrid1KeyDown
-          OnKeyPress = StringGrid1KeyPress
-          OnKeyUp = StringGrid1KeyUp
-          OnMouseMove = StringGrid1MouseMove
-          OnSelectCell = StringGrid1SelectCell
-          ColWidths = (
-            64
-            64
-            64
-            64
-            64)
-        end
         object ControlBar2: TControlBar
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1125
+          Width = 1107
           Height = 32
           Align = alTop
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 1
-          object NavigatorBindSourceDB3: TBindNavigator
-            AlignWithMargins = True
-            Left = 11
-            Top = 2
-            Width = 207
-            Height = 22
-            DataSource = BindSourceDB3
-            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost, nbCancel, nbRefresh]
-            Flat = True
-            Orientation = orHorizontal
-            ConfirmDelete = False
-            TabOrder = 0
-            BeforeAction = NavigatorBindSourceDB3BeforeAction
-          end
+          TabOrder = 0
           object ToolBar2: TToolBar
-            Left = 231
+            Left = 314
             Top = 2
             Width = 72
             Height = 22
@@ -588,7 +508,7 @@ object FPresupuestos: TFPresupuestos
           end
           object ToolBar3: TToolBar
             AlignWithMargins = True
-            Left = 316
+            Left = 399
             Top = 2
             Width = 158
             Height = 48
@@ -601,14 +521,31 @@ object FPresupuestos: TFPresupuestos
               Top = 0
               Action = AprobarTodos
             end
+            object btn1: TToolButton
+              Left = 23
+              Top = 0
+              Caption = 'btn1'
+              ImageIndex = 4
+              OnClick = btn1Click
+            end
+          end
+          object RzDBNavigator1: TRzDBNavigator
+            Left = 11
+            Top = 2
+            Width = 290
+            Height = 22
+            DataSource = dslineas
+            BorderOuter = fsNone
+            TabOrder = 0
           end
         end
         object LabeledEdit10: TLabeledEdit
-          Left = 632
-          Top = 275
+          Left = 584
+          Top = 215
           Width = 137
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 93
           EditLabel.Height = 13
@@ -623,15 +560,16 @@ object FPresupuestos: TFPresupuestos
           EditLabel.ParentFont = False
           LabelPosition = lpLeft
           ParentBiDiMode = False
-          TabOrder = 2
+          TabOrder = 3
           OnChange = LabeledEdit10Change
         end
         object LabeledEdit9: TLabeledEdit
-          Left = 632
-          Top = 356
+          Left = 584
+          Top = 296
           Width = 137
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 133
           EditLabel.Height = 13
@@ -646,14 +584,15 @@ object FPresupuestos: TFPresupuestos
           EditLabel.ParentFont = False
           LabelPosition = lpLeft
           ParentBiDiMode = False
-          TabOrder = 3
+          TabOrder = 9
         end
         object LabeledEdit5: TLabeledEdit
           Left = 217
-          Top = 277
+          Top = 215
           Width = 129
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 106
           EditLabel.Height = 13
@@ -674,15 +613,16 @@ object FPresupuestos: TFPresupuestos
           LabelPosition = lpLeft
           ParentBiDiMode = False
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 2
           OnChange = LabeledEdit5Change
         end
         object LabeledEdit11: TLabeledEdit
           Left = 217
-          Top = 354
+          Top = 292
           Width = 129
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 149
           EditLabel.Height = 13
@@ -703,14 +643,15 @@ object FPresupuestos: TFPresupuestos
           LabelPosition = lpLeft
           ParentBiDiMode = False
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 8
         end
         object LabeledEdit12: TLabeledEdit
-          Left = 632
-          Top = 329
+          Left = 584
+          Top = 269
           Width = 137
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 84
           EditLabel.Height = 13
@@ -725,15 +666,16 @@ object FPresupuestos: TFPresupuestos
           EditLabel.ParentFont = False
           LabelPosition = lpLeft
           ParentBiDiMode = False
-          TabOrder = 6
+          TabOrder = 7
           OnChange = LabeledEdit10Change
         end
         object LabeledEdit13: TLabeledEdit
           Left = 217
-          Top = 327
+          Top = 265
           Width = 129
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 97
           EditLabel.Height = 13
@@ -754,15 +696,16 @@ object FPresupuestos: TFPresupuestos
           LabelPosition = lpLeft
           ParentBiDiMode = False
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 6
           OnChange = LabeledEdit5Change
         end
         object LabeledEdit14: TLabeledEdit
           Left = 217
-          Top = 304
+          Top = 242
           Width = 129
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 47
           EditLabel.Height = 13
@@ -783,15 +726,16 @@ object FPresupuestos: TFPresupuestos
           LabelPosition = lpLeft
           ParentBiDiMode = False
           ParentFont = False
-          TabOrder = 8
+          TabOrder = 4
           OnChange = LabeledEdit5Change
         end
         object LabeledEdit15: TLabeledEdit
-          Left = 632
-          Top = 302
+          Left = 584
+          Top = 242
           Width = 137
           Height = 21
           Alignment = taRightJustify
+          Anchors = [akLeft, akBottom]
           BiDiMode = bdLeftToRight
           EditLabel.Width = 47
           EditLabel.Height = 13
@@ -806,8 +750,139 @@ object FPresupuestos: TFPresupuestos
           EditLabel.ParentFont = False
           LabelPosition = lpLeft
           ParentBiDiMode = False
-          TabOrder = 9
+          TabOrder = 5
           OnChange = LabeledEdit10Change
+        end
+        object rDBGridClientesDBGridLineas: TrDBGrid_MS
+          Left = 0
+          Top = 38
+          Width = 1113
+          Height = 155
+          Align = alTop
+          DataSource = dslineas
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OptionsEx2.ActivateOptionsEx2 = True
+          TitleLines = 2
+          RowFixHeight = 20
+          FooterRow.FooterVisible = True
+          FooterRow.FieldFooterDefs.Strings = (
+            'Id_Partida=%COUNTVAL partidas;'
+            'Total=%SUM '#8364';')
+          FieldsAutoPickList.Strings = (
+            'Descripcion')
+          OnLoadPickList = rDBGridClientesDBGridLineasLoadPickList
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Id_Partida'
+              Title.Alignment = taCenter
+              Title.Caption = 'Partida'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 78
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Descripcion'
+              Title.Caption = 'Descripci'#243'n'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 532
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Total'
+              Title.Alignment = taCenter
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 80
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Aprovado'
+              Title.Alignment = taCenter
+              Title.Caption = 'Aprobado'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 87
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Ejecutado'
+              Title.Alignment = taCenter
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 87
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'presupuestos_id_presupuesto'
+              Title.Alignment = taRightJustify
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'presupuestos_grupo'
+              Title.Alignment = taRightJustify
+              Visible = False
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'obra'
+              Title.Alignment = taCenter
+              Title.Caption = 'Obra'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 54
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              ButtonStyle = cbsEllipsis
+              Expanded = False
+              FieldName = 'Fecha Aprobado'
+              Title.Alignment = taCenter
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 103
+              Visible = True
+            end>
         end
       end
       object documentacion: TTabSheet
@@ -817,8 +892,8 @@ object FPresupuestos: TFPresupuestos
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1125
-          Height = 385
+          Width = 1107
+          Height = 312
           AutoRefresh = True
           ObjectTypes = [otFolders, otNonFolders]
           Root = 'C:\'
@@ -838,8 +913,8 @@ object FPresupuestos: TFPresupuestos
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1125
-          Height = 385
+          Width = 1107
+          Height = 312
           AutoRefresh = True
           ObjectTypes = [otFolders, otNonFolders]
           Root = 'rfDesktop'
@@ -852,19 +927,208 @@ object FPresupuestos: TFPresupuestos
           Visible = False
         end
       end
+      object ts1: TTabSheet
+        Caption = 'Contactos'
+        ImageIndex = 3
+        object ctrlbr1: TControlBar
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 1107
+          Height = 32
+          Align = alTop
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          object tlb1: TToolBar
+            Left = 314
+            Top = 2
+            Width = 72
+            Height = 22
+            AutoSize = True
+            Caption = 'Editar'
+            Images = ImageList1
+            List = True
+            TabOrder = 1
+            object btn2: TToolButton
+              Left = 0
+              Top = 0
+              Action = EditCut
+            end
+            object btn3: TToolButton
+              Left = 23
+              Top = 0
+              Action = EditCopy
+            end
+            object btn4: TToolButton
+              Left = 46
+              Top = 0
+              Action = EditPaste
+            end
+          end
+          object tlb2: TToolBar
+            AlignWithMargins = True
+            Left = 399
+            Top = 2
+            Width = 158
+            Height = 48
+            ButtonHeight = 30
+            ButtonWidth = 31
+            Caption = 'ToolBar3'
+            Images = DataModule1.icopeque
+            TabOrder = 2
+            object btn5: TToolButton
+              Left = 0
+              Top = 0
+              Caption = 'btn1'
+              ImageIndex = 12
+              OnClick = btn1Click
+            end
+          end
+          object RzDBNavigator2: TRzDBNavigator
+            Left = 11
+            Top = 2
+            Width = 290
+            Height = 22
+            DataSource = dsContactosPresupuesto
+            BorderOuter = fsNone
+            TabOrder = 0
+          end
+        end
+        object rDBGrid1: TrDBGrid
+          Left = 0
+          Top = 38
+          Width = 1113
+          Height = 280
+          Align = alClient
+          DataSource = dsContactosPresupuesto
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          TitleLines = 2
+          RowFixHeight = 23
+          FixedColText.FixedColWidth = 23
+          FooterRow.FooterVisible = True
+          FooterRow.FieldFooterDefs.Strings = (
+            'id_contacto=%COUNTVAL contactos;')
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'id_presupuesto'
+              Title.Alignment = taRightJustify
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'id_contacto'
+              Title.Alignment = taRightJustify
+              Title.Caption = 'C'#243'digo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 50
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'pta'
+              Title.Alignment = taCenter
+              Title.Caption = 'Puerta'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Caption = 'Nombre'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 245
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'telefono1'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tel'#233'fono 1'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 103
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'telefono2'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tel'#233'fono 2'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 103
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'telefono3'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tel'#233'fono 3'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 103
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'mail'
+              Title.Caption = 'Mail'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 263
+              Visible = True
+            end>
+        end
+      end
     end
     object ToolBar1: TToolBar
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 1139
+      Width = 1121
       Height = 45
       ButtonHeight = 42
       ButtonWidth = 41
       Caption = 'ToolBar1'
       Images = DataModule1.ImageList1
       List = True
-      TabOrder = 3
+      TabOrder = 0
       object ToolButton1: TToolButton
         AlignWithMargins = True
         Left = 0
@@ -911,9 +1175,7 @@ object FPresupuestos: TFPresupuestos
         AlignWithMargins = True
         Left = 172
         Top = 0
-        Caption = 'ToolButton5'
-        Enabled = False
-        ImageIndex = 3
+        Action = crearObra
         ParentShowHint = False
         ShowHint = True
       end
@@ -944,61 +1206,44 @@ object FPresupuestos: TFPresupuestos
         AlignWithMargins = True
         Left = 303
         Top = 0
+        Hint = 'Salir'
         Action = cerrarpres
         ParentShowHint = False
         ShowHint = True
       end
     end
-    object DBGrid1: TDBGrid
-      Left = 818
-      Top = 4
-      Width = 217
-      Height = 176
-      DataSource = DataSource1
-      TabOrder = 4
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-    end
     object GroupBox3: TGroupBox
-      AlignWithMargins = True
-      Left = 4
-      Top = 736
-      Width = 807
-      Height = 15
+      Left = 1
+      Top = 644
+      Width = 792
+      Height = 137
       Margins.Bottom = 30
       Align = alLeft
       Anchors = [akLeft, akTop, akRight, akBottom]
       Caption = 'Observaciones'
-      TabOrder = 5
-      DesignSize = (
-        807
-        15)
+      TabOrder = 4
       object Memo1: TMemo
         AlignWithMargins = True
-        Left = 16
-        Top = 16
-        Width = 779
-        Height = 0
-        Anchors = [akLeft, akTop, akRight, akBottom]
+        Left = 5
+        Top = 18
+        Width = 782
+        Height = 114
+        Align = alClient
         TabOrder = 0
       end
     end
     object GroupBox5: TGroupBox
       AlignWithMargins = True
-      Left = 836
-      Top = 740
+      Left = 818
+      Top = 651
       Width = 307
-      Height = 38
+      Height = 127
       Margins.Top = 7
       Align = alRight
-      Anchors = [akTop, akRight]
-      TabOrder = 6
+      TabOrder = 5
       DesignSize = (
         307
-        38)
+        127)
       object Shape1: TShape
         Left = 17
         Top = -2
@@ -1016,7 +1261,7 @@ object FPresupuestos: TFPresupuestos
         Caption = 'Guardar'
         Enabled = False
         Images = DataModule1.ImageList1
-        TabOrder = 0
+        TabOrder = 2
         OnClick = GuardarClick
       end
       object Aceptar: TButton
@@ -1026,7 +1271,7 @@ object FPresupuestos: TFPresupuestos
         Height = 25
         Anchors = [akTop, akRight]
         Caption = 'Aceptar'
-        TabOrder = 1
+        TabOrder = 0
         OnClick = AceptarClick
       end
       object cerrar: TButton
@@ -1036,7 +1281,7 @@ object FPresupuestos: TFPresupuestos
         Height = 26
         Anchors = [akTop, akRight]
         Caption = 'Cerrar'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = cerrarClick
       end
     end
@@ -1065,6 +1310,7 @@ object FPresupuestos: TFPresupuestos
       FieldName = 'idcontactos'
       Origin = 'IdContactos'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdClientenombre: TStringField
       FieldName = 'nombre'
@@ -1094,17 +1340,11 @@ object FPresupuestos: TFPresupuestos
     UpdateOptions.UpdateMode = upWhereChanged
     SQL.Strings = (
       
-        'select * from presupuestos where id_ClientePrev=:id_cliente and ' +
-        'id_presupuesto=:id_presupuesto and grupo=:grupo')
+        'select * from presupuestos where id_presupuesto=:id_presupuesto ' +
+        'and grupo=:grupo')
     Left = 20
     Top = 220
     ParamData = <
-      item
-        Name = 'ID_CLIENTE'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end
       item
         Name = 'ID_PRESUPUESTO'
         DataType = ftInteger
@@ -1117,13 +1357,88 @@ object FPresupuestos: TFPresupuestos
         ParamType = ptInput
         Value = Null
       end>
+    object fdpresupuestoid_presupuesto: TIntegerField
+      FieldName = 'id_presupuesto'
+      Origin = 'id_presupuesto'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdpresupuestoId_ClientePrev: TIntegerField
+      FieldName = 'Id_ClientePrev'
+      Origin = 'Id_ClientePrev'
+      Required = True
+    end
+    object mfldDescripcion: TMemoField
+      FieldName = 'Descripcion'
+      Origin = 'Descripcion'
+      Required = True
+      BlobType = ftMemo
+    end
+    object mfldPath: TMemoField
+      FieldName = 'Path'
+      Origin = 'Path'
+      Required = True
+      BlobType = ftMemo
+    end
+    object blnfldAprovado: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'Aprovado'
+      Origin = 'Aprovado'
+    end
+    object blnfldEjecutado: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'Ejecutado'
+      Origin = 'Ejecutado'
+    end
+    object dtmfldFechaPresupuesto: TDateTimeField
+      FieldName = 'FechaPresupuesto'
+      Origin = 'FechaPresupuesto'
+      Required = True
+    end
+    object fltfldTotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'Total'
+      Origin = 'Total'
+    end
+    object fdpresupuestoPartidas: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'Partidas'
+      Origin = 'Partidas'
+    end
+    object fltfldTotalAprobado: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'TotalAprobado'
+      Origin = 'TotalAprobado'
+    end
+    object mfldDescripcionAprovado: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'DescripcionAprovado'
+      Origin = 'DescripcionAprovado'
+      BlobType = ftMemo
+    end
+    object fdpresupuestogrupo: TIntegerField
+      FieldName = 'grupo'
+      Origin = 'grupo'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdpresupuestopartidasAprobadas: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'partidasAprobadas'
+      Origin = 'partidasAprobadas'
+    end
+    object mfldfdpresupuestoobservaciones: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'observaciones'
+      Origin = 'observaciones'
+      BlobType = ftMemo
+    end
   end
   object fdlineas: TFDQuery
+    AfterOpen = fdlineasAfterOpen
     AfterInsert = fdlineasAfterInsert
     AfterEdit = fdlineasAfterEdit
-    BeforePost = fdlineasBeforePost
     AfterPost = fdlineasAfterPost
-    BeforeDelete = fdlineasBeforeDelete
     AfterDelete = fdlineasAfterDelete
     CachedUpdates = True
     Aggregates = <
@@ -1145,7 +1460,7 @@ object FPresupuestos: TFPresupuestos
         'o=:id_presupuesto and presupuestos_grupo=:grupopresupuesto order' +
         ' by id_partida ASC')
     Left = 432
-    Top = 427
+    Top = 419
     ParamData = <
       item
         Name = 'ID_PRESUPUESTO'
@@ -1200,148 +1515,16 @@ object FPresupuestos: TFPresupuestos
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-  end
-  object BindSourceDB1: TBindSourceDB
-    DataSet = fdCliente
-    ScopeMappings = <>
-    Left = 424
-    Top = 24
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 844
-    Top = 53
-    object LinkControlToField2: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'cif'
-      Control = LabeledEdit3
-      Track = True
+    object fdlineasobra: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'obra'
+      Origin = 'obra'
     end
-    object LinkControlToField3: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'nombre'
-      Control = LabeledEdit2
-      Track = True
+    object fdlineasfecha_aprobado: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'fecha_aprobado'
+      Origin = 'fecha_aprobado'
     end
-    object LinkControlToField1: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'idcontactos'
-      Control = LabeledEdit1
-      Track = True
-    end
-    object LinkControlToField4: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'id_presupuesto'
-      Control = LabeledEdit4
-      Track = True
-    end
-    object LinkControlToField5: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Partidas'
-      Control = LabeledEdit6
-      Track = True
-    end
-    object LinkControlToField6: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Total'
-      Control = LabeledEdit7
-      Track = True
-    end
-    object LinkControlToField7: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Path'
-      Control = LabeledEdit8
-      Track = True
-    end
-    object LinkControlToField8: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'FechaPresupuesto'
-      Control = DateTimePicker1
-      Track = True
-    end
-    object LinkControlToField9: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'TotalAprobado'
-      Control = LabeledEdit10
-      Track = True
-    end
-    object LinkControlToField12: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Total'
-      Control = LabeledEdit5
-      Track = True
-      CustomFormat = '%s + " '#8364'"'
-    end
-    object LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB3
-      GridControl = StringGrid1
-      Columns = <
-        item
-          MemberName = 'Id_Partida'
-          Header = 'N'#186' Partida'
-        end
-        item
-          MemberName = 'Descripcion'
-          Header = 'Descripci'#243'n'
-        end
-        item
-          MemberName = 'Total'
-        end
-        item
-          MemberName = 'Aprovado'
-          Header = 'Aprobado'
-        end
-        item
-          MemberName = 'Ejecutado'
-        end>
-      OnAssigningValue = LinkGridToDataSourceBindSourceDB3AssigningValue
-    end
-    object LinkControlToField13: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'TotalAprobado'
-      Control = LabeledEdit16
-      Track = True
-    end
-    object LinkControlToField10: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'partidasAprobadas'
-      Control = LabeledEdit17
-      Track = True
-    end
-    object LinkControlToField11: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'observaciones'
-      Control = Memo1
-      Track = False
-    end
-    object LinkControlToField14: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Descripcion'
-      Control = LabeledEdit18
-      Track = True
-    end
-  end
-  object BindSourceDB2: TBindSourceDB
-    DataSet = fdpresupuesto
-    ScopeMappings = <>
-    Left = 24
-    Top = 176
   end
   object dialruta: TOpenDialog
     Left = 628
@@ -1400,83 +1583,24 @@ object FPresupuestos: TFPresupuestos
       OnExecute = carpetadocumentacionExecute
       OnUpdate = carpetadocumentacionUpdate
     end
-  end
-  object FDQuery1: TFDQuery
-    AfterInsert = fdlineasAfterInsert
-    AfterEdit = fdlineasAfterEdit
-    CachedUpdates = True
-    AfterApplyUpdates = fdlineasAfterApplyUpdates
-    Connection = DataModule1.FDConnection1
-    SQL.Strings = (
-      
-        'SELECT A.mail FROM clientes C, administradores A, presupuestos P' +
-        ' WHERE P.id_presupuesto=:idpresupuesto AND P.id_ClientePrev=C.id' +
-        'Contactos AND C.idAdministrador=A.idAdministrador')
-    Left = 528
-    Top = 427
-    ParamData = <
-      item
-        Name = 'IDPRESUPUESTO'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = 412
-      end>
-    object IntegerField1: TIntegerField
-      FieldName = 'Id_Partida'
-      Origin = 'Id_Partida'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'Id_Presupuesto'
-      Origin = 'Id_Presupuesto'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object StringField1: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'Descripcion'
-      Origin = 'Descripcion'
-      Size = 255
-    end
-    object FloatField1: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'Total'
-      Origin = 'Total'
-    end
-    object BooleanField1: TBooleanField
-      AutoGenerateValue = arDefault
-      FieldName = 'Aprovado'
-      Origin = 'Aprovado'
-    end
-    object BooleanField2: TBooleanField
-      AutoGenerateValue = arDefault
-      FieldName = 'Ejecutado'
-      Origin = 'Ejecutado'
-    end
-    object DateTimeField1: TDateTimeField
-      FieldName = 'FechaPresupuesto'
-      Origin = 'FechaPresupuesto'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+    object crearObra: TAction
+      Caption = 'Nueva obra'
+      Hint = 'Nueva obra'
+      ImageIndex = 22
+      OnExecute = crearObraExecute
+      OnUpdate = crearObraUpdate
     end
   end
-  object DataSource1: TDataSource
-    DataSet = fdlineas
+  object dspresupuesto: TDataSource
+    DataSet = fdpresupuesto
     Left = 616
     Top = 264
-  end
-  object BindSourceDB3: TBindSourceDB
-    DataSet = fdlineas
-    ScopeMappings = <>
-    Left = 448
-    Top = 368
   end
   object ImageList1: TImageList
     Left = 664
     Top = 433
     Bitmap = {
-      494C010104000800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1749,8 +1873,8 @@ object FPresupuestos: TFPresupuestos
   end
   object ActionManager2: TActionManager
     Images = ImageList1
-    Left = 680
-    Top = 369
+    Left = 992
+    Top = 49
     StyleName = 'Platform Default'
     object EditCopy: TEditCopy
       Category = 'Edit'
@@ -1779,5 +1903,121 @@ object FPresupuestos: TFPresupuestos
       ImageIndex = 3
       OnExecute = AprobarTodosExecute
     end
+  end
+  object dslineas: TDataSource
+    DataSet = fdlineas
+    Left = 352
+    Top = 431
+  end
+  object dscliente: TDataSource
+    DataSet = fdCliente
+    Left = 460
+    Top = 28
+  end
+  object fdqryContactosPresupuesto: TFDQuery
+    AfterInsert = fdqryContactosPresupuestoAfterInsert
+    AfterEdit = fdqryContactosPresupuestoAfterEdit
+    AfterDelete = fdqryContactosPresupuestoAfterDelete
+    CachedUpdates = True
+    AfterApplyUpdates = fdqryContactosPresupuestoAfterApplyUpdates
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      
+        'SELECT * FROM presupuestoscontactos where id_presupuesto=:idpres' +
+        'upuesto')
+    Left = 552
+    Top = 503
+    ParamData = <
+      item
+        Name = 'IDPRESUPUESTO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object fdqryContactosPresupuestoid_presupuesto: TIntegerField
+      FieldName = 'id_presupuesto'
+      Origin = 'id_presupuesto'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqryContactosPresupuestoid_contacto: TIntegerField
+      FieldName = 'id_contacto'
+      Origin = 'id_contacto'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqryContactosPresupuestopta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pta'
+      LookupDataSet = fdqrycontactoscliente
+      LookupKeyFields = 'id_contacto'
+      LookupResultField = 'pta'
+      KeyFields = 'id_contacto'
+      Lookup = True
+    end
+    object fdqryContactosPresupuestonombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre'
+      LookupDataSet = fdqrycontactoscliente
+      LookupKeyFields = 'id_contacto'
+      LookupResultField = 'nombre'
+      KeyFields = 'id_contacto'
+      Lookup = True
+    end
+    object fdqryContactosPresupuestotelefono1: TIntegerField
+      FieldKind = fkLookup
+      FieldName = 'telefono1'
+      LookupDataSet = fdqrycontactoscliente
+      LookupKeyFields = 'id_contacto'
+      LookupResultField = 'telefono1'
+      KeyFields = 'id_contacto'
+      Lookup = True
+    end
+    object fdqryContactosPresupuestotelefono2: TIntegerField
+      FieldKind = fkLookup
+      FieldName = 'telefono2'
+      LookupDataSet = fdqrycontactoscliente
+      LookupKeyFields = 'id_contacto'
+      LookupResultField = 'telefono2'
+      KeyFields = 'id_contacto'
+      Lookup = True
+    end
+    object fdqryContactosPresupuestotelefono3: TIntegerField
+      FieldKind = fkLookup
+      FieldName = 'telefono3'
+      LookupDataSet = fdqrycontactoscliente
+      LookupKeyFields = 'id_contacto'
+      LookupResultField = 'telefono3'
+      KeyFields = 'id_contacto'
+      Lookup = True
+    end
+    object fdqryContactosPresupuestomail: TStringField
+      FieldKind = fkLookup
+      FieldName = 'mail'
+      LookupDataSet = fdqrycontactoscliente
+      LookupKeyFields = 'id_contacto'
+      LookupResultField = 'mail'
+      KeyFields = 'id_contacto'
+      Lookup = True
+    end
+  end
+  object fdqrycontactoscliente: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from contactosclientes where id_cliente=:idcliente')
+    Left = 808
+    Top = 543
+    ParamData = <
+      item
+        Name = 'IDCLIENTE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsContactosPresupuesto: TDataSource
+    DataSet = fdqryContactosPresupuesto
+    Left = 368
+    Top = 551
   end
 end

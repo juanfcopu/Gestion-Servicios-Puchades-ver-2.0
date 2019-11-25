@@ -1,0 +1,175 @@
+object FLineasPresupuestoObra: TFLineasPresupuestoObra
+  Left = 0
+  Top = 0
+  BorderStyle = bsSizeToolWin
+  Caption = 'Selecciona Lineas Presupuesto'
+  ClientHeight = 299
+  ClientWidth = 628
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object statuslineas: TStatusBar
+    Left = 0
+    Top = 280
+    Width = 628
+    Height = 19
+    Panels = <
+      item
+        Width = 200
+      end
+      item
+        Width = 50
+      end>
+  end
+  object tlbarlineas: TToolBar
+    Left = 0
+    Top = 0
+    Width = 628
+    Height = 33
+    ButtonHeight = 38
+    ButtonWidth = 39
+    Caption = 'tlbarlineas'
+    Images = DataModule1.ImageList1
+    TabOrder = 0
+    object btnselectodos: TToolButton
+      Left = 0
+      Top = 0
+      Hint = 'Deselecionar Todos'
+      Caption = 'btnselectodos'
+      ImageIndex = 20
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnselectodosClick
+    end
+    object btndeselecTodos: TToolButton
+      Left = 39
+      Top = 0
+      Hint = 'Seleccionar Todos'
+      Caption = 'btndeselecTodos'
+      ImageIndex = 18
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btndeselecTodosClick
+    end
+    object btn1: TToolButton
+      Left = 78
+      Top = 0
+      Width = 39
+      AutoSize = True
+      Caption = 'btn1'
+      ImageIndex = 2
+      Style = tbsSeparator
+    end
+    object btaAceptar: TToolButton
+      Left = 117
+      Top = 0
+      Hint = 'Insertar'
+      Caption = 'btaAceptar'
+      ImageIndex = 19
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btaAceptarClick
+    end
+    object btCerrar: TToolButton
+      Left = 156
+      Top = 0
+      Hint = 'Cancelar'
+      Caption = 'btCerrar'
+      ImageIndex = 9
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btCerrarClick
+    end
+    object btn3: TToolButton
+      Left = 195
+      Top = 0
+      Caption = 'btn3'
+      ImageIndex = 11
+      OnClick = btn3Click
+    end
+  end
+  object rDBGridClientes1: TrDBGrid_MS
+    Left = 0
+    Top = 33
+    Width = 628
+    Height = 247
+    Align = alClient
+    DataSource = ds1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OptionsEx2.FixedCell.TitleExBtnHintRecCount = True
+    Sorter = DataModule1.rDBGridSorter_FireDac1
+    TitleLines = 2
+    RowLines = 2
+    FixedColText.FixedColWidth = 50
+    FixedColText.ShowCheckbox = True
+    OnBoolClick = rDBGridClientes1BoolClick
+    OnFixColClick = rDBGridClientes1FixColClick
+    OnGetFixedColState = rDBGridClientes1GetFixedColState
+    OnSelectingRecords = rDBGridClientes1SelectingRecords
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'id_presupuesto'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'grupo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Id_Partida'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Descripcion'
+        Visible = True
+      end>
+  end
+  object ds1: TDataSource
+    DataSet = fdqlpresupuestos
+    Left = 224
+    Top = 136
+  end
+  object fdqlpresupuestos: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      
+        'SELECT * FROM lineaspresupuesto LP,presupuestos P WHERE LP.presu' +
+        'puestos_id_presupuesto=P.id_presupuesto AND LP.Aprovado=true AND' +
+        ' P.id_ClientePrev=:IDCLIENTE AND LP.obra is null')
+    Left = 488
+    Top = 144
+    ParamData = <
+      item
+        Name = 'IDCLIENTE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object FDCommand1: TFDCommand
+    Connection = DataModule1.FDConnection1
+    CatalogName = 'puchades2'
+    CommandKind = skInsert
+    Left = 352
+    Top = 96
+  end
+end

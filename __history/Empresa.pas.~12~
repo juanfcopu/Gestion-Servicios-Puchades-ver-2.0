@@ -1,0 +1,71 @@
+unit Empresa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
+  Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+
+type
+  TFEmpresa = class(TForm)
+    GridPanel1: TGridPanel;
+    GroupBox1: TGroupBox;
+    lbedIdEmpresa: TLabeledEdit;
+    lbedNombreEmpresa: TLabeledEdit;
+    lbedCIF: TLabeledEdit;
+    lbedCodigoPostal: TLabeledEdit;
+    lbedDireccion: TLabeledEdit;
+    lbedCiudad: TLabeledEdit;
+    lbedTelefonoFijo: TLabeledEdit;
+    lbedTelefonoMovil: TLabeledEdit;
+    lbedmail: TLabeledEdit;
+    FDEmpresa: TFDQuery;
+    Panel1: TPanel;
+    btnAceptar: TButton;
+    btnCerrar: TButton;
+    bndsrcdb1: TBindSourceDB;
+    bndngslst1: TBindingsList;
+    lnkcntrltfld1: TLinkControlToField;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
+    LinkControlToField3: TLinkControlToField;
+    LinkControlToField4: TLinkControlToField;
+    LinkControlToField5: TLinkControlToField;
+    LinkControlToField6: TLinkControlToField;
+    LinkControlToField7: TLinkControlToField;
+    LinkControlToField8: TLinkControlToField;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FEmpresa: TFEmpresa;
+
+implementation
+
+uses
+  DModule1;
+
+{$R *.dfm}
+
+procedure TFEmpresa.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if FDEmpresa.Active then FDEmpresa.Close;
+
+end;
+
+procedure TFEmpresa.FormCreate(Sender: TObject);
+begin
+if not FDEmpresa.Active then FDEmpresa.Open;
+end;
+
+end.

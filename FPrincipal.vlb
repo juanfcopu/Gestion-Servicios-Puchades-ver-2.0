@@ -1,42 +1,15 @@
-﻿[StatusBar1]
-Coordinates=282,10,68,51
-
-[Panel2]
-Coordinates=225,10,47,51
-
-[PageControl2]
-Coordinates=10,125,81,33
-
-[listclientes.BindSourceDB1]
+﻿[listclientes.BindSourceDB1]
 Coordinates=100,123,148,213
 
 [DataModule1.fdClientes]
-Coordinates=100,123,148,213
+Coordinates=100,123,131,33
 Visible=False
 
 []
-Coordinates=132,71,78,33
+Coordinates=282,10,68,51
 
 [DataModule1.fdpresupuestos]
 Coordinates=66,1,158,51
-
-[Splitter1]
-Coordinates=262,80,55,33
-
-[ControlBar1]
-Coordinates=186,71,73,33
-
-[Panel3]
-Coordinates=0,0,47,51
-
-[Clientes1]
-Coordinates=262,132,60,33
-
-[Panel1]
-Coordinates=47,70,47,51
-
-[MainMenu1]
-Coordinates=107,71,70,33
 
 [FClientes.fdclientes]
 Visible=False
@@ -88,4 +61,13 @@ Coordinates=746,1,164,51
 
 [FClientes.BindSourceDB3]
 Coordinates=388,89,141,69
+
+[AppEvent1]
+Coordinates=433,1,68,33
+
+[DataModule1.fdadministradores]
+Coordinates=224,71,171,51
+
+[DataModule1.fdobras]
+Coordinates=243,1,119,51
 

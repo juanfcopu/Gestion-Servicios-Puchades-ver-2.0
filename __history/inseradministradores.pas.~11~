@@ -1,0 +1,57 @@
+unit inseradministradores;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
+
+type
+  TForm1 = class(TForm)
+    gridpanel: TGridPanel;
+    grp1: TGroupBox;
+    lbledt1: TLabeledEdit;
+    lbledt2: TLabeledEdit;
+    lbledt3: TLabeledEdit;
+    gridpanel4: TGridPanel;
+    grp2: TGroupBox;
+    grp3: TGroupBox;
+    lbledt7: TLabeledEdit;
+    lbledt8: TLabeledEdit;
+    lbledt11: TLabeledEdit;
+    lbledt5: TLabeledEdit;
+    lbledt4: TLabeledEdit;
+    lbledt6: TLabeledEdit;
+    lbledt9: TLabeledEdit;
+    lbledt10: TLabeledEdit;
+    btnAceptar: TButton;
+    btnCancelar: TButton;
+    fdinsertarAdministradores: TFDQuery;
+    procedure btnAceptarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnAceptarClick(Sender: TObject);
+begin
+ if fdinsertarAdministradores.State in [dsInsert,dsEdit] then
+    begin
+       fdinsertarAdministradores.Post;
+       btncancelar.Caption:='Cerrar';
+    end;
+end;
+
+end.

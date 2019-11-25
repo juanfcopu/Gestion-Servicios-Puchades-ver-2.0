@@ -14,7 +14,8 @@ object FClientes: TFClientes
   Font.Name = 'Tahoma'
   Font.Style = [fsBold]
   OldCreateOrder = False
-  OnCreate = FormCreate
+  Position = poOwnerFormCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 16
   object GroupBox1: TGroupBox
@@ -32,7 +33,7 @@ object FClientes: TFClientes
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 1
     object GridPanel2: TGridPanel
       Left = 2
       Top = 15
@@ -180,7 +181,7 @@ object FClientes: TFClientes
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         object LabeledEdit4: TLabeledEdit
           Left = 62
           Top = 54
@@ -196,7 +197,7 @@ object FClientes: TFClientes
           Font.Style = []
           LabelPosition = lpLeft
           ParentFont = False
-          TabOrder = 0
+          TabOrder = 1
         end
         object LabeledEdit5: TLabeledEdit
           Left = 62
@@ -214,7 +215,7 @@ object FClientes: TFClientes
           Font.Style = []
           LabelPosition = lpLeft
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 0
         end
       end
       object GroupBox5: TGroupBox
@@ -225,7 +226,7 @@ object FClientes: TFClientes
         Height = 104
         Align = alClient
         Caption = 'Familia y Administrador'
-        TabOrder = 2
+        TabOrder = 3
         object Label1: TLabel
           AlignWithMargins = True
           Left = 15
@@ -331,7 +332,7 @@ object FClientes: TFClientes
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 1
         object LabeledEdit6: TLabeledEdit
           Left = 72
           Top = 20
@@ -422,14 +423,14 @@ object FClientes: TFClientes
       item
         Value = 23.076923076923070000
       end>
-    TabOrder = 1
+    TabOrder = 2
     object Panel1: TPanel
       Left = 1
       Top = 433
       Width = 1340
       Height = 130
       Align = alClient
-      TabOrder = 0
+      TabOrder = 4
       object Label3: TLabel
         Left = 816
         Top = 80
@@ -443,7 +444,7 @@ object FClientes: TFClientes
         Width = 320
         Height = 120
         DataSource = dsfdpresupuestos
-        TabOrder = 0
+        TabOrder = 2
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -13
@@ -451,30 +452,43 @@ object FClientes: TFClientes
         TitleFont.Style = [fsBold]
       end
       object DBGrid2: TDBGrid
-        Left = 388
+        Left = 367
         Top = 6
         Width = 320
         Height = 120
         DataSource = dsfdlineaspresupuesto
-        TabOrder = 1
+        TabOrder = 3
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -13
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = [fsBold]
       end
-      object rDBRecordSelection1: TrDBRecordSelection
-        Left = 768
-        Top = 32
-        Width = 129
-        Height = 24
-        AutoDropDown = True
-        DropDownCount = 15
-        Enabled = False
-        TabOrder = 2
-        DataSource = dsfdpresupuestos
-        RecIdField = 'id_presupuesto'
-        DBEditLabel.ShowRequiredMark = False
+      object dbgrd1: TDBGrid
+        Left = 707
+        Top = 3
+        Width = 320
+        Height = 120
+        DataSource = dsobras
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+      end
+      object dblineasobras: TDBGrid
+        Left = 1033
+        Top = 3
+        Width = 320
+        Height = 120
+        DataSource = dslineasobras
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
       end
     end
     inline Frame11: TFrame1
@@ -484,7 +498,7 @@ object FClientes: TFClientes
       Height = 216
       Align = alClient
       Anchors = []
-      TabOrder = 1
+      TabOrder = 0
       ExplicitLeft = 1
       ExplicitTop = 1
       ExplicitWidth = 670
@@ -505,37 +519,40 @@ object FClientes: TFClientes
           ExplicitWidth = 662
         end
         inherited Button1: TButton
-          Top = 5
+          Top = 8
           Caption = ''
           ImageAlignment = iaCenter
           ImageIndex = 1
           Images = DataModule1.icopeque
+          TabOrder = 2
           Visible = True
           OnClick = Frame11Button1Click
-          ExplicitTop = 5
+          ExplicitTop = 8
         end
         inherited Button2: TButton
-          Top = 5
+          Top = 8
           Caption = ''
           ImageAlignment = iaCenter
           ImageIndex = 3
           Images = DataModule1.icopeque
+          TabOrder = 3
           Visible = True
           OnClick = Frame11Button2Click
-          ExplicitTop = 5
+          ExplicitTop = 8
         end
         inherited Button3: TButton
           Left = 398
-          Top = 5
+          Top = 8
           Caption = ''
           ImageAlignment = iaCenter
           ImageIndex = 2
           Images = DataModule1.icopeque
+          TabOrder = 4
           Visible = True
           StyleElements = []
           OnClick = Frame11Button3Click
           ExplicitLeft = 398
-          ExplicitTop = 5
+          ExplicitTop = 8
         end
         inherited ListViewPresupuestos: TListView
           Width = 662
@@ -560,13 +577,22 @@ object FClientes: TFClientes
           Font.Style = [fsBold]
           RowSelect = True
           ParentFont = False
+          TabOrder = 5
           ViewStyle = vsReport
           OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
           OnDblClick = Frame11ListView1DblClick
-          ExplicitLeft = 4
-          ExplicitTop = 46
           ExplicitWidth = 662
           ExplicitHeight = 166
+        end
+        inherited btnobra: TButton
+          Top = 8
+          Caption = ''
+          ImageIndex = 5
+          Images = DataModule1.icopeque
+          TabOrder = 1
+          Visible = True
+          OnClick = Frame11btnobraClick
+          ExplicitTop = 8
         end
       end
     end
@@ -583,7 +609,7 @@ object FClientes: TFClientes
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       ExplicitLeft = 671
       ExplicitTop = 1
       ExplicitWidth = 670
@@ -598,18 +624,32 @@ object FClientes: TFClientes
           ExplicitWidth = 662
         end
         inherited Button1: TButton
+          Caption = ''
           Font.Height = -13
           Font.Style = [fsBold]
+          ImageIndex = 1
+          Images = DataModule1.icopeque
+          TabOrder = 0
           Visible = True
+          OnClick = Frame21Button1Click
         end
         inherited Button2: TButton
+          Caption = ''
           Font.Height = -13
           Font.Style = [fsBold]
+          ImageIndex = 3
+          Images = DataModule1.icopeque
+          TabOrder = 1
           Visible = True
+          OnClick = Frame21Button2Click
         end
         inherited Button3: TButton
+          Caption = ''
           Font.Height = -13
           Font.Style = [fsBold]
+          ImageIndex = 2
+          Images = DataModule1.icopeque
+          TabOrder = 2
           Visible = True
         end
         inherited ListViewFacturas: TListView
@@ -626,12 +666,22 @@ object FClientes: TFClientes
             item
               Caption = 'Fecha'
               Width = 94
+            end
+            item
+              Caption = 'Base Imponible'
+            end
+            item
+              Caption = 'Iva'
+            end
+            item
+              Caption = 'Total'
             end>
           Font.Height = -13
           RowSelect = True
           ViewStyle = vsReport
           Visible = True
           OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
+          OnDblClick = Frame21ListViewFacturasDblClick
           ExplicitWidth = 662
           ExplicitHeight = 166
         end
@@ -643,7 +693,7 @@ object FClientes: TFClientes
       Width = 670
       Height = 216
       Align = alClient
-      TabOrder = 3
+      TabOrder = 2
       ExplicitLeft = 1
       ExplicitTop = 217
       ExplicitWidth = 670
@@ -676,7 +726,6 @@ object FClientes: TFClientes
           OnDblClick = Frame31ListViewObrasDblClick
           OnDragDrop = Frame31ListViewObrasDragDrop
           OnDragOver = Frame31ListViewObrasDragOver
-          ExplicitLeft = 5
           ExplicitWidth = 662
           ExplicitHeight = 166
         end
@@ -685,20 +734,34 @@ object FClientes: TFClientes
           ExplicitWidth = 662
         end
         inherited Button1: TButton
+          Top = 2
           Caption = ''
           ImageIndex = 1
           Images = DataModule1.icopeque
+          TabOrder = 3
+          OnClick = Frame31Button1Click
+          ExplicitTop = 2
         end
         inherited Button2: TButton
           Caption = ''
           ImageIndex = 3
           Images = DataModule1.icopeque
+          TabOrder = 0
           OnClick = Frame31Button2Click
         end
         inherited Button3: TButton
           Caption = ''
           ImageIndex = 2
           Images = DataModule1.icopeque
+          TabOrder = 1
+          OnClick = Frame31Button3Click
+        end
+        inherited btncrearfactura: TButton
+          Caption = ''
+          ImageIndex = 9
+          Images = DataModule1.icopeque
+          TabOrder = 2
+          OnClick = Frame31btncrearfacturaClick
         end
       end
     end
@@ -716,7 +779,7 @@ object FClientes: TFClientes
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
       ExplicitLeft = 674
       ExplicitTop = 220
       ExplicitWidth = 664
@@ -754,6 +817,7 @@ object FClientes: TFClientes
               Caption = 'Mail'
             end>
           Font.Height = -13
+          TabOrder = 4
           OnAdvancedCustomDrawItem = Frame11ListView1AdvancedCustomDrawItem
           ExplicitWidth = 656
           ExplicitHeight = 160
@@ -761,6 +825,15 @@ object FClientes: TFClientes
         inherited HeaderControl1: THeaderControl
           Width = 656
           ExplicitWidth = 656
+        end
+        inherited Button1: TButton
+          TabOrder = 0
+        end
+        inherited Button2: TButton
+          TabOrder = 1
+        end
+        inherited Button3: TButton
+          TabOrder = 2
         end
       end
     end
@@ -812,9 +885,16 @@ object FClientes: TFClientes
     IndexFieldNames = 'id_presupuesto;grupo'
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
-      'select * from presupuestos P '
-      'where P.id_clienteprev=:id_cliente '
-      'order by P.id_presupuesto DESC, P.grupo DESC ')
+      
+        'select C.nombre, P.Id_ClientePrev, P.id_presupuesto, P.descripci' +
+        'on, P.Aprovado, P.FechaPresupuesto, P.grupo, P.Total, P.TotalApr' +
+        'obado'
+      'From presupuestos P, clientes C'
+      
+        'where C.idContactos=P.id_ClientePrev and P.id_clienteprev=:id_cl' +
+        'iente '
+      'order by P.id_presupuesto DESC, P.grupo DESC '
+      '')
     Left = 397
     Top = 283
     ParamData = <
@@ -826,11 +906,17 @@ object FClientes: TFClientes
       end>
   end
   object fdfacturas: TFDQuery
+    IndexFieldNames = 'ano;idfactura'
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       
-        'select * from facturas where idcliente=:id_cliente order by Fech' +
-        'aFactura DESC')
+        'select f.idfactura, f.pagada, f.cantidad, f.emisorfactura, f.ano' +
+        ', f.iva, f.total, f.totalbruto, f.fechafactura, f.concepto, f.id' +
+        'cliente, c.nombre'
+      'from facturas f, clientes c '
+      
+        'where f.idcliente=:id_cliente and c.idcontactos=f.idcliente orde' +
+        'r by FechaFactura DESC')
     Left = 853
     Top = 267
     ParamData = <
@@ -845,8 +931,13 @@ object FClientes: TFClientes
     Connection = DataModule1.FDConnection1
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
     SQL.Strings = (
-      'select * from obras where id_cliente=:id_cliente')
-    Left = 341
+      
+        'select  o.id_obra, c.Nombre, o.Path, o.id_cliente, o.fechaComien' +
+        'zo, o.descripcion, o.ImporteObra, o.FechaFin,o.Ejecutado'
+      'from obras o, clientes c'
+      'where c.idcontactos=o.ID_Cliente and  o.id_cliente=:id_cliente'
+      '')
+    Left = 237
     Top = 499
     ParamData = <
       item
@@ -959,6 +1050,18 @@ object FClientes: TFClientes
         item
           SourceMemberName = 'FechaFactura'
           ControlMemberName = 'SubItems[1]'
+        end
+        item
+          SourceMemberName = 'TotalBruto'
+          ControlMemberName = 'SubItems[2]'
+        end
+        item
+          SourceMemberName = 'Iva'
+          ControlMemberName = 'SubItems[3]'
+        end
+        item
+          SourceMemberName = 'Total'
+          ControlMemberName = 'SubItems[4]'
         end>
       FillHeaderExpressions = <>
       FillBreakGroups = <>
@@ -1119,18 +1222,53 @@ object FClientes: TFClientes
   end
   object dsfdlineaspresupuesto: TDataSource
     DataSet = fdlineaspresupuesto
-    Left = 585
+    Left = 569
     Top = 650
   end
   object FDlineasObras: TFDQuery
+    Active = True
+    MasterSource = dsobras
+    MasterFields = 'id_obra'
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
-      'select * from lineasobras where id_lineaobra=:ID_OBRA')
-    Left = 440
-    Top = 513
+      'select * from lineasobras where obras_ID_obra=:ID_OBRA')
+    Left = 448
+    Top = 473
     ParamData = <
       item
         Name = 'ID_OBRA'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsobras: TDataSource
+    DataSet = fdobras
+    Left = 193
+    Top = 514
+  end
+  object dslineasobras: TDataSource
+    DataSet = FDlineasObras
+    Left = 393
+    Top = 514
+  end
+  object fdlineasfacturas: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      
+        'select * from lineasfacturas where facturas_idfactura=:id_factur' +
+        'a and facturas_ano=:ano')
+    Left = 1008
+    Top = 297
+    ParamData = <
+      item
+        Name = 'ID_FACTURA'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ANO'
         DataType = ftInteger
         ParamType = ptInput
         Value = Null

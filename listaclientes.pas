@@ -10,30 +10,45 @@ uses
   Vcl.ExtCtrls, Vcl.ToolWin, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS,
+  rDBGridSorter_FireDac, rXLSExport, rDBComponents, RzDBEdit, Vcl.Mask, RzEdit;
 
 type
   Tlistclientes = class(TForm)
-    ListView1: TListView;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
     cbAgruparAdmin: TCheckBox;
-    LinkControlToPropertyGroupView: TLinkControlToProperty;
     Panel1: TPanel;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
-    beBuscar: TButtonedEdit;
-    Label1: TLabel;
-    GroupBox4: TGroupBox;
-    cbOrdenarC: TCheckBox;
-    ControlBar1: TControlBar;
     ToolBar1: TToolBar;
-    linklistaclientes: TLinkListControlToField;
+    btn1: TToolButton;
+    btn2: TToolButton;
+    ToolButton1: TToolButton;
+    btncrearclientes: TToolButton;
+    btn3: TToolButton;
+    btn4: TToolButton;
+    rDBGridClientes1: TrDBGrid_MS;
+    ds1: TDataSource;
+    btn5: TToolButton;
+    btn6: TToolButton;
+    chkCamposBusqueda: TCheckBox;
+    lbed1: TLabeledEdit;
+    btn7: TToolButton;
     procedure FormCreate(Sender: TObject);
+    procedure ControlBar1DockOver(Sender: TObject; Source: TDragDockObject; X,
+      Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn1Click(Sender: TObject);
+    procedure btncrearclientesClick(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
+    procedure btn4Click(Sender: TObject);
+    procedure rDBGridClientes1DblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure cbAgruparAdminClick(Sender: TObject);
-    procedure beBuscarChange(Sender: TObject);
-    procedure cbOrdenarCClick(Sender: TObject);
-    procedure ListView1DblClick(Sender: TObject);
+    procedure btn6Click(Sender: TObject);
+    procedure chkCamposBusquedaClick(Sender: TObject);
+    procedure btn7Click(Sender: TObject);
+    procedure lbed1Change(Sender: TObject);
 
   private
     { Private declarations }
@@ -48,72 +63,104 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, clientes, FPrincipal;
+uses DModule1, clientes, FPrincipal,rDBFilter,rdbtool,rDBFind;
 
-procedure Tlistclientes.beBuscarChange(Sender: TObject);
-var li:TListItem;
+procedure Tlistclientes.btn1Click(Sender: TObject);
 begin
-li:=listview1.FindCaption(0,beBuscar.Text,true,true,false);
-if li <> nil then
-      begin
-      listview1.Selected:=li;
-      li.MakeVisible(True);
-      end
-else     showmessage('No existen resultados.');
+Close;
+end;
+
+procedure Tlistclientes.btn3Click(Sender: TObject);
+begin
+
+ds1.dataset.Delete;
+
+
+end;
+
+procedure Tlistclientes.btn4Click(Sender: TObject);
+begin
+DataModule1.VerClienteExecute(ds1.dataset);
+end;
+
+procedure Tlistclientes.btn6Click(Sender: TObject);
+begin
+DataModule1.rXLSExport1.ExportDBTable(rDBGridClientes1);
+end;
+
+procedure Tlistclientes.btn7Click(Sender: TObject);
+begin
+//FilterByField(DataModule1.fdClientesnombre,fjNone)  ;
+ FilterRec(rDBGridClientes1);
+end;
+
+procedure Tlistclientes.btncrearclientesClick(Sender: TObject);
+begin
+DataModule1.crearclientesExecute(Sender);
 end;
 
 procedure Tlistclientes.cbAgruparAdminClick(Sender: TObject);
 begin
-
-   if (cbAgruparAdmin.Checked) and not (LinkListaClientes.FillHeaderFieldName='nombreapellidos') then
-   begin
-      LinkListaClientes.Active:=false;
-      cbOrdenarC.Checked:=false;
-      cbOrdenarC.Enabled:=true;
-      LinkListaClientes.FillHeaderFieldName:='nombreapellidos';
-      DataModule1.fdClientes.IndexFieldNames:='';
-      DataModule1.fdClientes.IndexesActive:=false;
-      listview1.Clear;
-      LinkListaClientes.Active:=true;
-   end
-   else listview1.GroupView:=true;
-
-
+rDBGridClientes1.OptionsEx2.Filters.FunnelBtn:=cbAgruparAdmin.Checked;
 end;
 
-procedure Tlistclientes.cbOrdenarCClick(Sender: TObject);
+procedure Tlistclientes.chkCamposBusquedaClick(Sender: TObject);
 begin
-   if (Sender as TCheckBox).Checked then
-   begin
-        listview1.GroupView:=false;
-        cbAgruparAdmin.Checked:=listview1.GroupView;
-        LinkListaClientes.Active:=false;
-        LinkListaClientes.FillHeaderFieldName:='';
-        DataModule1.fdClientes.IndexFieldNames:='nombre';
-        DataModule1.fdClientes.indexesActive:=true;
-       cbOrdenarC.Enabled:=false;
-        LinkListaClientes.Active:=true;
-   end;
+   rDBGridClientes1.OptionsEx2.Filters.TextBar:=chkCamposBusqueda.Checked;
+end;
+
+procedure Tlistclientes.ControlBar1DockOver(Sender: TObject;
+  Source: TDragDockObject; X, Y: Integer; State: TDragState;
+  var Accept: Boolean);
+begin
+Accept:=False;
+end;
+
+procedure Tlistclientes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//ds1.DataSet.Active:=False;
+Action:=caFree;
 end;
 
 procedure Tlistclientes.FormCreate(Sender: TObject);
 begin
-     listview1.Clear;
-     cbAgruparAdmin.Checked:=listview1.GroupView;
-     cbOrdenarC.Checked:=false;
-     DataModule1.fdClientes.Active:=true;
-     if DataModule1.fdClientes.RecordCount > 0 then  linklistaclientes.Active:=true;
+
+    if Self.Owner is TFDQuery then
+    begin
+      ds1.DataSet:=TFDQuery(Self.Owner);
+      if not TFDQuery(Self.Owner).Active then TFDQuery(Self.owner).Active:=true;
+
+    end;
 
 end;
 
 
 
-procedure Tlistclientes.ListView1DblClick(Sender: TObject);
-var cliente:TFclientes;
+procedure Tlistclientes.FormShow(Sender: TObject);
 begin
-     cliente:=TFclientes.Create(Self);
-     cliente.Show;
-     cliente.ManualDock(principal.PageControl2);
+rDBGridClientes1.RecalculateSummaryResults(True);
+end;
+
+procedure Tlistclientes.lbed1Change(Sender: TObject);
+begin
+rDBGridClientes1.DataSource.DataSet.DisableControls;
+rDBGridClientes1.DataSource.DataSet.Filtered:=False;
+rDBGridClientes1.DataSource.DataSet.Filter:='nombre LIKE ''%'+TLabeledEdit(Sender).Text+'%''';
+rDBGridClientes1.DataSource.DataSet.Filtered:=True;
+rDBGridClientes1.DataSource.DataSet.EnableControls;
+
+
+
+end;
+
+procedure Tlistclientes.rDBGridClientes1DblClick(Sender: TObject);
+begin
+    DataModule1.VerClienteExecute(ds1.dataset);
+end;
+
+procedure Tlistclientes.ToolButton1Click(Sender: TObject);
+begin
+DataModule1.editarclienteExecute(ds1.dataset);
 end;
 
 end.

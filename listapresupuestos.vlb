@@ -1,11 +1,7 @@
-﻿[ListView1]
-Coordinates=710,70,97,303
+﻿[]
+Coordinates=306,71,95,51
 Visible=True
 ExplicitSubNodes=GroupView
-
-[]
-Coordinates=145,1,46,51
-Visible=True
 
 [Panel1]
 Coordinates=145,78,47,51
@@ -15,9 +11,6 @@ Coordinates=145,309,70,51
 
 [GroupBox4]
 Coordinates=145,155,70,51
-
-[beBuscar]
-Coordinates=66,351,61,51
 
 [FClientes.fdclientes]
 Visible=False
@@ -50,12 +43,8 @@ Visible=False
 [DataModule1.fdClientes]
 Coordinates=930,50,131,195
 
-[CoolBar1]
-Coordinates=145,254,60,33
-
 [DataModule1.fdpresupuestos]
-Coordinates=460,90,140,195
-Visible=False
+Coordinates=610,100,140,195
 
 [DateTimePicker1]
 Coordinates=306,281,97,51
@@ -71,18 +60,6 @@ Coordinates=306,141,97,51
 
 [Label3]
 Coordinates=306,1,46,51
-
-[BindSourceDB1]
-Coordinates=460,90,140,195
-
-[BindingsList1]
-Coordinates=0,0,82,33
-
-[cbnombre]
-Coordinates=46,296,95,51
-
-[cbaprobado]
-Coordinates=306,71,95,51
 
 [FClientes.BindSourceDB3]
 Coordinates=0,165,141,69
@@ -101,12 +78,6 @@ Coordinates=620,385,141,69
 
 [FClientes.BindSourceDB5]
 Coordinates=471,385,141,69
-
-[rbcliente]
-Coordinates=32,52,57,33
-
-[rbnumero]
-Coordinates=237,234,62,33
 
 [Button1]
 Coordinates=91,52,53,51

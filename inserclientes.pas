@@ -11,70 +11,52 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Vcl.Bind.Grid, System.Rtti, System.Bindings.Outputs,
   Vcl.Bind.Editors, Data.Bind.Controls, Data.Bind.Components, Vcl.Buttons,
-  Vcl.Bind.Navigator, Data.Bind.Grid, Data.Bind.DBScope;
+  Vcl.Bind.Navigator, Data.Bind.Grid, Data.Bind.DBScope, Vcl.DBGrids, rDBGrid,
+  RzPanel, RzDBNav, Vcl.Mask, Vcl.DBCtrls, rDBComponents;
 
 type
   TFInsertarCliente = class(TForm)
     GridPanel1: TGridPanel;
     GroupBox4: TGroupBox;
-    LabeledEdit1: TLabeledEdit;
-    LabeledEdit2: TLabeledEdit;
-    LabeledEdit3: TLabeledEdit;
-    LabeledEdit6: TLabeledEdit;
-    LabeledEdit7: TLabeledEdit;
-    LabeledEdit8: TLabeledEdit;
     GridPanel2: TGridPanel;
     GroupBox5: TGroupBox;
-    Label2: TLabel;
     Label1: TLabel;
-    ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     GroupBox2: TGroupBox;
-    LabeledEdit4: TLabeledEdit;
-    LabeledEdit5: TLabeledEdit;
     GridPanel3: TGridPanel;
     PageControl1: TPageControl;
     datosFacturacion: TTabSheet;
     datoscontactos: TTabSheet;
     GroupBox1: TGroupBox;
-    LabeledEdit9: TLabeledEdit;
-    LabeledEdit10: TLabeledEdit;
-    LabeledEdit11: TLabeledEdit;
-    LabeledEdit12: TLabeledEdit;
-    LabeledEdit13: TLabeledEdit;
-    LabeledEdit14: TLabeledEdit;
     Button1: TButton;
-    StringGrid1: TStringGrid;
     fdinsertarClientes: TFDQuery;
     fdadministradores: TFDQuery;
     fdcontactos: TFDQuery;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
-    CoolBar1: TCoolBar;
-    NavigatorBindSourceDB1: TBindNavigator;
-    BindSourceDB2: TBindSourceDB;
-    LinkControlToField1: TLinkControlToField;
-    LinkControlToField2: TLinkControlToField;
-    LinkControlToField3: TLinkControlToField;
-    LinkControlToField4: TLinkControlToField;
-    LinkControlToField5: TLinkControlToField;
-    LinkControlToField6: TLinkControlToField;
-    LinkControlToField7: TLinkControlToField;
-    LinkControlToField8: TLinkControlToField;
-    BindSourceDB3: TBindSourceDB;
-    linklistaadministradores: TLinkFillControlToField;
-    LinkPropertyToFieldItemIndex: TLinkPropertyToField;
-    LinkControlToField9: TLinkControlToField;
-    LinkControlToField10: TLinkControlToField;
-    LinkControlToField11: TLinkControlToField;
-    LinkControlToField12: TLinkControlToField;
-    LinkControlToField13: TLinkControlToField;
-    LinkControlToField14: TLinkControlToField;
     Panel1: TPanel;
     btaceptar: TButton;
     btcancelar: TButton;
-    procedure Button1Click(Sender: TObject);
+    ctrlbr1: TControlBar;
+    RzDBNavigator1: TRzDBNavigator;
+    rDBGrid1: TrDBGrid;
+    dsinsertarcliente: TDataSource;
+    dsadministradores: TDataSource;
+    dscontactos: TDataSource;
+    rDBEdit1: TrDBEdit;
+    rDBEdit2: TrDBEdit;
+    rDBEdit3: TrDBEdit;
+    rDBEdit4: TrDBEdit;
+    rDBEdit5: TrDBEdit;
+    rDBEdit6: TrDBEdit;
+    rDBEdit7: TrDBEdit;
+    rDBEdit8: TrDBEdit;
+    rDBEdit9: TrDBEdit;
+    rDBEdit10: TrDBEdit;
+    rDBEdit11: TrDBEdit;
+    rDBEdit12: TrDBEdit;
+    rDBEdit13: TrDBEdit;
+    rDBEdit14: TrDBEdit;
+    rDBLookupComboBox1: TrDBLookupComboBox;
+    rDBComboBox1: TrDBComboBox;
     procedure btcancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btaceptarClick(Sender: TObject);
@@ -82,6 +64,15 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LabeledEdit10Change(Sender: TObject);
+    procedure rDBComboBox1GetListItemProps(Sender: TObject; Canvas: TCanvas;
+      Index: Integer; State: TOwnerDrawState; var Rect: TRect; var Text: string;
+      ShowBmp: TBitmap; var DrawSeparatorTop, DrawSeparatorBottom: Boolean);
+    procedure ComboBox2Select(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure fdcontactosAfterOpen(DataSet: TDataSet);
+    procedure fdcontactosAfterPost(DataSet: TDataSet);
+    procedure fdcontactosAfterDelete(DataSet: TDataSet);
+    procedure fdcontactosAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -104,19 +95,11 @@ begin
        fdinsertarClientes.Post;
        btcancelar.Caption:='Cerrar';
     end;
-end;
-
-procedure TFInsertarCliente.Button1Click(Sender: TObject);
-begin
-
-
-LabeledEdit10.Text:=LabeledEdit2.text;
-LabeledEdit11.Text:=LabeledEdit3.text;
-LabeledEdit12.Text:=LabeledEdit6.text;
-LabeledEdit13.Text:=LabeledEdit7.text;
-LabeledEdit14.Text:=LabeledEdit8.text;
-
-
+    if fdcontactos.State in [dsInsert,dsEdit] then
+    begin
+      fdcontactos.Post;
+      btcancelar.Caption:='Cerrar';
+    end;
 end;
 
 procedure TFInsertarCliente.btcancelarClick(Sender: TObject);
@@ -124,19 +107,56 @@ begin
 Close;
 end;
 
+procedure TFInsertarCliente.Button1Click(Sender: TObject);
+begin
+if not ( dsinsertarcliente.State in [dsInsert,dsEdit]) then   dsinsertarcliente.DataSet.Edit;
+rDBEdit10.Text:=rDBEdit2.Text;
+rDBEdit11.Text:=rDBEdit3.Text;
+rDBEdit12.Text:=rDBEdit6.Text;
+rDBEdit13.Text:=rDBEdit5.Text;
+rDBEdit14.Text:=rDBEdit4.Text;
+end;
+
+procedure TFInsertarCliente.ComboBox2Select(Sender: TObject);
+begin
+    TrDBComboBox(Sender).DataSource.DataSet.FieldByName(TrDBComboBox(Sender).DataField).AsInteger:=TrDBComboBox(Sender).ItemIndex;
+end;
+
+procedure TFInsertarCliente.fdcontactosAfterDelete(DataSet: TDataSet);
+begin
+rDBGrid1.RecalculateSummaryResults(True);
+end;
+
+procedure TFInsertarCliente.fdcontactosAfterInsert(DataSet: TDataSet);
+begin
+DataSet.FieldByName('id_cliente').AsInteger:=fdinsertarClientes.FieldByName('idContactos').AsInteger;
+end;
+
+procedure TFInsertarCliente.fdcontactosAfterOpen(DataSet: TDataSet);
+begin
+rDBGrid1.RecalculateSummaryResults(True);
+end;
+
+procedure TFInsertarCliente.fdcontactosAfterPost(DataSet: TDataSet);
+begin
+rDBGrid1.RecalculateSummaryResults(True);
+end;
+
 procedure TFInsertarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   if fdinsertarClientes.State in [dsInsert,dsEdit] then fdinsertarClientes.cancel;
+   if fdcontactos.State in [dsInsert,dsEdit] then fdcontactos.cancel;
   fdinsertarClientes.close;
   fdadministradores.close;
   fdcontactos.close;
+
   Action:=caFree;
 end;
 
 procedure TFInsertarCliente.FormCreate(Sender: TObject);
 begin
-     ComboBox1.Clear;
+
      if not fdadministradores.Active then fdadministradores.Active:=true;
 
 end;
@@ -161,6 +181,20 @@ procedure TFInsertarCliente.PageControl1Changing(Sender: TObject;
 begin
        if fdinsertarClientes.state in [dsInsert] then AllowChange:=false;
 
+end;
+
+procedure TFInsertarCliente.rDBComboBox1GetListItemProps(Sender: TObject;
+  Canvas: TCanvas; Index: Integer; State: TOwnerDrawState; var Rect: TRect;
+  var Text: string; ShowBmp: TBitmap; var DrawSeparatorTop,
+  DrawSeparatorBottom: Boolean);
+begin
+if odSelected in State then
+ Canvas.Font.Style:=[fsBold];
+
+
+
+
+DrawSeparatorTop:=True;
 end;
 
 end.

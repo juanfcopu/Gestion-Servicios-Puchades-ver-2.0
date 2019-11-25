@@ -1,0 +1,44 @@
+object FimagenesCompanias: TFimagenesCompanias
+  Left = 0
+  Top = 0
+  Caption = 'Compa'#241'ias'
+  ClientHeight = 339
+  ClientWidth = 532
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object rzlstvw1: TRzListView
+    Left = 0
+    Top = 29
+    Width = 532
+    Height = 310
+    Align = alClient
+    Columns = <>
+    GridLines = True
+    IconOptions.WrapText = False
+    TabOrder = 1
+    OnDblClick = rzlstvw1DblClick
+    ExplicitLeft = 104
+    ExplicitTop = 72
+    ExplicitWidth = 250
+    ExplicitHeight = 150
+  end
+  object rztlbr1: TRzToolbar
+    Left = 0
+    Top = 0
+    Width = 532
+    Height = 29
+    BorderInner = fsNone
+    BorderOuter = fsGroove
+    BorderSides = [sdTop]
+    BorderWidth = 0
+    TabOrder = 0
+  end
+end

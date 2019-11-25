@@ -2,10 +2,10 @@ object fnavegador: Tfnavegador
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsToolWindow
   Caption = 'Navegador'
-  ClientHeight = 373
-  ClientWidth = 234
+  ClientHeight = 383
+  ClientWidth = 244
   Color = clBtnFace
   DragKind = dkDock
   DragMode = dmAutomatic
@@ -17,14 +17,15 @@ object fnavegador: Tfnavegador
   OldCreateOrder = False
   Position = poDefault
   PrintScale = poNone
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object TreeView1: TTreeView
     Left = 0
     Top = 0
-    Width = 234
-    Height = 373
+    Width = 244
+    Height = 383
     Align = alClient
     Indent = 19
     TabOrder = 0

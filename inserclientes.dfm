@@ -2,17 +2,21 @@ object FInsertarCliente: TFInsertarCliente
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsSingle
+  BorderStyle = bsToolWindow
   Caption = 'Insertar cliente'
   ClientHeight = 580
   ClientWidth = 946
   Color = clBtnFace
+  Constraints.MaxHeight = 609
+  Constraints.MaxWidth = 952
+  DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -25,7 +29,7 @@ object FInsertarCliente: TFInsertarCliente
     Align = alClient
     ColumnCollection = <
       item
-        Value = 54.545454545454550000
+        Value = 54.545454545454540000
       end
       item
         Value = 45.454545454545450000
@@ -52,7 +56,7 @@ object FInsertarCliente: TFInsertarCliente
         Value = 31.441597233139440000
       end
       item
-        Value = 68.558402766860550000
+        Value = 68.558402766860560000
       end>
     TabOrder = 0
     object GroupBox4: TGroupBox
@@ -69,99 +73,78 @@ object FInsertarCliente: TFInsertarCliente
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 0
-      object LabeledEdit1: TLabeledEdit
-        AlignWithMargins = True
+      TabOrder = 1
+      object rDBEdit1: TrDBEdit
         Left = 9
         Top = 40
         Width = 41
         Height = 21
-        EditLabel.Width = 33
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Codigo'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
+        CharCase = ecUpperCase
+        DataField = 'IdContactos'
+        DataSource = dsinsertarcliente
         TabOrder = 0
+        DBEditLabel.OwnCaption = 'C'#243'digo'
+        DBEditLabel.ShowRequiredBold = True
       end
-      object LabeledEdit2: TLabeledEdit
-        AlignWithMargins = True
+      object rDBEdit2: TrDBEdit
         Left = 56
         Top = 40
         Width = 235
         Height = 21
-        EditLabel.Width = 37
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Nombre'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
+        CharCase = ecUpperCase
+        DataField = 'Nombre'
+        DataSource = dsinsertarcliente
         TabOrder = 1
+        DBEditLabel.OwnCaption = 'Nombre'
+        DBEditLabel.ShowRequiredBold = True
       end
-      object LabeledEdit3: TLabeledEdit
-        AlignWithMargins = True
-        Left = 305
+      object rDBEdit3: TrDBEdit
+        Left = 297
         Top = 40
         Width = 91
         Height = 21
-        EditLabel.Width = 25
-        EditLabel.Height = 13
-        EditLabel.Caption = 'C.I.F'
-        EditLabel.Font.Charset = DEFAULT_CHARSET
-        EditLabel.Font.Color = clWindowText
-        EditLabel.Font.Height = -11
-        EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = []
-        EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
+        CharCase = ecUpperCase
+        DataField = 'CIF'
+        DataSource = dsinsertarcliente
         TabOrder = 2
+        DBEditLabel.OwnCaption = 'C.I.F'
+        DBEditLabel.ShowRequiredBold = True
       end
-      object LabeledEdit6: TLabeledEdit
-        Left = 95
-        Top = 101
-        Width = 281
-        Height = 21
-        EditLabel.Width = 43
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Direcci'#243'n'
-        TabOrder = 4
-      end
-      object LabeledEdit7: TLabeledEdit
-        Left = 9
+      object rDBEdit4: TrDBEdit
+        Left = 10
         Top = 101
         Width = 77
         Height = 21
-        EditLabel.Width = 65
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Codigo Postal'
+        CharCase = ecUpperCase
+        DataField = 'IdContactos'
+        DataSource = dsinsertarcliente
         TabOrder = 3
+        DBEditLabel.OwnCaption = 'C'#243'digo Postal'
+        DBEditLabel.ShowRequiredBold = True
       end
-      object LabeledEdit8: TLabeledEdit
-        Left = 388
+      object rDBEdit5: TrDBEdit
+        Left = 93
         Top = 101
-        Width = 121
+        Width = 281
         Height = 21
-        EditLabel.Width = 33
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Ciudad'
+        CharCase = ecUpperCase
+        DataField = 'Direccion'
+        DataSource = dsinsertarcliente
+        TabOrder = 4
+        DBEditLabel.OwnCaption = 'Direcci'#243'n'
+        DBEditLabel.ShowRequiredBold = True
+      end
+      object rDBEdit6: TrDBEdit
+        Left = 380
+        Top = 101
+        Width = 109
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'Ciudad'
+        DataSource = dsinsertarcliente
         TabOrder = 5
+        DBEditLabel.OwnCaption = 'Ciudad'
+        DBEditLabel.ShowRequiredBold = True
       end
     end
     object GridPanel2: TGridPanel
@@ -192,7 +175,7 @@ object FInsertarCliente: TFInsertarCliente
         item
           Value = 50.000000000000000000
         end>
-      TabOrder = 1
+      TabOrder = 0
       object GroupBox5: TGroupBox
         AlignWithMargins = True
         Left = 4
@@ -202,20 +185,6 @@ object FInsertarCliente: TFInsertarCliente
         Align = alClient
         Caption = 'Familia y Administrador'
         TabOrder = 0
-        object Label2: TLabel
-          AlignWithMargins = True
-          Left = 11
-          Top = 57
-          Width = 66
-          Height = 13
-          Caption = 'Administrador'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object Label1: TLabel
           AlignWithMargins = True
           Left = 19
@@ -230,36 +199,39 @@ object FInsertarCliente: TFInsertarCliente
           Font.Style = []
           ParentFont = False
         end
-        object ComboBox1: TComboBox
-          AlignWithMargins = True
-          Left = 91
-          Top = 59
-          Width = 312
-          Height = 21
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          Text = 'ADMINISTRACI'#211'N F.M PORTA'#209'A'
-        end
         object ComboBox2: TComboBox
-          Left = 91
+          Left = 80
           Top = 22
-          Width = 312
+          Width = 323
           Height = 21
           CharCase = ecUpperCase
           ItemIndex = 0
-          TabOrder = 1
+          TabOrder = 0
           Text = 'COMUNIDAD DE PROPIETARIOS'
+          OnSelect = ComboBox2Select
           Items.Strings = (
             'COMUNIDAD DE PROPIETARIOS'
             'COMUNIDAD DE BIENES'
             'SOCIEDAD LIMITADA'
             'PROPIETARIO  RESIDENCIA'
             'PROPIETARIO 2'#186' RESIDENCIA')
+        end
+        object rDBLookupComboBox1: TrDBLookupComboBox
+          Left = 80
+          Top = 53
+          Width = 321
+          Height = 21
+          DataField = 'idAdministrador'
+          DataSource = dsinsertarcliente
+          DropDownRows = 15
+          KeyField = 'idadministrador'
+          ListField = 'nombreapellidos'
+          ListSource = dsadministradores
+          TabOrder = 1
+          DBEditLabel.OwnCaption = 'Administrador'
+          DBEditLabel.Position = lpLeftCenter
+          BoundLabel.Position = lpTopRight
+          EmptyDisplayValue = 'Vac'#237'o'
         end
       end
       object GroupBox2: TGroupBox
@@ -277,40 +249,33 @@ object FInsertarCliente: TFInsertarCliente
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        object LabeledEdit4: TLabeledEdit
+        object rDBEdit7: TrDBEdit
           Left = 62
-          Top = 54
-          Width = 341
-          Height = 21
-          EditLabel.Width = 50
-          EditLabel.Height = 13
-          EditLabel.Caption = 'N'#186' Cuenta'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          LabelPosition = lpLeft
-          ParentFont = False
-          TabOrder = 0
-        end
-        object LabeledEdit5: TLabeledEdit
-          Left = 62
-          Top = 17
-          Width = 341
+          Top = 25
+          Width = 339
           Height = 21
           CharCase = ecUpperCase
-          EditLabel.Width = 29
-          EditLabel.Height = 13
-          EditLabel.Caption = 'Banco'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          LabelPosition = lpLeft
-          ParentFont = False
+          DataField = 'banco'
+          DataSource = dsinsertarcliente
+          TabOrder = 0
+          DBEditLabel.OwnCaption = 'Banco'
+          DBEditLabel.ShowRequiredBold = True
+          DBEditLabel.ShowRequiredMark = False
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBEdit8: TrDBEdit
+          Left = 62
+          Top = 54
+          Width = 339
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'IBAN'
+          DataSource = dsinsertarcliente
           TabOrder = 1
+          DBEditLabel.OwnCaption = 'IBAN'
+          DBEditLabel.ShowRequiredBold = True
+          DBEditLabel.ShowRequiredMark = False
+          DBEditLabel.Position = lpLeftCenter
         end
       end
     end
@@ -373,160 +338,228 @@ object FInsertarCliente: TFInsertarCliente
             DesignSize = (
               928
               277)
-            object LabeledEdit9: TLabeledEdit
-              AlignWithMargins = True
-              Left = 77
-              Top = 31
-              Width = 46
-              Height = 21
-              EditLabel.Width = 33
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Codigo'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              LabelPosition = lpLeft
-              ParentFont = False
-              TabOrder = 0
-            end
-            object LabeledEdit10: TLabeledEdit
-              AlignWithMargins = True
-              Left = 77
-              Top = 64
-              Width = 240
-              Height = 21
-              EditLabel.Width = 37
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Nombre'
-              EditLabel.Font.Charset = DEFAULT_CHARSET
-              EditLabel.Font.Color = clWindowText
-              EditLabel.Font.Height = -11
-              EditLabel.Font.Name = 'Tahoma'
-              EditLabel.Font.Style = []
-              EditLabel.ParentFont = False
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              LabelPosition = lpLeft
-              ParentFont = False
-              TabOrder = 1
-              OnChange = LabeledEdit10Change
-            end
-            object LabeledEdit11: TLabeledEdit
-              AlignWithMargins = True
-              Left = 77
-              Top = 99
-              Width = 96
-              Height = 21
-              EditLabel.Width = 25
-              EditLabel.Height = 13
-              EditLabel.Caption = 'C.I.F'
-              EditLabel.Font.Charset = DEFAULT_CHARSET
-              EditLabel.Font.Color = clWindowText
-              EditLabel.Font.Height = -11
-              EditLabel.Font.Name = 'Tahoma'
-              EditLabel.Font.Style = []
-              EditLabel.ParentFont = False
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              LabelPosition = lpLeft
-              ParentFont = False
-              TabOrder = 2
-            end
-            object LabeledEdit12: TLabeledEdit
-              Left = 77
-              Top = 169
-              Width = 286
-              Height = 21
-              EditLabel.Width = 43
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Direcci'#243'n'
-              LabelPosition = lpLeft
-              TabOrder = 3
-            end
-            object LabeledEdit13: TLabeledEdit
-              Left = 77
-              Top = 204
-              Width = 82
-              Height = 21
-              EditLabel.Width = 65
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Codigo Postal'
-              LabelPosition = lpLeft
-              TabOrder = 4
-            end
-            object LabeledEdit14: TLabeledEdit
-              Left = 77
-              Top = 134
-              Width = 126
-              Height = 21
-              EditLabel.Width = 33
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Ciudad'
-              LabelPosition = lpLeft
-              TabOrder = 5
-            end
             object Button1: TButton
               Left = 816
-              Top = 25
+              Top = 113
               Width = 105
               Height = 33
               Anchors = [akTop, akRight]
               Caption = 'Copiar Datos'
-              TabOrder = 6
+              TabOrder = 4
               OnClick = Button1Click
+            end
+            object rDBEdit9: TrDBEdit
+              Left = 77
+              Top = 30
+              Width = 60
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'IdContactos'
+              DataSource = dsinsertarcliente
+              TabOrder = 0
+              DBEditLabel.OwnCaption = 'C'#243'digo'
+              DBEditLabel.ShowRequiredBold = True
+              DBEditLabel.ShowRequiredMark = False
+              DBEditLabel.Position = lpLeftCenter
+            end
+            object rDBEdit10: TrDBEdit
+              Left = 77
+              Top = 64
+              Width = 240
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'nombrefactura'
+              DataSource = dsinsertarcliente
+              TabOrder = 2
+              DBEditLabel.OwnCaption = 'Nombre'
+              DBEditLabel.ShowRequiredBold = True
+              DBEditLabel.ShowRequiredMark = False
+              DBEditLabel.Position = lpLeftCenter
+            end
+            object rDBEdit11: TrDBEdit
+              Left = 77
+              Top = 100
+              Width = 96
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'ciffactura'
+              DataSource = dsinsertarcliente
+              TabOrder = 3
+              DBEditLabel.OwnCaption = 'C.I.F'
+              DBEditLabel.ShowRequiredBold = True
+              DBEditLabel.ShowRequiredMark = False
+              DBEditLabel.Position = lpLeftCenter
+            end
+            object rDBEdit12: TrDBEdit
+              Left = 77
+              Top = 134
+              Width = 126
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'ciudadfactura'
+              DataSource = dsinsertarcliente
+              TabOrder = 5
+              DBEditLabel.OwnCaption = 'Ciudad'
+              DBEditLabel.ShowRequiredBold = True
+              DBEditLabel.ShowRequiredMark = False
+              DBEditLabel.Position = lpLeftCenter
+            end
+            object rDBEdit13: TrDBEdit
+              Left = 77
+              Top = 167
+              Width = 286
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'direccionfactura'
+              DataSource = dsinsertarcliente
+              TabOrder = 6
+              DBEditLabel.OwnCaption = 'Direcci'#243'n'
+              DBEditLabel.ShowRequiredBold = True
+              DBEditLabel.ShowRequiredMark = False
+              DBEditLabel.Position = lpLeftCenter
+            end
+            object rDBEdit14: TrDBEdit
+              Left = 77
+              Top = 203
+              Width = 82
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'codigopostalfactura'
+              DataSource = dsinsertarcliente
+              TabOrder = 7
+              DBEditLabel.OwnCaption = 'C'#243'digo Postal'
+              DBEditLabel.ShowRequiredBold = True
+              DBEditLabel.ShowRequiredMark = False
+              DBEditLabel.Position = lpLeftCenter
+            end
+            object rDBComboBox1: TrDBComboBox
+              Left = 590
+              Top = 30
+              Width = 307
+              Height = 26
+              CharCase = ecUpperCase
+              DataField = 'familia'
+              DataSource = dsinsertarcliente
+              DropDownCount = 15
+              Items.Strings = (
+                '0'
+                '1'
+                '2'
+                '3'
+                '4')
+              TabOrder = 1
+              BoundLabel.Position = lpTopRight
+              DisplayedItems.ListItems.Strings = (
+                'COMUNIDAD DE PROPIETARIOS'
+                'COMUNIDAD DE BIENES'
+                'SOCIEDAD LIMITADA'
+                'PROPIETARIO  RESIDENCIA'
+                'PROPIETARIO 2'#186' RESIDENCIA')
+              DisplayedItems.AddItemAsFirstColumn = True
+              OnGetListItemProps = rDBComboBox1GetListItemProps
+              ItemHeightEx = 20
             end
           end
         end
         object datoscontactos: TTabSheet
           Caption = 'Contactos'
           ImageIndex = 1
-          object StringGrid1: TStringGrid
-            Tag = 6
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
+          object ctrlbr1: TControlBar
+            Left = 0
+            Top = 0
+            Width = 934
+            Height = 33
+            Align = alTop
+            TabOrder = 0
+            object RzDBNavigator1: TRzDBNavigator
+              Left = 47
+              Top = 2
+              Width = 310
+              Height = 22
+              DataSource = dscontactos
+              BorderOuter = fsNone
+              TabOrder = 0
+            end
+          end
+          object rDBGrid1: TrDBGrid
             Left = 0
             Top = 33
             Width = 934
             Height = 250
             Align = alClient
-            ColCount = 6
-            FixedCols = 0
-            RowCount = 2
-            TabOrder = 0
-            ColWidths = (
-              64
-              64
-              64
-              64
-              64
-              64)
-          end
-          object CoolBar1: TCoolBar
-            Left = 0
-            Top = 0
-            Width = 934
-            Height = 33
-            Bands = <
+            DataSource = dscontactos
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -12
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = [fsBold]
+            TitleLines = 2
+            RowFixHeight = 23
+            FooterRow.FooterVisible = True
+            FooterRow.FieldFooterDefs.Strings = (
+              'pta=%COUNTVALcontactos;')
+            Columns = <
               item
-                Control = NavigatorBindSourceDB1
-                ImageIndex = -1
-                Width = 928
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'pta'
+                Title.Alignment = taCenter
+                Title.Caption = 'Puerta'
+                Width = 65
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'nombre'
+                Title.Caption = 'Nombre'
+                Width = 245
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'telefono1'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tel'#233'fono 1'
+                Width = 103
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'telefono2'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tel'#233'fono 2'
+                Width = 103
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'telefono3'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tel'#233'fono 3'
+                Width = 103
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'mail'
+                Title.Caption = 'Mail'
+                Width = 263
+                Visible = True
               end>
-            object NavigatorBindSourceDB1: TBindNavigator
-              Left = 11
-              Top = 0
-              Width = 910
-              Height = 25
-              DataSource = BindSourceDB1
-              Orientation = orHorizontal
-              TabOrder = 0
-            end
           end
         end
       end
@@ -537,7 +570,6 @@ object FInsertarCliente: TFInsertarCliente
         Height = 84
         Align = alClient
         TabOrder = 1
-        ExplicitTop = 314
         DesignSize = (
           942
           84)
@@ -569,8 +601,8 @@ object FInsertarCliente: TFInsertarCliente
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'select * from clientes where idContactos=:id_cliente')
-    Left = 464
-    Top = 32
+    Left = 440
+    Top = 40
     ParamData = <
       item
         Name = 'ID_CLIENTE'
@@ -587,6 +619,10 @@ object FInsertarCliente: TFInsertarCliente
     Top = 64
   end
   object fdcontactos: TFDQuery
+    AfterOpen = fdcontactosAfterOpen
+    AfterInsert = fdcontactosAfterInsert
+    AfterPost = fdcontactosAfterPost
+    AfterDelete = fdcontactosAfterDelete
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'select * from contactosclientes where id_cliente=:id_cliente')
@@ -600,177 +636,19 @@ object FInsertarCliente: TFInsertarCliente
         Value = Null
       end>
   end
-  object BindSourceDB1: TBindSourceDB
-    DataSet = fdcontactos
-    ScopeMappings = <>
-    Left = 400
-    Top = 248
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 20
-    Top = 5
-    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      GridControl = StringGrid1
-      Columns = <
-        item
-          MemberName = 'pta'
-          CustomParse = 'Puerta'
-        end
-        item
-          MemberName = 'nombre'
-          Header = 'Nombre'
-        end
-        item
-          MemberName = 'telefono1'
-          Header = 'Tel'#233'fono 1'
-        end
-        item
-          MemberName = 'telefono2'
-          Header = 'Tel'#233'fono 2'
-        end
-        item
-          MemberName = 'telefono3'
-          Header = 'Tel'#233'fono 3'
-        end
-        item
-          MemberName = 'mail'
-          Header = 'Mail'
-        end>
-    end
-    object LinkControlToField1: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'IdContactos'
-      Control = LabeledEdit1
-      Track = True
-    end
-    object LinkControlToField2: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Nombre'
-      Control = LabeledEdit2
-      Track = True
-    end
-    object LinkControlToField3: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'CIF'
-      Control = LabeledEdit3
-      Track = True
-    end
-    object LinkControlToField4: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'CodigoPostal'
-      Control = LabeledEdit7
-      Track = True
-    end
-    object LinkControlToField5: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Direccion'
-      Control = LabeledEdit6
-      Track = True
-    end
-    object LinkControlToField6: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Ciudad'
-      Control = LabeledEdit8
-      Track = True
-    end
-    object LinkControlToField7: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'banco'
-      Control = LabeledEdit5
-      Track = True
-    end
-    object LinkControlToField8: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'IBAN'
-      Control = LabeledEdit4
-      Track = True
-    end
-    object linklistaadministradores: TLinkFillControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'idAdministrador'
-      Control = ComboBox1
-      Track = False
-      FillDataSource = BindSourceDB3
-      FillValueFieldName = 'idadministrador'
-      FillDisplayFieldName = 'nombreapellidos'
-      AutoFill = True
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
-    object LinkPropertyToFieldItemIndex: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'familia'
-      Component = ComboBox2
-      ComponentProperty = 'ItemIndex'
-    end
-    object LinkControlToField9: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'IdContactos'
-      Control = LabeledEdit9
-      Track = True
-    end
-    object LinkControlToField10: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'nombrefactura'
-      Control = LabeledEdit10
-      Track = True
-    end
-    object LinkControlToField11: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'ciffactura'
-      Control = LabeledEdit11
-      Track = True
-    end
-    object LinkControlToField12: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'ciudadfactura'
-      Control = LabeledEdit14
-      Track = True
-    end
-    object LinkControlToField13: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'direccionfactura'
-      Control = LabeledEdit12
-      Track = True
-    end
-    object LinkControlToField14: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'codigopostalfactura'
-      Control = LabeledEdit13
-      Track = True
-    end
-  end
-  object BindSourceDB2: TBindSourceDB
+  object dsinsertarcliente: TDataSource
     DataSet = fdinsertarClientes
-    ScopeMappings = <>
-    Left = 480
-    Top = 248
+    Left = 236
+    Top = 20
   end
-  object BindSourceDB3: TBindSourceDB
+  object dsadministradores: TDataSource
     DataSet = fdadministradores
-    ScopeMappings = <>
-    Left = 560
-    Top = 248
+    Left = 508
+    Top = 60
+  end
+  object dscontactos: TDataSource
+    DataSet = fdcontactos
+    Left = 465
+    Top = 324
   end
 end

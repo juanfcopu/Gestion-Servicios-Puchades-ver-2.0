@@ -2,7 +2,7 @@ object Frame3: TFrame3
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 305
   Align = alClient
   TabOrder = 0
   OnResize = FrameResize
@@ -10,7 +10,7 @@ object Frame3: TFrame3
     Left = 0
     Top = 0
     Width = 451
-    Height = 304
+    Height = 305
     Align = alClient
     TabOrder = 0
     object ListViewObras: TListView
@@ -18,7 +18,7 @@ object Frame3: TFrame3
       Left = 4
       Top = 46
       Width = 443
-      Height = 254
+      Height = 255
       Align = alClient
       Columns = <>
       Font.Charset = DEFAULT_CHARSET
@@ -27,7 +27,7 @@ object Frame3: TFrame3
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 5
       OnResize = ListViewObrasResize
     end
     object HeaderControl1: THeaderControl
@@ -49,7 +49,7 @@ object Frame3: TFrame3
       Width = 32
       Height = 32
       Caption = 'Button1'
-      TabOrder = 2
+      TabOrder = 0
     end
     object Button2: TButton
       Left = 442
@@ -57,7 +57,7 @@ object Frame3: TFrame3
       Width = 32
       Height = 32
       Caption = 'Button1'
-      TabOrder = 3
+      TabOrder = 1
     end
     object Button3: TButton
       Left = 480
@@ -65,7 +65,15 @@ object Frame3: TFrame3
       Width = 32
       Height = 32
       Caption = 'Button1'
-      TabOrder = 4
+      TabOrder = 2
+    end
+    object btncrearfactura: TButton
+      Left = 366
+      Top = 2
+      Width = 32
+      Height = 32
+      Caption = 'Button1'
+      TabOrder = 3
     end
   end
 end

@@ -13,7 +13,7 @@ uses
   Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Data.Bind.Controls, Vcl.Buttons, Vcl.Bind.Navigator, Vcl.ToolWin, Vcl.Grids,
-  Vcl.DBGrids, rDBTreeView, rDBRecView, rDBComponents;
+  Vcl.DBGrids;
 
 type
   TFClientes = class(TForm)
@@ -75,11 +75,14 @@ type
     fdlineaspresupuesto: TFDQuery;
     dsfdlineaspresupuesto: TDataSource;
     DBGrid2: TDBGrid;
-    rDBRecordSelection1: TrDBRecordSelection;
     Label3: TLabel;
     LinkListControlToField2: TLinkListControlToField;
     FDlineasObras: TFDQuery;
-    procedure FormCreate(Sender: TObject);
+    dsobras: TDataSource;
+    dbgrd1: TDBGrid;
+    dslineasobras: TDataSource;
+    dblineasobras: TDBGrid;
+    fdlineasfacturas: TFDQuery;
     procedure GridPanel2Resize(Sender: TObject);
     procedure Frame11ListView1AdvancedCustomDrawItem(Sender: TCustomListView;
       Item: TListItem; State: TCustomDrawState; Stage: TCustomDrawStage;
@@ -95,13 +98,22 @@ type
       Y: Integer);
     procedure Frame31Button2Click(Sender: TObject);
     procedure Frame31ListViewObrasDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Frame11btnobraClick(Sender: TObject);
+    procedure Frame21ListViewFacturasDblClick(Sender: TObject);
+    procedure Frame21Button2Click(Sender: TObject);
+    procedure Frame31Button3Click(Sender: TObject);
+    procedure Frame31Button1Click(Sender: TObject);
+    procedure Frame31btncrearfacturaClick(Sender: TObject);
+    procedure Frame21Button1Click(Sender: TObject);
 
 
   private
     { Private declarations }
-    lstobras:TStringList;
+
   public
     { Public declarations }
+    lstobras:TStringList;
   end;
 
 var
@@ -111,63 +123,22 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, presupuestos, FPrincipal, listaclientes;
+uses DModule1, presupuestos, FPrincipal, listaclientes, SelectLineasPresupuestos;
 
-procedure TFClientes.FormCreate(Sender: TObject);
+procedure TFClientes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+FDlineasObras.Close;
+fdlineaspresupuesto.Close;
+fdpresupuestos.Close;
+fdobras.Close;
+fdclientes.Close;
+Action:=caFree;
+end;
 
-     frame11.ListViewPresupuestos.Clear;
-     frame21.ListViewFacturas.clear;
-     Frame31.ListViewObras.clear;
-     Frame41.ListViewContactos.clear;
-
-     lstobras:=TStringList.Create;
-     lstobras.Add('fdobras');
-     lstobras.Add('fdlineasobras')  ;
-
-
-      fdclientes.ParamByName('id_cliente').AsInteger:=DataModule1.fdClientes.FieldByName('IdContactos').AsInteger;
-      fdclientes.Active:=true;
-
-      (Sender as TFClientes).Caption:='Cliente ' + fdclientes.FieldByName('nombre').AsString;
-
-      fdAdministradores.Active:=true;
-
-      fdpresupuestos.ParamByName('id_cliente').AsInteger:=fdclientes.FieldByName('IdContactos').AsInteger;
-      fdpresupuestos.Active:=true;
-
-      fdlineaspresupuesto.ParamByName('id_presupuesto').AsInteger:=fdpresupuestos.FieldByName('Id_presupuesto').AsInteger;
-      fdlineaspresupuesto.ParamByName('grupo').AsInteger:=fdpresupuestos.FieldByName('grupo').AsInteger;
-
-      fdlineaspresupuesto.active:=true;
-
- //    if fdpresupuestos.RecordCount > 0 then LinkListControlToField2.Active:=true
-   //           else LinkListControlToField2.AutoActivate:=true;
-
-
-      fdfacturas.ParamByName('id_cliente').AsInteger:=fdclientes.FieldByName('IdContactos').AsInteger;
-      fdfacturas.Active:=true;
-
-      if fdfacturas.RecordCount > 0 then LinkListControlToField1.Active:=true
-              else LinkListControlToField1.AutoActivate:=true;
-
-      fdobras.ParamByName('id_cliente').AsInteger:=fdclientes.FieldByName('IdContactos').AsInteger;
-      fdobras.Active:=true;
-
-      fdlineasobras.ParamByName('ID_OBRA').AsInteger:= fdobras.FieldByName('id_obra').AsInteger;
-      fdlineasobras.Active:=true;
-
-
-      if fdobras.RecordCount > 0 then LinkListControlToField3.Active:=true
-              else LinkListControlToField3.AutoActivate:=true;
-
-       fdcontactos.ParamByName('id_cliente').AsInteger:=fdclientes.FieldByName('IdContactos').AsInteger;
-      fdcontactos.Active:=true;
-
-      if fdcontactos.RecordCount > 0 then LinkListControlToField4.Active:=true
-              else LinkListControlToField4.AutoActivate:=true;
-
-      end;
+procedure TFClientes.Frame11btnobraClick(Sender: TObject);
+begin
+DataModule1.ConvertirEnObraExecute(Self);
+end;
 
 procedure TFClientes.Frame11Button1Click(Sender: TObject);
 begin
@@ -181,7 +152,12 @@ end;
 
 procedure TFClientes.Frame11Button3Click(Sender: TObject);
 begin
-DataModule1.borrarpresupuestosExecute(fdpresupuestos);
+if Application.MessageBox('¿Esta seguro de borrar el presupuesto?','Borrar Presupuesto',MB_YESNO)=IDYES then
+       begin
+        if not (fdpresupuestos.State in [dsInsert,dsEdit]) then fdpresupuestos.Delete;
+
+       end;
+
 end;
 
 procedure TFClientes.Frame11ListView1AdvancedCustomDrawItem(
@@ -216,9 +192,43 @@ begin
       DataModule1.editarpresupuestoExecute(fdpresupuestos);
 end;
 
+procedure TFClientes.Frame21Button1Click(Sender: TObject);
+begin
+DataModule1.insertarFacturaExecute(fdfacturas);
+end;
+
+procedure TFClientes.Frame21Button2Click(Sender: TObject);
+begin
+DataModule1.editarFacturaExecute(fdfacturas);
+end;
+
+procedure TFClientes.Frame21ListViewFacturasDblClick(Sender: TObject);
+begin
+ DataModule1.editarFacturaexecute(fdFacturas);
+end;
+
+procedure TFClientes.Frame31btncrearfacturaClick(Sender: TObject);
+begin
+DataModule1.ConvertirEnFacturaExecute(Self);
+end;
+
+procedure TFClientes.Frame31Button1Click(Sender: TObject);
+begin
+   DataModule1.insertarobraExecute(fdobras);
+end;
+
 procedure TFClientes.Frame31Button2Click(Sender: TObject);
 begin
 DataModule1.editarObraExecute(fdobras);
+end;
+
+procedure TFClientes.Frame31Button3Click(Sender: TObject);
+begin
+ if Application.MessageBox('¿Esta seguro de borrar la obra?','Borrar Obra',MB_YESNO)=IDYES then
+       begin
+        if not (fdobras.State in [dsInsert,dsEdit]) then fdobras.Delete;
+
+       end;
 end;
 
 procedure TFClientes.Frame31ListViewObrasDblClick(Sender: TObject);
@@ -228,44 +238,18 @@ end;
 
 procedure TFClientes.Frame31ListViewObrasDragDrop(Sender, Source: TObject; X,
   Y: Integer);
-  var i:integer;
+  var SellineasPresu:TFLineasPresupuestoObra;
 begin
-     if fdpresupuestos.FieldByName('Aprovado').asboolean then
-     begin
 
-      fdobras.Insert;
-      fdobras.Fieldbyname('Descripcion').asstring:=fdpresupuestos.FieldByName('Descripcion').asstring;
-      fdobras.Fieldbyname('Ejecutado').asboolean:=false;
-      fdobras.Fieldbyname('ImporteObra').asfloat:=fdpresupuestos.FieldByName('TotalAprobado').asfloat;
-      fdobras.Fieldbyname('Id_Cliente').asinteger:=fdpresupuestos.FieldByName('Id_ClientePrev').asinteger;
-      fdobras.Fieldbyname('FechaComienzo').asdatetime:=Now;
-    fdobras.post;
+   if fdpresupuestos.FieldByName('Aprovado').asboolean then
+             begin
 
-    i:=1;
+               SellineasPresu:=TFLineasPresupuestoObra.Create(Self);
+               SellineasPresu.ShowModal;
+               SellineasPresu.Close;
 
-    while not fdlineaspresupuesto.eof do
-    begin
-    if fdlineaspresupuesto.FieldByName('Aprovado').AsBoolean then
-    begin
-      FDlineasObras.Append;
-      fdlineasobras.Fieldbyname('id_lineaobra').asinteger:=i;
-      fdlineasobras.Fieldbyname('Descripcion').asstring:=fdlineaspresupuesto.FieldByName('Descripcion').asstring;
-      fdlineasobras.Fieldbyname('Ejecutado').asboolean:=false;
-      fdlineasobras.Fieldbyname('total').asfloat:=fdlineaspresupuesto.FieldByName('Total').asfloat;
-      fdlineasobras.Fieldbyname('obras_Id_obra').asinteger:=fdobras.FieldByName('Id_obra').asinteger;
-      fdlineasobras.Fieldbyname('presupuestos_Id_presupuesto').asinteger:=fdlineaspresupuesto.FieldByName('presupuestos_Id_presupuesto').asinteger;
-      fdlineasobras.Fieldbyname('presupuestos_grupo').asinteger:=fdlineaspresupuesto.FieldByName('presupuestos_grupo').asinteger;
-      FDlineasObras.Post;
-      i:=i+1;
-    end;
-      fdlineaspresupuesto.next;
-    end;
-    LinkListControlToField3.Active:=false;
-      DataModule1.RefrescarDataSet(lstobras);
-      linkListControlToField3.Active:=true;
-
-  end
-     else showmessage('El presupuesto no esta aprobado, no se puede crear la obra.');
+             end
+   else showmessage('El presupuesto no esta aprobado, no se puede crear la obra.');
 end;
 
 procedure TFClientes.Frame31ListViewObrasDragOver(Sender, Source: TObject; X,
