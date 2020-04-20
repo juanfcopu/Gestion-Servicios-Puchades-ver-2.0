@@ -310,7 +310,6 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 62
         Visible = True
       end
       item
@@ -324,7 +323,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 55
+        Width = 57
         Visible = True
       end
       item
@@ -338,7 +337,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 76
+        Width = 78
         Visible = True
       end
       item
@@ -349,25 +348,40 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 200
+        Width = 206
         Visible = True
       end
       item
+        ButtonStyle = cbsEllipsis
+        Expanded = False
+        FieldName = 'fechafactura'
+        Title.Caption = 'Fecha'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 102
+        Visible = True
+      end
+      item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'concepto'
+        Title.Alignment = taCenter
         Title.Caption = 'Concepto'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 469
+        Width = 319
         Visible = True
       end
       item
         Alignment = taCenter
         Expanded = False
-        FieldName = 'totalbruto'
+        FieldName = 'baseimponible'
         Title.Alignment = taCenter
         Title.Caption = 'Base Imponible'
         Title.Font.Charset = DEFAULT_CHARSET
@@ -375,7 +389,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 105
+        Width = 113
         Visible = True
       end
       item
@@ -389,7 +403,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 62
+        Width = 78
         Visible = True
       end
       item
@@ -403,7 +417,6 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 62
         Visible = True
       end
       item
@@ -411,27 +424,24 @@ object listfacturas: Tlistfacturas
         Expanded = False
         FieldName = 'total'
         Title.Alignment = taCenter
-        Title.Caption = 'Total'
+        Title.Caption = 'Total Factura'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 62
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'pagada'
-        Title.Alignment = taCenter
         Title.Caption = 'Pagada'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 62
+        Width = 66
         Visible = True
       end>
   end

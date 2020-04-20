@@ -25,10 +25,6 @@ object FimagenesCompanias: TFimagenesCompanias
     IconOptions.WrapText = False
     TabOrder = 1
     OnDblClick = rzlstvw1DblClick
-    ExplicitLeft = 104
-    ExplicitTop = 72
-    ExplicitWidth = 250
-    ExplicitHeight = 150
   end
   object rztlbr1: TRzToolbar
     Left = 0

@@ -1,0 +1,31 @@
+unit resumen;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, rStringGridEd, RzSplit,
+  RzPanel, Vcl.ExtCtrls, Data.DB, Vcl.DBGrids, rDBGrid, rDBGrid_MS, RzGrids;
+
+type
+  TFResumen = class(TForm)
+    rztlbr1: TRzToolbar;
+    rzstsbr1: TRzStatusBar;
+    rzstsbr2: TRzStatusBar;
+    rzspltr1: TRzSplitter;
+    rztlbr2: TRzToolbar;
+    rssgrid1: TrStringGridEd;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FResumen: TFResumen;
+
+implementation
+
+{$R *.dfm}
+
+end.

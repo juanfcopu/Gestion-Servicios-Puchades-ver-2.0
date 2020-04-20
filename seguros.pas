@@ -15,7 +15,8 @@ uses
   Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,System.Win.COMObj,
   Vcl.DBGrids, Vcl.Bind.Navigator, Data.Bind.Controls, Vcl.StdActns, Vcl.ImgList,
   System.ImageList, ShellCtrls, rDBGrid, rDBGrid_MS, RzPanel, RzDBNav, Vcl.Mask,
-  Vcl.DBCtrls, rDBComponents, rImageZoom, RzListVw;
+  Vcl.DBCtrls, rDBComponents, rImageZoom, RzListVw, rImprovedComps,
+  RzShellDialogs, RzStatus, Vcl.Imaging.pngimage;
 
 
 type
@@ -42,12 +43,11 @@ type
     abrirpresupuesto: TAction;
     actguardarseguro: TAction;
     guardarPDF: TAction;
-    mail: TAction;
+    activarSeguro: TAction;
     ToolButton9: TToolButton;
     cerrarpres: TAction;
     ToolButton10: TToolButton;
     carpetadocumentacion: TAction;
-    BTBuscarCliente: TButton;
     btpath: TButton;
     ImageList1: TImageList;
     ActionManager2: TActionManager;
@@ -56,7 +56,6 @@ type
     EditPaste: TEditPaste;
     AprobarTodos: TAction;
     GroupBox3: TGroupBox;
-    Memo1: TMemo;
     GroupBox5: TGroupBox;
     Shape1: TShape;
     Guardar: TButton;
@@ -84,14 +83,11 @@ type
     rDBGridClientesDBGridLineas: TrDBGrid_MS;
     fdtncfldfdqsegurosid_seguros: TFDAutoIncField;
     fdqsegurosdescripcion: TStringField;
-    fdqsegurostipo: TIntegerField;
     dtmfldfdqsegurosfechacontrato: TDateTimeField;
     dtmfldfdqsegurosfecharenovacion: TDateTimeField;
     fltfldfdqsegurostotal: TFloatField;
-    fdqsegurosFormaPago: TIntegerField;
     fdqsegurosimg: TBlobField;
     fdqsegurosNpoliza: TStringField;
-    fdqsegurosfraccionamiento: TStringField;
     fdqsegurosmatricula: TStringField;
     rDBImage1: TrDBImage;
     rDBTipo: TrDBComboBox;
@@ -102,6 +98,22 @@ type
     rDBFormaPago: TrDBComboBox;
     rDBFraccionamiento: TrDBComboBox;
     il1: TImageList;
+    mfldfdqsegurosobservaciones: TMemoField;
+    rDBRutaobservaciones: TrDBMemo;
+    fdqsegurospolizaPDF: TBlobField;
+    dlgOpen1: TOpenDialog;
+    fdqsegurosestado: TBooleanField;
+    il2: TImageList;
+    rImageEx1: TrImageEx;
+    lbl4: TLabel;
+    fdqsegurostipo: TStringField;
+    fdqsegurosFormaPago: TStringField;
+    fdqsegurosfraccionamiento: TStringField;
+    fdlineasid_lineaseguro: TFDAutoIncField;
+    fdlineasseguros_id_seguros: TIntegerField;
+    fdlineasimporte: TFloatField;
+    fdlineasnrecibo: TStringField;
+    fdlineasFechaPago: TDateField;
 
 
 
@@ -126,8 +138,16 @@ type
     procedure fdqsegurosAfterDelete(DataSet: TDataSet);
     procedure fdqsegurosAfterInsert(DataSet: TDataSet);
     procedure FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);
-    procedure fdqsegurostipoChange(Sender: TField);
     procedure rDBImage1Click(Sender: TObject);
+    procedure rDBFraccionamientoGetListItemProps(Sender: TObject;
+      Canvas: TCanvas; Index: Integer; State: TOwnerDrawState; var Rect: TRect;
+      var Text: string; ShowBmp: TBitmap; var DrawSeparatorTop,
+      DrawSeparatorBottom: Boolean);
+    procedure guardarPDFExecute(Sender: TObject);
+    procedure fdqsegurosestadoChange(Sender: TField);
+    procedure fdqsegurosAfterOpen(DataSet: TDataSet);
+    procedure activarSeguroExecute(Sender: TObject);
+    procedure rDBTipoChange(Sender: TObject);
   private
     { Private declarations }
      lst:TStringlist;
@@ -160,6 +180,7 @@ begin
 end;
 
 procedure TFSeguros.cerrarClick(Sender: TObject);
+
 begin
    if (FDSchemaAdapter1.UpdatesPending)  then
        if Application.MessageBox('¿Guardar los cambios del seguro?','Guardar',MB_YESNO)=IDYES then
@@ -202,6 +223,14 @@ end;
 
 procedure TFSeguros.fdlineasAfterInsert(DataSet: TDataSet);
 begin
+ case rDBFraccionamiento.ItemIndex of
+  3: fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat;
+  2:fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/2;
+  1:fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/4;
+  0  : fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/12;
+ end;
+
+
  actguardarseguro.Enabled:=True;
    Guardar.Enabled:=True;
    Shape1.Brush.Color:=clLime;
@@ -245,11 +274,58 @@ if (fdlineas.state in [dsEdit,dsInsert]) then
 
 end;
 
+procedure TFSeguros.guardarPDFExecute(Sender: TObject);
+var nbre:Integer;
+begin
+ if fdqsegurospolizaPDF.BlobSize = 0 then
+begin
+  if dlgOpen1.Execute then
+   begin
+      if not (fdqseguros.State in [dsEdit,dsInsert]) then fdqseguros.edit;
+
+      fdqsegurospolizaPDF.LoadFromFile(dlgOpen1.FileName);
+      fdqseguros.Post;
+   end;
+end else  begin
+            nbre:=Random(1000);
+            fdqsegurospolizaPDF.SaveToFile(nbre.ToString+'.pdf');
+
+            if FileExists(nbre.ToString+'.pdf') then
+               ShellExecute(Application.Handle,nil,PChar(nbre.ToString+'.pdf'),'','',SW_SHOWNORMAL)
+              else    ShowMessage('El archivo no existe.');
+          end;
+
+
+end;
+
+procedure TFSeguros.rDBFraccionamientoGetListItemProps(Sender: TObject;
+  Canvas: TCanvas; Index: Integer; State: TOwnerDrawState; var Rect: TRect;
+  var Text: string; ShowBmp: TBitmap; var DrawSeparatorTop,
+  DrawSeparatorBottom: Boolean);
+begin
+
+Canvas.Font.Size:=9;
+
+end;
+
 procedure TFSeguros.rDBImage1Click(Sender: TObject);
 var compsegur:TFimagenesCompanias;
 begin
     compsegur:=TFimagenesCompanias.Create(Self);
     compsegur.ShowModal;
+end;
+
+procedure TFSeguros.rDBTipoChange(Sender: TObject);
+begin
+if TrDBComboBox(Sender).Text='AUTOMOVIL' then   begin
+                                rDBMatricula.Visible:=True;
+                                rDBMatricula.DBEditLabel.Visible:=True;
+                              end
+                              else begin
+                                 rDBMatricula.Visible:=False;
+                                rDBMatricula.DBEditLabel.Visible:=False;
+
+                              end;
 end;
 
 procedure TFSeguros.actguardarseguroExecute(Sender: TObject);
@@ -261,6 +337,29 @@ end;
 
 
 
+
+procedure TFSeguros.activarSeguroExecute(Sender: TObject);
+begin
+    if not(fdqseguros.State in [dsInsert, dsEdit]) then  fdqseguros.Edit;
+
+   if  fdqsegurosestado.AsBoolean then fdqsegurosestado.AsBoolean:=False
+    else fdqsegurosestado.AsBoolean:=True;
+
+
+
+end;
+
+procedure TFSeguros.fdqsegurosestadoChange(Sender: TField);
+begin
+if Sender.AsBoolean then
+
+                            il2.GetBitmap(1,rImageEx1.Picture.Bitmap)
+
+else
+        il2.GetBitmap(0,rImageEx1.Picture.Bitmap);
+
+    rImageEx1.Repaint;
+end;
 
 procedure TFSeguros.fdqsegurosAfterDelete(DataSet: TDataSet);
 begin
@@ -278,15 +377,17 @@ end;
 
 procedure TFSeguros.fdqsegurosAfterInsert(DataSet: TDataSet);
 begin
- actguardarseguro.Enabled:=True;
+   fdqsegurosestado.AsBoolean:=False;
+   fdqsegurosFormaPago.AsString:='DOMICILIADO';
+   actguardarseguro.Enabled:=True;
    Guardar.Enabled:=True;
    Shape1.Brush.Color:=clLime;
 end;
 
-procedure TFSeguros.fdqsegurostipoChange(Sender: TField);
+procedure TFSeguros.fdqsegurosAfterOpen(DataSet: TDataSet);
 begin
- if Sender.AsString='AUTOMOVIL' then   rDBMatricula.Visible:=True;
-
+rDBTipoChange(rDBTipo);
+fdqsegurosestadoChange(fdqsegurosestado);
 end;
 
 procedure TFSeguros.FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);

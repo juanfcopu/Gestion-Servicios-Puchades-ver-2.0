@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, Vcl.ExtCtrls,
   Vcl.ActnMan, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.ToolWin, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.AppEvnts, RzGroupBar, RzTabs, RzSplit, RzPanel,
-  RzStatus, RzDBStat;
+  RzStatus, RzDBStat, VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.TeeProcs,
+  VCLTee.Chart, VCLTee.DBChart;
 
 type
   Tprincipal = class(TForm)
@@ -28,6 +29,7 @@ type
     RzFieldStatus1: TRzFieldStatus;
     RzVersionInfoStatus1: TRzVersionInfoStatus;
     RzClockStatus1: TRzClockStatus;
+    RzGroup7: TRzGroup;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

@@ -11,7 +11,8 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls, RzDTP, Vcl.Mask,
-  RzEdit, RzCmboBx, rImprovedComps, rDBRecView, rDBComponents;
+  RzEdit, RzCmboBx, rImprovedComps, rDBRecView, rDBComponents, RzStatus,
+  RzDBStat, RzPanel;
 
 type
   Tlistnominas= class(TForm)
@@ -29,7 +30,6 @@ type
     rb1Trimestres: TRadioButton;
     rb2trimestre: TRadioButton;
     rbTodas: TRadioButton;
-    stat1: TStatusBar;
     tlb1: TToolBar;
     btn1: TToolButton;
     btn2: TToolButton;
@@ -46,6 +46,11 @@ type
     btn6: TToolButton;
     btn7: TToolButton;
     rDBRecView1: TrDBRecView;
+    RzStatusBar1: TRzStatusBar;
+    RzStatusPane1: TRzStatusPane;
+    RzFieldStatus1: TRzFieldStatus;
+    RzDBStatusPane1: TRzDBStatusPane;
+    RzDBStateStatus1: TRzDBStateStatus;
     procedure FormCreate(Sender: TObject);
 
     procedure Button1Click(Sender: TObject);
@@ -60,20 +65,24 @@ type
     procedure rb3trimestreClick(Sender: TObject);
     procedure rb4trimestreClick(Sender: TObject);
     procedure RzComboBox1Change(Sender: TObject);
-    procedure fdqfacturascomprasAfterDelete(DataSet: TDataSet);
-    procedure fdqfacturascomprasAfterOpen(DataSet: TDataSet);
-    procedure fdqfacturascomprasAfterPost(DataSet: TDataSet);
-    procedure fdqfacturascomprasAfterInsert(DataSet: TDataSet);
-    procedure fdqfacturascomprasAfterCancel(DataSet: TDataSet);
+    procedure fdqnominasAfterDelete(DataSet: TDataSet);
+    procedure fdqnominasAfterOpen(DataSet: TDataSet);
+    procedure fdqnominasAfterPost(DataSet: TDataSet);
+    procedure fdqnominasAfterInsert(DataSet: TDataSet);
+    procedure fdqnominasAfterCancel(DataSet: TDataSet);
     procedure rDBRecView1Click(Sender: TObject);
     procedure rGroupBox1MinimizeChange(Sender: TObject);
     procedure rDBRecView1KeyPress(Sender: TObject; var Key: Char);
     procedure btn7Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
+    procedure fdq1AfterExecute(DataSet: TFDDataSet);
+    procedure fdqnominasBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
     { Public declarations }
+    inserciones:Integer;
+    estado:TDataSetState;
   end;
 
 var
@@ -88,20 +97,78 @@ uses
 
 
 
-procedure Tlistnominas.fdqfacturascomprasAfterDelete(DataSet: TDataSet);
+procedure Tlistnominas.fdq1AfterExecute(DataSet: TFDDataSet);
+begin
+
+   if TFDQuery(DataSet).RowsAffected = -1 then
+    showmessage('No se ha modificado ningún asiento')
+  else
+    case TFDQuery(DataSet).Command.CommandKind of
+    skInsert: begin
+
+                rzfieldstatus1.caption:='Se ha generado el asiento Nº '+DataModule1.fdqnominasid_asiento.asstring ;
+
+              end;
+    skUpdate: rzfieldstatus1.caption:='Se ha modificado el asiento Nº '+DataModule1.fdqnominasid_asiento.asstring;
+    else      showmessage(Format('%d rows affected', [TFDQuery(DataSet).RowsAffected]));
+    end;
+
+
+end;
+
+procedure Tlistnominas.fdqnominasBeforePost(DataSet: TDataSet);
+begin
+estado:=Dataset.state;
+   with DataModule1 do
+ begin
+
+                   if (fdqnominasid_asiento.isnull) or (fdqnominasid_asiento.AsInteger=-1) then
+
+                      begin
+
+                      fdqnominasid_asiento.AsInteger:= generarAsiento(-1,64000001,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasimportedevengado.AsFloat,'NOMINAS',true);
+                                                               generarAsiento(fdqnominasid_asiento.AsInteger,64200000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasssocialEmpresa.asfloat,'NOMINAS',false);
+                                                               generarAsiento(fdqnominasid_asiento.AsInteger,47600000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasssocialTrabajador.asfloat,'NOMINAS',false);
+                                                               generarAsiento(fdqnominasid_asiento.AsInteger,47510000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasirpf.asfloat,'NOMINAS',false);
+                                                               generarAsiento(fdqnominasid_asiento.AsInteger,46500000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasTotalPercibir.asfloat,'NOMINAS',false);
+
+
+                      end
+                      else begin
+                               modificarAsiento(fdqnominasid_asiento.AsInteger,64000001,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasimportedevengado.AsFloat,'NOMINAS');
+                               modificarAsiento(fdqnominasid_asiento.AsInteger,64200000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasssocialEmpresa.AsFloat,'NOMINAS');
+                               modificarAsiento(fdqnominasid_asiento.AsInteger,47600000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasssocialTrabajador.asfloat,'NOMINAS');
+                               modificarAsiento(fdqnominasid_asiento.AsInteger,47510000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasirpf.asfloat,'NOMINAS');
+                               modificarAsiento(fdqnominasid_asiento.AsInteger,46500000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasTotalPercibir.asfloat,'NOMINAS');
+
+                           end;
+
+end;
+end;
+
+
+
+procedure Tlistnominas.fdqnominasAfterDelete(DataSet: TDataSet);
 begin
 rDBGridClientes1.RecalculateSummaryResults(True);
 end;
 
-procedure Tlistnominas.fdqfacturascomprasAfterOpen(DataSet: TDataSet);
+procedure Tlistnominas.fdqnominasAfterOpen(DataSet: TDataSet);
 begin
 rDBGridClientes1.RecalculateSummaryResults(True);
 end;
 
-procedure Tlistnominas.fdqfacturascomprasAfterPost(DataSet: TDataSet);
+procedure Tlistnominas.fdqnominasAfterPost(DataSet: TDataSet);
 begin
 rDBGridClientes1.RecalculateSummaryResults(True);
  rDBRecView1.Options:=rDBRecView1.Options-[goEditing];
+ rDBGridClientes1.RecalculateSummaryResults(True);
+ case estado of
+
+  dsInsert : rzstatuspane1.Caption:=inserciones.ToString + ' nóminas insertadas';
+  dsEdit   : rzstatuspane1.Caption:='Se ha modificado la nomina '+ DataSet.FieldByName('nombre').AsString+' - '+ DataSet.FieldByName('fechanomina').asstring;
+  end;
+
 end;
 
 procedure Tlistnominas.beBuscarChange(Sender: TObject);
@@ -143,7 +210,7 @@ end;
 
 procedure Tlistnominas.btn5Click(Sender: TObject);
 begin
-if Application.MessageBox('¿Esta seguro de borrar la factura?','Borrar',MB_YESNO)=IDYES then
+if Application.MessageBox('¿Esta seguro de borrar la Nómina?','Borrar',MB_YESNO)=IDYES then
        begin
            ds1.DataSet.Delete;
        end
@@ -157,14 +224,14 @@ end ;
 
 
 
-procedure Tlistnominas.fdqfacturascomprasAfterCancel(DataSet: TDataSet);
+procedure Tlistnominas.fdqnominasAfterCancel(DataSet: TDataSet);
 begin
+  Dec(inserciones);
   rDBRecView1.Options:=rDBRecView1.Options-[goEditing];
 end;
 
 
 procedure Tlistnominas.Button1Click(Sender: TObject);
-
 begin
  rDBGridClientes1.DataSource.DataSet.DisableControls;
 ds1.DataSet.Filtered:=False;
@@ -183,6 +250,8 @@ begin
      ds1.DataSet.AfterDelete:=nil;
      ds1.DataSet.AfterInsert:=nil;
      ds1.DataSet.AfterCancel:=nil;
+     ds1.DataSet.BeforePost:=nil;
+     DataModule1.fq1.AfterExecute:=nil;
 
     ds1.dataset.Active:=false;
 fdqtrabajadores.Active:=false;
@@ -207,19 +276,19 @@ begin
 
      fdqtrabajadores.Active:=True;
 
-    ds1.DataSet.AfterOpen:= fdqfacturascomprasAfterOpen;
-     ds1.DataSet.AfterPost:= fdqfacturascomprasAfterPost;
-     ds1.DataSet.AfterDelete:=fdqfacturascomprasAfterDelete;
-     ds1.DataSet.AfterPost:=fdqfacturascomprasAfterPost;
-     ds1.DataSet.AfterInsert:=fdqfacturascomprasAfterInsert;
+     DataModule1.fq1.AfterExecute:=fdq1AfterExecute;
 
-     //ds1.Dataset.FieldByName('nombre').LookupList.
+     ds1.DataSet.AfterOpen:= fdqnominasAfterOpen;
+     ds1.DataSet.AfterPost:= fdqnominasAfterPost;
+     ds1.DataSet.AfterDelete:=fdqnominasAfterDelete;
+     ds1.DataSet.AfterPost:=fdqnominasAfterPost;
+     ds1.DataSet.AfterInsert:=fdqnominasAfterInsert;
+     ds1.DataSet.BeforePost:=fdqnominasBeforePost;
+
 
      DataModule1.fdqnominasnombre.LookupDataSet:=fdqtrabajadores;
 
-     //if Assigned(ds1.Dataset.FieldByName then
-        DataModule1.fdqnominas.Active:=True;
-       //  ds1.DataSet.Active:=true;
+         ds1.DataSet.Active:=true;
         rbTodas.Checked:=True;
         rGroupBox1.Minimized:=True;
 end;
@@ -338,10 +407,10 @@ if Key=#13 then begin
 
 end;
 
-procedure Tlistnominas.fdqfacturascomprasAfterInsert(DataSet: TDataSet);
+procedure Tlistnominas.fdqnominasAfterInsert(DataSet: TDataSet);
 begin
 
-
+ Inc(inserciones);
  rDBRecView1.Options:=rDBRecView1.Options+[goEditing];
 end;
 

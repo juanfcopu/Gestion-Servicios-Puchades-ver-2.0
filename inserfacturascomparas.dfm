@@ -78,7 +78,6 @@ object insertFacturasCompras: TinsertFacturasCompras
     ScrollBars = ssVertical
     TabOrder = 1
     OnKeyPress = rDBRecView1KeyPress
-    ExplicitHeight = 287
   end
   object RzStatusBar1: TRzStatusBar
     Left = 0
@@ -91,6 +90,5 @@ object insertFacturasCompras: TinsertFacturasCompras
     BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
     BorderWidth = 0
     TabOrder = 2
-    ExplicitTop = 321
   end
 end

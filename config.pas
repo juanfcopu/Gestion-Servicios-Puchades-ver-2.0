@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Tabs, Vcl.StdCtrls, Vcl.DockTabSet,
-  Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls, System.IniFiles;
+  Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls, System.IniFiles, RzPanel, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, Vcl.Mask, Vcl.DBCtrls,
+  rDBComponents;
 
 type
   Tconfiguracion = class(TForm)
@@ -33,6 +35,19 @@ type
     lbedEmpresa: TLabeledEdit;
     btn2: TButton;
     btn3: TButton;
+    ts2: TTabSheet;
+    rzgrpbx1: TRzGroupBox;
+    lbedIRPFdefecto: TLabeledEdit;
+    grp1: TGroupBox;
+    grp2: TGroupBox;
+    tlb1: TToolBar;
+    ds1: TDataSource;
+    rDBGridClientes1: TrDBGrid_MS;
+    rDBEdit1: TrDBEdit;
+    rDBEdit2: TrDBEdit;
+    btn4: TButton;
+    btn5: TButton;
+    btn6: TToolButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
@@ -41,6 +56,13 @@ type
     procedure lbIVAdefectoKeyPress(Sender: TObject; var Key: Char);
     procedure btCancelar2Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
+    procedure pgc1Change(Sender: TObject);
+    procedure ts2Enter(Sender: TObject);
+    procedure ts2Exit(Sender: TObject);
+    procedure btn4Click(Sender: TObject);
+    procedure ds1StateChange(Sender: TObject);
+    procedure btn5Click(Sender: TObject);
+    procedure btn6Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,6 +75,7 @@ var
 implementation
 
 {$R *.dfm}
+uses DModule1;
 
 procedure Tconfiguracion.btAceptar2Click(Sender: TObject);
 var SPuchades:TIniFile;
@@ -60,7 +83,7 @@ begin
    SPuchades := TIniFile.Create(ExtractFilePath(Application.ExeName)+'SPuchades.ini') ;
 try
     SPuchades.WriteInteger('IVA','IvaDefecto',StrToInt(lbIVAdefecto.text));
-
+    SPuchades.WriteInteger('IRPF','IRPFDefecto',StrToInt(lbedIRPFdefecto.Text));
 finally
   Spuchades.Free;
 end;
@@ -122,6 +145,37 @@ begin
   end;
 end;
 
+procedure Tconfiguracion.btn4Click(Sender: TObject);
+begin
+if (ds1.DataSet.State in [dsInsert,dsEdit]) then ds1.DataSet.Post;
+
+
+
+end;
+
+procedure Tconfiguracion.btn5Click(Sender: TObject);
+begin
+    if (ds1.DataSet.State in [dsBrowse]) then ds1.DataSet.Insert;
+end;
+
+procedure Tconfiguracion.btn6Click(Sender: TObject);
+begin
+DataModule1.rXLSExport1.ExportDBTable(ds1.DataSet);
+end;
+
+procedure Tconfiguracion.ds1StateChange(Sender: TObject);
+begin
+    if TDataSource(Sender).DataSet.State in [dsInsert, dsEdit] then
+    begin
+    btn4.Enabled:=True ;
+    btn5.Enabled:=False;
+    end
+    else begin
+          btn4.Enabled:=False;
+          btn5.Enabled:=True;
+          end;
+end;
+
 procedure Tconfiguracion.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 Action:=caFree;
@@ -150,7 +204,9 @@ begin
     lbPathPresupuestos.Text:=SPuchades.ReadString('PATH','PATHDOCPRESUPUESTOS',PathUsuario+'\PRESUPUESTOS');
     lbPathObras.Text:=SPuchades.ReadString('PATH','PATHDOCOBRAS',PathUsuario+'\OBRAS');
 
+
     lbIVAdefecto.Text:=IntToStr(SPuchades.ReadInteger('IVA','IvaDefecto',10));
+     lbedIRPFdefecto.Text:=IntToStr(SPuchades.ReadInteger('IRPF','IRPFDefecto',20));
     lbedEmpresa.Text:=IntToStr(SPuchades.ReadInteger('EMPRESA','IDEMPRESA',1));
 
   finally
@@ -167,6 +223,21 @@ if not (Key in [#8, '0'..'9']) then
            Key := #0;
   end
 
+end;
+
+procedure Tconfiguracion.pgc1Change(Sender: TObject);
+begin
+//if (TPageControl(Sender).ActivePageIndex=4) then  DataModule1.fdqcuentas.active:=True;
+end;
+
+procedure Tconfiguracion.ts2Enter(Sender: TObject);
+begin
+DataModule1.fdqcuentas.Active:=True;
+end;
+
+procedure Tconfiguracion.ts2Exit(Sender: TObject);
+begin
+DataModule1.fdqcuentas.Active:=True;
 end;
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, RzListVw, rHTMLListView,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, RzListVw, rHTMLListView,   Data.DB,
   Vcl.ExtCtrls, RzPanel;
 
 type
@@ -35,8 +35,7 @@ begin
       rzlstvw1.LargeImages:=TFSeguros(Self.Owner).il1;
      for i := 0 to TFSeguros(Self.Owner).il1.Count-1 do
        begin
-    //      itm:=lvr1.Items.Add;
-      //    itm.ImageIndex:=i;
+    
           itm:=rzlstvw1.Items.Add;
           itm.ImageIndex:=i;
 
@@ -45,6 +44,8 @@ end;
 
 procedure TFimagenesCompanias.rzlstvw1DblClick(Sender: TObject);
 begin
+
+if not (TFSeguros(Self.Owner).fdqseguros.State in [dsEdit,dsInsert]) then TFSeguros(Self.Owner).fdqseguros.edit;
 TFSeguros(Self.Owner).fdqseguros.FieldByName('img').Clear;
 TFSeguros(Self.Owner).il1.GetBitmap( rzlstvw1.ItemIndex  ,TFSeguros(Self.Owner).rDBImage1.Picture.Bitmap);
 TFSeguros(Self.Owner).fdqseguros.FieldByName('img').Assign(TFSeguros(Self.Owner).rDBImage1.Picture.Bitmap);

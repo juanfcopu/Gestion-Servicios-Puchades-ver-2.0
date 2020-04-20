@@ -17,6 +17,7 @@ object FFacturas: TFFacturas
   OldCreateOrder = False
   Position = poDesigned
   OnClose = FormClose
+  OnCreate = FormCreate
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
@@ -168,7 +169,7 @@ object FFacturas: TFFacturas
       object rDBEdit6: TrDBEdit
         Left = 370
         Top = 16
-        Width = 670
+        Width = 419
         Height = 21
         CharCase = ecUpperCase
         DataField = 'Concepto'
@@ -184,7 +185,7 @@ object FFacturas: TFFacturas
         Height = 21
         DataField = 'Iva'
         DataSource = dsFacturas
-        TabOrder = 6
+        TabOrder = 7
         DBEditLabel.OwnCaption = 'I.V.A'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -195,7 +196,7 @@ object FFacturas: TFFacturas
         Height = 21
         Date = 43734.909575613430000000
         Time = 43734.909575613430000000
-        TabOrder = 4
+        TabOrder = 5
         DataField = 'FechaFactura'
         DataSource = dsFacturas
         DBEditLabel.OwnCaption = 'Fecha Factura'
@@ -210,7 +211,7 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'Total'
         DataSource = dsFacturas
-        TabOrder = 8
+        TabOrder = 9
         DBEditLabel.OwnCaption = 'Total Factura'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -222,7 +223,7 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'TotalBruto'
         DataSource = dsFacturas
-        TabOrder = 5
+        TabOrder = 6
         DBEditLabel.OwnCaption = 'SubTotal'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -234,209 +235,21 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'importeIVA'
         DataSource = dsFacturas
-        TabOrder = 7
+        TabOrder = 8
         DBEditLabel.OwnCaption = 'Total I.V.A'
         DBEditLabel.Position = lpLeftCenter
       end
-    end
-    object PageControl1: TPageControl
-      AlignWithMargins = True
-      Left = 4
-      Top = 295
-      Width = 1121
-      Height = 346
-      ActivePage = lineas
-      Align = alTop
-      Enabled = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-      object lineas: TTabSheet
-        Caption = 'Lineas'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        object Label7: TLabel
-          Left = 828
-          Top = 339
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label9: TLabel
-          Left = 828
-          Top = 358
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label12: TLabel
-          Left = 886
-          Top = 337
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object ControlBar2: TControlBar
-          AlignWithMargins = True
-          Left = 3
-          Top = 3
-          Width = 1107
-          Height = 32
-          Align = alTop
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          object ToolBar2: TToolBar
-            Left = 265
-            Top = 2
-            Width = 72
-            Height = 22
-            AutoSize = True
-            Caption = 'Editar'
-            Images = ImageList1
-            List = True
-            TabOrder = 1
-            object ToolButton11: TToolButton
-              Left = 0
-              Top = 0
-              Action = EditCut
-            end
-            object ToolButton12: TToolButton
-              Left = 23
-              Top = 0
-              Action = EditCopy
-            end
-            object ToolButton13: TToolButton
-              Left = 46
-              Top = 0
-              Action = EditPaste
-            end
-          end
-          object RzDBNavigator1: TRzDBNavigator
-            Left = 11
-            Top = 2
-            Width = 240
-            Height = 22
-            DataSource = dslineas
-            BorderOuter = fsNone
-            TabOrder = 0
-          end
-        end
-        object rDBGridClientes1: TrDBGrid_MS
-          Left = 0
-          Top = 38
-          Width = 1113
-          Height = 280
-          Align = alClient
-          DataSource = dslineas
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          TitleLines = 2
-          RowFixHeight = 23
-          FooterRow.FooterVisible = True
-          FooterRow.FieldFooterDefs.Strings = (
-            'total=%SUM ;')
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'id_lineafactura'
-              Title.Alignment = taCenter
-              Title.Caption = 'L'#237'nea'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -12
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 80
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'descripcion'
-              Title.Caption = 'Descripci'#243'n'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -12
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 532
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'cantidad'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cantidad'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -12
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 75
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'importe'
-              Title.Alignment = taCenter
-              Title.Caption = 'Importe'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -12
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 75
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'descuento'
-              Title.Alignment = taCenter
-              Title.Caption = 'Descuento'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -12
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 75
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'total'
-              Title.Alignment = taCenter
-              Title.Caption = 'Total'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -12
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 75
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'facturas_ano'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'facturas_idfactura'
-              Visible = True
-            end>
-        end
+      object rDBEdit11: TrDBEdit
+        Left = 908
+        Top = 17
+        Width = 129
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'id_asiento'
+        DataSource = dsFacturas
+        TabOrder = 3
+        DBEditLabel.OwnCaption = 'N'#186' Asiento'
+        DBEditLabel.Position = lpLeftCenter
       end
     end
     object ToolBar1: TToolBar
@@ -553,9 +366,9 @@ object FFacturas: TFFacturas
     end
     object GroupBox3: TGroupBox
       Left = 1
-      Top = 644
+      Top = 717
       Width = 792
-      Height = 137
+      Height = 64
       Margins.Bottom = 30
       Align = alLeft
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -565,7 +378,7 @@ object FFacturas: TFFacturas
         Left = 2
         Top = 15
         Width = 788
-        Height = 120
+        Height = 47
         Align = alClient
         DataField = 'observaciones'
         DataSource = dsFacturas
@@ -575,35 +388,29 @@ object FFacturas: TFFacturas
         DBEditLabel.OwnCaption = ' '
         ButtonFrm.Width = 18
         ButtonFrm.Height = 15
-        ButtonFrm.Caption = 'f'
         ButtonFrm.Visible = False
         ButtonEdit.Width = 18
         ButtonEdit.Height = 15
-        ButtonEdit.Caption = 'e'
         BoundLabel.AlignWithMargins = True
         BoundLabel.Margins.Left = 0
         BoundLabel.Margins.Top = 0
         BoundLabel.Margins.Right = 40
         BoundLabel.Margins.Bottom = 0
         BoundLabel.Position = lpTopRight
-        ExplicitLeft = 224
-        ExplicitTop = 40
-        ExplicitWidth = 185
-        ExplicitHeight = 89
       end
     end
     object GroupBox5: TGroupBox
       AlignWithMargins = True
       Left = 818
-      Top = 651
+      Top = 724
       Width = 307
-      Height = 127
+      Height = 54
       Margins.Top = 7
       Align = alRight
       TabOrder = 5
       DesignSize = (
         307
-        127)
+        54)
       object Shape1: TShape
         Left = 17
         Top = -2
@@ -645,6 +452,355 @@ object FFacturas: TFFacturas
         OnClick = cerrarClick
       end
     end
+    object grp1: TGroupBox
+      Left = 1
+      Top = 292
+      Width = 1127
+      Height = 425
+      Align = alTop
+      Caption = 'L'#237'neas'
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      object ctrlbr1: TControlBar
+        AlignWithMargins = True
+        Left = 5
+        Top = 18
+        Width = 1117
+        Height = 32
+        Align = alTop
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        object tlb1: TToolBar
+          Left = 224
+          Top = 2
+          Width = 0
+          Height = 66
+          AutoSize = True
+          Caption = 'Editar'
+          Images = ImageList1
+          List = True
+          TabOrder = 1
+          object btn1: TToolButton
+            Left = 0
+            Top = 0
+            Action = EditCut
+            Wrap = True
+          end
+          object btn2: TToolButton
+            Left = 0
+            Top = 22
+            Action = EditCopy
+            Wrap = True
+          end
+          object btn3: TToolButton
+            Left = 0
+            Top = 44
+            Action = EditPaste
+          end
+        end
+        object rzdbnvgtr1: TRzDBNavigator
+          Left = 11
+          Top = 2
+          Width = 200
+          Height = 22
+          DataSource = dslineas
+          BorderOuter = fsNone
+          TabOrder = 0
+        end
+      end
+      object rDBGridClientes1: TrDBGrid_MS
+        AlignWithMargins = True
+        Left = 5
+        Top = 56
+        Width = 1117
+        Height = 282
+        Align = alClient
+        DataSource = dslineas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+        ColumnWidth = cwAutoWidth
+        TitleLines = 2
+        RowFixHeight = 23
+        FooterRow.FooterVisible = True
+        FooterRow.FieldFooterDefs.Strings = (
+          'total=%SUM ;')
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'nlinea'
+            Title.Alignment = taCenter
+            Title.Caption = 'L'#237'nea'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'descripcion'
+            Title.Caption = 'Descripci'#243'n'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 437
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'cantidad'
+            Title.Alignment = taCenter
+            Title.Caption = 'Cantidad'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 95
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'importe'
+            Title.Alignment = taCenter
+            Title.Caption = 'Importe'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'descuento'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descuento'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 82
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'total'
+            Title.Alignment = taCenter
+            Title.Caption = 'Total'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'facturas_ano'
+            Width = 94
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'facturas_idfactura'
+            Width = 130
+            Visible = True
+          end>
+      end
+      object rdbtotales1: TrDBGrid
+        AlignWithMargins = True
+        Left = 5
+        Top = 344
+        Width = 1117
+        Height = 76
+        Align = alBottom
+        DataSource = dsFacturas
+        Options = [dgEditing, dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleHotTrack]
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+        OptionsEx = [dgFixColBtn, dgNotProcDblClick, dgUseTitlePopup, dgAutoPickListWidth]
+        OptionsEx2.ActivateOptionsEx2 = True
+        OptionsEx2.FixedCell.TitleExBtn = False
+        OptionsEx2.FixedCell.TitleBtn = False
+        OptionsEx2.Editors.BoolGlyphs = False
+        OptionsEx2.Editors.Memo = obtNone
+        OptionsEx2.Editors.Graphic = obtNone
+        OptionsEx2.Editors.DateTimePicker = False
+        OptionsEx2.Editors.NotProcDblClick = True
+        OptionsEx2.Appearance.DragToScrollData = True
+        ColorActiveRow = clWindow
+        ColumnWidth = cwAutoWidth
+        TitleLines = 2
+        RowFixHeight = 25
+        RowVerticalAlign = taVerticalCenter
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'TotalBruto'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Total'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'retencion'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Retenci'#243'n'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'importeRetencion'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Total Retenci'#243'n'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'baseimponible'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Base Imponible'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'Iva'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'I.V.A'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'importeIVA'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Total I.V.A'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Total'
+            Title.Alignment = taCenter
+            Title.Caption = 'Total Factura'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 154
+            Visible = True
+          end>
+      end
+    end
+  end
+  object btn4: TButton
+    Left = 1016
+    Top = 251
+    Width = 75
+    Height = 25
+    Caption = 'btn4'
+    TabOrder = 1
+    OnClick = btn4Click
   end
   object fdCliente: TFDQuery
     Connection = DataModule1.FDConnection1
@@ -791,6 +947,24 @@ object FFacturas: TFFacturas
       Required = True
       DisplayFormat = '#.00 '#8364
     end
+    object fdfacturasretencion: TIntegerField
+      FieldName = 'retencion'
+      OnChange = fdfacturasTotalBrutoChange
+      DisplayFormat = '0 %'
+    end
+    object fltfldfdfacturasimporteRetencion: TFloatField
+      FieldName = 'importeRetencion'
+    end
+    object fltfldfacturasbaseimponible: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'baseimponible'
+      Origin = 'baseimponible'
+    end
+    object fdfacturasid_asiento: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_asiento'
+      Origin = 'id_asiento'
+    end
   end
   object fdlineas: TFDQuery
     AfterOpen = fdlineasAfterOpen
@@ -886,6 +1060,11 @@ object FFacturas: TFFacturas
       OnChange = fdlineasdescuentoChange
       DisplayFormat = '0 %'
     end
+    object fdlineasnlinea: TIntegerField
+      FieldName = 'nlinea'
+      Origin = 'nlinea'
+      Required = True
+    end
   end
   object dialruta: TOpenDialog
     Left = 628
@@ -895,7 +1074,7 @@ object FFacturas: TFFacturas
     Left = 664
     Top = 433
     Bitmap = {
-      494C010104000800A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

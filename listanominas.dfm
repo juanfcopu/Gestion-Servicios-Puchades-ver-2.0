@@ -298,14 +298,6 @@ object listnominas: Tlistnominas
       end
     end
   end
-  object stat1: TStatusBar
-    Left = 0
-    Top = 592
-    Width = 1307
-    Height = 25
-    Panels = <>
-    SimplePanel = True
-  end
   object tlb1: TToolBar
     Left = 0
     Top = 0
@@ -465,20 +457,6 @@ object listnominas: Tlistnominas
       item
         Alignment = taCenter
         Expanded = False
-        FieldName = 'BaseCotizacion'
-        Title.Alignment = taCenter
-        Title.Caption = 'Base Cotizaci'#243'n'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 127
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
         FieldName = 'ssocialTrabajador'
         Title.Alignment = taCenter
         Title.Caption = 'Seg. Social Trabajador'
@@ -521,6 +499,19 @@ object listnominas: Tlistnominas
       item
         Alignment = taCenter
         Expanded = False
+        FieldName = 'embargo'
+        Title.Alignment = taCenter
+        Title.Caption = 'Embargo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 134
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'TotalPercibir'
         Title.Alignment = taCenter
         Title.Caption = 'Total a Pagar'
@@ -529,9 +520,62 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 134
         Visible = True
       end>
+  end
+  object RzStatusBar1: TRzStatusBar
+    Left = 0
+    Top = 592
+    Width = 1307
+    Height = 25
+    BorderInner = fsNone
+    BorderOuter = fsNone
+    BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
+    BorderWidth = 0
+    TabOrder = 3
+    object RzStatusPane1: TRzStatusPane
+      Left = 0
+      Top = 0
+      Width = 300
+      Height = 25
+      Align = alLeft
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      Caption = ''
+    end
+    object RzFieldStatus1: TRzFieldStatus
+      Left = 300
+      Top = 0
+      Width = 300
+      Height = 25
+      Align = alLeft
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      Caption = ''
+    end
+    object RzDBStatusPane1: TRzDBStatusPane
+      Left = 600
+      Top = 0
+      Width = 150
+      Height = 25
+      Align = alLeft
+      ParentShowHint = False
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      DataField = 'nombre'
+      DataSource = ds1
+    end
+    object RzDBStateStatus1: TRzDBStateStatus
+      Left = 750
+      Top = 0
+      Height = 25
+      Align = alLeft
+      DataSource = ds1
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      ExplicitLeft = 1307
+      ExplicitHeight = 20
+    end
   end
   object ds1: TDataSource
     DataSet = DataModule1.fdqnominas
@@ -539,6 +583,7 @@ object listnominas: Tlistnominas
     Top = 336
   end
   object fdqtrabajadores: TFDQuery
+    Active = True
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'SELECT nombre, id_trabajador from trabajadores order by nombre')

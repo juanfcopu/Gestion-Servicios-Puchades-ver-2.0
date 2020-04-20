@@ -37,7 +37,7 @@ uses
 {$R *.dfm}
 
 
- var inserciones:Integer;
+
 
 
 procedure TinsertFacturasCompras.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -49,7 +49,7 @@ end;
 procedure TinsertFacturasCompras.FormShow(Sender: TObject);
 begin
 
-  inserciones:=0;
+
   Self.Left:=principal.Left+(principal.Width div 2)-(Self.Width div 2);
   Self.Top:=principal.Top+(principal.Height div 2)-(Self.Height div 2);
   Tlistfacturascompras(Self.Owner).ds1.DataSet.Insert;
@@ -60,12 +60,11 @@ begin
 try
 if Key=#13 then begin
             Tlistfacturascompras(Self.Owner).ds1.DataSet.Post;
-            inserciones:=inserciones+1;
-            RzStatusBar1.SimpleCaption:=IntToStr(inserciones) +' nominas insertadas.';
+             RzStatusBar1.SimpleCaption:=IntToStr(listfacturascompras.inserciones) +' facturas insertadas.';
             Tlistfacturascompras(Self.Owner).ds1.DataSet.Insert;
 
 
-            //rDBRecView1.
+
                  end;
  except
   raise;

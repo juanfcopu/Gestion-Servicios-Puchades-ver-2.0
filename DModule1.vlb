@@ -336,9 +336,6 @@ Coordinates=510,50,108,159
 [FObras.dscertificacion]
 Coordinates=22,405,125,33
 
-[actSeguros]
-Coordinates=0,0,70,33
-
 [actEmpresa]
 Coordinates=0,0,72,33
 
@@ -389,4 +386,7 @@ Coordinates=708,209,110,33
 
 [FFacturas.dslineas]
 Coordinates=141,405,107,33
+
+[actPagosSeguros]
+Coordinates=0,0,70,33
 

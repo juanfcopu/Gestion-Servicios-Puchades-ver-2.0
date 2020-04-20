@@ -1,0 +1,380 @@
+object configuracion: Tconfiguracion
+  Left = 0
+  Top = 0
+  BorderStyle = bsSizeToolWin
+  Caption = 'Configuracion'
+  ClientHeight = 364
+  ClientWidth = 749
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pgc1: TPageControl
+    Left = 0
+    Top = 0
+    Width = 749
+    Height = 364
+    ActivePage = ts2
+    Align = alClient
+    TabOrder = 0
+    OnChange = pgc1Change
+    object tsServidor: TTabSheet
+      Caption = 'Servidor'
+      object btn1: TButton
+        Left = 336
+        Top = 272
+        Width = 75
+        Height = 25
+        Caption = 'Aceptar'
+        TabOrder = 5
+        OnClick = btn1Click
+      end
+      object lbEservidor: TLabeledEdit
+        Left = 160
+        Top = 48
+        Width = 121
+        Height = 21
+        EditLabel.Width = 40
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Servidor'
+        LabelPosition = lpLeft
+        TabOrder = 1
+      end
+      object lbEpuerto: TLabeledEdit
+        Left = 160
+        Top = 93
+        Width = 121
+        Height = 21
+        EditLabel.Width = 37
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Pucerto'
+        LabelPosition = lpLeft
+        TabOrder = 2
+      end
+      object lbEdriver: TLabeledEdit
+        Left = 160
+        Top = 3
+        Width = 121
+        Height = 21
+        EditLabel.Width = 29
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Driver'
+        LabelPosition = lpLeft
+        TabOrder = 0
+      end
+      object lbEDataBase: TLabeledEdit
+        Left = 160
+        Top = 144
+        Width = 121
+        Height = 21
+        EditLabel.Width = 53
+        EditLabel.Height = 13
+        EditLabel.Caption = 'lbEservidor'
+        LabelPosition = lpLeft
+        TabOrder = 3
+      end
+      object lbEVerdorLib: TLabeledEdit
+        Left = 160
+        Top = 192
+        Width = 473
+        Height = 21
+        EditLabel.Width = 53
+        EditLabel.Height = 13
+        EditLabel.Caption = 'lbEservidor'
+        LabelPosition = lpLeft
+        TabOrder = 4
+      end
+      object btncancelar: TButton
+        Left = 456
+        Top = 272
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 6
+        OnClick = btCancelar2Click
+      end
+    end
+    object tsPath: TTabSheet
+      Caption = 'PATH'
+      ImageIndex = 1
+      object lbPathUSer: TLabeledEdit
+        Left = 152
+        Top = 88
+        Width = 450
+        Height = 21
+        EditLabel.Width = 55
+        EditLabel.Height = 13
+        EditLabel.Caption = 'PATH USER'
+        LabelPosition = lpLeft
+        TabOrder = 0
+      end
+      object lbPathPlantillas: TLabeledEdit
+        Left = 152
+        Top = 128
+        Width = 450
+        Height = 21
+        EditLabel.Width = 87
+        EditLabel.Height = 13
+        EditLabel.Caption = 'PATH PLANTILLAS'
+        LabelPosition = lpLeft
+        TabOrder = 1
+      end
+      object lbPathPresupuestos: TLabeledEdit
+        Left = 152
+        Top = 176
+        Width = 450
+        Height = 21
+        EditLabel.Width = 106
+        EditLabel.Height = 13
+        EditLabel.Caption = 'PATH PRESUPUESTOS'
+        LabelPosition = lpLeft
+        TabOrder = 2
+      end
+      object lbPathObras: TLabeledEdit
+        Left = 152
+        Top = 216
+        Width = 450
+        Height = 21
+        EditLabel.Width = 63
+        EditLabel.Height = 13
+        EditLabel.Caption = 'PATH OBRAS'
+        LabelPosition = lpLeft
+        TabOrder = 3
+      end
+      object btAceptar: TButton
+        Left = 288
+        Top = 288
+        Width = 75
+        Height = 25
+        Caption = 'btAceptar'
+        TabOrder = 4
+        OnClick = btAceptarClick
+      end
+      object btCancelar1: TButton
+        Left = 400
+        Top = 288
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 5
+        OnClick = btCancelar2Click
+      end
+    end
+    object tsIVA: TTabSheet
+      Caption = 'I.V.A y Descuentos'
+      ImageIndex = 2
+      object lbIVAdefecto: TLabeledEdit
+        Left = 152
+        Top = 72
+        Width = 73
+        Height = 21
+        EditLabel.Width = 57
+        EditLabel.Height = 13
+        EditLabel.Caption = 'IVA defecto'
+        LabelPosition = lpLeft
+        TabOrder = 1
+        OnKeyPress = lbIVAdefectoKeyPress
+      end
+      object btAceptar2: TButton
+        Left = 240
+        Top = 272
+        Width = 75
+        Height = 25
+        Caption = 'Aceptar'
+        TabOrder = 2
+        OnClick = btAceptar2Click
+      end
+      object btCancelar2: TButton
+        Left = 392
+        Top = 272
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 3
+        OnClick = btCancelar2Click
+      end
+      object rzgrpbx1: TRzGroupBox
+        Left = 416
+        Top = 56
+        Width = 233
+        Height = 185
+        Caption = 'I.R.P.F'
+        TabOrder = 0
+        object lbedIRPFdefecto: TLabeledEdit
+          Left = 96
+          Top = 56
+          Width = 73
+          Height = 21
+          EditLabel.Width = 75
+          EditLabel.Height = 13
+          EditLabel.Caption = 'I.R.P.F defecto'
+          LabelPosition = lpLeft
+          TabOrder = 0
+          OnKeyPress = lbIVAdefectoKeyPress
+        end
+      end
+    end
+    object ts1: TTabSheet
+      Caption = 'Empresa'
+      ImageIndex = 3
+      object lbedEmpresa: TLabeledEdit
+        Left = 280
+        Top = 88
+        Width = 121
+        Height = 21
+        EditLabel.Width = 41
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Empresa'
+        LabelPosition = lpLeft
+        TabOrder = 0
+      end
+      object btn2: TButton
+        Left = 248
+        Top = 280
+        Width = 75
+        Height = 25
+        Caption = 'Aceptar'
+        TabOrder = 1
+        OnClick = btn2Click
+      end
+      object btn3: TButton
+        Left = 400
+        Top = 280
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 2
+        OnClick = btCancelar2Click
+      end
+    end
+    object ts2: TTabSheet
+      Caption = 'Cuentas'
+      ImageIndex = 4
+      OnEnter = ts2Enter
+      OnExit = ts2Exit
+      ExplicitLeft = 0
+      ExplicitTop = 28
+      object grp1: TGroupBox
+        AlignWithMargins = True
+        Left = 392
+        Top = 32
+        Width = 346
+        Height = 301
+        Align = alRight
+        Caption = 'Maestro de Cuentas'
+        TabOrder = 2
+        object rDBGridClientes1: TrDBGrid_MS
+          AlignWithMargins = True
+          Left = 5
+          Top = 18
+          Width = 336
+          Height = 278
+          Align = alClient
+          DataSource = ds1
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'id_cuenta'
+              Title.Caption = 'Cuenta'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 88
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'descripcion'
+              Title.Caption = 'Descripci'#243'n'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 210
+              Visible = True
+            end>
+        end
+      end
+      object grp2: TGroupBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 32
+        Width = 273
+        Height = 301
+        Align = alLeft
+        Caption = 'Edici'#243'n de cuentas'
+        TabOrder = 1
+        ExplicitLeft = 0
+        ExplicitTop = 29
+        ExplicitHeight = 307
+        object rDBEdit1: TrDBEdit
+          Left = 88
+          Top = 48
+          Width = 121
+          Height = 21
+          DataField = 'id_cuenta'
+          DataSource = ds1
+          TabOrder = 0
+          DBEditLabel.OwnCaption = 'N'#186' de Cuenta'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBEdit2: TrDBEdit
+          Left = 88
+          Top = 91
+          Width = 121
+          Height = 21
+          DataField = 'descripcion'
+          DataSource = ds1
+          TabOrder = 1
+          DBEditLabel.OwnCaption = 'Descripci'#243'n'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object btn4: TButton
+          Left = 120
+          Top = 200
+          Width = 89
+          Height = 41
+          Caption = 'btn4'
+          Enabled = False
+          TabOrder = 2
+          OnClick = btn4Click
+        end
+      end
+      object tlb1: TToolBar
+        Left = 0
+        Top = 0
+        Width = 741
+        Height = 29
+        Caption = 'tlb1'
+        TabOrder = 0
+        ExplicitLeft = 352
+        ExplicitTop = 104
+        ExplicitWidth = 150
+      end
+    end
+  end
+  object ds1: TDataSource
+    DataSet = DataModule1.fdqcuentas
+    OnStateChange = ds1StateChange
+    Left = 588
+    Top = 24
+  end
+end

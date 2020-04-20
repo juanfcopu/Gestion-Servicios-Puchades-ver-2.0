@@ -33,6 +33,7 @@ type
     chkCamposBusqueda: TCheckBox;
     lbed1: TLabeledEdit;
     btn7: TToolButton;
+    btn8: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure ControlBar1DockOver(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer; State: TDragState; var Accept: Boolean);
@@ -49,6 +50,7 @@ type
     procedure chkCamposBusquedaClick(Sender: TObject);
     procedure btn7Click(Sender: TObject);
     procedure lbed1Change(Sender: TObject);
+    procedure btn8Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -63,7 +65,7 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, clientes, FPrincipal,rDBFilter,rdbtool,rDBFind;
+uses DModule1, clientes, FPrincipal,rDBFilter,rdbtool,rDBFind,listaspagoseguros;
 
 procedure Tlistseguros.btn1Click(Sender: TObject);
 begin
@@ -92,6 +94,11 @@ procedure Tlistseguros.btn7Click(Sender: TObject);
 begin
 //FilterByField(DataModule1.fdClientesnombre,fjNone)  ;
  FilterRec(rDBGridClientes1);
+end;
+
+procedure Tlistseguros.btn8Click(Sender: TObject);
+begin
+DataModule1.actPagosSegurosExecute(Sender);
 end;
 
 procedure Tlistseguros.btncrearclientesClick(Sender: TObject);

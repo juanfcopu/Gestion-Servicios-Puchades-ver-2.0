@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=409,80,108,33
+Coordinates=63,459,93,36
 Visible=True
 ExplicitSubNodes=Row;RowCount
 
@@ -17,21 +17,11 @@ Visible=True
 Coordinates=916,276,79,58
 Visible=True
 
-[PageControl1]
-Coordinates=63,459,93,36
-
-[lineas]
-Coordinates=10,459,48,36
-Visible=True
-
 [fdlineas]
 Coordinates=325,60,105,256
 
 [fdCliente]
 Coordinates=1268,10,69,146
-
-[ControlBar2]
-Coordinates=639,459,83,36
 
 [dialruta]
 Coordinates=81,167,57,36
@@ -79,14 +69,8 @@ Coordinates=722,459,84,36
 [ToolButton7]
 Coordinates=701,398,84,36
 
-[Label7]
-Coordinates=419,337,53,58
-
 [DataModule1.fdpresupuestos]
 Coordinates=587,337,182,58
-
-[Label9]
-Coordinates=436,276,53,58
 
 [Shape2]
 Coordinates=579,459,59,36
@@ -103,26 +87,11 @@ Coordinates=87,232,108,36
 [EditPaste]
 Coordinates=320,558,70,36
 
-[ToolBar2]
-Coordinates=174,502,67,36
-
 [ImageList1]
 Coordinates=304,342,77,36
 
-[ToolButton12]
-Coordinates=862,398,91,36
-
-[ToolButton11]
-Coordinates=242,502,91,36
-
-[ToolButton13]
-Coordinates=527,398,91,36
-
 [AprobarTodos]
 Coordinates=930,205,96,36
-
-[Label12]
-Coordinates=154,398,60,58
 
 [GroupBox5]
 Coordinates=10,276,79,58
@@ -261,12 +230,6 @@ Coordinates=600,133,130,36
 
 [mfldfdfacturasobservaciones]
 Coordinates=930,1,179,36
-
-[RzDBNavigator1]
-Coordinates=468,453,110,58
-
-[rDBGridClientes1]
-Coordinates=860,566,115,36
 
 [rDBEdit9]
 Coordinates=420,576,66,36

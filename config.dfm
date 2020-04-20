@@ -4,7 +4,7 @@ object configuracion: Tconfiguracion
   BorderStyle = bsSizeToolWin
   Caption = 'Configuracion'
   ClientHeight = 364
-  ClientWidth = 749
+  ClientWidth = 726
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,11 +19,12 @@ object configuracion: Tconfiguracion
   object pgc1: TPageControl
     Left = 0
     Top = 0
-    Width = 749
+    Width = 726
     Height = 364
     ActivePage = ts1
     Align = alClient
     TabOrder = 0
+    OnChange = pgc1Change
     object tsServidor: TTabSheet
       Caption = 'Servidor'
       object btn1: TButton
@@ -170,15 +171,15 @@ object configuracion: Tconfiguracion
       Caption = 'I.V.A y Descuentos'
       ImageIndex = 2
       object lbIVAdefecto: TLabeledEdit
-        Left = 160
-        Top = 96
+        Left = 152
+        Top = 72
         Width = 73
         Height = 21
         EditLabel.Width = 57
         EditLabel.Height = 13
         EditLabel.Caption = 'IVA defecto'
         LabelPosition = lpLeft
-        TabOrder = 0
+        TabOrder = 1
         OnKeyPress = lbIVAdefectoKeyPress
       end
       object btAceptar2: TButton
@@ -187,7 +188,7 @@ object configuracion: Tconfiguracion
         Width = 75
         Height = 25
         Caption = 'Aceptar'
-        TabOrder = 1
+        TabOrder = 2
         OnClick = btAceptar2Click
       end
       object btCancelar2: TButton
@@ -196,8 +197,28 @@ object configuracion: Tconfiguracion
         Width = 75
         Height = 25
         Caption = 'Cancelar'
-        TabOrder = 2
+        TabOrder = 3
         OnClick = btCancelar2Click
+      end
+      object rzgrpbx1: TRzGroupBox
+        Left = 416
+        Top = 56
+        Width = 233
+        Height = 185
+        Caption = 'I.R.P.F'
+        TabOrder = 0
+        object lbedIRPFdefecto: TLabeledEdit
+          Left = 96
+          Top = 56
+          Width = 73
+          Height = 21
+          EditLabel.Width = 75
+          EditLabel.Height = 13
+          EditLabel.Caption = 'I.R.P.F defecto'
+          LabelPosition = lpLeft
+          TabOrder = 0
+          OnKeyPress = lbIVAdefectoKeyPress
+        end
       end
     end
     object ts1: TTabSheet
@@ -233,5 +254,138 @@ object configuracion: Tconfiguracion
         OnClick = btCancelar2Click
       end
     end
+    object ts2: TTabSheet
+      Caption = 'Cuentas'
+      ImageIndex = 4
+      OnEnter = ts2Enter
+      OnExit = ts2Exit
+      object grp1: TGroupBox
+        AlignWithMargins = True
+        Left = 287
+        Top = 32
+        Width = 428
+        Height = 301
+        Align = alRight
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Caption = 'Maestro de Cuentas'
+        TabOrder = 2
+        object rDBGridClientes1: TrDBGrid_MS
+          AlignWithMargins = True
+          Left = 5
+          Top = 18
+          Width = 418
+          Height = 278
+          Align = alClient
+          DataSource = ds1
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'id_cuenta'
+              Title.Caption = 'Cuenta'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 87
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'descripcion'
+              Title.Caption = 'Descripci'#243'n'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 293
+              Visible = True
+            end>
+        end
+      end
+      object grp2: TGroupBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 32
+        Width = 278
+        Height = 301
+        Align = alLeft
+        Anchors = [akTop, akRight, akBottom]
+        Caption = 'Edici'#243'n de cuentas'
+        TabOrder = 1
+        object rDBEdit1: TrDBEdit
+          Left = 88
+          Top = 48
+          Width = 177
+          Height = 21
+          DataField = 'id_cuenta'
+          DataSource = ds1
+          TabOrder = 0
+          DBEditLabel.OwnCaption = 'N'#186' de Cuenta'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBEdit2: TrDBEdit
+          Left = 72
+          Top = 91
+          Width = 193
+          Height = 21
+          DataField = 'descripcion'
+          DataSource = ds1
+          TabOrder = 1
+          DBEditLabel.OwnCaption = 'Descripci'#243'n'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object btn4: TButton
+          Left = 136
+          Top = 184
+          Width = 89
+          Height = 41
+          Caption = 'Guardar'
+          Enabled = False
+          TabOrder = 3
+          OnClick = btn4Click
+        end
+        object btn5: TButton
+          Left = 24
+          Top = 184
+          Width = 89
+          Height = 41
+          Caption = 'Nuevo'
+          Enabled = False
+          TabOrder = 2
+          OnClick = btn5Click
+        end
+      end
+      object tlb1: TToolBar
+        Left = 0
+        Top = 0
+        Width = 718
+        Height = 29
+        Caption = 'tlb1'
+        TabOrder = 0
+        object btn6: TToolButton
+          Left = 0
+          Top = 0
+          Caption = 'btn6'
+          ImageIndex = 0
+          OnClick = btn6Click
+        end
+      end
+    end
+  end
+  object ds1: TDataSource
+    DataSet = DataModule1.fdqcuentas
+    OnStateChange = ds1StateChange
+    Left = 588
+    Top = 24
   end
 end

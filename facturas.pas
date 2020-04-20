@@ -15,7 +15,7 @@ uses
   Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,System.Win.COMObj,
   Vcl.DBGrids, Vcl.Bind.Navigator, Data.Bind.Controls, Vcl.StdActns, Vcl.ImgList,
   System.ImageList, ShellCtrls, RzPanel, RzDBNav, RzDBGrid, rDBGrid, rDBGrid_MS,
-  Vcl.Mask, Vcl.DBCtrls, rDBComponents;
+  Vcl.Mask, Vcl.DBCtrls, rDBComponents, rStringGridEd, rDBStringGridEd;
 
 
 type
@@ -26,12 +26,9 @@ type
     GroupBox1: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox2: TGroupBox;
-    PageControl1: TPageControl;
-    lineas: TTabSheet;
     fdCliente: TFDQuery;
     fdfacturas: TFDQuery;
     fdlineas: TFDQuery;
-    ControlBar2: TControlBar;
     dialruta: TOpenDialog;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
@@ -44,21 +41,14 @@ type
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
     ToolButton10: TToolButton;
-    Label7: TLabel;
     BTBuscarCliente: TButton;
-    Label9: TLabel;
     Shape2: TShape;
-    ToolBar2: TToolBar;
     ImageList1: TImageList;
     ActionManager2: TActionManager;
-    ToolButton11: TToolButton;
     EditCopy: TEditCopy;
     EditCut: TEditCut;
     EditPaste: TEditPaste;
-    ToolButton12: TToolButton;
-    ToolButton13: TToolButton;
     AprobarTodos: TAction;
-    Label12: TLabel;
     GroupBox3: TGroupBox;
     GroupBox5: TGroupBox;
     Shape1: TShape;
@@ -91,9 +81,7 @@ type
     fdlineasimporte: TFloatField;
     fdlineasiva: TFloatField;
     FDSchemaAdapter1: TFDSchemaAdapter;
-    RzDBNavigator1: TRzDBNavigator;
     dslineas: TDataSource;
-    rDBGridClientes1: TrDBGrid_MS;
     fdlineasdescuento: TIntegerField;
     mfldfdfacturasobservaciones: TMemoField;
     rDBEdit1: TrDBEdit;
@@ -110,6 +98,22 @@ type
     fdfacturascantidad: TIntegerField;
     fltfldIVA: TFloatField;
     rDBEdit10: TrDBEdit;
+    grp1: TGroupBox;
+    ctrlbr1: TControlBar;
+    tlb1: TToolBar;
+    btn1: TToolButton;
+    btn2: TToolButton;
+    btn3: TToolButton;
+    rzdbnvgtr1: TRzDBNavigator;
+    rDBGridClientes1: TrDBGrid_MS;
+    fdfacturasretencion: TIntegerField;
+    fltfldfdfacturasimporteRetencion: TFloatField;
+    rdbtotales1: TrDBGrid;
+    fltfldfacturasbaseimponible: TFloatField;
+    fdfacturasid_asiento: TIntegerField;
+    rDBEdit11: TrDBEdit;
+    btn4: TButton;
+    fdlineasnlinea: TIntegerField;
     procedure GuardarClick(Sender: TObject);
 
     procedure cerrarClick(Sender: TObject);
@@ -135,6 +139,8 @@ type
     procedure fdfacturasAfterDelete(DataSet: TDataSet);
     procedure fdlineasBeforeInsert(DataSet: TDataSet);
     procedure fdlineasdescuentoChange(Sender: TField);
+    procedure FormCreate(Sender: TObject);
+    procedure btn4Click(Sender: TObject);
 
 
 
@@ -151,6 +157,7 @@ type
    
     procedure luces(aprobado:boolean);
 
+
   end;
 
 
@@ -165,9 +172,13 @@ implementation
 uses DModule1, listaclientes, SelectLineasPresupuestos;
 
 
+
+
+
+
  procedure TFFacturas.luces(aprobado:boolean);
  begin
-    
+
  end;
 
 
@@ -214,7 +225,12 @@ fdclen:=TFDQuery.Create(Sender as TControl);
               fdfacturas.Post;
          end;
     Self.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+ ' - ' +fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
+    grp1.Enabled:=True;
+end;
 
+procedure TFFacturas.btn4Click(Sender: TObject);
+begin
+fdlineas.Refresh;
 end;
 
 procedure TFFacturas.cerrarClick(Sender: TObject);
@@ -257,15 +273,19 @@ end;
 procedure TFFacturas.fdfacturasAfterInsert(DataSet: TDataSet);
 begin
 fdfacturasidFactura.Value:=-200;
+fdfacturasid_asiento.Value:=-100;
 fdfacturasidCliente.Value:=fdClienteidcontactos.Value;
 fdfacturasFechaFactura.Value:=Date;
 fdfacturasano.Value:=YearOf(Date);
-fdfacturasEmisorFactura.Value:=0;
+fdfacturasEmisorFactura.Value:=IDEMPRESA;
+fdfacturascantidad.value:=1;
 fdfacturaspagada.Value:=False;
 fdfacturasIva.Value:=Trunc((DataModule1.IVA(fdClientefamilia.value)-1)*100);
 fdfacturasTotal.Value:=0;
 fdfacturasTotalBruto.Value:=0;
 fdfacturasConcepto.Value:='Concepto';
+fdfacturasretencion.Value:=0;
+
 
 
 Guardar.Enabled:=true;
@@ -275,13 +295,26 @@ end;
 
 procedure TFFacturas.fdfacturasTotalBrutoChange(Sender: TField);
 begin
-fltfldIVA.asfloat:=fdfacturasTotalBruto.asfloat*(fdfacturasIva.asfloat/100);
-fdfacturasTotal.asfloat:=fdfacturasTotalBruto.asfloat*(fdfacturasIva.asfloat/100)+fdfacturasTotalBruto.asfloat;
+fltfldfacturasbaseimponible.asfloat:=fdfacturasTotalBruto.AsFloat-fdfacturasTotalBruto.asfloat*(fdfacturasretencion.AsInteger/100);
+fltfldfdfacturasimporteRetencion.AsFloat:=fdfacturasTotalBruto.asfloat*(fdfacturasretencion.AsInteger/100);
+fltfldIVA.asfloat:=fltfldfacturasbaseimponible.asfloat*(fdfacturasIva.asfloat/100);
+fdfacturasTotal.asfloat:=fltfldfacturasbaseimponible.asfloat*(fdfacturasIva.asfloat/100)+fltfldfacturasbaseimponible.asfloat;
 end;
 
 procedure TFFacturas.fdlineasAfterDelete(DataSet: TDataSet);
 begin
+Guardar.Enabled:=true;
+Shape1.Brush.Color:=cllime;
 rDBGridClientes1.RecalculateSummaryResults(true);
+
+while not DataSet.eof do
+begin
+  DataSet.edit;
+  DataSet.FieldByName('nlinea').asinteger:=DataSet.RecNo-1;
+  DataSet.Post;
+  DataSet.Next;
+end;
+
 end;
 
 procedure TFFacturas.fdlineasAfterEdit(DataSet: TDataSet);
@@ -297,16 +330,18 @@ begin
 Guardar.Enabled:=true;
 Shape1.Brush.Color:=cllime;
 fdlineascantidad.Value:=1;
+fdlineasimporte.Value:=0;
 fdlineastotal.Value:=0;
 fdlineasiva.Value:=0;
 fdlineasdescuento.Value:=0;
+fdlineasnlinea.Value:=DataSet.RecordCount;
 
 end;
 
 procedure TFFacturas.fdlineasAfterOpen(DataSet: TDataSet);
 begin
 
-PageControl1.Enabled:=True;
+grp1.Enabled:=True;
 rDBGridClientes1.RecalculateSummaryResults(true);
 end;
 
@@ -352,7 +387,7 @@ if (fdfacturas.state in [dsInsert, dsEdit]) then
  begin
    fdfacturas.post;
  end;
-  
+
 if (fdlineas.state in [dsEdit,dsInsert]) then
  begin
    fdlineas.post;
@@ -385,20 +420,54 @@ with Sender as TFDSchemaAdapter do CommitUpdates;
 end;
 
 procedure TFFacturas.FDSchemaAdapter1BeforeApplyUpdate(Sender: TObject);
+var cnpIVA,cnpVentas:Integer;
 begin
+ try
  if YearOf(fdfacturasFechaFactura.AsDateTime) <> fdfacturasano.asinteger then
    begin
      ShowMessage('El año de la fecha de factura no coincide con la serie');
      fdfacturas.CancelUpdates;
    end
    else begin
-          if fdlineasfacturas_idfactura.CurValue=-200 then
-           begin
            fdfacturas.Edit;
-           fdfacturasidFactura.AsInteger:=DataModule1.ObtenerNFactura(fdfacturasano.asinteger);
-           fdfacturas.Post;   end;
-   end;
-    Self.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+ ' - ' +fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
+           if fdlineasfacturas_idfactura.CurValue=-200 then  fdfacturasidFactura.AsInteger:=DataModule1.ObtenerNFactura(fdfacturasano.asinteger);
+
+            if (fdfacturasIva.AsInteger = 10) then
+                  begin
+                  cnpIVA:=47700010;
+                  cnpVentas:=70000010;
+                  end
+                   else begin
+                    cnpIVA:=47700021;
+                    cnpVentas:=70000021;
+                   end;
+
+                   if fdfacturasid_asiento.AsInteger < 0 then
+                      begin
+                     fdfacturasid_asiento.AsInteger:=DataModule1.generarAsiento(-1,cnpIVA,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldIVA.AsFloat, fdfacturasidFactura.asstring+ fdfacturasano.asstring,true);
+                      DataModule1.generarAsiento(fdfacturasid_asiento.AsInteger,cnpVentas,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldfacturasbaseimponible.AsFloat, fdfacturasidFactura.asstring+ fdfacturasano.asstring,false);
+
+                     // ShowMessage('Se ha generado el asiento Nº '+fdfacturasid_asiento.AsString );
+
+                      end
+                      else begin
+                               DataModule1.modificarAsiento(fdfacturasid_asiento.asinteger,cnpIVA,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldIVA.AsFloat,fdfacturasidFactura.asstring+ fdfacturasano.asstring);
+                               DataModule1.modificarAsiento(fdfacturasid_asiento.asinteger,cnpVentas,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldfacturasbaseimponible.AsFloat,fdfacturasidFactura.asstring+ fdfacturasano.asstring);
+                               //ShowMessage('Se ha modificado el asiento Nº '+fdfacturasid_asiento.AsString);
+                           end;
+
+               fdfacturas.Post;
+               Self.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+ ' - ' +fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
+          end  ;
+
+    except
+
+       Application.MessageBox('Se ha producido un error en la aplicación.',
+         PChar(Application.Title), MB_OK + MB_ICONSTOP);
+
+ end;
+
+
 
 end;
 
@@ -406,6 +475,11 @@ procedure TFFacturas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 
 action:=caFree;
+end;
+
+procedure TFFacturas.FormCreate(Sender: TObject);
+begin
+ShowScrollBar(rdbtotales1.Handle,SB_BOTH,false);
 end;
 
 procedure TFFacturas.FormResize(Sender: TObject);

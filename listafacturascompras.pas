@@ -11,7 +11,8 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls, RzDTP, Vcl.Mask,
-  RzEdit, RzCmboBx, rImprovedComps, rDBRecView, rDBComponents;
+  RzEdit, RzCmboBx, rImprovedComps, rDBRecView, rDBComponents, RzPanel, RzStatus,
+  RzDBStat;
 
 type
   Tlistfacturascompras= class(TForm)
@@ -30,7 +31,6 @@ type
     rb1Trimestres: TRadioButton;
     rb2trimestre: TRadioButton;
     rbTodas: TRadioButton;
-    stat1: TStatusBar;
     tlb1: TToolBar;
     btn1: TToolButton;
     btn3: TToolButton;
@@ -38,7 +38,6 @@ type
     btn5: TToolButton;
     rDBGridClientes1: TrDBGrid_MS;
     ds1: TDataSource;
-    fdqproveedores: TFDQuery;
     rb3trimestre: TRadioButton;
     rb4trimestre: TRadioButton;
     RzComboBox1: TRzComboBox;
@@ -46,6 +45,12 @@ type
     rDBRecView1: TrDBRecView;
     btn6: TToolButton;
     btn7: TToolButton;
+    fdqproveedores: TFDQuery;
+    RzStatusBar1: TRzStatusBar;
+    RzStatusPane1: TRzStatusPane;
+    RzFieldStatus1: TRzFieldStatus;
+    RzDBStatusPane1: TRzDBStatusPane;
+    RzDBStateStatus1: TRzDBStateStatus;
     procedure FormCreate(Sender: TObject);
 
     procedure Button1Click(Sender: TObject);
@@ -67,15 +72,24 @@ type
     procedure fdqfacturascomprasAfterPost(DataSet: TDataSet);
     procedure fdqfacturascomprasAfterInsert(DataSet: TDataSet);
     procedure fdqfacturascomprasAfterCancel(DataSet: TDataSet);
+    procedure fdqfacturascomprasBeforeCancel(DataSet: TDataSet);
     procedure rDBRecView1Click(Sender: TObject);
     procedure rGroupBox1MinimizeChange(Sender: TObject);
     procedure rDBRecView1KeyPress(Sender: TObject; var Key: Char);
     procedure btn7Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
+    procedure fdq1AfterExecute(DataSet: TFDDataSet);
+    procedure fdqfacturascomprasBeforePost(DataSet: TDataSet);
+
+
+
   private
     { Private declarations }
   public
     { Public declarations }
+
+     inserciones:Integer;
+     estado:   TDataSetState;
   end;
 
 var
@@ -90,6 +104,12 @@ uses
 
 
 
+procedure Tlistfacturascompras.fdqfacturascomprasBeforeCancel(DataSet: TDataSet);
+begin
+ if DataSet.State in [dsInsert] then Dec(inserciones);
+
+end;
+
 procedure Tlistfacturascompras.fdqfacturascomprasAfterDelete(DataSet: TDataSet);
 begin
 rDBGridClientes1.RecalculateSummaryResults(True);
@@ -100,10 +120,79 @@ begin
 rDBGridClientes1.RecalculateSummaryResults(True);
 end;
 
-procedure Tlistfacturascompras.fdqfacturascomprasAfterPost(DataSet: TDataSet);
+
+procedure Tlistfacturascompras.fdq1AfterExecute(DataSet: TFDDataSet);
 begin
-rDBGridClientes1.RecalculateSummaryResults(True);
+
+   if TFDQuery(DataSet).RowsAffected = -1 then
+    showmessage('No se ha modificado ningún asiento')
+  else
+    case TFDQuery(DataSet).Command.CommandKind of
+    skInsert: begin
+
+
+                rzfieldstatus1.caption:='Se ha generado el asiento Nº '+DataModule1.fdqfacturascomprasid_asiento.asstring ;
+
+              end;
+    skUpdate: rzfieldstatus1.caption:='Se ha modificado el asiento Nº '+DataModule1.fdqfacturascomprasid_asiento.asstring;
+    else      showmessage(Format('%d rows affected', [TFDQuery(DataSet).RowsAffected]));
+    end;
+
+
+end;
+
+
+procedure Tlistfacturascompras.fdqfacturascomprasAfterPost(DataSet: TDataSet);
+
+begin
+
+ rDBGridClientes1.RecalculateSummaryResults(True);
  rDBRecView1.Options:=rDBRecView1.Options-[goEditing];
+  rDBGridClientes1.RecalculateSummaryResults(True);
+  case estado of
+
+  dsInsert : rzstatuspane1.Caption:=inserciones.ToString + ' facturas insertadas';
+  dsEdit   : rzstatuspane1.Caption:='Se ha modificado la factura Nº '+ DataSet.FieldByName('Nfactura').AsString;
+  end;
+
+
+end;
+
+procedure Tlistfacturascompras.fdqfacturascomprasBeforePost(DataSet: TDataSet);
+var cnpIVA,cnpCompras:Integer;
+begin
+estado:=Dataset.state;
+   with DataModule1 do
+ begin
+ if (fdqfacturascomprasIVA.AsInteger = 10) then
+                  begin
+                  cnpIVA:=47200010;
+                 cnpCompras:=60000001;
+
+                 end
+                   else begin
+                    cnpIVA:=47200021;
+                    cnpCompras:=60000001;
+                   end;
+
+                   if (fdqfacturascomprasid_asiento.isnull) or (fdqfacturascomprasid_asiento.AsInteger=-1) then
+
+                      begin
+
+                      fdqfacturascomprasid_asiento.AsInteger:= generarAsiento(-1,cnpIVA,Date,'FACTURA COMPRAS '+fdqfacturascomprasnombre.AsString,fdqfacturascomprasIVA.AsFloat, fdqfacturascomprasNfactura.asstring,true);
+                      generarAsiento(fdqfacturascomprasid_asiento.AsInteger,cnpCompras,Date,'FACTURA COMPRAS '+fdqfacturascomprasnombre.AsString,fdqfacturascomprasimporte.AsFloat, fdqfacturascomprasNfactura.asstring,false);
+
+
+                        
+
+                      end
+                      else begin
+                               DataModule1.modificarAsiento(fdqfacturascomprasid_asiento.AsInteger,cnpIVA,Date,'FACTURA COMPRAS '+fdqfacturascomprasnombre.AsString,fdqfacturascomprasIVA.AsFloat,fdqfacturascomprasNfactura.asstring);
+                               DataModule1.modificarAsiento(fdqfacturascomprasid_asiento.AsInteger,cnpCompras,Date,'FACTURA COMPRAS '+fdqfacturascomprasnombre.AsString,fdqfacturascomprasimporte.AsFloat,fdqfacturascomprasNfactura.asstring);
+
+                           end;
+
+end;
 end;
 
 procedure Tlistfacturascompras.beBuscarChange(Sender: TObject);
@@ -124,8 +213,8 @@ ds1.dataset.Filtered:=True;
  end
 end
 else begin
-        fdqproveedores.Filtered:=False;
-        ds1.DataSet.Filtered:=False;
+         fdqproveedores.Filtered:=False;
+         ds1.DataSet.Filtered:=False;
          rDBGridClientes1.RecalculateSummaryResults(true);
      end;
 end;
@@ -161,6 +250,7 @@ end ;
 
 procedure Tlistfacturascompras.fdqfacturascomprasAfterCancel(DataSet: TDataSet);
 begin
+
   rDBRecView1.Options:=rDBRecView1.Options-[goEditing];
 end;
 
@@ -173,21 +263,23 @@ ds1.DataSet.Filtered:=False;
 ds1.DataSet.Filter:='fecha>= {d '+FormatDateTime('yyyy-mm-dd',DateTimePicker1.Date)+'} and fecha<={d '+FormatDateTime('yyyy-mm-dd',DateTimePicker2.Date)+'}';
 ds1.DataSet.Filtered:=True;
 rDBGridClientes1.DataSource.DataSet.EnableControls;
-  rDBGridClientes1.RecalculateSummaryResults(true);
+rDBGridClientes1.RecalculateSummaryResults(true);
 
 end;
 
 procedure Tlistfacturascompras.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-
-  ds1.DataSet.AfterOpen:= nil;
+     DataModule1.fq1.AfterExecute:=nil;
+     ds1.DataSet.AfterOpen:= nil;
      ds1.DataSet.AfterPost:= nil;
      ds1.DataSet.AfterDelete:=nil;
      ds1.DataSet.AfterInsert:=nil;
      ds1.DataSet.AfterCancel:=nil;
+     ds1.DataSet.AfterEdit:=nil;
+     ds1.DataSet.BeforeCancel:=nil;
 
-    ds1.dataset.Active:=false;
-fdqproveedores.Active:=false;
+     ds1.dataset.Active:=false;
+
 
 
 Action:=caFree;
@@ -198,7 +290,7 @@ var i:Integer;
 begin
      DateTimePicker1.Date:=Date;
      DateTimePicker2.Date:=Date;
-
+     inserciones:=0;
      for i := YearOf(date)-4 to YearOf(date)+5 do RzComboBox1.Items.add(IntToStr(i));
 
      i:=YearOf(date);
@@ -207,13 +299,19 @@ begin
 
      rbcliente.checked:=true;
 
-     fdqproveedores.Active:=True;
 
+     DataModule1.fq1.AfterExecute:=fdq1AfterExecute;
+
+     ds1.DataSet:=DataModule1.fdqfacturascompras;
      ds1.DataSet.AfterOpen:= fdqfacturascomprasAfterOpen;
      ds1.DataSet.AfterPost:= fdqfacturascomprasAfterPost;
      ds1.DataSet.AfterDelete:=fdqfacturascomprasAfterDelete;
-     ds1.DataSet.AfterPost:=fdqfacturascomprasAfterPost;
      ds1.DataSet.AfterInsert:=fdqfacturascomprasAfterInsert;
+
+     ds1.DataSet.BeforePost:=fdqfacturascomprasBeforePost;
+     ds1.DataSet.BeforeCancel:=fdqfacturascomprasBeforeCancel;
+
+     DataModule1.fdqfacturascomprasnombre.LookupDataSet:=fdqproveedores;
 
        ds1.DataSet.Active:=true;
         rbTodas.Checked:=True;
@@ -347,6 +445,8 @@ procedure Tlistfacturascompras.rDBRecView1KeyPress(Sender: TObject;
 begin
 if Key=#13 then begin
             ds1.DataSet.Post;
+     //       Inc(inserciones);
+       //     rzStatusBar1.SimpleCaption:=IntToStr(TFDQuery(ds1.DataSet).RowsAffected) +' facturas insertadas.';
             ds1.DataSet.Insert;
             //rDBRecView1.
                  end;
@@ -356,7 +456,9 @@ end;
 procedure Tlistfacturascompras.fdqfacturascomprasAfterInsert(DataSet: TDataSet);
 begin
 
+ Inc(inserciones);
  ds1.DataSet.FieldByName('tasaIVA').AsInteger:=21;
+ ds1.DataSet.FieldByName('formapago').AsString:='CONTADO';
  rDBRecView1.Options:=rDBRecView1.Options+[goEditing];
 end;
 

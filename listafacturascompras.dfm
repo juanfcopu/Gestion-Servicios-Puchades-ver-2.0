@@ -40,7 +40,6 @@ object listfacturascompras: Tlistfacturascompras
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
-      ExplicitHeight = 254
       object beBuscar: TButtonedEdit
         Left = 71
         Top = 28
@@ -95,7 +94,6 @@ object listfacturascompras: Tlistfacturascompras
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
-      ExplicitHeight = 254
       object Label2: TLabel
         Left = 16
         Top = 16
@@ -177,7 +175,6 @@ object listfacturascompras: Tlistfacturascompras
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
-      ExplicitHeight = 254
       object rb1Trimestres: TRadioButton
         Left = 137
         Top = 8
@@ -279,7 +276,6 @@ object listfacturascompras: Tlistfacturascompras
       MinMaxBtnType = mmbRound
       MinimizeAnimate = True
       OnMinimizeChange = rGroupBox1MinimizeChange
-      ExplicitHeight = 260
       object rDBRecView1: TrDBRecView
         Left = 2
         Top = 17
@@ -325,17 +321,8 @@ object listfacturascompras: Tlistfacturascompras
         TabOrder = 0
         OnClick = rDBRecView1Click
         OnKeyPress = rDBRecView1KeyPress
-        ExplicitHeight = 241
       end
     end
-  end
-  object stat1: TStatusBar
-    Left = 0
-    Top = 592
-    Width = 1307
-    Height = 25
-    Panels = <>
-    SimplePanel = True
   end
   object tlb1: TToolBar
     Left = 0
@@ -409,9 +396,10 @@ object listfacturascompras: Tlistfacturascompras
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgDragCell, dgUseTitlePopup, dgAutoPickListWidth]
+    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgOnlyPickListValues, dgDragCell, dgUseTitlePopup, dgAutoPickListWidth]
     OptionsEx2.ActivateOptionsEx2 = True
     OptionsEx2.Editors.Memo = obtContent
+    OptionsEx2.Editors.OnlyPickListValues = True
     OptionsEx2.Appearance.DragCell = True
     SortDesc = True
     Sorter = DataModule1.rDBGridSorter_FireDac1
@@ -431,13 +419,13 @@ object listfacturascompras: Tlistfacturascompras
     FooterRow.Color = clWhite
     FooterRow.FieldFooterDefs.Strings = (
       'importe=%SUM '#8364';'
-      'IVA=%SUM '#8364';'
+      'IVA=%SUM '#8364';Red;'
       'total=%SUM '#8364';')
     FieldsAsLink.Strings = (
       'nombre=user_defined')
     FieldsAutoPickList.Strings = (
-      'formapago'
-      'tasaIVA')
+      'tasaIVA'
+      'formapago')
     LookupListItemIncreaseWidth = 20
     OnLoadPickList = rDBGridClientes1LoadPickList
     Columns = <
@@ -450,7 +438,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 301
+        Width = 262
         Visible = True
       end
       item
@@ -464,7 +452,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 103
+        Width = 89
         Visible = True
       end
       item
@@ -479,11 +467,12 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 104
+        Width = 90
         Visible = True
       end
       item
         Alignment = taCenter
+        ButtonStyle = cbsEllipsis
         Expanded = False
         FieldName = 'fecha'
         Title.Alignment = taCenter
@@ -493,7 +482,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 119
+        Width = 103
         Visible = True
       end
       item
@@ -507,7 +496,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 115
+        Width = 100
         Visible = True
       end
       item
@@ -521,7 +510,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 117
+        Width = 102
         Visible = True
       end
       item
@@ -535,7 +524,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 85
+        Width = 73
         Visible = True
       end
       item
@@ -549,7 +538,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 125
+        Width = 108
         Visible = True
       end
       item
@@ -564,7 +553,7 @@ object listfacturascompras: Tlistfacturascompras
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 118
+        Width = 103
         Visible = True
       end
       item
@@ -572,14 +561,87 @@ object listfacturascompras: Tlistfacturascompras
         ButtonStyle = cbsEllipsis
         Expanded = False
         FieldName = 'vencimiento'
+        Title.Alignment = taCenter
         Title.Caption = 'Vencimiento'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
+        Width = 113
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'id_asiento'
+        Title.Alignment = taCenter
+        Title.Caption = 'Asiento'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 70
         Visible = True
       end>
+  end
+  object RzStatusBar1: TRzStatusBar
+    AlignWithMargins = True
+    Left = 3
+    Top = 595
+    Width = 1301
+    Height = 19
+    BorderInner = fsNone
+    BorderOuter = fsNone
+    BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
+    BorderWidth = 0
+    TabOrder = 3
+    object RzStatusPane1: TRzStatusPane
+      Left = 0
+      Top = 0
+      Width = 300
+      Height = 19
+      Align = alLeft
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      Caption = ''
+      ExplicitHeight = 25
+    end
+    object RzFieldStatus1: TRzFieldStatus
+      Left = 300
+      Top = 0
+      Width = 300
+      Height = 19
+      Align = alLeft
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      Caption = ''
+      ExplicitHeight = 25
+    end
+    object RzDBStatusPane1: TRzDBStatusPane
+      Left = 600
+      Top = 0
+      Width = 150
+      Height = 19
+      Align = alLeft
+      ParentShowHint = False
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      DataField = 'nombre'
+      DataSource = ds1
+      ExplicitHeight = 25
+    end
+    object RzDBStateStatus1: TRzDBStateStatus
+      Left = 750
+      Top = 0
+      Height = 19
+      Align = alLeft
+      DataSource = ds1
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+      ExplicitLeft = 1307
+      ExplicitHeight = 20
+    end
   end
   object ds1: TDataSource
     DataSet = DataModule1.fdqfacturascompras
@@ -587,11 +649,10 @@ object listfacturascompras: Tlistfacturascompras
     Top = 336
   end
   object fdqproveedores: TFDQuery
-    Active = True
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'SELECT nombre, id_proveedor from proveedores order by nombre')
     Left = 1000
-    Top = 384
+    Top = 448
   end
 end

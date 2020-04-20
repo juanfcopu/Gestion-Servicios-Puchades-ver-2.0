@@ -329,7 +329,7 @@ object FObras: TFObras
       Top = 311
       Width = 1186
       Height = 371
-      ActivePage = lineas
+      ActivePage = certificaciones
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       Enabled = False
@@ -1567,7 +1567,7 @@ object FObras: TFObras
     Left = 776
     Top = 320
     Bitmap = {
-      494C010104000800040110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2323,8 +2323,8 @@ object FObras: TFObras
     UpdateOptions.UpdateMode = upWhereChanged
     AfterApplyUpdate = FDSchemaCertificacionesAfterApplyUpdate
     OnReconcileRow = FDSchemaCertificacionesReconcileRow
-    Left = 723
-    Top = 614
+    Left = 731
+    Top = 590
   end
   object dscertificacion: TDataSource
     DataSet = fdCertificacion
