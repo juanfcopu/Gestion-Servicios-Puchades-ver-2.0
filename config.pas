@@ -48,6 +48,16 @@ type
     btn4: TButton;
     btn5: TButton;
     btn6: TToolButton;
+    lbPathThunderbird: TLabeledEdit;
+    TabSheet1: TTabSheet;
+    GroupBox1: TGroupBox;
+    rDBEdit3: TrDBEdit;
+    rDBEdit4: TrDBEdit;
+    Button1: TButton;
+    Button2: TButton;
+    GroupBox2: TGroupBox;
+    rDBGrid_MS1: TrDBGrid_MS;
+    ds2: TDataSource;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
@@ -63,6 +73,9 @@ type
     procedure ds1StateChange(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure ds2StateChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -99,6 +112,7 @@ SPuchades.Writestring('PATH','PATHUSER',lbPathUSer.Text) ;
     SPuchades.Writestring('PATH','PATHPLANTILLAS',lbPathPlantillas.text);
     SPuchades.WriteString('PATH','PATHDOCPRESUPUESTOS',lbPathPresupuestos.text);
     SPuchades.WriteString('PATH','PATHDOCOBRAS', lbPathObras.text);
+    SPuchades.WriteString('PATH','PATHTHUNDERBIRD', lbPathThunderbird.text);
 
 finally
   SPuchades.Free;
@@ -163,6 +177,16 @@ begin
 DataModule1.rXLSExport1.ExportDBTable(ds1.DataSet);
 end;
 
+procedure Tconfiguracion.Button1Click(Sender: TObject);
+begin
+      if (ds2.DataSet.State in [dsInsert,dsEdit]) then ds2.DataSet.Post;
+end;
+
+procedure Tconfiguracion.Button2Click(Sender: TObject);
+begin
+        if (ds2.DataSet.State in [dsBrowse]) then ds2.DataSet.Insert;
+end;
+
 procedure Tconfiguracion.ds1StateChange(Sender: TObject);
 begin
     if TDataSource(Sender).DataSet.State in [dsInsert, dsEdit] then
@@ -173,6 +197,19 @@ begin
     else begin
           btn4.Enabled:=False;
           btn5.Enabled:=True;
+          end;
+end;
+
+procedure Tconfiguracion.ds2StateChange(Sender: TObject);
+begin
+  if TDataSource(Sender).DataSet.State in [dsInsert, dsEdit] then
+    begin
+    Button1.Enabled:=True ;
+    Button2.Enabled:=False;
+    end
+    else begin
+          Button1.Enabled:=False;
+          button2.Enabled:=True;
           end;
 end;
 
@@ -203,7 +240,7 @@ begin
     lbPathPlantillas.Text:=SPuchades.ReadString('PATH','PATHPLANTILLAS','\Plantillas\Presupuestos.dot');
     lbPathPresupuestos.Text:=SPuchades.ReadString('PATH','PATHDOCPRESUPUESTOS',PathUsuario+'\PRESUPUESTOS');
     lbPathObras.Text:=SPuchades.ReadString('PATH','PATHDOCOBRAS',PathUsuario+'\OBRAS');
-
+    lbPathThunderbird.Text:=SPuchades.ReadString('PATH','PATHTHUNDERBIRD','C:\Program Files (x86)\Mozilla Thunderbird\thunderbird');
 
     lbIVAdefecto.Text:=IntToStr(SPuchades.ReadInteger('IVA','IvaDefecto',10));
      lbedIRPFdefecto.Text:=IntToStr(SPuchades.ReadInteger('IRPF','IRPFDefecto',20));
@@ -227,7 +264,7 @@ end;
 
 procedure Tconfiguracion.pgc1Change(Sender: TObject);
 begin
-//if (TPageControl(Sender).ActivePageIndex=4) then  DataModule1.fdqcuentas.active:=True;
+if (TPageControl(Sender).ActivePageIndex=5) then  Ds2.dataset.active:=True;
 end;
 
 procedure Tconfiguracion.ts2Enter(Sender: TObject);

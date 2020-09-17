@@ -137,7 +137,7 @@ end;
 
 procedure TFClientes.Frame11btnobraClick(Sender: TObject);
 begin
-DataModule1.ConvertirEnObraExecute(Self);
+DataModule1.ConvertirEnObraExecute(fdpresupuestos);
 end;
 
 procedure TFClientes.Frame11Button1Click(Sender: TObject);
@@ -209,7 +209,7 @@ end;
 
 procedure TFClientes.Frame31btncrearfacturaClick(Sender: TObject);
 begin
-DataModule1.ConvertirEnFacturaExecute(Self);
+DataModule1.ConvertirEnFacturaExecute(fdobras);
 end;
 
 procedure TFClientes.Frame31Button1Click(Sender: TObject);

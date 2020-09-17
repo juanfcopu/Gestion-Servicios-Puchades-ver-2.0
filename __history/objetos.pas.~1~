@@ -1,0 +1,22 @@
+unit objetos;
+
+interface
+
+
+type
+  TFacturas = class(TObject);
+    FDCliente: TFDQuery;
+    FDFactura: TFDQuery;
+    FDlineasFact: TFDQuery;
+  private
+    { Private declarations }
+
+
+  public
+    { Public declarations }
+  end;
+
+
+implementation
+
+end.

@@ -16,22 +16,12 @@ Coordinates=236,10,70,51
 [GroupBox4]
 Coordinates=81,197,70,51
 
-[lvadministradores]
-Coordinates=580,10,103,249
-Visible=True
-
 [DataModule1.fdadministradores]
-Coordinates=316,10,171,33
-Visible=False
+Coordinates=497,20,171,33
 
 []
-Coordinates=266,197,73,33
-
-[bndsrcdb1]
 Coordinates=316,10,152,159
-
-[bndngslst1]
-Coordinates=132,80,69,33
+Visible=True
 
 [DataModule1.fdpresupuestos]
 Coordinates=721,1,158,51

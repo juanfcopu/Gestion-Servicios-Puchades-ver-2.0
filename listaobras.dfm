@@ -340,14 +340,14 @@ object listobras: Tlistobras
     Height = 439
     Align = alClient
     DataSource = ds1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgUseTitlePopup, dgAutoPickListWidth]
-    OptionsEx2.ActivateOptionsEx2 = True
+    OnDblClick = rDBGridClientes1DblClick
     OptionsEx2.FixedCell.FixedCols = 1
     OptionsEx2.Editors.Memo = obtContent
     Sorter = DataModule1.rDBGridSorter_FireDac1

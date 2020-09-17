@@ -4,7 +4,7 @@ object insertFacturasCompras: TinsertFacturasCompras
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Insertar Facturas de Compra'
-  ClientHeight = 367
+  ClientHeight = 401
   ClientWidth = 494
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -40,15 +40,14 @@ object insertFacturasCompras: TinsertFacturasCompras
     Left = 3
     Top = 31
     Width = 488
-    Height = 314
+    Height = 348
     DataSource = listfacturascompras.ds1
-    DBGrid = listfacturascompras.rDBGridClientes1
-    FieldsAsLink.Strings = (
-      'nombre=user_defined')
+    DBGrid = listfacturascompras.rdbfacturascompras
     OptionsEx = [goUseGridPickList]
     Fields.Strings = (
       'nombre=Proveedor'
       'ticket=Ticket'
+      'categoriades=Categoria'
       'Nfactura=Factura'
       'fecha=Fecha'
       'importe=Importe'
@@ -64,6 +63,15 @@ object insertFacturasCompras: TinsertFacturasCompras
     SpecFont.Height = -11
     SpecFont.Name = 'Tahoma'
     SpecFont.Style = []
+    PickLists.Strings = (
+      '[formapago]'
+      'CONTADO'
+      'DOMICILIADO'
+      'CHEQUE'
+      ''
+      '[tasaIVA]'
+      '10'
+      '21')
     Align = alClient
     DefaultColWidth = 175
     DefaultRowHeight = 30
@@ -81,7 +89,7 @@ object insertFacturasCompras: TinsertFacturasCompras
   end
   object RzStatusBar1: TRzStatusBar
     Left = 0
-    Top = 348
+    Top = 382
     Width = 494
     Height = 19
     SimpleStatus = True

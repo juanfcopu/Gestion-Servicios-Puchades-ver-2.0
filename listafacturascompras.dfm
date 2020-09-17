@@ -22,15 +22,15 @@ object listfacturascompras: Tlistfacturascompras
     Left = 0
     Top = 43
     Width = 1307
-    Height = 286
+    Height = 318
     Align = alTop
     TabOrder = 1
     object GroupBox2: TGroupBox
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 341
-      Height = 278
+      Width = 317
+      Height = 310
       Align = alLeft
       Caption = 'Buscar'
       Font.Charset = DEFAULT_CHARSET
@@ -41,9 +41,9 @@ object listfacturascompras: Tlistfacturascompras
       ParentFont = False
       TabOrder = 1
       object beBuscar: TButtonedEdit
-        Left = 71
+        Left = 80
         Top = 28
-        Width = 258
+        Width = 228
         Height = 21
         Align = alCustom
         CharCase = ecUpperCase
@@ -53,9 +53,9 @@ object listfacturascompras: Tlistfacturascompras
       object rbcliente: TRadioButton
         Left = 16
         Top = 24
-        Width = 49
+        Width = 58
         Height = 25
-        Caption = 'Cliente'
+        Caption = 'Proveedor'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -81,10 +81,10 @@ object listfacturascompras: Tlistfacturascompras
     end
     object GroupBox4: TGroupBox
       AlignWithMargins = True
-      Left = 575
+      Left = 718
       Top = 4
       Width = 258
-      Height = 278
+      Height = 310
       Align = alLeft
       Caption = 'Filtrar Fecha Facturas'
       Font.Charset = DEFAULT_CHARSET
@@ -162,10 +162,10 @@ object listfacturascompras: Tlistfacturascompras
     end
     object GroupBox1: TGroupBox
       AlignWithMargins = True
-      Left = 351
+      Left = 494
       Top = 4
       Width = 218
-      Height = 278
+      Height = 310
       Align = alLeft
       Caption = 'Ver'
       Font.Charset = DEFAULT_CHARSET
@@ -176,6 +176,7 @@ object listfacturascompras: Tlistfacturascompras
       ParentFont = False
       TabOrder = 2
       object rb1Trimestres: TRadioButton
+        Tag = 1
         Left = 137
         Top = 8
         Width = 113
@@ -188,9 +189,10 @@ object listfacturascompras: Tlistfacturascompras
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = rb1TrimestresClick
+        OnClick = rb2trimestreClick
       end
       object rb2trimestre: TRadioButton
+        Tag = 2
         Left = 137
         Top = 26
         Width = 113
@@ -218,9 +220,10 @@ object listfacturascompras: Tlistfacturascompras
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = rbTodasClick
+        OnClick = rb2trimestreClick
       end
       object rb3trimestre: TRadioButton
+        Tag = 3
         Left = 137
         Top = 44
         Width = 113
@@ -233,9 +236,10 @@ object listfacturascompras: Tlistfacturascompras
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = rb3trimestreClick
+        OnClick = rb2trimestreClick
       end
       object rb4trimestre: TRadioButton
+        Tag = 4
         Left = 137
         Top = 63
         Width = 113
@@ -248,7 +252,7 @@ object listfacturascompras: Tlistfacturascompras
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = rb4trimestreClick
+        OnClick = rb2trimestreClick
       end
       object RzComboBox1: TRzComboBox
         Left = 3
@@ -260,10 +264,10 @@ object listfacturascompras: Tlistfacturascompras
       end
     end
     object rGroupBox1: TrGroupBox
-      Left = 836
+      Left = 979
       Top = 1
       Width = 253
-      Height = 284
+      Height = 316
       Align = alLeft
       Caption = 'Nueva'
       Font.Charset = DEFAULT_CHARSET
@@ -280,18 +284,17 @@ object listfacturascompras: Tlistfacturascompras
         Left = 2
         Top = 17
         Width = 249
-        Height = 265
+        Height = 297
         DataSource = ds1
-        DBGrid = rDBGridClientes1
-        FieldsAsLink.Strings = (
-          'nombre=user_defined')
+        DBGrid = rdbfacturascompras
         OptionsEx = [goNumberRight, goUseGridPickList]
         Fields.Strings = (
           'nombre=Proveedor'
           'ticket=Ticket'
-          'Nfactura=Factura'
+          'NFactura=NFactura'
+          'categoriades=Categoria'
           'fecha=Fecha'
-          'importe=Importe'
+          'Importe=Importe'
           'tasaIVA=Tasa I.V.A'
           'IVA=I.V.A'
           'total=Total'
@@ -305,6 +308,15 @@ object listfacturascompras: Tlistfacturascompras
         SpecFont.Height = -11
         SpecFont.Name = 'Tahoma'
         SpecFont.Style = []
+        PickLists.Strings = (
+          '[tasaIVA]'
+          '10'
+          '21'
+          ''
+          '[formapago]'
+          'CONTADO'
+          'DOMICILIADO'
+          'CHEQUE')
         Align = alClient
         DefaultColWidth = 90
         DefaultRowHeight = 25
@@ -321,6 +333,54 @@ object listfacturascompras: Tlistfacturascompras
         TabOrder = 0
         OnClick = rDBRecView1Click
         OnKeyPress = rDBRecView1KeyPress
+      end
+    end
+    object GroupBox3: TGroupBox
+      AlignWithMargins = True
+      Left = 327
+      Top = 4
+      Width = 161
+      Height = 310
+      Align = alLeft
+      Caption = 'Agrupar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      object cbAgruparAdmin: TCheckBox
+        AlignWithMargins = True
+        Left = 5
+        Top = 18
+        Width = 151
+        Height = 17
+        Align = alTop
+        Caption = 'Filtrar '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = cbAgruparAdminClick
+      end
+      object chkCamposBusqueda: TCheckBox
+        Left = 5
+        Top = 41
+        Width = 132
+        Height = 17
+        Caption = 'Buscar por campos'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = chkCamposBusquedaClick
       end
     end
   end
@@ -344,25 +404,25 @@ object listfacturascompras: Tlistfacturascompras
     object btn3: TToolButton
       Left = 42
       Top = 0
+      Hint = 'A'#241'adir factura compras'
       Caption = 'btn3'
-      ImageIndex = 40
+      ImageIndex = 60
+      ParentShowHint = False
+      ShowHint = True
       OnClick = btn3Click
     end
-    object btn4: TToolButton
+    object btn5: TToolButton
       Left = 84
       Top = 0
-      Caption = 'btn4'
-      ImageIndex = 41
-    end
-    object btn5: TToolButton
-      Left = 126
-      Top = 0
+      Hint = 'Borrar factura compras'
       Caption = 'btn5'
-      ImageIndex = 42
+      ImageIndex = 61
+      ParentShowHint = False
+      ShowHint = True
       OnClick = btn5Click
     end
     object btn6: TToolButton
-      Left = 168
+      Left = 126
       Top = 0
       Width = 8
       Caption = 'btn6'
@@ -370,220 +430,25 @@ object listfacturascompras: Tlistfacturascompras
       Style = tbsSeparator
     end
     object btn7: TToolButton
-      Left = 176
+      Left = 134
       Top = 0
+      Hint = 'Exportar Excel'
       Caption = 'btn7'
       ImageIndex = 43
+      ParentShowHint = False
+      ShowHint = True
       OnClick = btn7Click
     end
-  end
-  object rDBGridClientes1: TrDBGrid_MS
-    Left = 0
-    Top = 329
-    Width = 1307
-    Height = 263
-    Align = alClient
-    DataSource = ds1
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgOnlyPickListValues, dgDragCell, dgUseTitlePopup, dgAutoPickListWidth]
-    OptionsEx2.ActivateOptionsEx2 = True
-    OptionsEx2.Editors.Memo = obtContent
-    OptionsEx2.Editors.OnlyPickListValues = True
-    OptionsEx2.Appearance.DragCell = True
-    SortDesc = True
-    Sorter = DataModule1.rDBGridSorter_FireDac1
-    ColumnWidth = cwAutoWidth
-    TitleLines = 2
-    RowLines = 2
-    RowVerticalAlign = taVerticalCenter
-    FixedColText.FixedColWidth = 50
-    FixedColText.ShowCheckbox = True
-    FooterRow.FooterVisible = True
-    FooterRow.ParentFont = False
-    FooterRow.Font.Charset = DEFAULT_CHARSET
-    FooterRow.Font.Color = clHighlight
-    FooterRow.Font.Height = -15
-    FooterRow.Font.Name = 'Tahoma'
-    FooterRow.Font.Style = [fsBold]
-    FooterRow.Color = clWhite
-    FooterRow.FieldFooterDefs.Strings = (
-      'importe=%SUM '#8364';'
-      'IVA=%SUM '#8364';Red;'
-      'total=%SUM '#8364';')
-    FieldsAsLink.Strings = (
-      'nombre=user_defined')
-    FieldsAutoPickList.Strings = (
-      'tasaIVA'
-      'formapago')
-    LookupListItemIncreaseWidth = 20
-    OnLoadPickList = rDBGridClientes1LoadPickList
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'nombre'
-        Title.Caption = 'Proveedor'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 262
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'ticket'
-        Title.Alignment = taCenter
-        Title.Caption = 'Ticket'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 89
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        ButtonStyle = cbsEllipsis
-        Expanded = False
-        FieldName = 'Nfactura'
-        Title.Alignment = taCenter
-        Title.Caption = 'Factura'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 90
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        ButtonStyle = cbsEllipsis
-        Expanded = False
-        FieldName = 'fecha'
-        Title.Alignment = taCenter
-        Title.Caption = 'Fecha'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 103
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'importe'
-        Title.Alignment = taCenter
-        Title.Caption = 'Importe'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 100
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'tasaIVA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Tasa I.V.A'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 102
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'IVA'
-        Title.Alignment = taCenter
-        Title.Caption = 'I.V.A'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 73
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'total'
-        Title.Alignment = taCenter
-        Title.Caption = 'Total'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 108
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        ButtonStyle = cbsEllipsis
-        Expanded = False
-        FieldName = 'formapago'
-        Title.Alignment = taCenter
-        Title.Caption = 'Forma Pago'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 103
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        ButtonStyle = cbsEllipsis
-        Expanded = False
-        FieldName = 'vencimiento'
-        Title.Alignment = taCenter
-        Title.Caption = 'Vencimiento'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 113
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'id_asiento'
-        Title.Alignment = taCenter
-        Title.Caption = 'Asiento'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 70
-        Visible = True
-      end>
+    object btnGenAsiento: TToolButton
+      Left = 176
+      Top = 0
+      Hint = 'Generar Asiento'
+      Caption = 'btnGenAsiento'
+      ImageIndex = 64
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnGenAsientoClick
+    end
   end
   object RzStatusBar1: TRzStatusBar
     AlignWithMargins = True
@@ -595,7 +460,7 @@ object listfacturascompras: Tlistfacturascompras
     BorderOuter = fsNone
     BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
     BorderWidth = 0
-    TabOrder = 3
+    TabOrder = 2
     object RzStatusPane1: TRzStatusPane
       Left = 0
       Top = 0
@@ -628,7 +493,6 @@ object listfacturascompras: Tlistfacturascompras
       BlinkIntervalOff = 100
       BlinkIntervalOn = 100
       DataField = 'nombre'
-      DataSource = ds1
       ExplicitHeight = 25
     end
     object RzDBStateStatus1: TRzDBStateStatus
@@ -636,23 +500,226 @@ object listfacturascompras: Tlistfacturascompras
       Top = 0
       Height = 19
       Align = alLeft
-      DataSource = ds1
       BlinkIntervalOff = 100
       BlinkIntervalOn = 100
       ExplicitLeft = 1307
       ExplicitHeight = 20
     end
   end
-  object ds1: TDataSource
-    DataSet = DataModule1.fdqfacturascompras
-    Left = 1104
-    Top = 336
+  object rdbfacturascompras: TrDBGrid_MS
+    AlignWithMargins = True
+    Left = 3
+    Top = 364
+    Width = 1301
+    Height = 225
+    Align = alClient
+    DataSource = ds1
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Sorter = DataModule1.rDBGridSorter_FireDac1
+    ColumnWidth = cwAutoWidth
+    TitleLines = 2
+    RowLines = 2
+    FooterRow.FooterVisible = True
+    FooterRow.FieldFooterDefs.Strings = (
+      'total=%SUM '#8364';10;'
+      'Importe=%SUM '#8364';10;'
+      'NFactura=%COUNTALL facturas;10;'
+      'IVA=%SUM '#8364';10;')
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'nombre'
+        Title.Caption = 'Proveedor'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 144
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ticket'
+        Title.Alignment = taCenter
+        Title.Caption = 'Ticket'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 58
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NFactura'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 149
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'categoriades'
+        Title.Alignment = taCenter
+        Title.Caption = 'Categoria'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 144
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        ButtonStyle = cbsEllipsis
+        Expanded = False
+        FieldName = 'fecha'
+        Title.Alignment = taCenter
+        Title.Caption = 'Fecha'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 130
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Importe'
+        Title.Alignment = taCenter
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 83
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'tasaIVA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Tasa I.V.A'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 81
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IVA'
+        Title.Alignment = taCenter
+        Title.Caption = 'I.V.A'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 74
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'total'
+        Title.Alignment = taCenter
+        Title.Caption = 'Total'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 79
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'formapago'
+        Title.Alignment = taCenter
+        Title.Caption = 'Forma Pago'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 74
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        ButtonStyle = cbsEllipsis
+        Expanded = False
+        FieldName = 'vencimiento'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vencimiento'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 74
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'id_asiento'
+        Title.Alignment = taCenter
+        Title.Caption = 'Asiento'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 56
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        ButtonStyle = cbsEllipsis
+        Expanded = False
+        FieldName = 'fechacontable'
+        Title.Alignment = taCenter
+        Title.Caption = 'Fecha Contable'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 98
+        Visible = True
+      end>
   end
   object fdqproveedores: TFDQuery
+    Active = True
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'SELECT nombre, id_proveedor from proveedores order by nombre')
     Left = 1000
     Top = 448
+  end
+  object ds1: TDataSource
+    DataSet = DataModule1.fdfactcompras
+    Left = 280
+    Top = 472
   end
 end

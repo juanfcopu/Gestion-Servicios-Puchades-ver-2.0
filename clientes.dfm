@@ -33,7 +33,7 @@ object FClientes: TFClientes
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
     object GridPanel2: TGridPanel
       Left = 2
       Top = 15

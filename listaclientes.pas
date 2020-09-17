@@ -33,6 +33,9 @@ type
     chkCamposBusqueda: TCheckBox;
     lbed1: TLabeledEdit;
     btn7: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure ControlBar1DockOver(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer; State: TDragState; var Accept: Boolean);
@@ -49,7 +52,10 @@ type
     procedure chkCamposBusquedaClick(Sender: TObject);
     procedure btn7Click(Sender: TObject);
     procedure lbed1Change(Sender: TObject);
-
+    procedure ToolButton2Click(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
+    procedure ToolButton4Click(Sender: TObject);
+    procedure rDBGridClientes2DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -80,7 +86,7 @@ end;
 
 procedure Tlistclientes.btn4Click(Sender: TObject);
 begin
-DataModule1.VerClienteExecute(ds1.dataset);
+DataModule1.VerDatosClienteExecute(ds1.DataSet);
 end;
 
 procedure Tlistclientes.btn6Click(Sender: TObject);
@@ -118,7 +124,11 @@ end;
 
 procedure Tlistclientes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-//ds1.DataSet.Active:=False;
+
+
+
+//ds1.dataset.Active:=False;
+
 Action:=caFree;
 end;
 
@@ -149,18 +159,43 @@ rDBGridClientes1.DataSource.DataSet.Filter:='nombre LIKE ''%'+TLabeledEdit(Sende
 rDBGridClientes1.DataSource.DataSet.Filtered:=True;
 rDBGridClientes1.DataSource.DataSet.EnableControls;
 
+rDBGridClientes1.RecalculateSummaryResults(true);
 
+ if Length(TLabeledEdit(Sender).text)<1 then rDBGridClientes1.DataSource.DataSet.Filtered:=False;
 
 end;
 
 procedure Tlistclientes.rDBGridClientes1DblClick(Sender: TObject);
 begin
-    DataModule1.VerClienteExecute(ds1.dataset);
+    DataModule1.VerDatosClienteExecute(ds1.dataset);
 end;
+
+procedure Tlistclientes.rDBGridClientes2DblClick(Sender: TObject);
+begin
+    Close;
+end;
+
+
+
 
 procedure Tlistclientes.ToolButton1Click(Sender: TObject);
 begin
 DataModule1.editarclienteExecute(ds1.dataset);
+end;
+
+procedure Tlistclientes.ToolButton2Click(Sender: TObject);
+begin
+   DataModule1.insertarpresupuestoExecute(ds1.DataSet);
+end;
+
+procedure Tlistclientes.ToolButton3Click(Sender: TObject);
+begin
+DataModule1.insertarobraExecute(ds1.DataSet);
+end;
+
+procedure Tlistclientes.ToolButton4Click(Sender: TObject);
+begin
+DataModule1.insertarFacturaExecute(ds1.DataSet);
 end;
 
 end.

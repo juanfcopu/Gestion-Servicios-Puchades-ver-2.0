@@ -15,7 +15,7 @@ uses
   Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,System.Win.COMObj,
   Vcl.DBGrids, Vcl.Bind.Navigator, Data.Bind.Controls, Vcl.StdActns, Vcl.ImgList,
   System.ImageList, ShellCtrls, rDBGrid, rDBGrid_MS, RzPanel, RzDBNav, Vcl.Mask,
-  Vcl.DBCtrls, rDBComponents;
+  Vcl.DBCtrls, rDBComponents, RzListVw, RzShellCtrls;
 
 
 type
@@ -32,19 +32,8 @@ type
     fotografias: TTabSheet;
     fdCliente: TFDQuery;
     fdpresupuesto: TFDQuery;
-    fdlineas: TFDQuery;
-    fdlineasId_Partida: TIntegerField;
-    fdlineasDescripcion: TStringField;
-    fdlineasTotal: TFloatField;
-    fdlineasAprovado: TBooleanField;
-    fdlineasEjecutado: TBooleanField;
-    ShellListView1: TShellListView;
-    ShellListView2: TShellListView;
+    fdlineas1: TFDQuery;
     ControlBar2: TControlBar;
-    LabeledEdit10: TLabeledEdit;
-    LabeledEdit9: TLabeledEdit;
-    LabeledEdit5: TLabeledEdit;
-    LabeledEdit11: TLabeledEdit;
     dialruta: TOpenDialog;
     spaprobado: TShape;
     spNoaprobado: TShape;
@@ -71,18 +60,11 @@ type
     cerrarpres: TAction;
     ToolButton10: TToolButton;
     carpetadocumentacion: TAction;
-    LabeledEdit12: TLabeledEdit;
-    LabeledEdit13: TLabeledEdit;
     Label7: TLabel;
     dspresupuesto: TDataSource;
     BTBuscarCliente: TButton;
     btpath: TButton;
-    fdlineaspresupuestos_id_presupuesto: TIntegerField;
-    fdlineaspresupuestos_grupo: TIntegerField;
-    LabeledEdit14: TLabeledEdit;
-    LabeledEdit15: TLabeledEdit;
     Label9: TLabel;
-    Shape2: TShape;
     ToolBar2: TToolBar;
     ImageList1: TImageList;
     ActionManager2: TActionManager;
@@ -97,7 +79,6 @@ type
     AprobarTodos: TAction;
     Label12: TLabel;
     GroupBox3: TGroupBox;
-    Memo1: TMemo;
     GroupBox5: TGroupBox;
     Shape1: TShape;
     Guardar: TButton;
@@ -110,23 +91,17 @@ type
     fdClientecif: TStringField;
     fdClientefamilia: TIntegerField;
     crearObra: TAction;
-    fdlineasobra: TIntegerField;
     dslineas: TDataSource;
     RzDBNavigator1: TRzDBNavigator;
     rDBCodigo: TrDBEdit;
     dscliente: TDataSource;
     rDBCIF: TrDBEdit;
     rDBNombre: TrDBEdit;
-    rDBTotalAprobado: TrDBEdit;
-    rDBPartidasAprobadas: TrDBEdit;
     rDBNumero: TrDBEdit;
-    rDBTotalPresupuesto: TrDBEdit;
-    rDBPartidas: TrDBEdit;
     rDBRutaPath: TrDBMemo;
     rDBRutaDescripcion: TrDBMemo;
     rDBDateTimePicker1: TrDBDateTimePicker;
     btn1: TToolButton;
-    fdlineasfecha_aprobado: TDateField;
     ts1: TTabSheet;
     ctrlbr1: TControlBar;
     tlb1: TToolBar;
@@ -163,23 +138,58 @@ type
     fdqryContactosPresupuestotelefono3: TIntegerField;
     fdqryContactosPresupuestomail: TStringField;
     dsContactosPresupuesto: TDataSource;
+    fdlineas1Id_Partida: TIntegerField;
+    fdlineas1Descripcion: TStringField;
+    fdlineas1Total: TFloatField;
+    fdlineas1Aprovado: TBooleanField;
+    fdlineas1Ejecutado: TBooleanField;
+    fdlineas1presupuestos_id_presupuesto: TIntegerField;
+    fdlineas1presupuestos_grupo: TIntegerField;
+    fdlineas1obra: TIntegerField;
+    fdlineas1fecha_aprobado: TDateField;
+    FDSchemaAdapter1: TFDSchemaAdapter;
+    Fdlineas: TFDQuery;
+    FdlineasId_Partida: TIntegerField;
+    FdlineasDescripcion: TStringField;
+    FdlineasTotal: TFloatField;
+    FdlineasAprovado: TBooleanField;
+    FdlineasEjecutado: TBooleanField;
+    Fdlineaspresupuestos_id_presupuesto: TIntegerField;
+    Fdlineaspresupuestos_grupo: TIntegerField;
+    Fdlineasobra: TIntegerField;
+    Fdlineasfecha_aprobado: TDateField;
+    RzShellList1: TRzShellList;
+    RzShellList2: TRzShellList;
+    rDBGrid2: TrDBGrid;
+    fdqryContactosPresupuestogrupo: TIntegerField;
+    Fdlineasdiasejecucion: TIntegerField;
+    rDBEdit1: TrDBEdit;
+    GroupBox6: TGroupBox;
+    rDBMemo2: TrDBMemo;
+    rdbtrabajAsig: TrDBGrid_MS;
+    fdtrabajAsignados: TFDQuery;
+    dstrabajAsignados: TDataSource;
+    fdtrabajadores: TFDQuery;
+    fdtrabajAsignadosid_presupuesto: TIntegerField;
+    fdtrabajAsignadosgrupo: TIntegerField;
+    fdtrabajAsignadosid_trabajador: TIntegerField;
+    fdtrabajAsignadosnombre: TStringField;
+    ToolBar4: TToolBar;
+    RzDBNavigator3: TRzDBNavigator;
 
 
 
     procedure GuardarClick(Sender: TObject);
     procedure AceptarClick(Sender: TObject);
     procedure cerrarClick(Sender: TObject);
-    procedure fdlineasAfterEdit(DataSet: TDataSet);
-    procedure fdlineasAfterInsert(DataSet: TDataSet);
+    procedure fdlineas1AfterEdit(DataSet: TDataSet);
+    procedure fdlineas1AfterInsert(DataSet: TDataSet);
     procedure DateTimePicker1Change(Sender: TObject);
     procedure fdpresupuestoAfterEdit(DataSet: TDataSet);
     procedure fdpresupuestoAfterInsert(DataSet: TDataSet);
     procedure fdlineasAfterApplyUpdates(DataSet: TFDDataSet; AErrors: Integer);
     procedure fdpresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
       AErrors: Integer);
-
-    procedure LabeledEdit10Change(Sender: TObject);
-    procedure LabeledEdit5Change(Sender: TObject);
     procedure abrircarpetaExecute(Sender: TObject);
     procedure abrirpresupuestoExecute(Sender: TObject);
     procedure guardarpresupuestoExecute(Sender: TObject);
@@ -187,11 +197,11 @@ type
     procedure mailExecute(Sender: TObject);
     procedure cerrarpresExecute(Sender: TObject);
     procedure carpetadocumentacionExecute(Sender: TObject);
-    procedure fdlineasAfterDelete(DataSet: TDataSet);
+    procedure fdlineas1AfterDelete(DataSet: TDataSet);
     procedure BTBuscarClienteClick(Sender: TObject);
     procedure btpathClick(Sender: TObject);
     procedure fdClienteAfterOpen(DataSet: TDataSet);
-    procedure fdlineasAfterPost(DataSet: TDataSet);
+    procedure fdlineas1AfterPost(DataSet: TDataSet);
     procedure LinkGridToDataSourceBindSourceDB3AssigningValue(Sender: TObject;
       AssignValueRec: TBindingAssignValueRec; var Value: TValue;
       var Handled: Boolean);
@@ -211,11 +221,9 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure crearObraUpdate(Sender: TObject);
     procedure crearObraExecute(Sender: TObject);
-    procedure rDBGrid_MS1LoadPickList(Sender: TObject; DS: TDataSet;
-      FieldName: string; PickList: TStrings);
     procedure btn1Click(Sender: TObject);
     procedure fdlineasAprovadoChange(Sender: TField);
-    procedure fdlineasAfterOpen(DataSet: TDataSet);
+    procedure fdlineas1AfterOpen(DataSet: TDataSet);
     procedure PageControl1Change(Sender: TObject);
     procedure fdqryContactosPresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
       AErrors: Integer);
@@ -224,6 +232,11 @@ type
     procedure fdqryContactosPresupuestoAfterDelete(DataSet: TDataSet);
     procedure rDBGridClientesDBGridLineasLoadPickList(Sender: TObject;
       DS: TDataSet; FieldName: string; PickList: TStrings);
+    procedure FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);
+    procedure FdlineasBeforePost(DataSet: TDataSet);
+    procedure dtmfldFechaPresupuestoChange(Sender: TField);
+    procedure mfldPathChange(Sender: TField);
+
   private
     { Private declarations }
      lst:TStringlist;
@@ -302,9 +315,14 @@ begin
    if FileExists(fichero) then
   begin
   try
-    MSWord:=GetActiveOleOBject('Word.Application');
-    except
+
+
       MsWord:=CreateOleObject('Word.Application');
+   except
+         on Exception do  MessageBox(Handle,
+           'No se puede abrir la aplicación Microsoft Word.',
+           'Error', MB_OK + MB_ICONSTOP);
+
 
     end;
      MSWord.Documents.Open(fichero);
@@ -335,9 +353,9 @@ end;
 procedure TFPresupuestos.crearObraExecute(Sender: TObject);
 var SelLinPres:TFLineasPresupuestoObra;
 begin
-    SelLinPres:=TFLineasPresupuestoObra.Create(Self);
+    SelLinPres:=TFLineasPresupuestoObra.Create(fdpresupuesto);
     SelLinPres.ShowModal;
-    SelLinPres.Close;
+
 
 
 end;
@@ -399,6 +417,7 @@ begin
 
     lclientes:=Tlistclientes.Create(fdclen);
     lclientes.DragMode:=dmManual;
+    lclientes.rDBGridClientes1.OnDblClick:=lclientes.rDBGridClientes2DblClick;
     lclientes.ShowModal;
 
     fdcliente.Close;
@@ -408,11 +427,11 @@ begin
 
     if fdpresupuesto.State in [dsInsert,dsEdit] then
     begin
-         fdpresupuesto.FieldByName('Id_clientePrev').AsInteger:=FDCliente.FieldByName('IdContactos').AsInteger
+         fdpresupuesto.FieldByName('Id_clientePrev').AsInteger:=FDCliente.FieldByName('idContactos').AsInteger
     end
     else begin
               FDpresupuesto.Edit;
-              FDpresupuesto.FieldByName('Id_clientePrev').AsInteger:=FDCliente.FieldByName('IdContactos').AsInteger;
+              FDpresupuesto.FieldByName('Id_clientePrev').AsInteger:=FDCliente.FieldByName('idContactos').AsInteger;
               FDpresupuesto.Post;
          end;
 
@@ -480,11 +499,11 @@ begin
          if DirectoryExists(ruta) then
          begin
           spcarpetas.Brush.Color:=cllime;
-          ShellListView1.Enabled:=True;
-          ShellListView2.Enabled:=True;
+          rzShellList1.Enabled:=True;
+          rzShellList2.Enabled:=True;
 
-          ShellListView1.Root:=ruta+'\Documentacion';
-          ShellListView2.Root:=ruta+'\Fotos';
+          rzShellList1.Folder.PathName:=ruta+'\Documentacion';
+          rzShellList2.Folder.PathName:=ruta+'\Fotos';
           showmessage('El directorio se ha creado con exito.');
 
          end
@@ -574,6 +593,11 @@ if fdpresupuesto.State in [dsbrowse] then
      end;
 end;
 
+procedure TFPresupuestos.dtmfldFechaPresupuestoChange(Sender: TField);
+begin
+fdpresupuestogrupo.asinteger:=YearOf(dtmfldFechaPresupuesto.AsDateTime);
+end;
+
 procedure TFPresupuestos.fdClienteAfterOpen(DataSet: TDataSet);
 
 begin
@@ -606,7 +630,7 @@ begin
 
 end;
 
-procedure TFPresupuestos.fdlineasAfterDelete(DataSet: TDataSet);
+procedure TFPresupuestos.fdlineas1AfterDelete(DataSet: TDataSet);
 var i:integer; nl:integer;
 begin
 
@@ -615,11 +639,16 @@ begin
 
 
      existelineasaprobados(dataset,nl);
+    if not (fdpresupuesto.State in [dsInsert,dsEdit]) then fdpresupuesto.Edit;
+
       fdpresupuesto.FieldByName('partidasAprobadas').asinteger:=nl;
 
-     if nl>0 then fdpresupuesto.FieldByName('Aprovado').AsBoolean:=true
+     if nl>0 then   fdpresupuesto.FieldByName('Aprovado').AsBoolean:=true
+
      else
           fdpresupuesto.FieldByName('Aprovado').AsBoolean:=false;
+
+        fdpresupuesto.Post;
 
       luces(fdpresupuesto.FieldByName('Aprovado').AsBoolean);
 
@@ -640,9 +669,10 @@ end;
 
 
 
-procedure TFPresupuestos.fdlineasAfterEdit(DataSet: TDataSet);
+procedure TFPresupuestos.fdlineas1AfterEdit(DataSet: TDataSet);
 begin
 
+  
      guardarpresupuesto.Enabled:=True;
      Guardar.Enabled:=true;
      shape1.Brush.Color:=cllime;
@@ -651,15 +681,16 @@ begin
 
 end;
 
-procedure TFPresupuestos.fdlineasAfterInsert(DataSet: TDataSet);
+procedure TFPresupuestos.fdlineas1AfterInsert(DataSet: TDataSet);
 begin
 
-   DataSet.FieldByName('presupuestos_Id_Presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
-   DataSet.FieldByName('presupuestos_grupo').asinteger:= YearOf(fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime);
+ //  DataSet.FieldByName('presupuestos_Id_Presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
+  // DataSet.FieldByName('presupuestos_grupo').asinteger:= YearOf(fdpresupuesto.FieldByName('FechaPresupuesto').AsDateTime);
    DataSet.FieldByName('Id_partida').AsInteger:=DataSet.RecordCount+1;
    DataSet.FieldByName('Aprovado').AsBoolean:=false;
    DataSet.FieldByName('Ejecutado').asboolean:=false;
    DataSet.FieldByName('Total').AsFloat:=0;
+   DataSet.FieldByName('diasejecucion').AsInteger:=1;
 
 
      guardarpresupuesto.Enabled:=True;
@@ -667,12 +698,12 @@ begin
      shape1.Brush.Color:=cllime;
 end;
 
-procedure TFPresupuestos.fdlineasAfterOpen(DataSet: TDataSet);
+procedure TFPresupuestos.fdlineas1AfterOpen(DataSet: TDataSet);
 begin
 rDBGridClientesDBGridLineas.RecalculateSummaryResults(True);
 end;
 
-procedure TFPresupuestos.fdlineasAfterPost(DataSet: TDataSet);
+procedure TFPresupuestos.fdlineas1AfterPost(DataSet: TDataSet);
  var nl:integer;
 begin
 
@@ -704,6 +735,12 @@ fdlineasfecha_aprobado.clear;
 
 end;
 
+procedure TFPresupuestos.FdlineasBeforePost(DataSet: TDataSet);
+begin
+//if fdpresupuesto.State in [dsInsert, dsEdit] then fdpresupuesto.Post;
+
+end;
+
 procedure TFPresupuestos.fdpresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
   AErrors: Integer);
   var ruta:string; existe:boolean;  fichero:string;
@@ -726,10 +763,12 @@ if AErrors = 0 then
                  if DirectoryExists(ruta) then
                  begin
                       spcarpetas.brush.color:=cllime;
-                      ShellListView1.Visible:=true;
-                      ShellListView2.Visible:=true;
-                      ShellListView1.Root:=ruta+'\Documentacion';
-                      ShellListView2.Root:=ruta+'\Fotos';
+                     RzShellList1.Visible:=true;
+                      RzShellList2.Visible:=true;
+                      RzShellList1.folder.PathName:=ruta+'\Documentacion';
+                      //RzShellList2..Root:=ruta+'\Fotos'; }
+                      RzShellList2.folder.PathName:=ruta+'\Fotos';
+
                  end;
             end
             else  begin
@@ -791,33 +830,25 @@ procedure TFPresupuestos.GuardarClick(Sender: TObject);
 var         fd:TFDQuery;
 begin
 
-if fdpresupuesto.state in [dsInsert] then
+if fdpresupuesto.fieldbyname('id_clientePrev').asinteger = 0  then
+begin
+  MessageBox(Handle, 'No se ha seleccionado ningún cliente.', 'Error', MB_OK +  MB_ICONSTOP);
+  exit;
+
+end;
+
+
+if  fdpresupuesto.FieldByName('id_presupuesto').AsInteger=-1 then
 begin
   fd:=TFDQuery.Create(Self);
+  fdpresupuesto.edit;
   fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=DataModule1.ObtenerNPresupuesto(fd);
   fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
   fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('Nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
 
   if Length(fdpresupuesto.FieldByName('descripcion').asstring)=0 then fdpresupuesto.FieldByName('descripcion').asstring:='descripción';
+    self.Caption:='P. '+fdpresupuesto.FieldByName('id_Presupuesto').AsString+ ' '+(fdcliente).FieldByName('nombre').Asstring;
 
-
-  fdlineas.First ;
-  while not fdlineas.eof do
-  begin
-      fdlineas.edit;
-      fdlineas.FieldByName('presupuestos_id_presupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
-      fdlineas.FieldByName('presupuestos_grupo').asinteger:=yearof(date);
-      fdlineas.post;
-      fdlineas.next;
-  end;
-
-end;
-
-
-
-if (fdlineas.state in [dsEdit,dsInsert]) then
- begin
-   fdlineas.post;
  end;
 
 
@@ -828,29 +859,29 @@ if (fdpresupuesto.state in [dsInsert, dsEdit]) then
  end;
 
 
-
- if fdpresupuesto.UpdatesPending then
+if (fdlineas.state in [dsEdit,dsInsert]) then
  begin
-      fdpresupuesto.ApplyUpdates(1);
-
+   fdlineas.post;
  end;
 
- if fdlineas.UpdatesPending then
-    begin
-         fdlineas.ApplyUpdates(1);
+ if (fdtrabajAsignados.state in [dsEdit,dsInsert]) then
+ begin
+   fdtrabajAsignados.post;
+ end;
 
-    end;
+
 
     if (fdqryContactosPresupuesto.state in [dsEdit,dsInsert]) then
  begin
    fdqryContactosPresupuesto.post;
  end;
 
- if fdqryContactosPresupuesto.UpdatesPending then
-    begin
-    fdqryContactosPresupuesto.ApplyUpdates(1);
 
-    end;
+ if FDSchemaAdapter1.UpdatesPending then
+FDSchemaAdapter1.ApplyUpdates(1);
+
+
+
 
 end;
 
@@ -892,38 +923,6 @@ begin
 GuardarClick(Sender);
 end;
 
-procedure TFPresupuestos.LabeledEdit10Change(Sender: TObject);
-begin
-     if fdCliente.Active then
-     begin
-          labeledEdit12.Text:= floattostr((DataModule1.IVA(fdCliente.FieldByName('familia').Asinteger)-1)* fdpresupuesto.FieldByName('TotalAprobado').Asfloat)+' €';
-          labeledEdit15.Text:= floattostr((DataModule1.IVA(fdCliente.FieldByName('familia').Asinteger)-1)*100)+' %';
-          labeledEdit9.Text:= floattostr(DataModule1.IVA(fdCliente.FieldByName('familia').Asinteger)* fdpresupuesto.FieldByName('TotalAprobado').Asfloat);
-     end
-     else
-     begin
-          labeledEdit12.Text:= floattostr((IVADEFECTO-1)* fdpresupuesto.FieldByName('TotalAprobado').Asfloat)+' €';
-          labeledEdit15.Text:= floattostr((IVADEFECTO - 1)*100)+' %';
-          labeledEdit9.Text:= floattostr(IVADEFECTO * fdpresupuesto.FieldByName('TotalAprobado').Asfloat);
-     end;
-end;
-
-procedure TFPresupuestos.LabeledEdit5Change(Sender: TObject);
-begin
-     if fdCliente.Active then
-     begin
-     labeledEdit14.Text:= floattostr((DataModule1.IVA(fdCliente.FieldByName('familia').Asinteger)-1)*100)+' %';
-     labeledEdit13.Text:= floattostr((DataModule1.IVA(fdCliente.FieldByName('familia').Asinteger)-1)* fdpresupuesto.FieldByName('Total').Asfloat)+' €';
-     labeledEdit11.Text:= floattostr(DataModule1.IVA(fdCliente.FieldByName('familia').Asinteger)* fdpresupuesto.FieldByName('Total').Asfloat)+' €';
-     end
-     else
-     begin
-         labeledEdit14.Text:= floattostr((IVADEFECTO - 1)*100)+' %';
-         labeledEdit13.Text:= FloatToStr((IVADEFECTO - 1) * fdpresupuesto.FieldByName('Total').Asfloat)+' €';
-         labeledEdit11.Text:= floattostr(IVADEFECTO * fdpresupuesto.FieldByName('Total').Asfloat)+' €';
-     end;
-end;
-
 procedure TFPresupuestos.LinkGridToDataSourceBindSourceDB3AssigningValue(
   Sender: TObject; AssignValueRec: TBindingAssignValueRec; var Value: TValue;
   var Handled: Boolean);
@@ -941,6 +940,16 @@ begin
  extension:=ExtractFileExt(fichero);
  nombresinext:=copy(nombre,0,pos(extension,nombre)-1);
 
+  mail:=PATHTHUNDERBIRD;
+
+   if not FileExists(mail) then begin
+     MessageBox(Handle, 'No se encuentra el programa de correo Thunderbird.',
+       'Error', MB_OK + MB_ICONSTOP);
+
+     Exit;
+   end;
+
+
 if FileExists(fichero) then
   begin
   try
@@ -955,8 +964,8 @@ if FileExists(fichero) then
 
      fdq:=TFDQuery.Create(Self);
      fdq.connection:=DataModule1.FDConnection1;
-     fdq.SQL.Add('SELECT correo FROM clientes C, administradores A, presupuestos P WHERE P.id_presupuesto=412 AND P.id_ClientePrev=C.idContactos AND C.idAdministrador=A.idAdministrador');
-    // fdq.ParamByName('idpresupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
+     fdq.SQL.Add('SELECT correo FROM clientes C, administradores A, presupuestos P WHERE P.id_presupuesto=:idpresupuesto and P.id_ClientePrev=C.idContactos AND C.idAdministrador=A.idAdministrador');
+     fdq.ParamByName('idpresupuesto').AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
      fdq.Active:=true;
 
      if fdq.RecordCount > -1 then
@@ -966,7 +975,8 @@ if FileExists(fichero) then
        Asunto:='subject='+nombre+',';
        Cuerpo:='body=Hola%20envío%20presupuesto solicitado.%0D%0A%0D%0A Saludos cordiales.'+',';
        adjunto:='attachment=file:///'+DataModule1.cambiarbarras(ruta)+nombresinext+'.pdf'+'"';
-        mail:='C:\Program Files (x86)\Mozilla Thunderbird\thunderbird';
+
+
         parametro:= '-compose "'+destinatario+Asunto+Cuerpo+adjunto;
        shellExecute(0,'open',PChar(mail),Pchar(parametro),nil,SW_SHOWNORMAL);
 
@@ -985,8 +995,33 @@ begin
 ToolButton3.Enabled:= FileExists(PATHUSER+fdpresupuesto.FieldByName('path').AsString);
 end;
 
-procedure TFPresupuestos.PageControl1Change(Sender: TObject);
+procedure TFPresupuestos.mfldPathChange(Sender: TField);
 begin
+ if FileExists(Sender.asstring) then spdocumento.Brush.Color:=clLime
+ else spdocumento.Brush.Color:=clRed;
+
+end;
+
+procedure TFPresupuestos.PageControl1Change(Sender: TObject);
+var ruta:string;
+begin
+   if (TPageControl(Sender).ActivePageIndex = 1)  or  (TPageControl(Sender).ActivePageIndex = 2) then
+   begin
+      ruta:= PATHDOCPRESUPUESTOS+'\'+fdpresupuesto.fieldbyname('id_presupuesto').asstring+fdpresupuesto.fieldbyname('grupo').asstring;
+
+    if DirectoryExists(ruta) then
+                begin
+                  spcarpetas.brush.color:=cllime;
+                  rzShellList1.Enabled:=True;
+                  rzShellList2.Enabled:=True;
+                  rzShellList1.Folder.PathName:=ruta+'\Documentacion';
+                  rzShellList2.folder.PathName:=ruta+'\Fotos';
+                end
+                else  spcarpetas.brush.color:=clred;
+       end;
+
+
+
    if TPageControl(Sender).ActivePageIndex = 3 then
    begin
 
@@ -999,6 +1034,8 @@ begin
    if not fdqryContactosPresupuesto.Active then
    begin
        fdqryContactosPresupuesto.ParamByName('idpresupuesto').AsInteger:=fdpresupuestoid_presupuesto.AsInteger;
+       fdqryContactosPresupuesto.ParamByName('grupo').AsInteger:=fdpresupuestogrupo.AsInteger;
+
        fdqryContactosPresupuesto.Open;
    end;
 
@@ -1007,26 +1044,21 @@ begin
    end;
 end;
 
+
 procedure TFPresupuestos.rDBGridClientesDBGridLineasLoadPickList(
   Sender: TObject; DS: TDataSet; FieldName: string; PickList: TStrings);
 begin
-   PickList.LoadFromFile('p.txt');
-end;
-
-procedure TFPresupuestos.rDBGrid_MS1LoadPickList(Sender: TObject; DS: TDataSet;
-  FieldName: string; PickList: TStrings);
-begin
-//if FieldName='Descripcion' then PickList.Add('Fachada');
-//if FieldName='Descripcion' then PickList.Add('Bajante');
-
-
+  // PickList.LoadFromFile('p.txt');
 end;
 
 procedure TFPresupuestos.fdpresupuestoAfterInsert(DataSet: TDataSet);
 begin
      fdpresupuesto.FieldByName('Id_ClientePrev').Asinteger:=fdCliente.FieldByName('IdContactos').AsInteger;
                    fdpresupuesto.FieldByName('id_presupuesto').AsInteger:=-1;
-                   fdpresupuesto.FieldByName('grupo').asinteger:=yearof(date);
+                   fdpresupuesto.FieldByName('grupo').asinteger:=yearof(rDBDateTimePicker1.date);
+                   fdpresupuesto.FieldByName('descripcion').AsString:='Descripción';
+                  fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('Nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
+
 
                    fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime:=date;
                    fdpresupuesto.FieldByName('partidas').asinteger:=0;
@@ -1075,15 +1107,34 @@ procedure TFPresupuestos.fdqryContactosPresupuestoAfterInsert(
   DataSet: TDataSet);
 begin
 fdqryContactosPresupuestoid_presupuesto.AsInteger:=fdpresupuesto.FieldByName('id_presupuesto').AsInteger;
+fdqryContactosPresupuestogrupo.AsInteger:=fdpresupuesto.FieldByName('grupo').AsInteger;
+
 guardarpresupuesto.Enabled:=True;
      Guardar.Enabled:=true;
      shape1.Brush.Color:=cllime;
+end;
+
+procedure TFPresupuestos.FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);
+begin
+
+with Sender as TFDSchemaAdapter do CommitUpdates;
+ if ( not fdpresupuesto.UpdatesPending) and (not FDlineas.UpdatesPending) then
+            begin
+
+             guardar.Enabled:=false;
+              shape1.Brush.Color:=clwhite;
+
+            end;
 end;
 
 procedure TFPresupuestos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 action:=caFree;
 end;
+
+
+
+
 
 procedure TFPresupuestos.FormCreate(Sender: TObject);
 begin

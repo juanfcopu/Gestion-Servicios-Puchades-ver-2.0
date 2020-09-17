@@ -10,9 +10,6 @@ Coordinates=10,592,94,36
 [RzComboBox1]
 Coordinates=950,546,100,36
 
-[rDBGridClientes1]
-Coordinates=825,546,115,36
-
 [btn3]
 Coordinates=775,546,40,36
 
@@ -52,17 +49,11 @@ Coordinates=264,546,83,36
 [Label2]
 Coordinates=99,478,53,58
 
-[ds1]
-Coordinates=88,1,40,36
-
 [btn5]
 Coordinates=214,546,40,36
 
 [btn7]
 Coordinates=164,546,40,36
-
-[btn4]
-Coordinates=114,546,40,36
 
 [rDBRecView1]
 Coordinates=10,546,94,36
@@ -138,7 +129,7 @@ Coordinates=986,342,157,58
 Coordinates=480,410,137,58
 
 []
-Coordinates=530,478,124,36
+Coordinates=114,546,40,36
 
 [DataModule1.]
 Coordinates=560,10,184,102

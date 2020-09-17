@@ -60,15 +60,21 @@ begin
 try
 if Key=#13 then begin
             Tlistfacturascompras(Self.Owner).ds1.DataSet.Post;
-             RzStatusBar1.SimpleCaption:=IntToStr(listfacturascompras.inserciones) +' facturas insertadas.';
+            // RzStatusBar1.SimpleCaption:=IntToStr(listfacturascompras.inserciones) +' facturas insertadas.';
             Tlistfacturascompras(Self.Owner).ds1.DataSet.Insert;
 
 
 
                  end;
+ if Key='.' then Key:=',';
+
  except
   raise;
 end;
-                 end;
+
+
+
+
+end;
 
 end.

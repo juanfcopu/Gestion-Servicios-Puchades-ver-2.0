@@ -24,6 +24,18 @@ type
     ds1: TDataSource;
     rDBGridClientes1: TrDBGrid_MS;
     fdqlobras: TFDQuery;
+    fdqlobrasid_lineaobra: TIntegerField;
+    fdqlobrasobras_ID_obra: TIntegerField;
+    fdqlobrasdescripcion: TStringField;
+    fdqlobrasTotal: TFloatField;
+    fdqlobrasfacturas_id_factura: TIntegerField;
+    fdqlobrasfacturas_ano: TIntegerField;
+    fdqlobrasFechaComienzo: TDateTimeField;
+    fdqlobrasFechaFin: TDateTimeField;
+    fdqlobrasid_obra: TFDAutoIncField;
+    fdqlobrasID_Cliente: TIntegerField;
+    fdqlobrasdescripObra: TMemoField;
+    btVista: TToolButton;
 
     procedure btCerrarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -34,6 +46,8 @@ type
     procedure rDBGridClientes1GetFixedColState(Sender: TObject;
       ActiveRow: Boolean; AFont: TFont; var Text: string;
       var CheckBoxChecked: Boolean);
+    procedure btVistaClick(Sender: TObject);
+    procedure fdqlobrasAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -51,43 +65,38 @@ implementation
 uses
   clientes,DModule1, obras, facturas;
 
-var clente:Integer;
+
 {$R *.dfm}
 
 procedure TFLineasObrasFacturas.btaAceptarClick(Sender: TObject);
-var i:Integer;     iva,totalfactura:Double;  fdcliente, fdobra,fdfactura,fdlineasobra,fdlineasfactura:TFDQuery;
+var i:Integer;     iva,totalfactura:Double;  fdcliente,fdfactura,fdlineasobra:TFDQuery;
 begin
-
-
-        if Self.Owner is TFClientes then
-        begin
-           with (Self.Owner as TFClientes) do
-              begin
-                fdobra:=fdobras;
-                fdcliente:=fdclientes;
-                fdfactura:=fdfacturas;
-                fdlineasobra:=fdqlObras;
-                fdlineasfactura:=fdlineasfacturas;
-              end;
-        end
-        else if Self.Owner is TFObras then
-             begin
+          {
+                 fdlineasobra:=fdqlobras;
 
                  fdfactura:=TFDQuery.Create(Self);
                  fdfactura.Connection:=DataModule1.FDConnection1;
                  fdfactura.SQL.Clear;
                  fdfactura.SQL.Add('SELECT * FROM facturas');
                  fdfactura.Open;
-                 fdobra:= (Self.Owner as TFObras).fdobra;
-                 fdcliente:= (Self.Owner as TFObras).fdCliente;
-                 fdlineasobra:=fdqlobras;
+
+                 fdcliente:=TFDQuery.Create(Self);
+                 fdcliente.Connection:=DataModule1.FDConnection1;
+                 fdcliente.SQL.Clear;
+                 fdcliente.SQL.Add('SELECT * FROM clientes WHERE idContactos=:contacto');
+                 fdcliente.ParamByName('contacto').AsInteger:=fdlineasobra.FieldByName('id_cliente').asinteger;
+                 fdcliente.Open;
+
+
+                 {
                  fdlineasfactura:=TFDQuery.Create(Self);
                  fdlineasfactura.Connection:=DataModule1.FDConnection1;
                  fdlineasfactura.SQL.Clear;
                  fdlineasfactura.SQL.Add('SELECT * FROM lineasfacturas');
-                 fdlineasfactura.Open;
 
-             end;
+
+                 fdlineasfactura.UpdateOptions.KeyFields:='id_lineafactura;facturas_idfactura;facturas_ano';
+                  fdlineasfactura.Open;
 
         iva:=DataModule1.IVA(fdcliente.FieldByName('familia').AsInteger);
 
@@ -96,13 +105,13 @@ begin
         fdfactura.FieldByName('ano').AsInteger:=YearOf(Date);
         fdfactura.FieldByName('idfactura').AsInteger:=DataModule1.ObtenerNFactura(YearOf(Date));
         fdfactura.FieldByName('EmisorFactura').AsInteger:=DataModule1.ObtenerIDEMPRESA;
-        fdfactura.Fieldbyname('concepto').asstring:=fdobra.FieldByName('Descripcion').asstring;
+        fdfactura.Fieldbyname('concepto').asstring:=fdlineasobra.FieldByName('DescripObra').asstring;
         fdfactura.Fieldbyname('Pagada').asboolean:=false;
         fdfactura.Fieldbyname('TotalBruto').asfloat:=0;
         fdfactura.FieldByName('iva').AsFloat:=(iva-1)*100 ;
         fdfactura.FieldByName('importeIva').AsFloat:=0;
         fdfactura.FieldByName('total').AsFloat:=0;
-        fdfactura.Fieldbyname('IdCliente').asinteger:=fdobra.FieldByName('Id_Cliente').asinteger;
+        fdfactura.Fieldbyname('IdCliente').asinteger:=fdlineasobra.FieldByName('Id_Cliente').asinteger;
         fdfactura.Fieldbyname('FechaFactura').asdatetime:=Date;
         fdfactura.post;
 
@@ -111,10 +120,12 @@ begin
         begin
             begin
                   fdlineasobra.GotoBookmark(rDBGridClientes1.rBookmarks.Items[i]);
-                  fdlineasfactura.Append;
-                  fdlineasfactura.FieldByName('id_lineafactura').AsInteger:=i;
+                  fdlineasfactura.refresh;
+                  fdlineasfactura.Insert;
+                //  fdlineasfactura.FieldByName('id_lineafactura').AsInteger:=i;
                   fdlineasfactura.Fieldbyname('descripcion').asstring:=fdlineasobra.FieldByName('Descripcion').asstring;
                   fdlineasfactura.Fieldbyname('total').asfloat:=fdlineasobra.FieldByName('Total').asfloat;
+
                   totalfactura:=totalfactura+fdlineasfactura.Fieldbyname('total').asfloat;
                   fdlineasfactura.Fieldbyname('facturas_Idfactura').asinteger:=fdfactura.FieldByName('Idfactura').asinteger;
                   fdlineasfactura.Fieldbyname('facturas_ano').asinteger:=fdfactura.FieldByName('ano').asinteger;
@@ -124,6 +135,7 @@ begin
                   fdlineasfactura.FieldByName('descuento').AsInteger:=0;
                   fdlineasfactura.Fieldbyname('lineasobras_id_lineaobra').AsFloat:=fdlineasobra.FieldByName('id_lineaobra').asfloat;
                   fdlineasfactura.Fieldbyname('lineasobras_obras_id_obra').AsFloat:=fdlineasobra.FieldByName('obras_ID_obra').asfloat;
+                  fdlineasfactura.FieldByName('nlinea').AsInteger:=i+1;
 
                   FDlineasfactura.Post;
 
@@ -136,17 +148,19 @@ begin
         end;
            fdfactura.Edit;
            fdfactura.Fieldbyname('TotalBruto').asfloat:=totalfactura;
+           fdfactura.Fieldbyname('baseimponible').asfloat:=totalfactura;
            fdfactura.Fieldbyname('iva').asfloat:=(iva-1)*100;
            fdfactura.FieldByName('importeIva').AsFloat:=totalfactura*(iva-1);
            fdfactura.Fieldbyname('total').asfloat:=totalfactura+(totalfactura*(iva-1));
            fdfactura.Post;
 
-        //  if Self.Owner is TFObras then (Self.Owner as TFObras).GuardarClick(Self);
 
 
 
 
 
+            }
+     DataModule1.insertar2execute(Self);
      Close;
 end;
 
@@ -170,6 +184,12 @@ begin
 
 end;
 
+procedure TFLineasObrasFacturas.fdqlobrasAfterOpen(DataSet: TDataSet);
+begin
+   statuslineas.Panels[0].Text:='Nº Total de lineas:'+ IntToStr(rDBGridclientes1.DataSource.DataSet.RecordCount);
+
+end;
+
 procedure TFLineasObrasFacturas.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -178,35 +198,62 @@ end;
 
 procedure TFLineasObrasFacturas.FormCreate(Sender: TObject);
 begin
-clente:=-200;
-if (Owner is TFClientes) then begin
 
 
-                                  clente:=(Owner as TFClientes).fdfacturas.FieldByName('Id_Cliente').AsInteger;
-                              end
-else
-  if (Owner is TFObras) then begin
+
+     if (Owner is TFDQuery) then
+      begin
+          fdqlobras.ParamByName('IDCLIENTE').AsInteger:=TFDQuery(Owner).FieldByName('id_Cliente').AsInteger;
+          fdqlobras.Active:=True;
+      end else
+                ShowMessage('No se ha podido encontrar el cliente.');
 
 
-                                       clente:=(Owner as TFObras).fdobra.FieldByName('id_Cliente').AsInteger;
-                                    end;
 
-                                   if clente <> -200 then begin
 
-                                                fdqlobras.ParamByName('IDCLIENTE').AsInteger:=clente;
-                                                fdqlobras.Active:=True;
-                                   end;
 
                                     rDBGridClientes1.UseMultiSelect:=True;
-                                     statuslineas.Panels[0].Text:='Nº Total de lineas:'+ IntToStr(rDBGridclientes1.DataSource.DataSet.RecordCount);
-
+                                  
 end;
 
 procedure TFLineasObrasFacturas.rDBGridClientes1GetFixedColState(
   Sender: TObject; ActiveRow: Boolean; AFont: TFont; var Text: string;
   var CheckBoxChecked: Boolean);
 begin
-statuslineas.Panels[1].Text:='Nº de lineas seleccionadas:'+inttostr(TrDBGrid_MS(Sender).GetSelectedRecCount);;
+statuslineas.Panels[1].Text:='Nº de lineas seleccionadas:'+inttostr(TrDBGrid_MS(Sender).GetSelectedRecCount);
+
+if TrDBGrid_MS(Sender).GetSelectedRecCount > 0 then btaAceptar.Enabled:=True
+else btaAceptar.Enabled:=False;
+
+
+end;
+
+procedure TFLineasObrasFacturas.btVistaClick(Sender: TObject);
+var literal1,literal2:string;
+begin
+
+ if not (Owner is TFDQuery) then  Exit;
+
+ literal1:='SELECT O.ID_Cliente, O.descripcion as descripObra, O.id_obra, LO.id_lineaobra, LO.obras_ID_obra, LO.descripcion,LO.Total,LO.facturas_id_factura,LO.facturas_ano,O.FechaComienzo,O.FechaFin FROM lineasobras LO,obras O ';
+ if btVista.Down then
+ begin
+   literal2:='WHERE LO.obras_id_obra=O.id_obra AND O.id_obra=:OBRA AND O.id_Cliente=:IDCLIENTE AND LO.facturas_id_factura is null';
+   fdqlobras.Close;
+   fdqlobras.SQL.clear;
+   fdqlobras.SQL.Add(literal1+literal2);
+   fdqlobras.ParamByName('IDCLIENTE').AsInteger:= TFDQuery(Owner).FieldByName('id_Cliente').AsInteger;
+   fdqlobras.ParamByName('OBRA').AsInteger:=TFDQuery(Owner).FieldByName('id_Obra').AsInteger;
+   fdqlobras.Active:=True;
+ end else begin
+           literal2:='WHERE LO.obras_id_obra=O.id_obra AND O.id_Cliente=:IDCLIENTE AND LO.facturas_id_factura is null';
+            fdqlobras.Close;
+            fdqlobras.SQL.Clear;
+            fdqlobras.SQL.Add(literal1+literal2);
+            fdqlobras.ParamByName('IDCLIENTE').AsInteger:= TFDQuery(Owner).FieldByName('id_Cliente').AsInteger;
+            fdqlobras.Active:=True;
+
+          end;
+
 end;
 
 end.

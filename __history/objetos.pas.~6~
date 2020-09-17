@@ -1,0 +1,35 @@
+unit objetos;
+
+interface
+
+uses FireDAC.Comp.Client;
+
+type
+  TFactura = class(TObject)
+    FQCliente: TFDQuery;
+    FQFactura: TFDQuery;
+    FQlineasFact: TFDQuery;
+  private
+    { Private declarations }
+
+
+  public
+    { Public declarations }
+     constructor create(connection:TFDConnection) ;
+  end;
+
+
+implementation
+
+   constructor TFactura.create(connection:TFDConnection);
+   begin
+    //FQCliente:=TFDQuery.Create(Self);
+    //FQFactura:=TFDQuery.Create(Self);
+    //FQlineasFact:=TFDQuery.Create(Self);
+      FQCliente.Connection:=connection;
+      FQFactura.Connection:=connection;
+      FQlineasFact.Connection:=connection;
+
+   end;
+
+end.

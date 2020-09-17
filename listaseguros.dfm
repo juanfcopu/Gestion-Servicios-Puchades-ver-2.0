@@ -215,8 +215,6 @@ object listseguros: Tlistseguros
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = [fsBold]
     OnDblClick = rDBGridClientes1DblClick
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgGraphicShowImg, dgDateTimePicker, dgUseTitlePopup, dgAutoPickListWidth]
-    OptionsEx2.ActivateOptionsEx2 = True
     OptionsEx2.FixedCell.TitleExBtn = False
     OptionsEx2.FixedCell.FixedCols = 1
     OptionsEx2.Editors.Graphic = obtContent

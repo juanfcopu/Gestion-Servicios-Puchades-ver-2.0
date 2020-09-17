@@ -1,0 +1,86 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Lista Gastos Bancos'
+  ClientHeight = 270
+  ClientWidth = 592
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object rdbgrid1: TrDBGrid_MS
+    Left = 0
+    Top = 29
+    Width = 592
+    Height = 222
+    Align = alClient
+    DataSource = ds1
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    TitleLines = 2
+    RowLines = 2
+    Columns = <
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end>
+  end
+  object rzstsbr1: TRzStatusBar
+    Left = 0
+    Top = 251
+    Width = 592
+    Height = 19
+    BorderInner = fsNone
+    BorderOuter = fsNone
+    BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
+    BorderWidth = 0
+    TabOrder = 1
+    ExplicitLeft = 216
+    ExplicitTop = 144
+    ExplicitWidth = 185
+  end
+  object rztlbr1: TRzToolbar
+    Left = 0
+    Top = 0
+    Width = 592
+    Height = 29
+    BorderInner = fsNone
+    BorderOuter = fsGroove
+    BorderSides = [sdTop]
+    BorderWidth = 0
+    TabOrder = 2
+  end
+  object ds1: TDataSource
+    DataSet = FDbancos
+    Left = 232
+    Top = 104
+  end
+  object FDbancos: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from bancos')
+    Left = 456
+    Top = 184
+  end
+end

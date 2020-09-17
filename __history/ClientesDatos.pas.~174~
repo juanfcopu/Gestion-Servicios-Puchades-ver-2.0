@@ -1,0 +1,986 @@
+unit ClientesDatos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Mask, Vcl.DBCtrls,
+  rDBComponents, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,Vcl.Themes,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin, rDBTreeView, RzStatus,
+  RzDBStat, RzPanel, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, VirtualTrees,editors;
+
+type
+  TFclientesDatos = class(TForm)
+    CoolBar1: TCoolBar;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    GroupBox1: TGroupBox;
+    GridPanel2: TGridPanel;
+    GroupBox4: TGroupBox;
+    GroupBox2: TGroupBox;
+    GroupBox5: TGroupBox;
+    GroupBox3: TGroupBox;
+    fdclientes: TFDQuery;
+    rDBEdit1: TrDBEdit;
+    GridPanel1: TGridPanel;
+    PanelPRESUPUESTOS: TPanel;
+    HeaderControl1: THeaderControl;
+    PanelFACTURAS: TPanel;
+    HeaderControl2: THeaderControl;
+    pnlOBRAS: TPanel;
+    HeaderControl3: THeaderControl;
+    dsclientes: TDataSource;
+    fdpresupuestos: TFDQuery;
+    dspresupuestos: TDataSource;
+    fdfacturas: TFDQuery;
+    dsfacturas: TDataSource;
+    fdobras: TFDQuery;
+    dsobras: TDataSource;
+    fdpresupuestosnombre: TStringField;
+    fdpresupuestosId_ClientePrev: TIntegerField;
+    fdpresupuestosid_presupuesto: TIntegerField;
+    fdpresupuestosdescripcion: TMemoField;
+    fdpresupuestosAprovado: TBooleanField;
+    fdpresupuestosFechaPresupuesto: TDateTimeField;
+    fdpresupuestosgrupo: TIntegerField;
+    fdpresupuestosTotal: TFloatField;
+    fdpresupuestosTotalAprobado: TFloatField;
+    RzStatusBar1: TRzStatusBar;
+    RzDBStatusPane1: TRzDBStatusPane;
+    RzDBStateStatus1: TRzDBStateStatus;
+    fdlineaspresupuesto: TFDQuery;
+    dslineasPresu: TDataSource;
+    fdlineaspresupuestoId_Partida: TIntegerField;
+    fdlineaspresupuestoDescripcion: TStringField;
+    fdlineaspresupuestoTotal: TFloatField;
+    fdlineaspresupuestoAprovado: TBooleanField;
+    fdlineaspresupuestoEjecutado: TBooleanField;
+    fdlineaspresupuestopresupuestos_id_presupuesto: TIntegerField;
+    fdlineaspresupuestopresupuestos_grupo: TIntegerField;
+    fdlineaspresupuestoobra: TIntegerField;
+    fdlineaspresupuestofecha_aprobado: TDateField;
+    fdlineasfacturas: TFDQuery;
+    dslineasFact: TDataSource;
+    FDlineasObras: TFDQuery;
+    dslineasObras: TDataSource;
+    fdContactos: TFDQuery;
+    pnContactos: TPanel;
+    HeaderControl4: THeaderControl;
+    rDBGrid_MS1: TrDBGrid_MS;
+    dscontactos: TDataSource;
+    fdfacturasidfactura: TIntegerField;
+    fdfacturaspagada: TBooleanField;
+    fdfacturascantidad: TIntegerField;
+    fdfacturasemisorfactura: TIntegerField;
+    fdfacturasano: TIntegerField;
+    fdfacturasiva: TSmallintField;
+    fdfacturastotal: TFloatField;
+    fdfacturastotalbruto: TFloatField;
+    fdfacturasfechafactura: TDateTimeField;
+    fdfacturasconcepto: TMemoField;
+    fdfacturasidcliente: TIntegerField;
+    fdlineasfacturasid_lineafactura: TFDAutoIncField;
+    fdlineasfacturasdescripcion: TStringField;
+    fdlineasfacturastotal: TFloatField;
+    fdlineasfacturasfacturas_ano: TIntegerField;
+    fdlineasfacturasfacturas_idfactura: TIntegerField;
+    fdlineasfacturascantidad: TFloatField;
+    fdlineasfacturasimporte: TFloatField;
+    fdlineasfacturasiva: TFloatField;
+    fdlineasfacturasdescuento: TIntegerField;
+    fdlineasfacturaslineasobras_id_lineaobra: TIntegerField;
+    fdlineasfacturaslineasobras_obras_ID_obra: TIntegerField;
+    fdlineasfacturasnlinea: TIntegerField;
+    VSTP: TVirtualStringTree;
+    VSTF: TVirtualStringTree;
+    fdfacturasimporteIVA: TFloatField;
+    VSTO: TVirtualStringTree;
+    fdContactosid_contacto: TFDAutoIncField;
+    fdContactosid_cliente: TIntegerField;
+    fdContactospta: TStringField;
+    fdContactosnombre: TStringField;
+    fdContactostelefono1: TIntegerField;
+    fdContactostelefono2: TIntegerField;
+    fdContactostelefono3: TIntegerField;
+    fdContactosmail: TStringField;
+    fdobrasid_obra: TFDAutoIncField;
+    fdobrasNombre: TStringField;
+    fdobrasPath: TMemoField;
+    fdobrasid_cliente: TIntegerField;
+    fdobrasfechaComienzo: TDateTimeField;
+    fdobrasdescripcion: TMemoField;
+    fdobrasImporteObra: TFloatField;
+    fdobrasFechaFin: TDateTimeField;
+    fdobrasEjecutado: TBooleanField;
+    FDlineasObrasid_lineaobra: TIntegerField;
+    FDlineasObrasdescripcion: TStringField;
+    FDlineasObrastotal: TFloatField;
+    FDlineasObrasejecutado: TBooleanField;
+    FDlineasObrasobras_ID_obra: TIntegerField;
+    FDlineasObraspresupuestos_id_presupuesto: TIntegerField;
+    FDlineasObraspresupuestos_grupo: TIntegerField;
+    FDlineasObraspresupuestos_Id_Partida: TIntegerField;
+    FDlineasObrasfacturas_id_factura: TIntegerField;
+    FDlineasObrasfacturas_ano: TIntegerField;
+    Button1: TButton;
+    Button2: TButton;
+    rDBEdit2: TrDBEdit;
+    rDBEdit3: TrDBEdit;
+    rDBEdit4: TrDBEdit;
+    rDBEdit5: TrDBEdit;
+    rDBEdit6: TrDBEdit;
+    rDBEdit7: TrDBEdit;
+    rDBEdit8: TrDBEdit;
+    rDBComboBox2: TrDBComboBox;
+    fdclientesIdContactos: TIntegerField;
+    fdclientesNombre: TStringField;
+    fdclientesDireccion: TStringField;
+    fdclientesCiudad: TStringField;
+    fdclientesTelefonoCasa: TIntegerField;
+    fdclientesTelefonoMovil: TIntegerField;
+    fdclientesmail: TStringField;
+    fdclientesNumFax: TIntegerField;
+    fdclientesCIF: TStringField;
+    fdclientesCodigoPostal: TStringField;
+    fdclientesidAdministrador: TIntegerField;
+    fdclientesCP: TBooleanField;
+    fdclientesIBAN: TStringField;
+    fdclientesbanco: TStringField;
+    fdclientesnombrefactura: TStringField;
+    fdclientesciffactura: TStringField;
+    fdclientesciudadfactura: TStringField;
+    fdclientesdireccionfactura: TStringField;
+    fdclientescodigopostalfactura: TStringField;
+    FDAdministradores: TFDQuery;
+    fdclientesadministrador: TStringField;
+    rDBLookupComboBox1: TrDBLookupComboBox;
+    fdclientesfamilia: TIntegerField;
+    rzStatusBarPresupuestos: TRzStatusBar;
+    RzStatusPane1: TRzStatusPane;
+    rzstatusbarFacturas: TRzStatusBar;
+    RzStatusPane2: TRzStatusPane;
+    rzstatusBarObras: TRzStatusBar;
+    RzStatusPane3: TRzStatusPane;
+    btnGuardar: TToolButton;
+    procedure Button1Click(Sender: TObject);
+    procedure rDBTreeView1DblClick(Sender: TObject);
+    procedure rDBTreeView1CustomDrawItem(Sender: TCustomTreeView;
+      Node: TTreeNode; State: TCustomDrawState; var DefaultDraw: Boolean);
+    procedure VSTPInitNode(Sender: TBaseVirtualTree; ParentNode,
+      Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
+    procedure VSTPCreateEditor(Sender: TBaseVirtualTree;
+      Node: PVirtualNode; Column: TColumnIndex; out EditLink: IVTEditLink);
+    procedure VSTPInitChildren(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      var ChildCount: Cardinal);
+    procedure VSTPGetNodeDataSize(Sender: TBaseVirtualTree;
+      var NodeDataSize: Integer);
+    procedure VSTPGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
+    procedure VSTPGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: TImageIndex);
+    procedure VSTPChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
+    procedure VSTPEdited(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex);
+    procedure VSTPAfterCellPaint(Sender: TBaseVirtualTree;
+      TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+      CellRect: TRect);
+    procedure VSTPPaintText(Sender: TBaseVirtualTree;
+      const TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+      TextType: TVSTTextType);
+    procedure VSTPBeforeCellPaint(Sender: TBaseVirtualTree;
+      TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+      CellPaintMode: TVTCellPaintMode; CellRect: TRect; var ContentRect: TRect);
+    procedure VSTPEditing(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; var Allowed: Boolean);
+    procedure VSTPHeaderDraw(Sender: TVTHeader; HeaderCanvas: TCanvas;
+      Column: TVirtualTreeColumn; R: TRect; Hover, Pressed: Boolean;
+      DropMark: TVTDropMarkMode);
+    procedure VSTFGetNodeDataSize(Sender: TBaseVirtualTree;
+      var NodeDataSize: Integer);
+    procedure VSTFInitNode(Sender: TBaseVirtualTree; ParentNode,
+      Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
+    procedure VSTFInitChildren(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      var ChildCount: Cardinal);
+    procedure VSTFGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
+    procedure VSTFEditing(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; var Allowed: Boolean);
+    procedure VSTFAfterCellPaint(Sender: TBaseVirtualTree;
+      TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+      CellRect: TRect);
+    procedure VSTFCreateEditor(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; out EditLink: IVTEditLink);
+    procedure VSTFEdited(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex);
+    procedure VSTOGetNodeDataSize(Sender: TBaseVirtualTree;
+      var NodeDataSize: Integer);
+    procedure VSTOInitNode(Sender: TBaseVirtualTree; ParentNode,
+      Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
+    procedure VSTOInitChildren(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      var ChildCount: Cardinal);
+    procedure VSTOGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
+    procedure VSTFGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: TImageIndex);
+    procedure VSTOGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: TImageIndex);
+    procedure VSTOEditing(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; var Allowed: Boolean);
+    procedure VSTOEdited(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex);
+    procedure VSTOCreateEditor(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; out EditLink: IVTEditLink);
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure fdpresupuestosAfterOpen(DataSet: TDataSet);
+    procedure fdpresupuestosAfterRefresh(DataSet: TDataSet);
+    procedure fdfacturasAfterRefresh(DataSet: TDataSet);
+    procedure fdfacturasAfterOpen(DataSet: TDataSet);
+    procedure fdobrasAfterOpen(DataSet: TDataSet);
+    procedure fdobrasAfterRefresh(DataSet: TDataSet);
+    procedure btnGuardarClick(Sender: TObject);
+    procedure fdclientesAfterEdit(DataSet: TDataSet);
+    procedure fdclientesAfterInsert(DataSet: TDataSet);
+    procedure fdclientesAfterPost(DataSet: TDataSet);
+    procedure HeaderControl1SectionClick(HeaderControl: THeaderControl;
+      Section: THeaderSection);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+
+const
+
+WM_STARTEDITING = WM_USER + 778;
+
+var
+  FclientesDatos: TFclientesDatos;
+
+implementation
+
+uses
+  DModule1;
+
+{$R *.dfm}
+
+procedure TFclientesDatos.btnGuardarClick(Sender: TObject);
+begin
+if fdclientes.State in [dsInsert,dsEdit] then
+begin
+fdclientes.Post;
+
+end;
+end;
+
+procedure TFclientesDatos.Button1Click(Sender: TObject);
+begin
+DataModule1.insertarpresupuestoExecute(fdclientes);
+end;
+
+procedure TFclientesDatos.Button2Click(Sender: TObject);
+var Data:PTreePresupuesto;
+begin
+
+if not Assigned(VSTP.FocusedNode) then Exit;
+
+
+if VSTP.GetNodeLevel(VSTP.FocusedNode)=1 then
+begin
+data:=VSTP.GetNodeData(VSTP.FocusedNode.Parent);
+fdpresupuestos.RecNo:=Data.RecNo;
+end else
+ begin
+    data:=VSTP.GetNodeData(VSTP.focusedNode);
+    fdpresupuestos.RecNo:=Data.RecNo;
+
+ end;
+DataModule1.editarpresupuestoExecute(fdpresupuestos);
+end;
+
+procedure TFclientesDatos.fdclientesAfterEdit(DataSet: TDataSet);
+begin
+btnGuardar.Enabled:=True;
+end;
+
+procedure TFclientesDatos.fdclientesAfterInsert(DataSet: TDataSet);
+begin
+btnGuardar.Enabled:=True;
+end;
+
+procedure TFclientesDatos.fdclientesAfterPost(DataSet: TDataSet);
+begin
+btnGuardar.Enabled:=False;
+end;
+
+procedure TFclientesDatos.fdfacturasAfterOpen(DataSet: TDataSet);
+begin
+      RzStatusPane2.Caption:=fdfacturas.RecordCount.ToString+ ' facturas' ;
+end;
+
+procedure TFclientesDatos.fdfacturasAfterRefresh(DataSet: TDataSet);
+begin
+      RzStatusPane2.Caption:=fdfacturas.RecordCount.ToString+ ' facturas' ;
+end;
+
+procedure TFclientesDatos.fdobrasAfterOpen(DataSet: TDataSet);
+begin
+  RzStatusPane3.Caption:=fdobras.RecordCount.ToString+ ' obras' ;
+end;
+
+procedure TFclientesDatos.fdobrasAfterRefresh(DataSet: TDataSet);
+begin
+RzStatusPane3.Caption:=fdobras.RecordCount.ToString+ ' obras' ;
+end;
+
+procedure TFclientesDatos.fdpresupuestosAfterOpen(DataSet: TDataSet);
+begin
+RzStatusPane1.Caption:=fdpresupuestos.RecordCount.ToString+ ' presupuestos' ;
+end;
+
+procedure TFclientesDatos.fdpresupuestosAfterRefresh(DataSet: TDataSet);
+begin
+RzStatusPane1.Caption:=fdpresupuestos.RecordCount.ToString+ ' presupuestos' ;
+end;
+
+procedure TFclientesDatos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+fdclientes.Close;
+FDAdministradores.Close;
+Action:=caFree;
+end;
+
+procedure TFclientesDatos.FormCreate(Sender: TObject);
+begin
+     fdclientesfamilia.OnSetText:=DataModule1.ClientesfamiliaSetText;
+     fdclientesfamilia.OnGetText:=DataModule1.fdClientesfamiliaGetText;
+end;
+
+procedure TFclientesDatos.HeaderControl1SectionClick(
+  HeaderControl: THeaderControl; Section: THeaderSection);
+begin
+  if Section.Index = 1 then
+  PanelPRESUPUESTOS.ManualFloat(GridPanel1.ClientRect);
+
+end;
+
+procedure TFclientesDatos.rDBTreeView1CustomDrawItem(Sender: TCustomTreeView;
+  Node: TTreeNode; State: TCustomDrawState; var DefaultDraw: Boolean);
+begin
+DefaultDraw:=True;
+//if Node.Level =0 then Sender.Canvas.Font.Style:=[fsbold];
+
+end;
+
+procedure TFclientesDatos.rDBTreeView1DblClick(Sender: TObject);
+var noe:TNodeObject; noetr:TTreeNode;
+begin
+ noetr:=TrDBTreeView(Sender).Selected;
+
+ if (Noetr.level=1)   and (Assigned(noetr.Parent)) then
+       noe:=Noetr.parent.Data
+    else   if Assigned(noetr) then noe:=Noetr.Data;
+
+   if fdpresupuestos.active then fdpresupuestos.RecNo:=noe.RecNo;
+
+
+ DataModule1.editarpresupuestoExecute(fdpresupuestos);
+end;
+
+procedure TFclientesDatos.ToolButton1Click(Sender: TObject);
+begin
+   DataModule1.editarclienteExecute(fdclientes);
+end;
+
+procedure TFclientesDatos.VSTFAfterCellPaint(Sender: TBaseVirtualTree;
+  TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+  CellRect: TRect);
+var detalle:TThemedElementDetails;   data:PTreeFacturas;
+begin
+if not Assigned(Node) then Exit;
+
+data:=Node.GetData;
+
+if (Column=6) and (Sender.GetNodeLevel(node)=0) then
+ begin
+if (Data.Pagada) then detalle:=ThemeServices.GetElementDetails(tbCheckBoxCheckedNormal)
+else  detalle:=ThemeServices.GetElementDetails(tbCheckBoxUncheckedNormal);
+ThemeServices.DrawElement(TargetCanvas.Handle,detalle,CellRect);
+
+
+end;
+
+end;
+
+procedure TFclientesDatos.VSTFCreateEditor(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; out EditLink: IVTEditLink);
+begin
+EditLink:=TFacturasEditLink.Create;
+end;
+
+procedure TFclientesDatos.VSTFEdited(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
+var data:PTreeFacturas;
+begin
+if not Assigned(Node) then Exit;
+
+if Column in [1,2,6]  then
+try
+if Sender.GetNodeLevel(Node)=1 then
+begin
+data:=Sender.GetNodeData(Node.Parent);
+fdfacturas.RecNo:=Data.RecNo;
+data:=Sender.GetNodeData(Node);
+fdlineasfacturas.RecNo:=Data.RecNo;
+fdlineasfacturas.Edit;
+fdlineasfacturas.FieldByName('Descripcion').AsString:=Data.concepto;
+fdlineasfacturas.Post;
+end else
+ begin
+    data:=Sender.GetNodeData(Node);
+    fdfacturas.RecNo:=Data.RecNo;
+    fdfacturas.Edit;
+    fdfacturas.FieldByName('Descripcion').AsString:=Data.Concepto;
+    fdfacturas.FieldByName('FechaFactura').AsDateTime:=Data.Fecha;
+    fdfacturas.FieldByName('pagado').AsBoolean:=Data.pagada;
+    fdfacturas.Post;
+
+ end;
+
+except
+    on E: Exception do
+    begin
+          if fdlineasfacturas.State in [dsInsert,dsEdit] then fdlineasfacturas.Cancel;
+          if fdfacturas.State in [dsInsert,dsEdit] then fdfacturas.Cancel;
+        Sender.EditNode(Node,column);
+    end;
+end;
+
+end;
+
+procedure TFclientesDatos.VSTFEditing(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; var Allowed: Boolean);
+begin
+if Column in [0,3,4,5] then Allowed:=False;
+end;
+
+procedure TFclientesDatos.VSTFGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: TImageIndex);
+var nivel:Integer;
+begin
+
+if Assigned(Node) then
+   nivel:=Sender.GetNodeLevel(Node);
+
+
+if Column=0 then
+    begin
+   case kind of
+
+     ikNormal,ikSelected:   case nivel of
+                          0: ImageIndex:=9;
+                          1:ImageIndex:=16;
+                            end;
+    end;
+    end;
+
+end;
+
+procedure TFclientesDatos.VSTFGetNodeDataSize(Sender: TBaseVirtualTree;
+  var NodeDataSize: Integer);
+begin
+ NodeDataSize:=SizeOf(TTreeFactura);
+end;
+
+procedure TFclientesDatos.VSTFGetText(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
+  var CellText: string);
+var data:PTreeFacturas;
+  begin
+     Data:=Sender.GetNodeData(node);
+
+    case Column of
+         0: CellText:=Data.NFactura;
+         1: begin
+             if Sender.GetNodeLevel(node)=0 then
+             begin
+             TextType:=ttNormal;
+             CellText:=DateToStr(Data.Fecha);
+             end else CellText:='';
+            end;
+         2: begin
+             TextType:=ttNormal;
+             CellText:=Data.concepto;
+            end;
+         3: CellText:=FloatToStrF(Data.totalBruto,ffCurrency,8,2);
+         4: CellText:=FloatToStrF(Data.iva,ffCurrency,8,2);
+         5: CellText:=FloatToStrF(Data.total,ffCurrency,8,2);
+         6: CellText:='';
+
+    end;
+end;
+
+procedure TFclientesDatos.VSTFInitChildren(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; var ChildCount: Cardinal);
+var Data:PTreeFacturas;
+begin
+    data:=VSTP.GetNodeData(Node);
+    if Assigned(Node) then
+    begin
+       fdfacturas.RecNo:=Data.RecNo  ;
+       ChildCount:=fdlineasfacturas.RecordCount;
+
+    end;
+
+end;
+
+procedure TFclientesDatos.VSTFInitNode(Sender: TBaseVirtualTree; ParentNode,
+  Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
+var Data:PTreeFacturas;
+begin
+
+  data:=Sender.GetNodeData(Node);
+   if Assigned(data) then
+      begin
+
+          if ParentNode= nil then
+              begin
+          InitialStates:=[ivsHasChildren];
+          data.NFactura:=fdfacturasidfactura.AsString + ' - ' +fdfacturasano.AsString;
+          data.Fecha:=fdfacturasfechafactura.AsDateTime;
+          data.Concepto:=fdfacturasconcepto.AsString;
+          Data.Total:=fdfacturastotal.AsFloat;
+          Data.Totalbruto:=fdfacturastotalbruto.AsFloat;
+          Data.IVA:=fdfacturasimporteIVA.asfloat;
+          data.Pagada:=fdfacturaspagada.AsBoolean;
+          data.RecNo:=fdfacturas.RecNo;
+          fdfacturas.Next;
+              end
+                  else begin
+                         data.Concepto:=fdlineasfacturasdescripcion.AsString;
+                          Data.Total:=fdlineasfacturastotal.AsFloat;
+                          Data.IVA:=fdlineasfacturasiva.asfloat;
+                          Data.TotalBruto:=fdlineasfacturasimporte.AsFloat;
+
+                         data.RecNo:=fdlineasfacturas.RecNo;
+                        fdlineasfacturas.Next;
+                       end;
+
+      end;
+
+end;
+
+
+
+procedure TFclientesDatos.VSTOCreateEditor(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; out EditLink: IVTEditLink);
+begin
+EditLink := TObrasEditLink.Create;
+end;
+
+procedure TFclientesDatos.VSTOEdited(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
+var data:PTreeObras;
+begin
+if not Assigned(Node) then Exit;
+
+if Column in [1,2,3]  then
+try
+if Sender.GetNodeLevel(Node)=1 then
+begin
+data:=Sender.GetNodeData(Node.Parent);
+fdObras.RecNo:=Data.RecNo;
+data:=Sender.GetNodeData(Node);
+fdlineasObras.RecNo:=Data.RecNo;
+fdlineasObras.Edit;
+fdlineasObras.FieldByName('Descripcion').AsString:=Data.Descripcion;
+fdlineasObras.Post;
+end else
+ begin
+    data:=Sender.GetNodeData(Node);
+    fdObras.RecNo:=Data.RecNo;
+    fdObras.Edit;
+    fdobras.FieldByName('Descripcion').AsString:=Data.Descripcion;
+    fdobras.FieldByName('Fechacomienzo').AsDateTime:=Data.Fecha;
+    fdobras.FieldByName('FechaFin').AsDateTime:=Data.FechaFin;
+    fdobras.Post;
+
+ end;
+
+except
+    on E: Exception do
+    begin
+          if fdlineasObras.State in [dsInsert,dsEdit] then FDlineasObras.Cancel;
+          if fdobras.State in [dsInsert,dsEdit] then fdobras.Cancel;
+        Sender.EditNode(Node,column);
+    end;
+end;
+
+
+end;
+
+procedure TFclientesDatos.VSTOEditing(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; var Allowed: Boolean);
+begin
+if Column in [0,4,5] then Allowed:=False;
+end;
+
+procedure TFclientesDatos.VSTOGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: TImageIndex);
+var nivel:Integer;
+begin
+
+if Assigned(Node) then
+   nivel:=Sender.GetNodeLevel(Node);
+
+
+if Column=0 then
+    begin
+   case kind of
+
+     ikNormal,ikSelected:   case nivel of
+                          0: ImageIndex:=5;
+                          1:ImageIndex:=16;
+                            end;
+    end;
+    end;
+
+end;
+
+procedure TFclientesDatos.VSTOGetNodeDataSize(Sender: TBaseVirtualTree;
+  var NodeDataSize: Integer);
+begin
+NodeDataSize:=SizeOf(TTreeObra);
+end;
+
+procedure TFclientesDatos.VSTOGetText(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
+  var CellText: string);
+var data:PTreeObras;
+  begin
+     Data:=Sender.GetNodeData(node);
+
+    case Column of
+         0: CellText:=Data.NObra;
+         1: begin
+             if Sender.GetNodeLevel(node)=0 then
+             begin
+             TextType:=ttNormal;
+             CellText:=DateToStr(Data.Fecha);
+             end else CellText:='';
+            end;
+         2: begin
+             TextType:=ttNormal;
+             CellText:=Data.Descripcion;
+            end;
+         3: if Sender.GetNodeLevel(node)=0 then
+             begin
+             TextType:=ttNormal;
+             CellText:=DateToStr(Data.FechaFin);
+             end else CellText:='';
+
+         4: CellText:=FloatToStrF(Data.Total,ffCurrency,8,2);
+
+         5: begin
+                if Sender.GetNodeLevel(node)=1 then
+                 begin
+                      CellText:=Inttostr(Data.Npresupuesto)+' - '+InttoStr(Data.GrupoPresupuesto)
+                 end     else CellText:='';
+
+
+         end;
+
+
+    end;
+
+end;
+
+procedure TFclientesDatos.VSTOInitChildren(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; var ChildCount: Cardinal);
+var Data:PTreeObras;
+begin
+    data:=VSTP.GetNodeData(Node);
+    if Assigned(Node) then
+    begin
+       fdobras.RecNo:=Data.RecNo  ;
+       ChildCount:=FDlineasObras.RecordCount;
+
+    end;
+
+end;
+
+procedure TFclientesDatos.VSTOInitNode(Sender: TBaseVirtualTree; ParentNode,
+  Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
+var Data:PTreeObras;
+begin
+
+  data:=Sender.GetNodeData(Node);
+   if Assigned(data) then
+      begin
+
+          if ParentNode= nil then
+              begin
+          InitialStates:=[ivsHasChildren];
+          data.NObra:=fdobrasid_obra.AsString;
+          data.Fecha:=fdobrasfechaComienzo.AsDateTime;
+          data.Descripcion:=fdobrasdescripcion.AsString;
+          Data.Total:=fdobrasImporteObra.AsFloat;
+          Data.FechaFin:=fdobrasFechaFin.AsDateTime;
+          data.Ejecutado:=fdobrasEjecutado.AsBoolean;
+          data.RecNo:=fdobras.RecNo;
+          fdobras.Next;
+              end
+                  else begin
+                         data.Descripcion:=FDlineasObrasdescripcion.AsString;
+                          Data.Total:=FDlineasObrastotal.AsFloat;
+                          Data.Npresupuesto:=FDlineasObraspresupuestos_id_presupuesto.AsInteger;
+                          Data.GrupoPresupuesto:=FDlineasObraspresupuestos_grupo.AsInteger;
+                          Data.Ptdapresupuesto:=FDlineasObraspresupuestos_Id_Partida.AsInteger;
+                          data.RecNo:=FDlineasObras.RecNo;
+                        FDlineasObras.Next;
+                       end;
+
+      end;
+
+end;
+
+procedure TFclientesDatos.VSTPAfterCellPaint(Sender: TBaseVirtualTree;
+  TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+  CellRect: TRect);
+ var detalle:TThemedElementDetails;   data:PTreePresupuesto;
+begin
+if not Assigned(Node) then Exit;
+
+data:=Node.GetData;
+
+if Column=4 then
+ begin
+if (Data.Aprobado) then detalle:=ThemeServices.GetElementDetails(tbCheckBoxCheckedNormal)
+else  detalle:=ThemeServices.GetElementDetails(tbCheckBoxUncheckedNormal);
+ThemeServices.DrawElement(TargetCanvas.Handle,detalle,CellRect);
+
+
+end;
+
+end;
+
+procedure TFclientesDatos.VSTPBeforeCellPaint(Sender: TBaseVirtualTree;
+  TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+  CellPaintMode: TVTCellPaintMode; CellRect: TRect; var ContentRect: TRect);
+begin
+if Sender.GetNodeLevel(node) =0 then
+    begin
+
+     TargetCanvas.Brush.Color:=clInfoBk;
+     TargetCanvas.FillRect(CellRect);
+    end;
+end;
+
+procedure TFclientesDatos.VSTPChange(Sender: TBaseVirtualTree;
+  Node: PVirtualNode);
+begin
+ with Sender do
+  begin
+
+    if Assigned(Node) and (Sender.NodeParent[Node] <> nil) and not (tsIncrementalSearching in TreeStates) then
+    begin
+
+      PostMessage(Self.Handle, WM_STARTEDITING, WPARAM(Node), 0);
+    end;
+  end;
+end;
+
+procedure TFclientesDatos.VSTPCreateEditor(
+  Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex;
+  out EditLink: IVTEditLink);
+begin
+EditLink := TStringEditLink.Create;
+end;
+
+procedure TFclientesDatos.VSTPEdited(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
+var data:PTreePresupuesto;
+begin
+if not Assigned(Node) then Exit;
+
+if Column in [1,2,4]  then
+try
+if Sender.GetNodeLevel(Node)=1 then
+begin
+data:=Sender.GetNodeData(Node.Parent);
+fdpresupuestos.RecNo:=Data.RecNo;
+data:=Sender.GetNodeData(Node);
+fdlineaspresupuesto.RecNo:=Data.RecNo;
+fdlineaspresupuesto.Edit;
+fdlineaspresupuesto.FieldByName('Descripcion').AsString:=Data.Descripcion;
+fdlineaspresupuesto.FieldByName('aprovado').AsBoolean:=Data.Aprobado;
+fdlineaspresupuesto.Post;
+end else
+ begin
+    data:=Sender.GetNodeData(Node);
+    fdpresupuestos.RecNo:=Data.RecNo;
+    fdpresupuestos.Edit;
+    fdpresupuestos.FieldByName('Descripcion').AsString:=Data.Descripcion;
+    fdpresupuestos.FieldByName('FechaPresupuesto').AsDateTime:=Data.Fecha;
+    fdpresupuestos.FieldByName('aprovado').AsBoolean:=Data.Aprobado;
+    fdpresupuestos.Post;
+
+ end;
+
+except
+    on E: Exception do
+    begin
+          if fdlineaspresupuesto.State in [dsInsert,dsEdit] then fdlineaspresupuesto.Cancel;
+          if fdpresupuestos.State in [dsInsert,dsEdit] then fdpresupuestos.Cancel;
+        Sender.EditNode(Node,column);
+    end;
+end;
+end;
+
+procedure TFclientesDatos.VSTPEditing(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; var Allowed: Boolean);
+begin
+if (Column in [0,3]) or ((Column=6) and (Sender.GetNodeLevel(node)=1) ) then Allowed:=False;
+
+
+
+end;
+
+procedure TFclientesDatos.VSTPGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: TImageIndex);
+
+var nivel:Integer;
+begin
+
+if Assigned(Node) then
+   nivel:=Sender.GetNodeLevel(Node);
+
+
+if Column=0 then
+    begin
+   case kind of
+
+     ikNormal,ikSelected:   case nivel of
+                          0: ImageIndex:=13;
+                          1:ImageIndex:=16;
+                            end;
+    end;
+    end;
+end;
+
+
+
+procedure TFclientesDatos.VSTPGetNodeDataSize(Sender: TBaseVirtualTree;
+  var NodeDataSize: Integer);
+begin
+  NodeDataSize:=SizeOf(TTreePresupuesto);
+end;
+
+procedure TFclientesDatos.VSTPGetText(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
+  var CellText: string);
+ var data:PTreePresupuesto;
+  begin
+     Data:=Sender.GetNodeData(node);
+
+    case Column of
+         0: CellText:=Data.NPresupuesto;
+         1: begin
+             if Sender.GetNodeLevel(node)=0 then
+             begin
+             TextType:=ttNormal;
+             CellText:=DateToStr(Data.Fecha);
+            end;
+            end;
+         2: begin
+             TextType:=ttNormal;
+                          CellText:=Data.Descripcion;
+            end;
+         3: CellText:=FloatToStrF(Data.total,ffCurrency,8,2);
+         4: CellText:='';
+    end;
+
+end;
+
+procedure TFclientesDatos.VSTPHeaderDraw(Sender: TVTHeader;
+  HeaderCanvas: TCanvas; Column: TVirtualTreeColumn; R: TRect; Hover,
+  Pressed: Boolean; DropMark: TVTDropMarkMode);
+begin
+HeaderCanvas.Font.Style:=[fsbold];
+end;
+
+procedure TFclientesDatos.VSTPInitChildren(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; var ChildCount: Cardinal);
+var Data:PTreePresupuesto;
+begin
+    data:=VSTP.GetNodeData(Node);
+    if Assigned(Node) then
+    begin
+       fdpresupuestos.RecNo:=Data.RecNo  ;
+       ChildCount:=fdlineaspresupuesto.RecordCount;
+
+    end;
+end;
+
+procedure TFclientesDatos.VSTPInitNode(Sender: TBaseVirtualTree;
+  ParentNode, Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
+var Data:PTreePresupuesto;
+begin
+
+  data:=Sender.GetNodeData(Node);
+   if Assigned(data) then
+      begin
+
+          if ParentNode= nil then
+              begin
+          InitialStates:=[ivsHasChildren];
+          data.NPresupuesto:=fdpresupuestos.FieldByName('id_presupuesto').AsString + ' - ' +fdpresupuestos.FieldByName('grupo').AsString;
+          data.Fecha:=fdpresupuestos.FieldByName('FechaPresupuesto').AsDateTime;
+          data.Descripcion:=fdpresupuestos.FieldByName('descripcion').AsString;
+          Data.Total:=fdpresupuestos.FieldByName('Total').AsFloat;
+          data.Aprobado:=fdpresupuestos.FieldByName('Aprovado').AsBoolean;
+          data.RecNo:=FDpresupuestos.RecNo;
+          fdpresupuestos.Next;
+              end
+                  else begin
+                         data.Descripcion:=fdlineaspresupuesto.FieldByName('descripcion').AsString;
+                          Data.Total:=fdlineaspresupuesto.FieldByName('Total').AsFloat;
+                          data.Aprobado:=fdlineaspresupuesto.FieldByName('Aprovado').AsBoolean;
+                         data.RecNo:=fdlineaspresupuesto.RecNo;
+                        fdlineaspresupuesto.Next;
+                       end;
+
+      end;
+end;
+
+
+
+
+
+
+procedure TFclientesDatos.VSTPPaintText(Sender: TBaseVirtualTree;
+  const TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
+  TextType: TVSTTextType);
+begin
+if Sender.GetNodeLevel(Node) = 0 then
+
+TargetCanvas.Font.Style:=[fsBold];
+TargetCanvas.Font.Size:=9;
+
+
+end;
+
+
+
+end.

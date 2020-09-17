@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, System.Rtti,
-  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, System.Rtti,  System.Win.ComObj,
+  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt, Winapi.ShellAPI,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, Vcl.StdCtrls,DB,
   Vcl.ExtCtrls, Vcl.ToolWin, FireDAC.Stan.Intf, FireDAC.Stan.Option, System.DateUtils ,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
@@ -35,6 +35,10 @@ type
     lbed1: TLabeledEdit;
     rb1: TRadioButton;
     rb2: TRadioButton;
+    ToolButton1: TToolButton;
+    btnmail: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure cbaprobadoClick(Sender: TObject);
@@ -47,9 +51,19 @@ type
     procedure rb1Click(Sender: TObject);
     procedure rb2Click(Sender: TObject);
     procedure rDBGridClientes1DblClick(Sender: TObject);
-
+    procedure fdqpresupuestosFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+    procedure fdqpresupuestosAfterDelete(DataSet: TDataSet);
+    procedure fdqpresupuestosAfterOpen(DataSet: TDataSet) ;
+    procedure fdqpresupuestosAfterPost(DataSet: TDataSet);
+    procedure btnmailClick(Sender: TObject);
+    procedure rDBGridClientes1FixColClick(Sender: TObject);
+    procedure ToolButton2Click(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
+    procedure FormClose2(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    function DevolverTrabajadores(npresu,grupo:integer):string;
   public
     { Public declarations }
   end;
@@ -63,7 +77,7 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, clientes, FPrincipal;
+uses DModule1, DmoduleReports, clientes, FPrincipal;
 
 
 
@@ -89,6 +103,68 @@ begin
        begin
            DataModule1.fdpresupuestos.Delete;
        end
+
+
+end;
+
+procedure Tlistpresupuestos.btnmailClick(Sender: TObject);
+var mail, parametro,nombresinext,extension,ruta,nombre,destinatario,asunto,cuerpo,adjunto,fichero:string; MSWord:Variant;  fdq:TFDQuery;
+begin
+
+ fichero:=PATHUSER+ds1.dataset.FieldByName('path').AsString;
+ ruta:=ExtractFilePath(fichero);
+ nombre:=ExtractFileName(fichero);
+ extension:=ExtractFileExt(fichero);
+ nombresinext:=copy(nombre,0,pos(extension,nombre)-1);
+
+  mail:=PATHTHUNDERBIRD;
+
+   if not FileExists(mail) then begin
+     MessageBox(Handle, 'No se encuentra el programa de correo Thunderbird.',
+       'Error', MB_OK + MB_ICONSTOP);
+
+     Exit;
+   end;
+
+
+if FileExists(fichero) then
+  begin
+  try
+    MSWord:=GetActiveOleOBject('Word.Application');
+    except
+      MsWord:=CreateOleObject('Word.Application');
+    end;
+
+     MSWord.Documents.Open(fichero);
+     MSWord.ActiveDocument.SaveAs2(ruta+nombresinext+'.pdf',17);
+     MSWord.ActiveDocument.close;
+
+     fdq:=TFDQuery.Create(Self);
+     fdq.connection:=DataModule1.FDConnection1;
+     fdq.SQL.Add('SELECT correo FROM clientes C, administradores A, presupuestos P WHERE P.id_presupuesto=:idpresupuesto and P.id_ClientePrev=C.idContactos AND C.idAdministrador=A.idAdministrador');
+     fdq.ParamByName('idpresupuesto').AsInteger:=ds1.dataset.FieldByName('id_presupuesto').AsInteger;
+     fdq.Active:=true;
+
+     if fdq.RecordCount > -1 then
+        begin
+
+       destinatario:='to='+fdq.fieldbyname('correo').asstring+',';
+       Asunto:='subject='+nombre+',';
+       Cuerpo:='body=Hola%20envío%20presupuesto solicitado.%0D%0A%0D%0A Saludos cordiales.'+',';
+       adjunto:='attachment=file:///'+DataModule1.cambiarbarras(ruta)+nombresinext+'.pdf'+'"';
+
+
+        parametro:= '-compose "'+destinatario+Asunto+Cuerpo+adjunto;
+       shellExecute(0,'open',PChar(mail),Pchar(parametro),nil,SW_SHOWNORMAL);
+
+        end
+        else
+        showmessage('No existe destinatario de correo electronico.');
+
+         fdq.close;
+         fdq.free;
+        end
+  else showmessage('No se puede enviar el presupuesto porque el fichero Word no existe.')
 
 
 end;
@@ -133,15 +209,96 @@ procedure Tlistpresupuestos.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
 DataModule1.fdpresupuestos.Active:=false;
+ds1.DataSet.AfterOpen:= nil;
+     ds1.DataSet.AfterPost:= nil;
+     ds1.DataSet.AfterDelete:=nil;
+     ds1.dataset.onfilterrecord:=nil;
+
 Action:=cafree;
 end;
+
+function Tlistpresupuestos.DevolverTrabajadores(npresu,grupo:integer):string;
+var fdq:TFDQuery;
+begin
+Result:='';
+fdq:=TFDQuery.Create(Self);
+fdq.Connection:=DataModule1.FDConnection1;
+fdq.SQL.Add('SELECT nombre FROM presupuestostrabajadores PT, trabajadores T where PT.id_presupuesto=:v1 and PT.grupo=:v2 and T.id_trabajador=PT.id_trabajador');
+fdq.ParamByName('v1').AsInteger:=npresu;
+fdq.ParamByName('v2').AsInteger:=grupo;
+fdq.Active:=True;
+
+if fdq.RecordCount>0  then
+begin
+fdq.First;
+Result:=fdq.FieldByName('nombre').AsString;
+fdq.Next;
+while not fdq.eof do
+begin
+    Result:=Result+ ' / ' +fdq.FieldByName('nombre').AsString;
+    fdq.Next;
+end;
+end;
+
+fdq.Close;
+fdq.Free;
+
+end;
+
+
+procedure Tlistpresupuestos.FormClose2(Sender: TObject; var Action: TCloseAction);
+var i:Integer; fdq:TFDQuery;
+begin
+
+fdq:=TFDQuery.Create(Self);
+fdq.Connection:=DataModule1.FDConnection1;
+fdq.SQL.Add('INSERT INTO previsionpresupuestos (id_presupuesto,grupo,trabajadores,total,mesprevision) VALUES (:v1, :v2, :v3, :v4,:v5)');
+
+for i := 0 to rDBGridClientes1.rBookmarks.Count -1 do
+begin
+      ds1.DataSet.GotoBookmark(rDBGridClientes1.rBookmarks.Items[i]);
+
+fdq.ParamByName('v1').AsInteger:=ds1.DataSet.FieldByName('id_presupuesto').AsInteger;
+fdq.ParamByName('v2').AsInteger:=ds1.DataSet.FieldByName('grupo').AsInteger;
+fdq.ParamByName('v3').Asstring:=DevolverTrabajadores(ds1.DataSet.FieldByName('id_presupuesto').AsInteger,ds1.DataSet.FieldByName('grupo').AsInteger);
+fdq.ParamByName('v4').Asfloat:=ds1.DataSet.FieldByName('Total').AsFloat;
+fdq.ParamByName('v5').AsDate:=Date;
+
+fdq.Prepare;
+fdq.ExecSQL;
+
+
+end;
+
+fdq.Close;
+fdq.Free;
+
+DataModule1.fdpresupuestos.Active:=false;
+ds1.DataSet.AfterOpen:= nil;
+     ds1.DataSet.AfterPost:= nil;
+     ds1.DataSet.AfterDelete:=nil;
+     ds1.dataset.onfilterrecord:=nil;
+
+Action:=cafree;
+end;
+
+
 
 procedure Tlistpresupuestos.FormCreate(Sender: TObject);
 begin
      DateTimePicker1.Date:=StrToDate('01/01/'+IntToStr(YearOf(Date)));
      DateTimePicker2.Date:=Date;
 
+
+
+     ds1.DataSet.AfterOpen:= fdqpresupuestosAfterOpen;
+     ds1.DataSet.AfterPost:= fdqpresupuestosAfterPost;
+     ds1.DataSet.AfterDelete:=fdqpresupuestosAfterDelete;
+     ds1.dataset.onfilterrecord:=fdqpresupuestosFilterRecord;
+
+
      DataModule1.fdpresupuestos.Active:=true;
+
 end;
 
 
@@ -187,6 +344,50 @@ end;
 procedure Tlistpresupuestos.rDBGridClientes1DblClick(Sender: TObject);
 begin
 DataModule1.editarpresupuestoExecute(ds1.DataSet);
+end;
+
+
+procedure Tlistpresupuestos.rDBGridClientes1FixColClick(Sender: TObject);
+begin
+//if  TrDBGrid_MS(Sender).Column.Field=DataModule1.fdpresupuestosid_presupuesto then DataModule1.fdpresupuestos.IndexName:='idpresu';
+end;
+
+procedure Tlistpresupuestos.ToolButton2Click(Sender: TObject);
+begin
+
+DataModule2.FDPresupuestosAprobados.Active:=True;
+DataModule2.fdDetallePresupuestos.Active:=True;
+
+DataModule2.frxPresupuestosAprobados.ShowReport(True);
+DataModule2.FDPresupuestosAprobados.Active:=False;
+DataModule2.fdDetallePresupuestos.Active:=False;
+
+end;
+
+procedure Tlistpresupuestos.ToolButton3Click(Sender: TObject);
+begin
+ DataModule1.rXLSExport1.ExportDBTable(rDBGridClientes1);
+end;
+
+procedure Tlistpresupuestos.fdqpresupuestosAfterOpen(DataSet: TDataSet) ;
+begin
+     rDBGridClientes1.RecalculateSummaryResults(true);
+end;
+
+procedure Tlistpresupuestos.fdqpresupuestosAfterPost(DataSet: TDataSet);
+begin
+    rDBGridClientes1.RecalculateSummaryResults(true);
+end;
+
+procedure Tlistpresupuestos.fdqpresupuestosAfterDelete(DataSet: TDataSet);
+begin
+  rDBGridClientes1.RecalculateSummaryResults(true);
+end;
+
+procedure Tlistpresupuestos.fdqpresupuestosFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+  rDBGridClientes1.RecalculateSummaryResults(true);
 end;
 
 end.

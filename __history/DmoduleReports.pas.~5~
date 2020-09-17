@@ -1,0 +1,34 @@
+unit DmoduleReports;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, frxClass, frxDBSet, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TDataModule2 = class(TDataModule)
+    frxFacturasImpagadas: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    FDFacturasImpagadas: TFDQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule2: TDataModule2;
+
+implementation
+
+uses
+  DModule1;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

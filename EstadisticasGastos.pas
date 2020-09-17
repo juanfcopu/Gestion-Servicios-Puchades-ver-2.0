@@ -11,8 +11,12 @@ uses
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.ExtCtrls, RzPanel, RzSplit, dateUtils,
   Vcl.WinXCtrls, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.Mask, Vcl.DBCtrls,
-  rDBComponents, RzTabs, Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.StorageXML,
-  frxClass;
+  rDBComponents, RzTabs, Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.StorageXML,Printers,
+  rStringGridEd, RzGrids, RzEdit, RzButton, rDBGrid, rDBGrid_MS,
+  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.TeeProcs, VCLTee.Chart,
+  VCLTee.DBChart, VCLTee.TeCanvas, VCLTee.TeePenDlg, VCLTee.TeeData,
+  VCLTee.Series, RzLabel,System.VarUtils;
+ // frxClass;
 
 type
 
@@ -21,6 +25,7 @@ type
 tivas=record
       iva:integer;
       total:Real;
+      contador:Integer;
     end;
 
     Tivasrec= array of tivas;
@@ -39,7 +44,6 @@ tNumfac=record
     rComboBoxEx1: TrComboBoxEx;
     lbl1: TLabel;
     rzspltr1: TRzSplitter;
-    actInd1: TActivityIndicator;
     rComboBoxEx2: TrComboBoxEx;
     btnExpandirArbol: TToolButton;
     btnContraer: TToolButton;
@@ -47,123 +51,53 @@ tNumfac=record
     actExpandirArbol: TAction;
     actContraer: TAction;
     btn1: TToolButton;
-    RzGroupBox1: TRzGroupBox;
-    RzPageControl1: TRzPageControl;
-    TabSheet1: TRzTabSheet;
+    ActInd1: TActivityIndicator;
+    TabSheet3: TRzTabSheet;
+    RzStringGrid1: TRzStringGrid;
     RzGroupBox2: TRzGroupBox;
-    RzGroupBox5: TRzGroupBox;
-    RzGroupBox3: TRzGroupBox;
-    lbedVIVAN103: TLabeledEdit;
-    lbedVIVAT103: TLabeledEdit;
-    RzGroupBox4: TRzGroupBox;
-    lbedVIVAN213: TLabeledEdit;
-    lbedVIVAT213: TLabeledEdit;
-    RzGroupBox6: TRzGroupBox;
-    lbedVIVAN3: TLabeledEdit;
-    lbedVIVAT3: TLabeledEdit;
-    RzGroupBox7: TRzGroupBox;
-    RzGroupBox8: TRzGroupBox;
-    lbedGIVAN103: TLabeledEdit;
-    lbedGIVAT103: TLabeledEdit;
-    RzGroupBox9: TRzGroupBox;
-    lbedGIVAN213: TLabeledEdit;
-    lbedGIVAT213: TLabeledEdit;
-    RzGroupBox10: TRzGroupBox;
-    lbedGIVAN3: TLabeledEdit;
-    lbedGIVAT3: TLabeledEdit;
-    RzGroupBox11: TRzGroupBox;
-    RzGroupBox12: TRzGroupBox;
-    RzGroupBox13: TRzGroupBox;
-    lbedVIVAN101: TLabeledEdit;
-    RzGroupBox14: TRzGroupBox;
-    lbedVIVAN211: TLabeledEdit;
-    lbedVIVAT211: TLabeledEdit;
-    RzGroupBox15: TRzGroupBox;
-    lbedVIVAN1: TLabeledEdit;
-    lbedVIVAT1: TLabeledEdit;
-    RzGroupBox16: TRzGroupBox;
-    RzGroupBox17: TRzGroupBox;
-    lbedGIVAN101: TLabeledEdit;
-    lbedGIVAT101: TLabeledEdit;
-    RzGroupBox18: TRzGroupBox;
-    lbedGIVAN211: TLabeledEdit;
-    lbedGIVAT211: TLabeledEdit;
-    RzGroupBox19: TRzGroupBox;
-    lbedGIVAN1: TLabeledEdit;
-    lbedGIVAT1: TLabeledEdit;
-    RzGroupBox20: TRzGroupBox;
-    RzGroupBox21: TRzGroupBox;
-    RzGroupBox22: TRzGroupBox;
-    lbedVIVAN102: TLabeledEdit;
-    lbedVIVAT102: TLabeledEdit;
-    RzGroupBox23: TRzGroupBox;
-    lbedVIVAN212: TLabeledEdit;
-    lbedVIVAT212: TLabeledEdit;
-    RzGroupBox24: TRzGroupBox;
-    lbedVIVAN2: TLabeledEdit;
-    lbedVIVAT2: TLabeledEdit;
-    RzGroupBox25: TRzGroupBox;
-    RzGroupBox26: TRzGroupBox;
-    lbedGIVAN102: TLabeledEdit;
-    lbedGIVAT102: TLabeledEdit;
-    RzGroupBox27: TRzGroupBox;
-    lbedGIVAN212: TLabeledEdit;
-    lbedGIVAT212: TLabeledEdit;
-    RzGroupBox28: TRzGroupBox;
-    lbedGIVAN2: TLabeledEdit;
-    lbedGIVAT2: TLabeledEdit;
-    RzGroupBox29: TRzGroupBox;
-    lbedT1: TLabeledEdit;
-    lbedT2: TLabeledEdit;
-    lbedT3: TLabeledEdit;
-    lbedT: TLabeledEdit;
-    lbedVIVAT101: TLabeledEdit;
-    lbl3: TLabel;
+    LabeledEdit3: TLabeledEdit;
+    LabeledEdit4: TLabeledEdit;
+    LabeledEdit5: TLabeledEdit;
+    LabeledEdit6: TLabeledEdit;
+    LabeledEdit7: TLabeledEdit;
+    RzButton1: TRzButton;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    Button1: TButton;
+    TabSheet1: TRzTabSheet;
+    RzStringGrid2: TRzStringGrid;
+    LabeledEdit8: TLabeledEdit;
+    LabeledEdit9: TLabeledEdit;
+    Button2: TButton;
+    rzPageControl1: TRzPageControl;
     TabSheet2: TRzTabSheet;
-    rzgrpbx1: TRzGroupBox;
-    rzgrpbx2: TRzGroupBox;
-    rzgrpbx6: TRzGroupBox;
-    lbedGN3: TLabeledEdit;
-    lbedGFT3: TLabeledEdit;
-    lbedN3: TLabeledEdit;
-    lbedSS3: TLabeledEdit;
-    lbedS3: TLabeledEdit;
-    lbedVN3: TLabeledEdit;
-    lbedVFT3: TLabeledEdit;
-    lbedGT3: TLabeledEdit;
-    lbedVT3: TLabeledEdit;
-    rzgrpbx3: TRzGroupBox;
-    lbl2: TLabel;
-    lbedTIRPF: TLabeledEdit;
-    rzgrpbx4: TRzGroupBox;
-    rzgrpbx5: TRzGroupBox;
-    lbedVN2: TLabeledEdit;
-    lbedVFT2: TLabeledEdit;
-    lbedVT2: TLabeledEdit;
-    rzgrpbx7: TRzGroupBox;
-    lbedGN2: TLabeledEdit;
-    lbedGFT2: TLabeledEdit;
-    lbedN2: TLabeledEdit;
-    lbedSS2: TLabeledEdit;
-    lbedS2: TLabeledEdit;
-    lbedGT2: TLabeledEdit;
-    rzgrpbx8: TRzGroupBox;
-    rzgrpbx9: TRzGroupBox;
-    lbedVN1: TLabeledEdit;
-    lbedVFT1: TLabeledEdit;
-    lbedVT1: TLabeledEdit;
-    rzgrpbx10: TRzGroupBox;
-    lbedGN1: TLabeledEdit;
-    lbedGFT1: TLabeledEdit;
-    lbedN1: TLabeledEdit;
-    lbedSS1: TLabeledEdit;
-    lbedS1: TLabeledEdit;
-    lbedGT1: TLabeledEdit;
-    lbedTM1: TLabeledEdit;
-    lbedV: TLabeledEdit;
-    lbedTM2: TLabeledEdit;
-    lbedG: TLabeledEdit;
-    lbedTM3: TLabeledEdit;
+    ToolButton1: TToolButton;
+    PrintDialog1: TPrintDialog;
+    FDcuentas: TFDQuery;
+    fddiario: TFDQuery;
+    dscuentas: TDataSource;
+    dsdiario: TDataSource;
+    rGroupBox1: TrGroupBox;
+    Panel1: TPanel;
+    LabeledEdit11: TLabeledEdit;
+    LabeledEdit10: TLabeledEdit;
+    Button3: TButton;
+    rdbcuentas: TrDBGrid_MS;
+    rGroupBox2: TrGroupBox;
+    rdbdiario: TrDBGrid_MS;
+    fdGastosPorCategoria: TFDQuery;
+    ds: TDataSource;
+    fdfacturacionmensual: TFDQuery;
+    TabSheet4: TRzTabSheet;
+    DBChart1: TDBChart;
+    Series1: TBarSeries;
+    fdfacturaciontrimestral: TFDQuery;
+    DBChart2: TDBChart;
+    BarSeries1: TBarSeries;
+    RzLabel1: TRzLabel;
+    RzLabel2: TRzLabel;
+    RzLabel3: TRzLabel;
+    RzLabel4: TRzLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure rComboBoxEx1Change(Sender: TObject);
@@ -173,28 +107,25 @@ tNumfac=record
     procedure btn1Click(Sender: TObject);
     procedure actExpandirArbolUpdate(Sender: TObject);
     procedure actContraerUpdate(Sender: TObject);
-    procedure lbedGIVAN101Change(Sender: TObject);
-    procedure lbedVIVAN101Change(Sender: TObject);
-    procedure lbedGIVAN102Change(Sender: TObject);
-    procedure lbedVIVAN102Change(Sender: TObject);
-    procedure lbedGIVAN103Change(Sender: TObject);
-    procedure lbedVIVAN103Change(Sender: TObject);
-    procedure lbedGIVAT1Change(Sender: TObject);
-    procedure lbedGIVAT2Change(Sender: TObject);
-    procedure lbedGIVAT3Change(Sender: TObject);
-    procedure lbedT1Change(Sender: TObject);
-    procedure lbedGFT1Change(Sender: TObject);
-    procedure lbedVFT1Change(Sender: TObject);
-    procedure lbedVFT2Change(Sender: TObject);
-    procedure lbedVFT3Change(Sender: TObject);
-    procedure lbedGFT2Change(Sender: TObject);
-    procedure lbedGFT3Change(Sender: TObject);
-    procedure lbedGT1Change(Sender: TObject);
-    procedure lbedGT2Change(Sender: TObject);
-    procedure lbedGT3Change(Sender: TObject);
-    procedure lbedT2Change(Sender: TObject);
     procedure rCheckTreeView1DblClick(Sender: TObject);
     procedure rCheckTreeView1Click(Sender: TObject);
+    procedure TabSheet3Show(Sender: TObject);
+    procedure RzStringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure LabeledEdit3KeyPress(Sender: TObject; var Key: Char);
+    procedure RzButton1Click(Sender: TObject);
+    procedure RzStringGrid2DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure TabSheet1Show(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure RzPageControl1Change(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure TabSheet2Show(Sender: TObject);
+    procedure FDcuentasAfterScroll(DataSet: TDataSet);
+    procedure fddiarioAfterOpen(DataSet: TDataSet);
+    procedure fddiarioAfterPost(DataSet: TDataSet);
+    procedure fddiarioAfterRefresh(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -208,19 +139,21 @@ tNumfac=record
     function CalcularIVAFacturasVentas:Tivasrec;
     function CalcularIVAFacturasCompras:Tivasrec;
     function CalcularIRPFFacturasVentas:Tivasrec;
-    function CalcularIRPFFacturasCompras:Tivasrec;
+    //function CalcularIRPFFacturasCompras:Tivasrec;
     function CalcularIRPFFacturasComprasTotal:Real;
     function CalcularIRPFFacturasVentasTotal:Real;
-    function CalcularIRPFTicketCompras:Real;
-    function CalcularNominas:Real;
-    function CalcularSegurosSociales:Real;
-    function CalcularSeguros:Real;
+    procedure CalcularIRPFyNTicketCompras(var N:Integer; var total:real);
+    procedure CalcularNominasyN(var N:Integer; var total:real);
+    procedure CalcularSegurosSocialesyN(var N:integer;var total:real);
+    procedure CalcularSegurosyN(var N:Integer; var total:real);
     function calcularIVAGastosNFactura:TNumfacrec;
     function calcularIVAVentasNFactura:TNumfacrec;
     function calcularGastosNFacturaTotal:integer;
     function calcularVentasNFacturaTotal:integer;
-
-
+  //  procedure BorrarStringgrid(stgr:TStringGrid);
+    procedure CalcularBancosyN(var N:Integer; var total:real);
+    procedure CalcularInteresesyN(var N:Integer; var total:real);
+     procedure CalcularIRPFFacturasCompras(var N:Integer;var total:real);
    // function CalcularVentasNfacturas:Tivasrec;
 
 
@@ -243,81 +176,146 @@ uses
 var ano,m1,m2, peridodo:integer ;
 
 {$R *.dfm}
+{
+procedure TFEstadisticasGastosVentas.BorrarStringgrid(stgr:TStringGrid);
+
+begin
+    stgr.Canvas.Brush.Style:=bsclear;
+stgr.Canvas.Brush.Color:=clWhite;
+stgr.Canvas.Rectangle(RzStringGrid2.ClientRect);
+    stgr.Repaint;
+end;
+ }
 
 procedure TFEstadisticasGastosVentas.llenarIVATrimestre(trimestre:integer);
-var h,j,i,me1,me2:Integer; Ti:Tivasrec; Tn:TNumfacrec;
+var Ti:Tivasrec; Tn:TNumfacrec;  total,TCompras,TVentas,TIRPFCOmpras,TIRPFVentas:Real; num:integer;
 begin
-  RzGroupBox1.Caption:=rComboBoxEx1.Text;
+
+
+
+  LabeledEdit1.text:=rComboBoxEx1.Text ;
+  LabeledEdit8.Text:=LabeledEdit1.Text;
+  LabeledEdit2.Text:=rComboBoxEx2.Text ;
+  LabeledEdit9.Text:=LabeledEdit2.Text;
+  LabeledEdit11.Text:=rComboBoxEx2.Text ;
+  LabeledEdit10.Text:=LabeledEdit1.Text;
 
   DataModule1.ObtenerMesesTrimestre(trimestre,m1,m2);
 
-    me1:=m1;
-    me2:=m2;
+     DataModule1.BorrarStringgrid(RzStringGrid1);
 
-    RzGroupBox11.Caption:=meses[m1];
-    RzGroupBox20.Caption:=meses[m1+1];
-    RzGroupBox2.Caption:=meses[m1+2];
-
-    rzgrpbx8.Caption:=RzGroupBox11.Caption;
-    rzgrpbx4.Caption:=RzGroupBox20.Caption;
-    rzgrpbx1.Caption:=RzGroupBox2.Caption;
-
-
-   j:=1;
-   for i := m1 to m2 do
-   begin
-      m1:=i;
-      m2:=i;
       Tn:= calcularIVAGastosNFactura;
-      for h:=0 to Length(Tn)-1  do
-       begin
-           TLabeledEdit(FindComponent('lbedGIVAN'+Tn[h].iva.ToString+j.ToString)).Text:= Tn[h].total.tostring;
-       end;
 
-       Ti:=CalcularIVAFacturasCompras;
-       for h:=0 to Length(Ti) - 1 do
-       begin
-           TLabeledEdit(FindComponent('lbedGIVAT'+Ti[h].iva.ToString+j.ToString)).Text:= FloatToStrF(Ti[h].total,ffCurrency,8,2);
-       end;
-
-       Tn:= calcularIVAVentasNFactura;
-      for h:=0 to Length(Tn)-1  do
-       begin
-           TLabeledEdit(FindComponent('lbedVIVAN'+Tn[h].iva.ToString+j.ToString)).Text:= Tn[h].total.tostring;
-       end;
+      RzStringGrid1.Cells[2,4]:=Tn[0].total.ToString;
+      RzStringGrid1.Cells[2,5]:=Tn[1].total.ToString;
+      RzStringGrid1.Cells[2,6]:=IntToStr( Tn[0].total + Tn[1].total);
+      RzStringGrid2.Cells[2,4]:=RzStringGrid1.Cells[2,4];
 
 
-       Ti:=CalcularIVAFacturasVentas;
-       for h:=0 to Length(Ti) - 1 do
-       begin
-           TLabeledEdit(FindComponent('lbedVIVAT'+Ti[h].iva.ToString+j.ToString)).Text:= FloatToStrF(Ti[h].total,ffCurrency,8,2);
-       end;
-
-
-        TLabeledEdit(FindComponent('lbedGN'+j.ToString)).Text:= intToStr(calcularGastosNFacturaTotal);
-
-        TLabeledEdit(FindComponent('lbedGFT'+j.ToString)).Text:= FloatToStrF(CalcularIRPFTicketCompras+CalcularIRPFFacturasComprasTotal,ffCurrency,8,2);
-
-        TLabeledEdit(FindComponent('lbedN'+j.ToString)).Text:= FloatToStrF(CalcularNominas,ffCurrency,8,2);
-
-
-        TLabeledEdit(FindComponent('lbedSS'+j.ToString)).Text:= FloatToStrF(CalcularSegurosSociales,ffCurrency,8,2);
-
-        TLabeledEdit(FindComponent('lbedS'+j.ToString)).Text:= FloatToStrF(CalcularSeguros,ffCurrency,8,2);
-
-
-        TLabeledEdit(FindComponent('lbedVN'+j.ToString)).Text:= intToStr(calcularVentasNFacturaTotal);
-
-         TLabeledEdit(FindComponent('lbedVFT'+j.ToString)).Text:= floatToStrF(CalcularIRPFFacturasVentasTotal,ffCurrency,8,2);
+      Tn:= calcularIVAVentasNFactura;
+      RzStringGrid1.Cells[2,1]:=Tn[0].total.ToString;
+      RzStringGrid1.Cells[2,2]:=Tn[1].total.ToString;
+      RzStringGrid1.Cells[2,3]:=IntToStr( Tn[0].total + Tn[1].total);
+      RzStringGrid2.Cells[2,1]:=RzStringGrid1.Cells[2,1];
+      RzStringGrid2.Cells[2,2]:=RzStringGrid1.Cells[2,2];
+      RzStringGrid2.Cells[2,3]:=RzStringGrid1.Cells[2,3];
 
 
 
-      Inc(j);
-   end;
+      Ti:=CalcularIVAFacturasCompras;
+      RzStringGrid1.Cells[5,4]:=FloatToStrF(Ti[0].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[5,5]:=FloatToStrF(Ti[1].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[5,6]:=FloatToStrF(Ti[0].total + Ti[1].total,ffCurrency,8,2);
 
-      m1:=me1;
-      m2:=me2;
 
+      TCompras:=Ti[0].total + Ti[1].total;
+
+      LabeledEdit3.Text:=FloatToStrF(Ti[0].total,ffFixed,8,2);
+      LabeledEdit4.Text:=FloatToStrF(Ti[1].total,ffFixed,8,2);
+
+      Ti:=CalcularIRPFFacturasVentas;
+      RzStringGrid1.Cells[3,1]:=FloatToStrF(Ti[0].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[3,2]:=FloatToStrF(Ti[1].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[3,3]:=FloatToStrF(Ti[0].total + Ti[1].total,ffCurrency,8,2);
+      RzStringGrid2.Cells[3,1]:=RzStringGrid1.Cells[3,1];
+      RzStringGrid2.Cells[3,2]:=RzStringGrid1.Cells[3,2];
+      RzStringGrid2.Cells[3,3]:=RzStringGrid1.Cells[3,3];
+      RzStringGrid2.Cells[5,3]:=RzStringGrid1.Cells[3,3];
+
+      TIRPFVentas:=Ti[0].total + Ti[1].total;
+
+      Ti:=CalcularIVAFacturasVentas;
+      RzStringGrid1.Cells[5,1]:=FloatToStrF(Ti[0].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[5,2]:=FloatToStrF(Ti[1].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[5,3]:=FloatToStrF(Ti[0].total + Ti[1].total,ffCurrency,8,2);
+
+       TVentas:=Ti[0].total + Ti[1].total;
+
+
+      LabeledEdit5.Text:=FloatToStrF(Ti[0].total,ffFixed,8,2);
+      LabeledEdit6.Text:=FloatToStrF(Ti[1].total,ffFixed,8,2);
+
+      CalcularIRPFFacturasCompras(num,Total);
+      //RzStringGrid1.Cells[3,4]:=FloatToStrF(Ti[0].total,ffCurrency,8,2);
+      RzStringGrid1.Cells[3,5]:=FloatToStrF(Total,ffCurrency,8,2);
+      RzStringGrid1.Cells[3,6]:=FloatToStrF(Total,ffCurrency,8,2);
+      RzStringGrid2.Cells[3,4]:=RzStringGrid1.Cells[3,4];
+      RzStringGrid2.Cells[3,5]:=RzStringGrid1.Cells[3,5];
+      RzStringGrid2.Cells[3,6]:=RzStringGrid1.Cells[3,6];
+      RzStringGrid2.Cells[5,6]:=RzStringGrid1.Cells[3,6];
+
+      RzStringGrid2.Cells[2,5]:=num.ToString;
+      RzStringGrid2.Cells[2,6]:=num.ToString;
+
+
+      RzStringGrid1.Cells[5,8]:=FloatToStrF(TVentas-TCompras,ffCurrency,8,2);
+
+      LabeledEdit7.Text:=FloatToStrF(TVentas-TCompras,ffFixed,8,2);
+
+     TIRPFCompras:=TIRPFCompras+total;
+
+      CalcularIRPFyNTicketCompras(Num,Total);
+      RzStringGrid2.Cells[2,7]:= intToStr(Num);
+      RzStringGrid2.Cells[3,7]:= FloatToStrF(Total,ffCurrency,8,2);
+
+      TIRPFCompras:=TIRPFCompras+total;
+
+      CalcularNominasyN(Num,Total);
+      RzStringGrid2.Cells[2,8]:= intToStr(Num);
+      RzStringGrid2.Cells[3,8]:= FloatToStrF(Total,ffCurrency,8,2);
+
+      TIRPFCompras:=TIRPFCompras+total;
+
+
+      CalcularSegurosSocialesyN(Num,Total);
+      RzStringGrid2.Cells[2,9]:= intToStr(Num);
+      RzStringGrid2.Cells[3,9]:= FloatToStrF(Total,ffCurrency,8,2);
+
+      TIRPFCompras:=TIRPFCOmpras+total;
+
+      CalcularSegurosyN(Num,Total);
+      RzStringGrid2.Cells[2,10]:= intToStr(Num);
+      RzStringGrid2.Cells[3,10]:= FloatToStrF(Total,ffCurrency,8,2);
+
+       TIRPFCompras:=TIRPFCompras+total;
+
+      CalcularInteresesyN(Num,Total);
+      RzStringGrid2.Cells[2,11]:= intToStr(Num);
+      RzStringGrid2.Cells[3,11]:= FloatToStrF(Total,ffCurrency,8,2);
+
+       TIRPFCompras:=TIRPFCompras+total;
+
+      CalcularBancosyN(Num,Total);
+      RzStringGrid2.Cells[2,12]:= intToStr(Num);
+      RzStringGrid2.Cells[3,12]:= FloatToStrF(Total,ffCurrency,8,2);
+
+       TIRPFCompras:=TIRPFCompras+total;
+
+
+      RzStringGrid2.Cells[5,14]:= FloatToStrF(TIRPFCompras,ffCurrency,8,2);
+
+      RzStringGrid2.Cells[5,15]:= FloatToStrF(TIRPFVentas - TIRPFCompras,ffCurrency,8,2);
+      RzStringGrid2.Cells[5,16]:= FloatToStrF((TIRPFVentas - TIRPFCompras)*IRPFDEFECTO,ffCurrency,8,2);
 
 
 end;
@@ -345,512 +343,6 @@ begin
 
 end;
 
-procedure TFEstadisticasGastosVentas.lbedGFT1Change(Sender: TObject);
-var f1,f2,f3,f4:Double;s1,s2,s3,s4:string;
-begin
- s1:=lbedGFT1.Text;
- s2:=lbedN1.Text;
- s3:=lbedSS1.Text;
- s4:=lbedS1.Text;
-
-
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-if Pos ('€',s3)>0 then delete(s3,Pos('€',s3),1);
-while Pos('.',s3)>0 do
-delete(s3,Pos('.',s3),1);
-
-if Pos ('€',s4)>0 then delete(s4,Pos('€',s4),1);
-while Pos('.',s4)>0 do
-delete(s4,Pos('.',s4),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-f3:=StrToCurr(s3);
-f4:=StrToCurr(s4);
-
-lbedGT1.Text:=CurrtostrF(f1+f2+f3+f4,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGFT2Change(Sender: TObject);
-var f1,f2,f3,f4:Double;s1,s2,s3,s4:string;
-begin
- s1:=lbedGFT2.Text;
- s2:=lbedN2.Text;
- s3:=lbedSS2.Text;
- s4:=lbedS2.Text;
-
-
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-if Pos ('€',s3)>0 then delete(s3,Pos('€',s3),1);
-while Pos('.',s3)>0 do
-delete(s3,Pos('.',s3),1);
-
-if Pos ('€',s4)>0 then delete(s4,Pos('€',s4),1);
-while Pos('.',s4)>0 do
-delete(s4,Pos('.',s4),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-f3:=StrToCurr(s3);
-f4:=StrToCurr(s4);
-
-lbedGT2.Text:=CurrtostrF(f1+f2+f3+f4,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGFT3Change(Sender: TObject);
-var f1,f2,f3,f4:Double;s1,s2,s3,s4:string;
-begin
- s1:=lbedGFT3.Text;
- s2:=lbedN3.Text;
- s3:=lbedSS3.Text;
- s4:=lbedS3.Text;
-
-
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-if Pos ('€',s3)>0 then delete(s3,Pos('€',s3),1);
-while Pos('.',s3)>0 do
-delete(s3,Pos('.',s3),1);
-
-if Pos ('€',s4)>0 then delete(s4,Pos('€',s4),1);
-while Pos('.',s4)>0 do
-delete(s4,Pos('.',s4),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-f3:=StrToCurr(s3);
-f4:=StrToCurr(s4);
-
-lbedGT3.Text:=CurrtostrF(f1+f2+f3+f4,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGIVAN101Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-lbedGIVAN1.Text:=IntToStr(strtoint(lbedGIVAN101.Text)+strtoint(lbedGIVAN211.Text));
-
-
-
- s1:=lbedGIVAT101.Text;
- s2:=lbedGIVAT211.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-
-lbedGIVAT1.Text:=CurrtostrF(f1+f2,ffCurrency,2);
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGIVAN102Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-lbedGIVAN2.Text:=IntToStr(strtoint(lbedGIVAN102.Text)+strtoint(lbedGIVAN212.Text));
-
- s1:=lbedGIVAT102.Text;
- s2:=lbedGIVAT212.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedGIVAT2.Text:=CurrtostrF(f1+f2,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGIVAN103Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-lbedGIVAN3.Text:=IntToStr(strtoint(lbedGIVAN103.Text)+strtoint(lbedGIVAN213.Text));
-
- s1:=lbedGIVAT103.Text;
- s2:=lbedGIVAT213.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedGIVAT3.Text:=CurrtostrF(f1+f2,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGIVAT1Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-
-
- s1:=lbedGIVAT1.Text;
- s2:=lbedVIVAT1.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedT1.Text:=CurrtostrF(f2-f1,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGIVAT2Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-
-
- s1:=lbedGIVAT2.Text;
- s2:=lbedVIVAT2.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedT2.Text:=CurrtostrF(f2-f1,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGIVAT3Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-
-
- s1:=lbedGIVAT3.Text;
- s2:=lbedVIVAT3.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedT3.Text:=CurrtostrF(f2-f1,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGT1Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-
-
- s1:=lbedGT1.Text;
- s2:=lbedVT1.Text;
-
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-
-   lbedTM1.Text:=CurrtostrF(f2-f1,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGT2Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-
-
- s1:=lbedGT2.Text;
- s2:=lbedVT2.Text;
-
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-
-   lbedTM2.Text:=CurrtostrF(f2-f1,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedGT3Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-
-
- s1:=lbedGT3.Text;
- s2:=lbedVT3.Text;
-
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-
-
-   lbedTM3.text:=CurrtostrF(f2-f1,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedT1Change(Sender: TObject);
-var f1,f2,f3,f4,f5,f6,f7,f8,f9,FIR:Double;s1,s2,s3,s4,s5,s6,s7,s8,s9:string;
-begin
-
-
- s1:=lbedTM1.Text;
- s2:=lbedTM2.Text;
- s3:=lbedTM3.Text;
-
- s4:=lbedGT1.Text;
- s5:=lbedGT2.Text;
- s6:=lbedGT3.Text;
-
- s7:=lbedVT1.Text;
- s8:=lbedVT2.Text;
- s9:=lbedVT3.Text;
-
-
-
-if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-if Pos ('€',s3)>0 then delete(s3,Pos('€',s3),1);
-while Pos('.',s3)>0 do
-delete(s3,Pos('.',s3),1);
-
-if Pos ('€',s4)>0 then delete(s4,Pos('€',s4),1);
-while Pos('.',s4)>0 do
-delete(s4,Pos('.',s4),1);
-
-if Pos ('€',s5)>0 then delete(s5,Pos('€',s5),1);
-while Pos('.',s5)>0 do
-delete(s5,Pos('.',s5),1);
-
-if Pos ('€',s6)>0 then delete(s6,Pos('€',s6),1);
-while Pos('.',s6)>0 do
-delete(s6,Pos('.',s6),1);
-
-if Pos ('€',s7)>0 then delete(s7,Pos('€',s7),1);
-while Pos('.',s7)>0 do
-delete(s7,Pos('.',s7),1);
-
-if Pos ('€',s8)>0 then delete(s8,Pos('€',s8),1);
-while Pos('.',s8)>0 do
-delete(s8,Pos('.',s8),1);
-
-if Pos ('€',s9)>0 then delete(s9,Pos('€',s9),1);
-while Pos('.',s9)>0 do
-delete(s9,Pos('.',s9),1);
-
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-f3:=StrToCurr(s3);
-fIR:=(f1+f2+f3)*IRPFDEFECTO;
-   lbedTIRPF.Text:=CurrtostrF(fIR,ffCurrency,2);
-
-f4:=StrToCurr(s4);
-f5:=StrToCurr(s5);
-f6:=StrToCurr(s6);
-   lbedG.Text:=CurrtostrF(f4+f5+f6,ffCurrency,2);
-
-f7:=StrToCurr(s7);
-f8:=StrToCurr(s8);
-f9:=StrToCurr(s9);
-   lbedV.Text:=CurrtostrF(f7+f8+f9,ffCurrency,2);
-
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedT2Change(Sender: TObject);
-var f1,f2,f3:Double;s1,s2,s3:string;
-begin
-
-
- s1:=lbedT1.Text;
- s2:=lbedT2.Text;
- s3:=lbedT3.Text;
-
-
-
-
-if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-if Pos ('€',s3)>0 then delete(s3,Pos('€',s3),1);
-while Pos('.',s3)>0 do
-delete(s2,Pos('.',s3),1);
-
-
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-f3:=StrToCurr(s3);
-   lbedT.Text:=CurrtostrF(f1+f2+f3,ffCurrency,2);
-
-
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedVFT1Change(Sender: TObject);
-begin
-lbedVT1.Text:=lbedVFT1.Text;
-end;
-
-procedure TFEstadisticasGastosVentas.lbedVFT2Change(Sender: TObject);
-begin
- lbedVT2.Text:=lbedVFT2.Text;
-end;
-
-procedure TFEstadisticasGastosVentas.lbedVFT3Change(Sender: TObject);
-begin
-lbedVT3.Text:=lbedVFT3.Text;
-end;
-
-procedure TFEstadisticasGastosVentas.lbedVIVAN101Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-lbedVIVAN1.Text:=IntToStr(strtoint(lbedVIVAN101.Text)+strtoint(lbedVIVAN211.Text));
-
- s1:=lbedVIVAT101.Text;
- s2:=lbedVIVAT211.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedVIVAT1.Text:=CurrtostrF(f1+f2,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedVIVAN102Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-lbedVIVAN1.Text:=IntToStr(strtoint(lbedVIVAN102.Text)+strtoint(lbedVIVAN212.Text));
-
- s1:=lbedVIVAT102.Text;
- s2:=lbedVIVAT212.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedVIVAT2.Text:=CurrtostrF(f1+f2,ffCurrency,2);
-
-end;
-
-procedure TFEstadisticasGastosVentas.lbedVIVAN103Change(Sender: TObject);
-var f1,f2:Double;s1,s2:string;
-begin
-lbedVIVAN3.Text:=IntToStr(strtoint(lbedVIVAN103.Text)+strtoint(lbedVIVAN213.Text));
-
- s1:=lbedVIVAT103.Text;
- s2:=lbedVIVAT213.Text;
-
- if Pos ('€',s1)>0 then delete(s1,Pos('€',s1),1);
-while Pos('.',s1)>0 do
-delete(s1,Pos('.',s1),1);
-
-if Pos ('€',s2)>0 then delete(s2,Pos('€',s2),1);
-while Pos('.',s2)>0 do
-delete(s2,Pos('.',s2),1);
-
-f1:=StrToCurr(s1);
-f2:=StrToCurr(s2);
-   lbedVIVAT3.Text:=CurrtostrF(f1+f2,ffCurrency,2);
-
-end;
-
 procedure TFEstadisticasGastosVentas.llenarArbol(tipo:integer);
 begin
    rCheckTreeView1.Items.Clear;
@@ -861,7 +353,7 @@ begin
 end;
 
 procedure TFEstadisticasGastosVentas.llenarArbolTrimestre(arbol:TTreenodes; enganchado:TTreeNode; trimestre:integer);
-var padre,hijo,tio:TTreeNode; Tiv:Tivasrec;  i:integer; str:string;   totales:real;
+var padre,hijo,tio:TTreeNode; Tiv:Tivasrec;  i:integer; str:string;   total,totales:real; num:Integer;
 begin
 
 
@@ -885,7 +377,7 @@ begin
 
   hijo:=arbol.AddChild(hijo,'I.R.P.F');
   tio:=arbol.AddChild(hijo,'Facturas Compras');
-  Tiv:=CalcularIRPFFacturasCompras;
+ // Tiv:=CalcularIRPFFacturasCompras;
 
     totales:=0;
     for i := 0 to Length(Tiv)-1 do  begin
@@ -897,13 +389,21 @@ begin
 
     tio.Text:=tio.Text+'......'+FloatToStr(totales);
 
-       arbol.AddChild(hijo,Format('Tickets......%f €', [CalcularIRPFTicketCompras]));
+    CalcularIRPFyNTicketCompras(num,total);
 
-       arbol.AddChild(hijo,'Nóminas'+'......'+FloatToStr(CalcularNominas));
+       arbol.AddChild(hijo,Format('Tickets......%f €', [total]));
 
-       arbol.AddChild(hijo,'Seguros Sociales'+'......'+FloatToStr(CalcularSegurosSociales));
+    CalcularNominasyN(num,total);
 
-       arbol.AddChild(hijo,'Seguros'+'......'+FloatToStr(CalcularSeguros));
+       arbol.AddChild(hijo,'Nóminas'+'......'+FloatToStr(total));
+
+         CalcularSegurosSocialesyN(Num,Total);
+
+       arbol.AddChild(hijo,'Seguros Sociales'+'......'+FloatToStr(total));
+
+       CalcularSegurosyN(num,total);
+
+       arbol.AddChild(hijo,'Seguros'+'......'+FloatToStr(total));
 
   //-------------VENTAS--------------------
 
@@ -960,12 +460,12 @@ if (peridodo=1) and (TrCheckTreeView(Sender).Selected.Level=1) then
 end;
 
 procedure TFEstadisticasGastosVentas.rCheckTreeView1DblClick(Sender: TObject);
-var lstSS:Tlistsegurossociales;
+
 begin
    DataModule1.ObtenerMesesTrimestre(TrComboBoxEx(Sender).ItemIndex+1, m1,m2);
 
    mes1:=StrtoDate('1/'+m1.ToString+'/'+ano.ToString);
-   mes2:=StrToDate(IntToStr(DaysInMonth(StrToDate('1/'+m2.ToString+'/'+ano.ToString)))+'/'+m2.ToString+'/'+ano.Tostring);
+ // mes2:=StrToDate(IntToStr(DaysInMonth(StrToDate('1/'+m2.ToString+'/'+ano.ToString)))+'/'+m2.ToString+'/'+ano.Tostring);
 
  if (Sender is TrCheckTreeView) then
  begin
@@ -1001,8 +501,7 @@ begin
 
  if Pos('Seguros.',TrCheckTreeView(Sender).Selected.Text) > 0 then
  begin
-DataModule1.actPagosSegurosExecute(Self);
-
+   DataModule1.actPagosSegurosExecute(Self);
 
  end;
 
@@ -1018,18 +517,62 @@ DataModule1.ObtenerMesesTrimestre(TrComboBoxEx(Sender).ItemIndex+1, m1,m2);
   else llenarArbol(1);
   llenarIVATrimestre(TrComboBoxEx(Sender).ItemIndex+1);
   actInd1.Animate:=False;
+
+  case rzPageControl1.ActivePageIndex of
+    2:begin
+               fddiario.Close;
+               fddiario.ParamByName('f1').Asinteger:= m1;
+               fddiario.ParamByName('f2').asinteger:= m2;
+               fddiario.ParamByName('ano').asinteger:= ano;
+               fddiario.Active:=True;
+      end;
+
+
+    3:begin
+               fdfacturacionmensual.Close;
+               fdfacturacionmensual.ParamByName('ano').asinteger:= ano;
+               fdfacturacionmensual.Active:=True;
+               fdfacturaciontrimestral.Close;
+               fdfacturaciontrimestral.ParamByName('ano').asinteger:= ano;
+               fdfacturaciontrimestral.Active:=True;
+               RzLabel1.Caption:='Total: '+CurrToStrF(fdfacturacionmensual.Aggregates.AggregateByName('SUMAGRE').Value,ffCurrency,2);
+               RzLabel2.Caption:='Media: '+CurrToStrF(fdfacturacionmensual.Aggregates.AggregateByName('SUMAVG').Value,ffCurrency,2);
+               RzLabel3.Caption:='Total: '+CurrToStrF(fdfacturaciontrimestral.Aggregates.AggregateByName('SUMAGRE').Value,ffCurrency,2);
+               RzLabel4.Caption:='Media: '+CurrToStrF(fdfacturaciontrimestral.Aggregates.AggregateByName('SUMAVG').Value,ffCurrency,2);
+
+
+      end;
+
+
+  end;
+
+
 end;
 
 
 
 procedure TFEstadisticasGastosVentas.btn1Click(Sender: TObject);
 begin
-    peridodo:=1; //periodo ANUAL
+    peridodo:=1;
     rComboBoxEx2Change(rComboBoxEx2);
 end;
 
 
 
+
+procedure TFEstadisticasGastosVentas.Button1Click(Sender: TObject);
+begin
+
+llenarIVATrimestre(rComboBoxEx1.ItemIndex+1);
+DataModule1.BorrarStringgrid(RzStringGrid1);
+
+end;
+
+procedure TFEstadisticasGastosVentas.Button2Click(Sender: TObject);
+begin
+llenarIVATrimestre(rComboBoxEx1.ItemIndex+1);
+DataModule1.BorrarStringgrid(RzStringGrid2);
+end;
 
 procedure TFEstadisticasGastosVentas.rComboBoxEx2Change(Sender: TObject);
 begin
@@ -1038,10 +581,315 @@ begin
    actInd1.Animate:=True;
  if peridodo=0 then llenarArbol(0)
  else llenarArbol(1);
+  llenarIVATrimestre(rComboBoxEx1.ItemIndex+1);
  actInd1.Animate:=False;
 end;
 
-  function TFEstadisticasGastosVentas.calcularVentasNFacturaTotal:integer;
+  procedure TFEstadisticasGastosVentas.RzButton1Click(Sender: TObject);
+ var  TVentas,TCompras:Double;
+begin
+TCompras:=StrToFloat(LabeledEdit3.Text)+StrToFloat(LabeledEdit4.Text);
+TVentas:=StrToFloat(LabeledEdit5.Text)+StrToFloat(LabeledEdit6.Text);
+
+LabeledEdit7.Text:= FloatToStrF(TVentas-TCompras,ffFixed,8,2);
+
+end;
+
+procedure TFEstadisticasGastosVentas.RzPageControl1Change(Sender: TObject);
+begin
+DataModule1.BorrarStringgrid(RzStringGrid1);
+DataModule1.BorrarStringgrid(RzStringGrid2);
+rComboBoxEx1Change(sender);
+
+end;
+
+procedure TFEstadisticasGastosVentas.RzStringGrid1DrawCell(Sender: TObject;
+  ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+var Celltext:string;
+begin
+
+
+
+     Rect := RzStringGrid1.CellRect(ACol, ARow);
+     celltext:=rzStringGrid1.Cells[ACol,Arow];
+
+     if (ARow=0) or (ARow=3) or (ARow=6) or (ARow=8) then
+        begin
+       rzStringGrid1.Canvas.Pen.Width:=3;
+       rzStringGrid1.Canvas.Pen.Color:=clLtGray ;
+       rzStringGrid1.Canvas.MoveTo(Rect.Left,Rect.Top) ;
+       RzStringGrid1.Canvas.LineTo(Rect.Right,Rect.top);
+       rzStringGrid1.Canvas.MoveTo(Rect.Left,Rect.bottom) ;
+       RzStringGrid1.Canvas.LineTo(Rect.Right,Rect.Bottom);
+
+         end;
+
+     if (ACol=1) or (ACol=5) then
+        begin
+       rzStringGrid1.Canvas.Pen.Width:=3;
+       rzStringGrid1.Canvas.Pen.Color:=clLtGray ;
+       rzStringGrid1.Canvas.MoveTo(Rect.Right,Rect.Top) ;
+       RzStringGrid1.Canvas.LineTo(Rect.Right,Rect.Bottom);
+        end;
+
+
+
+     if (ACol<2) then
+     begin
+       case Arow of
+         1,4 : begin
+
+       Rect.top := Rect.top + (Rect.Height div 2)+10 ;
+       Rect.Bottom := Rect.Bottom + (Rect.Height*2);
+                end;
+       0,3,5,6,7,8 : begin
+       rzStringGrid1.Canvas.Pen.Width:=3;
+       rzStringGrid1.Canvas.Pen.Color:=clLtGray ;
+       rzStringGrid1.Canvas.MoveTo(Rect.Left,Rect.Bottom) ;
+       RzStringGrid1.Canvas.LineTo(Rect.Right,Rect.Bottom);
+           Rect.Bottom := Rect.Bottom;
+           Rect.top := Rect.Top+(Rect.Height div 3)-3;
+              end;
+        end;
+     end;
+
+       if (ACol>1) then
+
+       case Arow of
+        0,1,2,3,4,5,6,7,8 : begin
+           rzStringGrid1.Canvas.Pen.Width:=1;
+           rzStringGrid1.Canvas.Pen.Color:=clLtGray ;
+           rzStringGrid1.Canvas.MoveTo(Rect.Left,Rect.Bottom) ;
+           RzStringGrid1.Canvas.LineTo(Rect.Right,Rect.Bottom);
+           Rect.Bottom := Rect.Bottom;
+           Rect.top := Rect.Top+(Rect.Height div 3)-3;
+           rzStringGrid1.Canvas.Brush.Color := clWindow;
+         end;
+       end;
+     
+
+       if (ACol>1) and (ACol<8) and (ARow>0) then
+        begin
+       rzStringGrid1.Canvas.Font.Style:=[];
+       rzStringGrid1.Canvas.Font.Name:='Arial' ;
+       rzStringGrid1.Canvas.Font.Size:=8 ;
+      DrawText(rzStringGrid1.Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_WORDBREAK or DT_CENTER or DT_VCENTER or DT_END_ELLIPSIS)
+        end;
+
+       if ((ACol < 2 ) or (ARow=0)) and (not( (Arow=3) or (ARow=6) or ( ARow=8) ))then
+        begin
+       rzStringGrid1.Canvas.Font.Style:=[fsBold];
+       rzStringGrid1.Canvas.Font.Name:='Arial' ;
+       rzStringGrid1.Canvas.Font.Size:=10 ;
+      DrawText(rzStringGrid1.Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_WORDBREAK or DT_CENTER or DT_VCENTER or DT_END_ELLIPSIS)
+        end;
+
+        if (State = [gdFixed]) and (Celltext='Total:') or (Celltext='Diferencia:') then
+        begin
+       rzStringGrid1.Canvas.Font.Style:=[fsBold];
+       rzStringGrid1.Canvas.Font.Name:='Arial' ;
+       rzStringGrid1.Canvas.Font.Size:=10 ;
+      DrawText(rzStringGrid1.Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_WORDBREAK or DT_RIGHT or DT_VCENTER or DT_END_ELLIPSIS)
+        end;
+
+       
+end;
+
+procedure TFEstadisticasGastosVentas.RzStringGrid2DrawCell(Sender: TObject;
+  ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+  var celltext:string;
+begin
+
+
+
+  Rect := RzStringGrid2.CellRect(ACol, ARow);
+     celltext:=rzStringGrid2.Cells[ACol,Arow];
+
+     if (ARow=0) or (ARow=3) or (ARow=6) or (ARow=8) or (ARow=9) or (ARow=10) or (ARow=11) or (ARow=12) or (ARow=13) then
+        begin
+
+       rzStringGrid2.Canvas.Pen.Width:=3;
+       rzStringGrid2.Canvas.Pen.Color:=clLtGray ;
+       rzStringGrid2.Canvas.MoveTo(Rect.Left,Rect.Top) ;
+       RzStringGrid2.Canvas.LineTo(Rect.Right,Rect.top);
+       rzStringGrid2.Canvas.MoveTo(Rect.Left,Rect.bottom) ;
+       RzStringGrid2.Canvas.LineTo(Rect.Right,Rect.Bottom);
+
+         end;
+
+     if (ACol=1) or (ACol=5) then
+        begin
+       rzStringGrid2.Canvas.Pen.Width:=3;
+       rzStringGrid2.Canvas.Pen.Color:=clLtGray ;
+       rzStringGrid2.Canvas.MoveTo(Rect.Right,Rect.Top) ;
+       RzStringGrid2.Canvas.LineTo(Rect.Right,Rect.Bottom);
+        end;
+
+
+
+     if (ACol<2) then
+     begin
+       case Arow of
+         1,4 : begin
+
+       Rect.top := Rect.top + (Rect.Height div 2)+10 ;
+       Rect.Bottom := Rect.Bottom + (Rect.Height*2);
+                end;
+       0,3,5,6,7,8,9,10,11,12,13,14,15,16,17 : begin
+       rzStringGrid2.Canvas.Pen.Width:=3;
+       rzStringGrid2.Canvas.Pen.Color:=clLtGray ;
+       rzStringGrid2.Canvas.MoveTo(Rect.Left,Rect.Bottom) ;
+       RzStringGrid2.Canvas.LineTo(Rect.Right,Rect.Bottom);
+           Rect.Bottom := Rect.Bottom;
+           Rect.top := Rect.Top+(Rect.Height div 3)-3;
+              end;
+        end;
+     end;
+
+       if (ACol>1) then
+
+       case Arow of
+        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 : begin
+           rzStringGrid2.Canvas.Pen.Width:=1;
+           rzStringGrid2.Canvas.Pen.Color:=clLtGray ;
+           rzStringGrid2.Canvas.MoveTo(Rect.Left,Rect.Bottom) ;
+           RzStringGrid2.Canvas.LineTo(Rect.Right,Rect.Bottom);
+           Rect.Bottom := Rect.Bottom;
+           Rect.top := Rect.Top+(Rect.Height div 3)-3;
+           rzStringGrid2.Canvas.Brush.Color := clWindow;
+         end;
+       end;
+
+
+       if (ACol>1) and (ACol<13) and (ARow>0) then
+        begin
+       rzStringGrid2.Canvas.Font.Style:=[];
+       rzStringGrid2.Canvas.Font.Name:='Arial' ;
+       rzStringGrid2.Canvas.Font.Size:=8 ;
+      DrawText(rzStringGrid2.Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_WORDBREAK or DT_CENTER or DT_VCENTER or DT_END_ELLIPSIS)
+        end;
+
+       if ((ACol < 2 ) or (ARow=0)) and (not( (Arow=3) or (ARow=6) or (ARow=14) or (ARow=15)  ))then
+        begin
+       rzStringGrid2.Canvas.Font.Style:=[fsBold];
+       rzStringGrid2.Canvas.Font.Name:='Arial' ;
+       rzStringGrid2.Canvas.Font.Size:=10 ;
+      DrawText(rzStringGrid2.Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_WORDBREAK or DT_CENTER or DT_VCENTER or DT_END_ELLIPSIS)
+        end;
+
+        if (State = [gdFixed]) and (Celltext='Total:') or (Celltext='Diferencia:') then
+        begin
+       rzStringGrid2.Canvas.Font.Style:=[fsBold];
+       rzStringGrid2.Canvas.Font.Name:='Arial' ;
+       rzStringGrid2.Canvas.Font.Size:=10 ;
+      DrawText(rzStringGrid2.Canvas.Handle, PChar(CellText), Length(CellText), Rect, DT_WORDBREAK or DT_RIGHT or DT_VCENTER or DT_END_ELLIPSIS)
+        end;
+
+end;
+
+procedure TFEstadisticasGastosVentas.TabSheet1Show(Sender: TObject);
+begin
+
+RzStringGrid2.ColWidths[0]:=150;
+RzStringGrid2.ColWidths[1]:=150;
+RzStringGrid2.RowHeights[0]:=45;
+
+RzStringGrid2.Cells[0,0]:='Liquidación';
+RzStringGrid2.Cells[1,0]:='Concepto';
+RzStringGrid2.Cells[2,0]:='Nº Facturas';
+RzStringGrid2.Cells[3,0]:='Base Imponible';
+RzStringGrid2.Cells[4,0]:='Tipo';
+RzStringGrid2.Cells[5,0]:='Cuota';
+
+
+RzStringGrid2.Cells[0,1]:='VENTAS';
+rzStringGrid2.Cells[0,3]:='Total:';
+rzStringGrid2.Cells[0,4]:='GASTOS';
+rzStringGrid2.Cells[0,6]:='Total:';
+
+rzStringGrid2.Cells[1,1]:='Facturas Ventas';
+rzStringGrid2.Cells[1,4]:='Facturas Compras';
+rzStringGrid2.Cells[1,7]:='Tickets';
+rzStringGrid2.Cells[1,8]:='Nóminas:';
+rzStringGrid2.Cells[1,9]:='Seguros Sociales';
+rzStringGrid2.Cells[1,10]:='Seguros';
+rzStringGrid2.Cells[1,11]:='Intereses Deudas';
+RzStringGrid2.Cells[1,12]:='Servicios Bancarios';
+RzStringGrid2.Cells[1,13]:='Amortizaciones';
+//RzStringGrid2.Cells[1,14]:='2% Gastos dificil justificación ';
+
+
+
+rzStringGrid2.Cells[1,16]:=FloatToStr(IRPFDEFECTO*100)+' % IRPF';
+
+
+rzStringGrid2.Cells[0,14]:='Total:';
+
+rzStringGrid2.Cells[0,15]:='Diferencia:';
+
+rzStringGrid2.Cells[4,1]:='10 %';
+RzStringGrid2.Cells[4,2]:='21 %';
+rzStringGrid2.Cells[4,4]:='10 %';
+RzStringGrid2.Cells[4,5]:='21 %';
+
+
+end;
+
+procedure TFEstadisticasGastosVentas.TabSheet2Show(Sender: TObject);
+begin
+FDcuentas.Active:=True;
+fddiario.Active:=True;
+end;
+
+procedure TFEstadisticasGastosVentas.TabSheet3Show(Sender: TObject);
+begin
+RzStringGrid1.ColWidths[0]:=150;
+RzStringGrid1.ColWidths[1]:=150;
+RzStringGrid1.RowHeights[0]:=45;
+
+RzStringGrid1.Cells[0,0]:='Liquidación';
+RzStringGrid1.Cells[1,0]:='Concepto';
+RzStringGrid1.Cells[2,0]:='Nº Facturas';
+RzStringGrid1.Cells[3,0]:='Base Imponible';
+RzStringGrid1.Cells[4,0]:='Tipo';
+RzStringGrid1.Cells[5,0]:='Cuota';
+
+
+RzStringGrid1.Cells[0,1]:='IVA DEVENGADO';
+rzStringGrid1.Cells[0,3]:='Total:';
+rzStringGrid1.Cells[0,4]:='IVA DEDUCIBLE';
+
+rzStringGrid1.Cells[1,1]:='FACTURAS VENTAS';
+rzStringGrid1.Cells[1,4]:='FACTURAS COMPRAS';
+rzStringGrid1.Cells[0,6]:='Total:';
+rzStringGrid1.Cells[0,8]:='Diferencia:';
+
+rzStringGrid1.Cells[4,1]:='10 %';
+RzStringGrid1.Cells[4,2]:='21 %';
+rzStringGrid1.Cells[4,4]:='10 %';
+RzStringGrid1.Cells[4,5]:='21 %';
+
+end;
+
+procedure TFEstadisticasGastosVentas.ToolButton1Click(Sender: TObject);
+
+begin
+PrintDialog1.Options := [poPageNums, poSelection];
+PrintDialog1.FromPage := 1;
+
+if PrintDialog1.Execute then
+
+
+
+
+Printer.beginDoc;
+rzPageControl1.Pages[1].PaintTo(Printer.canvas,250,100);
+Printer.EndDoc;
+
+
+end;
+
+function TFEstadisticasGastosVentas.calcularVentasNFacturaTotal:integer;
   begin
    fdq1.Close;
   fdq1.SQL.Clear;
@@ -1065,7 +913,7 @@ end;
 
 
 function TFEstadisticasGastosVentas.calcularIVAVentasNFactura:TNumfacrec;
-var i: Integer; Tn:TNumfacrec;
+var  Tn:TNumfacrec;
 begin
 fdq1.Close;
   fdq1.SQL.Clear;
@@ -1080,15 +928,17 @@ fdq1.Close;
 
   fdq1.Prepare;
   fdq1.open;
-    SetLength(Tn,fdq1.RecordCount);
-  i:=0;
-   while not fdq1.eof do
-   begin
-     Tn[i].iva:=fdq1.Fields[0].AsInteger;
-     Tn[i].total:=fdq1.Fields[1].AsInteger;
+    SetLength(Tn,2);
+     fdq1.First;
+     Tn[0].iva:= 10 ;
+     if fdq1.Fields[0].AsInteger = 10 then  Tn[0].total:=fdq1.Fields[1].AsInteger
+     else Tn[0].total:=0;
+
      fdq1.Next;
-     Inc(i);
-   end;
+     Tn[1].iva:= 21 ;
+     if fdq1.Fields[0].AsInteger = 21 then  Tn[1].total:=fdq1.Fields[1].AsInteger
+     else Tn[1].total:=0;
+
 
   Result:=Tn;
 
@@ -1120,7 +970,7 @@ end;
 
 
 function TFEstadisticasGastosVentas.calcularIVAGastosNFactura:TNumfacrec;
-var i:Integer; Tn:TNumfacrec;
+var Tn:TNumfacrec;
 begin
   fdq1.Close;
   fdq1.SQL.Clear;
@@ -1136,14 +986,17 @@ begin
   fdq1.Prepare;
   fdq1.open;
   SetLength(Tn,2);
-  i:=0;
-   while not fdq1.eof do
-   begin
-     Tn[i].iva:=fdq1.Fields[0].AsInteger;
-     Tn[i].total:=fdq1.Fields[1].AsInteger;
+
+  fdq1.First;
+     Tn[0].iva:= 10 ;
+     if fdq1.Fields[0].AsInteger = 10 then  Tn[0].total:=fdq1.Fields[1].AsInteger
+     else Tn[0].total:=0;
+
      fdq1.Next;
-     Inc(i);
-   end;
+     Tn[1].iva:= 21 ;
+     if fdq1.Fields[0].AsInteger = 21 then  Tn[1].total:=fdq1.Fields[1].AsInteger
+     else Tn[1].total:=0;
+
 
 
   Result:=Tn;
@@ -1151,95 +1004,154 @@ begin
 
 
 
+
+
+
 end;
 
-function TFEstadisticasGastosVentas.CalcularSeguros:Real;
+procedure TFEstadisticasGastosVentas.CalcularSegurosyN(var N:Integer; var total:real);
 begin
   fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT SUM(importe) FROM lineasseguros WHERE YEAR(fechaPago)=:ano AND MONTH(fechaPago) BETWEEN :f1 AND :f2');
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1 or id_cuenta=:c2 or id_cuenta=:c3');
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+  fdq1.ParamByName('c2').FDDataType:=dtInt16;
+  fdq1.ParamByName('c3').FDDataType:=dtInt16;
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=62500001;
+  fdq1.ParamByName('c2').Value:=62500002;
+  fdq1.ParamByName('c3').Value:=62500003;
+
 
   fdq1.Prepare;
   fdq1.open;
 
-  Result:=fdq1.Fields[0].asfloat;
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
   fdq1.Close;
 
 end;
 
 
-function TFEstadisticasGastosVentas.CalcularSegurosSociales:Real;
+procedure TFEstadisticasGastosVentas.CalcularSegurosSocialesyN(var N:integer;var total:real);
 begin
-  fdq1.Close;
+ fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT SUM(importe) FROM segsociales WHERE YEAR(fechatc1)=:ano AND MONTH(fechatc1) BETWEEN :f1 AND :f2');
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1');
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=64200000;
+
+
 
   fdq1.Prepare;
   fdq1.open;
 
-  Result:=fdq1.Fields[0].asfloat;
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
   fdq1.Close;
 
 end;
 
-function TFEstadisticasGastosVentas.CalcularNominas:Real;
+procedure TFEstadisticasGastosVentas.CalcularNominasyN(var N:Integer; var total:real);
 begin
   fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT SUM(importedevengado) FROM nominas WHERE YEAR(fechanomina)=:ano AND MONTH(fechanomina) BETWEEN :f1 AND :f2');
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1');
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=64000001;
 
   fdq1.Prepare;
   fdq1.open;
 
-  Result:=fdq1.Fields[0].asfloat;
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
   fdq1.Close;
+
 
 end;
 
 
 
 
- function TFEstadisticasGastosVentas.CalcularIRPFTicketCompras:Real;
+ procedure TFEstadisticasGastosVentas.CalcularIRPFyNTicketCompras(var N:Integer;var total:real);
   begin
-   fdq1.Close;
+  fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT SUM(Importe) FROM fproveedores WHERE ticket=1 AND YEAR(Fecha)=:ano AND MONTH(Fecha) BETWEEN :f1 AND :f2');
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1');
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=62900000;
 
   fdq1.Prepare;
   fdq1.open;
 
-  Result:=fdq1.Fields[0].asfloat;
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
   fdq1.Close;
 
  end;
+
+
+ procedure TFEstadisticasGastosVentas.CalcularIRPFFacturasCompras(var N:Integer;var total:real);
+ begin
+   fdq1.Close;
+  fdq1.SQL.Clear;
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1');
+
+  fdq1.ParamByName('f1').FDDataType:=dtInt16;
+  fdq1.ParamByName('f2').FDDataType:=dtInt16;
+  fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+
+  fdq1.ParamByName('ano').Value:=ano;
+  fdq1.ParamByName('f1').Value:=m1;
+  fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=60000001;
+
+  fdq1.Prepare;
+  fdq1.open;
+
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
+  fdq1.Close;
+ end;
+
 
 
  procedure TFEstadisticasGastosVentas.actContraerExecute(Sender: TObject);
@@ -1269,35 +1181,7 @@ begin
   if rCheckTreeView1.Items.Count >0 then  TAction(Sender).Enabled:= not rCheckTreeView1.Items[0].Expanded;
 end;
 
-function TFEstadisticasGastosVentas.CalcularIRPFFacturasCompras:Tivasrec;
- var i:Integer; Ti:TivasRec;
- begin
-   fdq1.Close;
-  fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT TasaIva, SUM(Importe) FROM fproveedores WHERE ticket=0 AND YEAR(Fecha)=:ano AND MONTH(Fecha) BETWEEN :f1 AND :f2 GROUP BY TasaIva');
-  fdq1.ParamByName('f1').FDDataType:=dtInt16;
-  fdq1.ParamByName('f2').FDDataType:=dtInt16;
-  fdq1.ParamByName('ano').FDDataType:=dtInt16;
 
-  fdq1.ParamByName('ano').Value:=ano;
-  fdq1.ParamByName('f1').Value:=m1;
-  fdq1.ParamByName('f2').Value:=m2;
-
-  fdq1.Prepare;
-  fdq1.open;
-  SetLength(Ti,fdq1.RecordCount);
-  i:=0;
-   while not fdq1.eof do
-   begin
-     Ti[i].iva:=fdq1.Fields[0].AsInteger;
-     Ti[i].total:=fdq1.Fields[1].AsFloat;
-     fdq1.Next;
-     Inc(i);
-   end;
-
-  Result:=Ti;
-  fdq1.Close;
- end;
 
  function TFEstadisticasGastosVentas.CalcularIRPFFacturasComprasTotal:Real;
  var i:Integer;
@@ -1344,31 +1228,41 @@ function TFEstadisticasGastosVentas.CalcularIRPFFacturasCompras:Tivasrec;
  end;
 
 function TFEstadisticasGastosVentas.CalcularIRPFFacturasVentas:Tivasrec;
-var i:Integer; Ti:TivasRec;
+var  Ti:TivasRec;
 begin
    fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT Iva,SUM(TotalBruto) FROM facturas WHERE YEAR(FechaFactura)=:ano AND MONTH(FechaFactura) BETWEEN :f1 AND :f2 GROUP BY Iva');
+
+  fdq1.SQL.Add('SELECT id_cuenta,SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1 or id_cuenta=:c2');
+
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+  fdq1.ParamByName('c2').FDDataType:=dtInt16;
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=70000010;
+  fdq1.ParamByName('c2').Value:=70000021;
 
   fdq1.Prepare;
   fdq1.open;
 
- SetLength(Ti,fdq1.RecordCount);
-  i:=0;
-   while not fdq1.eof do
-   begin
-     Ti[i].iva:=fdq1.Fields[0].AsInteger;
-     Ti[i].total:=fdq1.Fields[1].AsFloat;
+ SetLength(Ti,2);
+  fdq1.First;
+
+     Ti[0].iva:=10;
+     if fdq1.Fields[0].AsInteger=fdq1.ParamByName('c1').Value then  Ti[0].total:=fdq1.Fields[1].AsFloat
+      else Ti[0].total:=0;
+
      fdq1.Next;
-     Inc(i);
-   end;
+     Ti[1].iva:=21;
+     if fdq1.Fields[0].AsInteger=fdq1.ParamByName('c2').Value then  Ti[1].total:=fdq1.Fields[1].AsFloat
+      else Ti[1].total:=0;
+
 
   Result:=Ti;
 
@@ -1376,30 +1270,39 @@ begin
 end;
 
 function TFEstadisticasGastosVentas.CalcularIVAFacturasVentas:Tivasrec;
-   var i:Integer; Ti:TivasRec;
+   var  Ti:TivasRec;
  begin
   fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT Iva, SUM(ImporteIVA) FROM facturas WHERE YEAR(FechaFactura)=:ano AND MONTH(FechaFactura) BETWEEN :f1 AND :f2 GROUP BY Iva');
+  fdq1.SQL.Add('SELECT id_cuenta,SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1 or id_cuenta=:c2');
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+  fdq1.ParamByName('c2').FDDataType:=dtInt16;
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=47700010;
+  fdq1.ParamByName('c2').Value:=47700021;
 
   fdq1.Prepare;
   fdq1.open;
-    SetLength(Ti,fdq1.RecordCount);
-  i:=0;
-   while not fdq1.eof do
-   begin
-     Ti[i].iva:=fdq1.Fields[0].AsInteger;
-     Ti[i].total:=fdq1.Fields[1].AsFloat;
+    SetLength(Ti,2);
+
+   fdq1.First;
+
+     Ti[0].iva:=10;
+     if fdq1.Fields[0].AsInteger=fdq1.ParamByName('c1').Value then  Ti[0].total:=fdq1.Fields[1].AsFloat
+      else Ti[0].total:=0;
+
      fdq1.Next;
-     Inc(i);
-   end;
+     Ti[1].iva:=21;
+     if fdq1.Fields[0].AsInteger=fdq1.ParamByName('c2').Value then  Ti[1].total:=fdq1.Fields[1].AsFloat
+      else Ti[1].total:=0;
+
 
   Result:=Ti;
 
@@ -1407,34 +1310,65 @@ function TFEstadisticasGastosVentas.CalcularIVAFacturasVentas:Tivasrec;
  end;
 
 function TFEstadisticasGastosVentas.CalcularIVAFacturasCompras:Tivasrec;
-var Ti:Tivasrec; i:Integer;
+var Ti:Tivasrec;
  begin
   fdq1.Close;
   fdq1.SQL.Clear;
-  fdq1.SQL.Add('SELECT TasaIva, SUM(IVA) FROM fproveedores WHERE YEAR(Fecha)=:ano AND MONTH(Fecha) BETWEEN :f1 AND :f2 GROUP BY TasaIva');
+
+  fdq1.SQL.Add('SELECT id_cuenta,SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1 or id_cuenta=:c2');
+
+
   fdq1.ParamByName('f1').FDDataType:=dtInt16;
   fdq1.ParamByName('f2').FDDataType:=dtInt16;
   fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+  fdq1.ParamByName('c2').FDDataType:=dtInt16;
 
   fdq1.ParamByName('ano').Value:=ano;
   fdq1.ParamByName('f1').Value:=m1;
   fdq1.ParamByName('f2').Value:=m2;
-
+  fdq1.ParamByName('c1').Value:=47200010;
+  fdq1.ParamByName('c2').Value:=47200021;
   fdq1.Prepare;
   fdq1.open;
-  SetLength(Ti,fdq1.RecordCount);
-  i:=0;
-   while not fdq1.eof do
-   begin
-     Ti[i].iva:=fdq1.Fields[0].AsInteger;
-     Ti[i].total:=fdq1.Fields[1].AsFloat;
+  SetLength(Ti,2);
+
+   fdq1.First;
+
+     Ti[0].iva:=10;
+     if fdq1.Fields[0].AsInteger=fdq1.ParamByName('c1').Value then  Ti[0].total:=fdq1.Fields[1].AsFloat
+      else Ti[0].total:=0;
+
      fdq1.Next;
-     Inc(i);
-   end;
+     Ti[1].iva:=21;
+     if fdq1.Fields[0].AsInteger=fdq1.ParamByName('c2').Value then  Ti[1].total:=fdq1.Fields[1].AsFloat
+      else Ti[1].total:=0;
+
 
   Result:=Ti;
   fdq1.Close;
  end;
+
+procedure TFEstadisticasGastosVentas.FDcuentasAfterScroll(DataSet: TDataSet);
+begin
+rGroupBox2.Caption:=DataSet.FieldByName('id_cuenta').AsString+ ' - '+DataSet.FieldByName('descripcion').AsString ;
+rdbdiario.RecalculateSummaryResults(true);
+end;
+
+procedure TFEstadisticasGastosVentas.fddiarioAfterOpen(DataSet: TDataSet);
+begin
+rdbdiario.RecalculateSummaryResults(true);
+end;
+
+procedure TFEstadisticasGastosVentas.fddiarioAfterPost(DataSet: TDataSet);
+begin
+rdbdiario.RecalculateSummaryResults(true);
+end;
+
+procedure TFEstadisticasGastosVentas.fddiarioAfterRefresh(DataSet: TDataSet);
+begin
+rdbdiario.RecalculateSummaryResults(true);
+end;
 
 procedure TFEstadisticasGastosVentas.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -1463,4 +1397,77 @@ rComboBoxEx2Change(rComboBoxEx2);
 end;
 
 
+procedure TFEstadisticasGastosVentas.LabeledEdit3KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+
+
+
+ if Key = '.' then
+ begin
+  Key:=',';
+  Exit;
+ end;
+
+ if not (key in [#8,'0'..'9',',','-']) then key:=#0;
+
+ if (Length(TLabeledEdit(Sender).Text) > 0) and (Key = '-') then  Key:=#0;
+
+
+end;
+
+
+procedure TFEstadisticasGastosVentas.CalcularInteresesyN(var N:Integer; var total:real);
+begin
+  fdq1.Close;
+  fdq1.SQL.Clear;
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1');
+
+  fdq1.ParamByName('f1').FDDataType:=dtInt16;
+  fdq1.ParamByName('f2').FDDataType:=dtInt16;
+  fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+
+  fdq1.ParamByName('ano').Value:=ano;
+  fdq1.ParamByName('f1').Value:=m1;
+  fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=66200000;
+
+  fdq1.Prepare;
+  fdq1.open;
+
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
+  fdq1.Close;
+
+
+end;
+
+procedure TFEstadisticasGastosVentas.CalcularBancosyN(var N:Integer; var total:real);
+ begin
+  fdq1.Close;
+  fdq1.SQL.Clear;
+  fdq1.SQL.Add('SELECT Count(*),SUM(importe) FROM diario WHERE YEAR(fecha)=:ano AND MONTH(fecha) BETWEEN :f1 AND :f2 GROUP BY id_cuenta HAVING id_cuenta=:c1');
+
+  fdq1.ParamByName('f1').FDDataType:=dtInt16;
+  fdq1.ParamByName('f2').FDDataType:=dtInt16;
+  fdq1.ParamByName('ano').FDDataType:=dtInt16;
+  fdq1.ParamByName('c1').FDDataType:=dtInt16;
+
+  fdq1.ParamByName('ano').Value:=ano;
+  fdq1.ParamByName('f1').Value:=m1;
+  fdq1.ParamByName('f2').Value:=m2;
+  fdq1.ParamByName('c1').Value:=62600000;
+
+  fdq1.Prepare;
+  fdq1.open;
+
+   N:=fdq1.Fields[0].Asinteger;
+   total:=fdq1.Fields[1].AsFloat;
+
+  fdq1.Close;
+
+
+end;
 end.

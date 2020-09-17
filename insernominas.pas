@@ -67,6 +67,7 @@ if Key=#13 then begin
 
             //rDBRecView1.
                  end;
+if Key='.' then Key:=',';
  except
   raise;
 end;

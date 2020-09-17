@@ -174,7 +174,7 @@ object listnominas: Tlistnominas
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = rb1TrimestresClick
+        OnClick = rbTodasClick
       end
       object rb2trimestre: TRadioButton
         Left = 137
@@ -189,7 +189,7 @@ object listnominas: Tlistnominas
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = rb2trimestreClick
+        OnClick = rbTodasClick
       end
       object rbTodas: TRadioButton
         Left = 18
@@ -219,7 +219,7 @@ object listnominas: Tlistnominas
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = rb3trimestreClick
+        OnClick = rbTodasClick
       end
       object rb4trimestre: TRadioButton
         Left = 137
@@ -234,7 +234,7 @@ object listnominas: Tlistnominas
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = rb4trimestreClick
+        OnClick = rbTodasClick
       end
       object RzComboBox1: TRzComboBox
         Left = 3
@@ -280,6 +280,7 @@ object listnominas: Tlistnominas
           'ssocialEmpresa=Seg. Social Trabajador'
           'ssocialEmpresa=Seg. Social Empresa'
           'irpf=I.R.P.F'
+          'embargo=Embargo'
           'TotalPercibir=Total a Pagar')
         SpecFields.Strings = (
           'nombre=0')
@@ -295,6 +296,8 @@ object listnominas: Tlistnominas
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSizing]
         ScrollBars = ssNone
         TabOrder = 0
+        OnClick = rDBRecView1Click
+        OnKeyPress = rDBRecView1KeyPress
       end
     end
   end
@@ -363,7 +366,7 @@ object listnominas: Tlistnominas
     Left = 0
     Top = 281
     Width = 1307
-    Height = 311
+    Height = 317
     Align = alClient
     DataSource = ds1
     Font.Charset = DEFAULT_CHARSET
@@ -378,8 +381,6 @@ object listnominas: Tlistnominas
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgDragCell, dgUseTitlePopup, dgAutoPickListWidth]
-    OptionsEx2.ActivateOptionsEx2 = True
     OptionsEx2.Editors.Memo = obtContent
     OptionsEx2.Appearance.DragCell = True
     SortDesc = True
@@ -421,7 +422,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 323
+        Width = 297
         Visible = True
       end
       item
@@ -436,7 +437,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 110
+        Width = 101
         Visible = True
       end
       item
@@ -451,7 +452,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 111
+        Width = 102
         Visible = True
       end
       item
@@ -465,7 +466,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 172
+        Width = 158
         Visible = True
       end
       item
@@ -479,7 +480,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 149
+        Width = 137
         Visible = True
       end
       item
@@ -493,7 +494,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 91
+        Width = 83
         Visible = True
       end
       item
@@ -507,7 +508,7 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 134
+        Width = 123
         Visible = True
       end
       item
@@ -520,14 +521,36 @@ object listnominas: Tlistnominas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
+        Width = 78
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'id_asiento'
+        Title.Caption = 'Asiento'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 66
+        Visible = True
+      end
+      item
+        ButtonStyle = cbsEllipsis
+        Expanded = False
+        FieldName = 'fechacontable'
+        Title.Caption = 'Fecha Contable'
+        Width = 70
         Visible = True
       end>
   end
   object RzStatusBar1: TRzStatusBar
     Left = 0
-    Top = 592
+    Top = 598
     Width = 1307
-    Height = 25
+    Height = 19
     BorderInner = fsNone
     BorderOuter = fsNone
     BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
@@ -537,38 +560,41 @@ object listnominas: Tlistnominas
       Left = 0
       Top = 0
       Width = 300
-      Height = 25
+      Height = 19
       Align = alLeft
       BlinkIntervalOff = 100
       BlinkIntervalOn = 100
       Caption = ''
+      ExplicitHeight = 25
     end
     object RzFieldStatus1: TRzFieldStatus
       Left = 300
       Top = 0
       Width = 300
-      Height = 25
+      Height = 19
       Align = alLeft
       BlinkIntervalOff = 100
       BlinkIntervalOn = 100
       Caption = ''
+      ExplicitHeight = 25
     end
     object RzDBStatusPane1: TRzDBStatusPane
       Left = 600
       Top = 0
       Width = 150
-      Height = 25
+      Height = 19
       Align = alLeft
       ParentShowHint = False
       BlinkIntervalOff = 100
       BlinkIntervalOn = 100
       DataField = 'nombre'
       DataSource = ds1
+      ExplicitHeight = 25
     end
     object RzDBStateStatus1: TRzDBStateStatus
       Left = 750
       Top = 0
-      Height = 25
+      Height = 19
       Align = alLeft
       DataSource = ds1
       BlinkIntervalOff = 100
@@ -583,7 +609,6 @@ object listnominas: Tlistnominas
     Top = 336
   end
   object fdqtrabajadores: TFDQuery
-    Active = True
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'SELECT nombre, id_trabajador from trabajadores order by nombre')

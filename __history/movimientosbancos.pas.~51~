@@ -1,0 +1,377 @@
+unit movimientosbancos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls, Vcl.ToolWin,
+  RzStatus, RzDBStat, RzPanel, Vcl.DBGrids, rDBGrid, rDBGrid_MS, Vcl.Grids,
+  rDBRecView, rImprovedComps, Vcl.StdCtrls, RzCmboBx, Vcl.ExtCtrls, DModule1,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,System.DateUtils,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TFMovimientosBancarios = class(TForm)
+    ds1: TDataSource;
+    Panel1: TPanel;
+    GroupBox4: TGroupBox;
+    Label2: TLabel;
+    Label3: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    Button1: TButton;
+    GroupBox1: TGroupBox;
+    rb1Trimestres: TRadioButton;
+    rb2trimestre: TRadioButton;
+    rbTodas: TRadioButton;
+    rb3trimestre: TRadioButton;
+    rb4trimestre: TRadioButton;
+    RzComboBox1: TRzComboBox;
+    rGroupBox1: TrGroupBox;
+    rDBGridClientes1: TrDBGrid_MS;
+    RzStatusBar1: TRzStatusBar;
+    RzStatusPane1: TRzStatusPane;
+    RzFieldStatus1: TRzFieldStatus;
+    RzDBStatusPane1: TRzDBStatusPane;
+    RzDBStateStatus1: TRzDBStateStatus;
+    tlb1: TToolBar;
+    btn1: TToolButton;
+    btn2: TToolButton;
+    btn3: TToolButton;
+    btn4: TToolButton;
+    btn5: TToolButton;
+    btn6: TToolButton;
+    btn7: TToolButton;
+    FDbancos: TFDQuery;
+    rDBRecView1: TrDBRecView;
+    FDUpdateSQL1: TFDUpdateSQL;
+    procedure btn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn7Click(Sender: TObject);
+    procedure rb1TrimestresClick(Sender: TObject);
+    procedure fdq1AfterExecute(DataSet: TFDDataSet);
+   procedure fdMovimientosBancosAfterDelete(DataSet: TDataSet);
+    procedure fdMovimientosBancosAfterOpen(DataSet: TDataSet);
+    procedure fdMovimientosBancosAfterPost(DataSet: TDataSet);
+    procedure fdMovimientosBancosAfterInsert(DataSet: TDataSet);
+    procedure fdMovimientosBancosBeforePost(DataSet: TDataSet);
+    procedure rDBGridClientes1LoadPickList(Sender: TObject; DS: TDataSet;
+      FieldName: string; PickList: TStrings);
+    procedure rGroupBox1MinimizeChange(Sender: TObject);
+    procedure rDBRecView1KeyPress(Sender: TObject; var Key: Char);
+    procedure rDBRecView1Click(Sender: TObject);
+    procedure fdmovimientosbancariosUpdateRecord(ASender: TDataSet;
+  ARequest: TFDUpdateRequest; var AAction: TFDErrorAction;
+  AOptions: TFDUpdateRowOptions);
+
+  private
+    { Private declarations }
+
+    inserciones:integer;
+  public
+    { Public declarations }
+
+  end;
+
+var
+  FMovimientosBancarios: TFMovimientosBancarios;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFMovimientosBancarios.btn1Click(Sender: TObject);
+begin
+Close;
+end;
+
+procedure TFMovimientosBancarios.btn7Click(Sender: TObject);
+begin
+DataModule1.rXLSExport1.ExportDBTable(ds1.DataSet);
+end;
+
+procedure TFMovimientosBancarios.Button1Click(Sender: TObject);
+begin
+rDBGridClientes1.DataSource.DataSet.DisableControls;
+ds1.DataSet.Filtered:=False;
+ds1.DataSet.Filter:='fecha>= {d '+FormatDateTime('yyyy-mm-dd',DateTimePicker1.Date)+'} and fecha<={d '+FormatDateTime('yyyy-mm-dd',DateTimePicker2.Date)+'}';
+ds1.DataSet.Filtered:=True;
+rDBGridClientes1.DataSource.DataSet.EnableControls;
+  rDBGridClientes1.RecalculateSummaryResults(true);
+end;
+
+procedure TFMovimientosBancarios.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+ds1.DataSet.AfterOpen:= nil;
+     ds1.DataSet.AfterPost:= nil;
+     ds1.DataSet.AfterDelete:=nil;
+     ds1.DataSet.AfterInsert:=nil;
+     ds1.DataSet.AfterCancel:=nil;
+     ds1.DataSet.BeforePost:=nil;
+     DataModule1.fq1.AfterExecute:=nil;
+     DataModule1.FDdiario.AfterExecute:=nil;
+
+    ds1.dataset.Active:=false;
+FDbancos.Active:=false;
+Action:=caFree;
+end;
+
+procedure TFMovimientosBancarios.FormCreate(Sender: TObject);
+var i:Integer;
+
+begin
+     DateTimePicker1.Date:=Date;
+     DateTimePicker2.Date:=Date;
+
+     for i := YearOf(date)-4 to YearOf(date)+5 do RzComboBox1.Items.add(IntToStr(i));
+
+     i:=YearOf(date);
+
+     RzComboBox1.text:=IntToStr(i);
+
+
+
+     FDbancos.Active:=True;
+
+     DataModule1.fq1.AfterExecute:=fdq1AfterExecute;
+
+     ds1.DataSet.AfterOpen:= fdMovimientosBancosAfterOpen;
+      ds1.DataSet.AfterDelete:=fdMovimientosBancosAfterDelete;
+     ds1.DataSet.AfterPost:=fdMovimientosBancosAfterPost ;
+     ds1.DataSet.AfterInsert:=fdMovimientosBancosAfterInsert;
+     ds1.DataSet.BeforePost:=fdMovimientosBancosBeforePost;
+     TFDQuery(ds1.DataSet).OnUpdateRecord:=fdmovimientosbancariosUpdateRecord;
+
+
+
+     DataModule1.fdmovimientosbancariosnombre.LookupDataSet:=FDbancos;
+
+         ds1.DataSet.Active:=true;
+        rbTodas.Checked:=True;
+        rGroupBox1.Minimized:=True;
+
+end;
+
+procedure TFMovimientosBancarios.rb1TrimestresClick(Sender: TObject);
+var dt1,dt2:TDate;
+begin
+
+if TRadioButton(Sender).Checked then
+       begin
+       rDBGridClientes1.DataSource.DataSet.DisableControls;
+
+       case TRadioButton(Sender).Tag of
+            0:begin
+                dt1:=StrToDate('1/1/'+RzComboBox1.Text);
+                   dt2:=StrToDate('31/12/'+RzComboBox1.Text);
+
+              end;
+
+            1: begin
+                   dt1:=StrToDate('1/1/'+RzComboBox1.Text);
+                   dt2:=StrToDate('31/3/'+RzComboBox1.Text);
+                end;
+            2: begin
+                  dt1:=StrToDate('1/4/'+RzComboBox1.Text);
+                  dt2:=StrToDate('30/6/'+RzComboBox1.Text);
+                end;
+            3: begin
+                    dt1:=StrToDate('1/7/'+RzComboBox1.Text);
+                   dt2:=StrToDate('30/9/'+RzComboBox1.Text);
+               end;
+            4: begin
+                     dt1:=StrToDate('1/10/'+RzComboBox1.Text);
+                  dt2:=StrToDate('31/12/'+RzComboBox1.Text);
+                end;
+       end;
+       ds1.DataSet.Filtered:=False;
+
+      ds1.DataSet.Filter:='fecha>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fecha<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
+
+       ds1.DataSet.Filtered:=True;
+       rDBGridClientes1.DataSource.DataSet.EnableControls;
+         rDBGridClientes1.RecalculateSummaryResults(true);
+       end;
+
+end;
+
+
+procedure TFMovimientosBancarios.rDBGridClientes1LoadPickList(Sender: TObject;
+  DS: TDataSet; FieldName: string; PickList: TStrings);
+begin
+if FieldName = 'tipo' then
+begin
+  PickList.Add('INTERESES');
+  PickList.Add('GASTOS BANCARIOS');
+
+end;
+end;
+
+procedure TFMovimientosBancarios.rDBRecView1Click(Sender: TObject);
+begin
+if not (ds1.DataSet.State in [dsEdit, dsInsert]) then
+begin
+
+ ds1.DataSet.Insert;
+
+end;
+end;
+
+procedure TFMovimientosBancarios.rDBRecView1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+if Key=#13 then begin
+            ds1.DataSet.Post;
+
+            ds1.DataSet.Insert;
+
+                 end;
+end;
+
+procedure TFMovimientosBancarios.rGroupBox1MinimizeChange(Sender: TObject);
+begin
+if not TrGroupBox(Sender).Minimized then begin
+
+if not (ds1.DataSet.State in [dsInsert, dsEdit]) then
+begin
+ds1.DataSet.Insert;
+
+ panel1.Height:=Panel1.Height+150;
+
+end;
+ end  else begin
+          ds1.DataSet.Cancel;
+
+          panel1.Height:=Panel1.Height-150
+          end;
+end;
+
+
+
+procedure TFMovimientosBancarios.fdq1AfterExecute(DataSet: TFDDataSet);
+begin
+
+   if TFDQuery(DataSet).RowsAffected = -1 then
+    showmessage('No se ha modificado ningún asiento')
+  else
+    case TFDQuery(DataSet).Command.CommandKind of
+    skInsert: begin
+
+                rzfieldstatus1.caption:='Se ha generado el asiento Nº '+DataModule1.fdmovimientosbancariosid_asiento.asstring ;
+
+              end;
+    skUpdate: rzfieldstatus1.caption:='Se ha modificado el asiento Nº '+DataModule1.fdmovimientosbancariosid_asiento.asstring;
+    skDelete: rzfieldstatus1.caption:='Se ha borrado el asiento Nº '+DataModule1.fdmovimientosbancariosid_asiento.asstring;
+    else      showmessage(Format('%d lineas afectadas', [TFDQuery(DataSet).RowsAffected]));
+    end;
+
+
+end;
+
+
+procedure TFMovimientosBancarios.fdMovimientosBancosAfterDelete(DataSet: TDataSet);
+begin
+rDBGridClientes1.RecalculateSummaryResults(True);
+end;
+
+procedure TFMovimientosBancarios.fdMovimientosBancosAfterOpen(DataSet: TDataSet);
+begin
+rDBGridClientes1.RecalculateSummaryResults(True);
+end;
+
+procedure TFMovimientosBancarios.fdMovimientosBancosAfterPost(DataSet: TDataSet);
+begin
+rDBGridClientes1.RecalculateSummaryResults(True);
+ rDBRecView1.Options:=rDBRecView1.Options-[goEditing];
+ rDBGridClientes1.RecalculateSummaryResults(True);
+
+
+end;
+
+
+procedure TFMovimientosBancarios.fdMovimientosBancosBeforePost(DataSet: TDataSet);
+var cnt:Integer;
+begin
+
+   with DataModule1 do
+ begin
+                 if fdmovimientosbancariostipo.AsString = 'INTERESES' then cnt:=662000001
+                  else cnt:=62600000;
+
+
+                   if (fdmovimientosbancariosid_asiento.isnull) or (fdmovimientosbancariosid_asiento.AsInteger=-1) then
+
+                      begin
+
+                      fdmovimientosbancariosid_asiento.AsInteger:= generarAsiento(-1,cnt,fdmovimientosbancariosfecha.AsDateTime,fdmovimientosbancariosnombre.AsString+' - '+fdmovimientosbancariosfecha.AsString,fdmovimientosbancariosimportes.AsFloat,'MOVIMIENTOS BANCARIOS',true);
+
+                      if fdmovimientosbancariosid_asiento.AsInteger = -1 then
+                      begin
+                         DataSet.cancel;
+
+                      end;
+                      end
+                      else begin
+                               modificarAsiento(fdmovimientosbancariosid_asiento.AsInteger,cnt,fdmovimientosbancariosfecha.AsDateTime,fdmovimientosbancariosnombre.AsString+' - '+fdmovimientosbancariosfecha.AsString,fdmovimientosbancariosimportes.AsFloat,'MOVIMIENTOS BANCARIOS');
+
+                           end;
+
+end;
+end;
+
+procedure TFMovimientosBancarios.fdMovimientosBancosAfterInsert(DataSet: TDataSet);
+begin
+
+ rDBRecView1.Options:=rDBRecView1.Options+[goEditing];
+end;
+
+procedure TFMovimientosBancarios.fdmovimientosbancariosUpdateRecord(ASender: TDataSet;
+  ARequest: TFDUpdateRequest; var AAction: TFDErrorAction;
+  AOptions: TFDUpdateRowOptions);
+  var cnt:Integer;
+begin
+
+ if fdmovimientosbancariostipo.AsString = 'INTERESES' then cnt:=662000001
+                  else cnt:=62600000;
+    case ARequest  of
+      arInsert:  begin
+
+                   with DataModule1 do
+                  begin
+
+
+
+                   if (fdmovimientosbancariosid_asiento.isnull) or (fdmovimientosbancariosid_asiento.AsInteger=-1) then
+
+                      begin
+
+                      fdmovimientosbancariosid_asiento.AsInteger:= generarAsiento(-1,cnt,fdmovimientosbancariosfecha.AsDateTime,fdmovimientosbancariosnombre.AsString+' - '+fdmovimientosbancariosfecha.AsString,fdmovimientosbancariosimportes.AsFloat,'MOVIMIENTOS BANCARIOS',true);
+
+                      if fdmovimientosbancariosid_asiento.AsInteger = -1 then
+                      begin
+                       ASender.Delete;
+                       Exit;
+                      end;
+
+                    end;
+
+                    Inc(inserciones);
+                    rzstatuspane1.Caption:=inserciones.ToString + ' movimientos insertados';
+                  end;
+
+       arUpdate: begin
+                  modificarAsiento(fdmovimientosbancariosid_asiento.AsInteger,cnt,fdmovimientosbancariosfecha.AsDateTime,fdmovimientosbancariosnombre.AsString+' - '+fdmovimientosbancariosfecha.AsString,fdmovimientosbancariosimportes.AsFloat,'MOVIMIENTOS BANCARIOS');
+
+                  rzstatuspane1.Caption:='Se ha modificado el movimiento '+ ASender.FieldByName('id_movimiento').AsString+' - '+ ASender.FieldByName('fecha').asstring+' - ' +ASender.FieldByName('nombre').asstring;
+
+                end;
+  end;
+
+
+end;
+
+end.

@@ -1,6 +1,6 @@
 object listfacturas: Tlistfacturas
-  Left = 0
-  Top = 0
+  Left = 1509
+  Top = 216
   BorderStyle = bsToolWindow
   Caption = 'Lista Facturas'
   ClientHeight = 617
@@ -14,6 +14,7 @@ object listfacturas: Tlistfacturas
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -222,14 +223,6 @@ object listfacturas: Tlistfacturas
       end
     end
   end
-  object stat1: TStatusBar
-    Left = 0
-    Top = 592
-    Width = 1307
-    Height = 25
-    Panels = <>
-    SimplePanel = True
-  end
   object tlb1: TToolBar
     Left = 0
     Top = 0
@@ -258,8 +251,7 @@ object listfacturas: Tlistfacturas
     object btn3: TToolButton
       Left = 50
       Top = 0
-      Caption = 'btn3'
-      ImageIndex = 40
+      Action = DataModule1.insertarFactura
     end
     object btn4: TToolButton
       Left = 92
@@ -274,12 +266,44 @@ object listfacturas: Tlistfacturas
       ImageIndex = 42
       OnClick = btn5Click
     end
+    object ToolButton1: TToolButton
+      Left = 176
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton1'
+      ImageIndex = 43
+      Style = tbsSeparator
+    end
+    object btnExcel: TToolButton
+      Left = 184
+      Top = 0
+      Hint = 'Exportar Excel'
+      Caption = 'btnExcel'
+      ImageIndex = 43
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnExcelClick
+    end
+    object ToolButton2: TToolButton
+      Left = 226
+      Top = 0
+      Caption = 'ToolButton2'
+      ImageIndex = 44
+      OnClick = ToolButton2Click
+    end
+    object ToolButton3: TToolButton
+      Left = 268
+      Top = 0
+      Caption = 'ToolButton3'
+      ImageIndex = 45
+      OnClick = ToolButton3Click
+    end
   end
   object rDBGridClientes1: TrDBGrid_MS
     Left = 0
     Top = 161
     Width = 1307
-    Height = 431
+    Height = 437
     Align = alClient
     DataSource = ds1
     TabOrder = 2
@@ -289,15 +313,22 @@ object listfacturas: Tlistfacturas
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     OnDblClick = rDBGridClientes1DblClick
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgUseTitlePopup, dgAutoPickListWidth]
     OptionsEx2.Editors.Memo = obtContent
-    SortDesc = True
     Sorter = DataModule1.rDBGridSorter_FireDac1
     ColumnWidth = cwAutoWidth
     TitleLines = 2
     RowLines = 2
     FixedColText.FixedColWidth = 50
     FixedColText.ShowCheckbox = True
+    FooterRow.FooterVisible = True
+    FooterRow.FieldFooterDefs.Strings = (
+      'total=%SUM '#8364';'
+      'totalbruto=%SUM;'
+      'Nombre=%COUNTVAL facturas;'
+      'importeIVA=%SUM '#8364';'
+      'baseimponible=%SUM '#8364';')
+    FooterRow.RecalculateAfterFilter = True
+    OnFilterChanged = rDBGridClientes1FilterChanged
     Columns = <
       item
         Alignment = taCenter
@@ -310,6 +341,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
+        Width = 60
         Visible = True
       end
       item
@@ -323,7 +355,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 57
+        Width = 53
         Visible = True
       end
       item
@@ -337,7 +369,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 78
+        Width = 73
         Visible = True
       end
       item
@@ -348,7 +380,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 206
+        Width = 193
         Visible = True
       end
       item
@@ -361,11 +393,10 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 102
+        Width = 95
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'concepto'
         Title.Alignment = taCenter
@@ -375,11 +406,10 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 319
+        Width = 298
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'baseimponible'
         Title.Alignment = taCenter
@@ -389,7 +419,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 113
+        Width = 105
         Visible = True
       end
       item
@@ -403,11 +433,10 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 78
+        Width = 73
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'importeIVA'
         Title.Alignment = taCenter
@@ -417,10 +446,10 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
+        Width = 60
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'total'
         Title.Alignment = taCenter
@@ -430,6 +459,7 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
+        Width = 79
         Visible = True
       end
       item
@@ -441,9 +471,43 @@ object listfacturas: Tlistfacturas
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 66
+        Width = 62
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'acuenta'
+        Title.Alignment = taCenter
+        Title.Caption = 'A Cuenta'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 61
         Visible = True
       end>
+  end
+  object RzStatusBar1: TRzStatusBar
+    Left = 0
+    Top = 598
+    Width = 1307
+    Height = 19
+    BorderInner = fsNone
+    BorderOuter = fsNone
+    BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
+    BorderWidth = 0
+    TabOrder = 3
+    object RzDBStateStatus1: TRzDBStateStatus
+      Left = 0
+      Top = 0
+      Width = 134
+      Height = 19
+      Align = alLeft
+      DataSource = ds1
+      BlinkIntervalOff = 100
+      BlinkIntervalOn = 100
+    end
   end
   object ds1: TDataSource
     DataSet = DataModule1.fdfacturas

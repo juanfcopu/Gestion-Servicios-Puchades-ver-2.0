@@ -1,0 +1,119 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  BorderStyle = bsSizeToolWin
+  Caption = 'Lista Gastos Bancos'
+  ClientHeight = 270
+  ClientWidth = 592
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object rdbgrid1: TrDBGrid_MS
+    AlignWithMargins = True
+    Left = 3
+    Top = 32
+    Width = 586
+    Height = 216
+    Align = alClient
+    DataSource = ds1
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Sorter = DataModule1.rDBGridSorter_FireDac1
+    ColumnWidth = cwAutoWidth
+    TitleLines = 2
+    RowLines = 2
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'id_banco'
+        Title.Caption = 'C'#243'digo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 65
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nombre'
+        Title.Caption = 'Nombre'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 217
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IBAN'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 264
+        Visible = True
+      end>
+  end
+  object rzstsbr1: TRzStatusBar
+    Left = 0
+    Top = 251
+    Width = 592
+    Height = 19
+    BorderInner = fsNone
+    BorderOuter = fsNone
+    BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
+    BorderWidth = 0
+    TabOrder = 1
+    ExplicitLeft = 216
+    ExplicitTop = 144
+    ExplicitWidth = 185
+  end
+  object rztlbr1: TRzToolbar
+    Left = 0
+    Top = 0
+    Width = 592
+    Height = 29
+    BorderInner = fsNone
+    BorderOuter = fsGroove
+    BorderSides = [sdTop]
+    BorderWidth = 0
+    TabOrder = 2
+    ToolbarControls = (
+      rzdbnvgtr1)
+    object rzdbnvgtr1: TRzDBNavigator
+      Left = 4
+      Top = 2
+      Width = 240
+      Height = 25
+      BorderOuter = fsNone
+      TabOrder = 0
+    end
+  end
+  object ds1: TDataSource
+    DataSet = FDbancos
+    Left = 232
+    Top = 104
+  end
+  object FDbancos: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from bancos')
+    Left = 456
+    Top = 184
+  end
+end

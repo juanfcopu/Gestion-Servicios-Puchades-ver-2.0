@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>GestionSPuchades.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -99,22 +99,25 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <BT_BuildType>Debug</BT_BuildType>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1034</VerInfo_Locale>
+        <Icon_MainIcon>GestionSPuchades_Icon1.ico</Icon_MainIcon>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <UWP_DelphiLogo150>C:\Users\juanf\OneDrive\Imágenes\logoSPuchadesPNG150.png</UWP_DelphiLogo150>
+        <VerInfo_MajorVer>2</VerInfo_MajorVer>
+        <VerInfo_Keys>CompanyName=Servicios Puchades;FileVersion=2.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=2.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="FPrincipal.pas">
-            <Form>principal</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="DModule1.pas">
             <Form>DataModule1</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="listapresupuestos.pas">
-            <Form>listpresupuestos</Form>
+        <DCCReference Include="listalineaspresupuestos.pas">
+            <Form>listlineaspresupuestos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="clientes.pas">
@@ -141,12 +144,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="facturas.pas">
-            <Form>FFacturas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="listaspagoseguros.pas">
-            <Form>listpagosseguros</Form>
+        <DCCReference Include="listaproveedores.pas">
+            <Form>Fproveedores</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="inserclientes.pas">
@@ -217,25 +216,70 @@
             <Form>FimagenesCompanias</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\Embarcadero\Studio\19.0\Imports\AcroPDFLib_TLB.pas"/>
         <DCCReference Include="EstadisticasGastos.pas">
             <Form>FEstadisticasGastosVentas</Form>
+        </DCCReference>
+        <DCCReference Include="asientos.pas">
+            <Form>FAsientos</Form>
+        </DCCReference>
+        <DCCReference Include="listaseguros.pas">
+            <Form>listseguros</Form>
+        </DCCReference>
+        <DCCReference Include="config.pas">
+            <Form>configuracion</Form>
+        </DCCReference>
+        <DCCReference Include="inserfacturascomparas.pas">
+            <Form>insertFacturasCompras</Form>
+        </DCCReference>
+        <DCCReference Include="ClientesDatos.pas">
+            <Form>FclientesDatos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="editors.pas"/>
+        <DCCReference Include="objetos.pas"/>
+        <DCCReference Include="bancos.pas">
+            <Form>FBancos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="movimientosbancos.pas">
+            <Form>FMovimientosBancarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="DmoduleReports.pas">
+            <Form>DataModule2</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="calendario.pas">
+            <Form>FCalendario</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="listafacturas.pas">
             <Form>listfacturas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="listaseguros.pas">
-            <Form>listseguros</Form>
+        <DCCReference Include="listastrabajadores.pas">
+            <Form>listtrabajadores</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="config.pas">
-            <Form>configuracion</Form>
+        <DCCReference Include="facturas.pas">
+            <Form>FFacturas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="inserfacturascomparas.pas">
-            <Form>insertFacturasCompras</Form>
+        <DCCReference Include="Elegircalendario.pas">
+            <Form>FElegirCalendario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="FPrincipal.pas">
+            <Form>principal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="PrevisionPresupuestos.pas">
+            <Form>FPrevisionEjecucion</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="listapresupuestos.pas">
+            <Form>listpresupuestos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -266,6 +310,19 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName="Win32\Release\GestionSPuchades.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>GestionSPuchades.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Imágenes\logoSPuchadesPNG150.png" Configuration="Release" Class="UWP_DelphiLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\GestionSPuchades.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>GestionSPuchades.exe</RemoteName>

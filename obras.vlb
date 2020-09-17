@@ -132,9 +132,6 @@ Coordinates=110,658,43,33
 [ToolBar1]
 Coordinates=586,540,58,33
 
-[ToolButton8]
-Coordinates=1152,463,74,33
-
 [ToolButton2]
 Coordinates=10,658,74,33
 
@@ -149,9 +146,6 @@ Coordinates=285,540,80,33
 
 [GroupBox3]
 Coordinates=667,309,70,51
-
-[ToolButton3]
-Coordinates=409,599,74,33
 
 [certificaciones]
 Coordinates=769,540,86,33
@@ -171,11 +165,8 @@ Coordinates=382,20,62,33
 [FDObra]
 Coordinates=772,110,52,33
 
-[FDlineasobra]
-Coordinates=689,670,79,33
-
 []
-Coordinates=316,405,144,33
+Coordinates=689,670,79,33
 Visible=True
 ExplicitSubNodes=Position
 

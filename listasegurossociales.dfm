@@ -40,8 +40,6 @@ object listsegurossociales: Tlistsegurossociales
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 575
-      ExplicitHeight = 230
       object Label2: TLabel
         Left = 16
         Top = 16
@@ -123,8 +121,6 @@ object listsegurossociales: Tlistsegurossociales
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 351
-      ExplicitHeight = 230
       object rb1Trimestres: TRadioButton
         Left = 137
         Top = 8
@@ -226,8 +222,6 @@ object listsegurossociales: Tlistsegurossociales
       MinMaxBtnType = mmbRound
       MinimizeAnimate = True
       OnMinimizeChange = rGroupBox1MinimizeChange
-      ExplicitLeft = 836
-      ExplicitHeight = 236
       object rDBRecView1: TrDBRecView
         Left = 2
         Top = 17
@@ -256,8 +250,6 @@ object listsegurossociales: Tlistsegurossociales
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitTop = 14
       end
     end
   end
@@ -348,8 +340,6 @@ object listsegurossociales: Tlistsegurossociales
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OptionsEx = [dgTitleExBtn, dgTitleBtn, dgFixColBtn, dgBool, dgMemo, dgMemoShowText, dgGraphic, dgDateTimePicker, dgDragCell, dgUseTitlePopup, dgAutoPickListWidth]
-    OptionsEx2.ActivateOptionsEx2 = True
     OptionsEx2.Editors.Memo = obtContent
     OptionsEx2.Appearance.DragCell = True
     SortDesc = True
@@ -391,7 +381,7 @@ object listsegurossociales: Tlistsegurossociales
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 323
+        Width = 591
         Visible = True
       end
       item
@@ -406,7 +396,7 @@ object listsegurossociales: Tlistsegurossociales
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 110
+        Width = 201
         Visible = True
       end
       item
@@ -421,7 +411,7 @@ object listsegurossociales: Tlistsegurossociales
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 111
+        Width = 203
         Visible = True
       end
       item
@@ -435,7 +425,7 @@ object listsegurossociales: Tlistsegurossociales
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 127
+        Width = 232
         Visible = True
       end>
   end

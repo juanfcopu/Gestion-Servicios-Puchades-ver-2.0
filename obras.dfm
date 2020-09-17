@@ -6,9 +6,9 @@ object FObras: TFObras
   BorderStyle = bsToolWindow
   Caption = 'Obra'
   ClientHeight = 782
-  ClientWidth = 1194
+  ClientWidth = 1344
   Color = clBtnFace
-  Constraints.MaxWidth = 1200
+  Constraints.MaxWidth = 1400
   DragKind = dkDock
   DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
@@ -24,7 +24,7 @@ object FObras: TFObras
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1194
+    Width = 1344
     Height = 782
     Align = alClient
     TabOrder = 0
@@ -32,7 +32,7 @@ object FObras: TFObras
       AlignWithMargins = True
       Left = 4
       Top = 55
-      Width = 1186
+      Width = 1336
       Height = 93
       Align = alTop
       Anchors = [akTop, akRight]
@@ -48,7 +48,7 @@ object FObras: TFObras
         AlignWithMargins = True
         Left = 12
         Top = 18
-        Width = 1169
+        Width = 1319
         Height = 63
         Margins.Left = 10
         Margins.Bottom = 10
@@ -124,7 +124,7 @@ object FObras: TFObras
       AlignWithMargins = True
       Left = 4
       Top = 154
-      Width = 1186
+      Width = 1336
       Height = 151
       Align = alTop
       Caption = 'Datos Obra'
@@ -196,19 +196,6 @@ object FObras: TFObras
         DBEditLabel.ShowRequiredBold = True
         DBEditLabel.Position = lpLeftCenter
       end
-      object rDBDescripcion: TrDBEdit
-        Left = 279
-        Top = 32
-        Width = 554
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'Descripcion'
-        DataSource = dsobras
-        TabOrder = 1
-        DBEditLabel.OwnCaption = 'Descripci'#243'n'
-        DBEditLabel.ShowRequiredBold = True
-        DBEditLabel.Position = lpLeftCenter
-      end
       object rDBDateTimeInicio: TrDBDateTimePicker
         Left = 110
         Top = 72
@@ -222,7 +209,7 @@ object FObras: TFObras
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
         DataField = 'FechaComienzo'
         DataSource = dsobras
         DBEditLabel.OwnCaption = 'Fecha Inicio'
@@ -236,7 +223,7 @@ object FObras: TFObras
         FormatEmpty = '__.__.__'
       end
       object rDBDateTimeFinal: TrDBDateTimePicker
-        Left = 279
+        Left = 294
         Top = 73
         Width = 88
         Height = 21
@@ -248,7 +235,7 @@ object FObras: TFObras
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 4
         DataField = 'FechaFin'
         DataSource = dsobras
         DBEditLabel.OwnCaption = 'Fecha Final'
@@ -260,42 +247,6 @@ object FObras: TFObras
         DBEditLabel.Font.Style = []
         DBEditLabel.ParentFont = False
         FormatEmpty = '__.__.__'
-      end
-      object rDBPartidas: TrDBEdit
-        Left = 463
-        Top = 72
-        Width = 57
-        Height = 21
-        DataField = 'partidas'
-        DataSource = dsobras
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-        DBEditLabel.OwnCaption = 'Partidas'
-        DBEditLabel.ShowRequiredBold = True
-        DBEditLabel.Position = lpLeftCenter
-        DBEditLabel.Font.Charset = DEFAULT_CHARSET
-        DBEditLabel.Font.Color = clWindowText
-        DBEditLabel.Font.Height = -11
-        DBEditLabel.Font.Name = 'Tahoma'
-        DBEditLabel.Font.Style = []
-        DBEditLabel.ParentFont = False
-      end
-      object rDBTotalObra: TrDBEdit
-        Left = 608
-        Top = 72
-        Width = 121
-        Height = 21
-        DataField = 'ImporteObra'
-        DataSource = dsobras
-        TabOrder = 5
-        DBEditLabel.OwnCaption = 'Total Obra'
-        DBEditLabel.ShowRequiredBold = True
-        DBEditLabel.Position = lpLeftCenter
       end
       object rDBRuta: TrDBEdit
         Left = 77
@@ -311,7 +262,7 @@ object FObras: TFObras
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 5
         DBEditLabel.OwnCaption = 'Ruta'
         DBEditLabel.ShowRequiredBold = True
         DBEditLabel.Position = lpLeftCenter
@@ -322,14 +273,27 @@ object FObras: TFObras
         DBEditLabel.Font.Style = []
         DBEditLabel.ParentFont = False
       end
+      object rDBMemo1: TrDBMemo
+        Left = 294
+        Top = 30
+        Width = 522
+        Height = 23
+        DataField = 'Descripcion'
+        DataSource = dsobras
+        PopupMenu = rDBMemo1.pmSearch
+        ScrollBars = ssVertical
+        TabOrder = 6
+        DBEditLabel.OwnCaption = 'Descripci'#243'n'
+        DBEditLabel.Position = lpLeftCenter
+      end
     end
     object PageControl1: TPageControl
       AlignWithMargins = True
       Left = 4
       Top = 311
-      Width = 1186
+      Width = 1336
       Height = 371
-      ActivePage = certificaciones
+      ActivePage = lineas
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
       Enabled = False
@@ -350,13 +314,13 @@ object FObras: TFObras
         Font.Style = []
         ParentFont = False
         DesignSize = (
-          1178
+          1328
           343)
         object ControlBar2: TControlBar
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1172
+          Width = 1322
           Height = 32
           Align = alTop
           DockSite = False
@@ -398,9 +362,31 @@ object FObras: TFObras
             BorderOuter = fsNone
             TabOrder = 0
           end
+          object ToolBar3: TToolBar
+            Left = 401
+            Top = 2
+            Width = 150
+            Height = 48
+            Caption = 'ToolBar3'
+            Images = ImageList1
+            TabOrder = 2
+            object ToolButton3: TToolButton
+              Left = 0
+              Top = 0
+              Action = abrirpresupuesto
+              ImageIndex = 4
+            end
+            object btnEjecutadoFechaFinlinea: TToolButton
+              Left = 23
+              Top = 0
+              Hint = 'Finalizar linea obra'
+              Action = EjecutadoFechaFinlinea
+              ImageIndex = 5
+            end
+          end
         end
         object LabeledEdit5: TLabeledEdit
-          Left = -32326
+          Left = -32176
           Top = 296
           Width = 129
           Height = 21
@@ -430,7 +416,7 @@ object FObras: TFObras
           OnChange = LabeledEdit5Change
         end
         object LabeledEdit11: TLabeledEdit
-          Left = -32326
+          Left = -32176
           Top = 296
           Width = 129
           Height = 21
@@ -459,7 +445,7 @@ object FObras: TFObras
           TabOrder = 5
         end
         object LabeledEdit13: TLabeledEdit
-          Left = -32326
+          Left = -32176
           Top = 296
           Width = 129
           Height = 21
@@ -488,7 +474,7 @@ object FObras: TFObras
           TabOrder = 6
         end
         object LabeledEdit14: TLabeledEdit
-          Left = -32326
+          Left = -32176
           Top = 296
           Width = 129
           Height = 21
@@ -517,7 +503,7 @@ object FObras: TFObras
           TabOrder = 3
         end
         object lbepartidasejecutadas: TLabeledEdit
-          Left = -32326
+          Left = -32176
           Top = 295
           Width = 129
           Height = 21
@@ -549,9 +535,9 @@ object FObras: TFObras
         object rDBGrid2: TrDBGrid
           Left = 0
           Top = 38
-          Width = 1178
-          Height = 187
-          Align = alTop
+          Width = 1328
+          Height = 231
+          Align = alClient
           DataSource = dslineasobra
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -579,14 +565,14 @@ object FObras: TFObras
               FieldName = 'id_lineaobra'
               Title.Alignment = taCenter
               Title.Caption = 'Partida'
-              Width = 80
+              Width = 83
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'descripcion'
               Title.Caption = 'Descripci'#243'n'
-              Width = 537
+              Width = 498
               Visible = True
             end
             item
@@ -595,7 +581,7 @@ object FObras: TFObras
               FieldName = 'total'
               Title.Alignment = taCenter
               Title.Caption = 'Total'
-              Width = 80
+              Width = 83
               Visible = True
             end
             item
@@ -604,7 +590,7 @@ object FObras: TFObras
               FieldName = 'ejecutado'
               Title.Alignment = taCenter
               Title.Caption = 'Ejecutado'
-              Width = 80
+              Width = 83
               Visible = True
             end
             item
@@ -613,7 +599,7 @@ object FObras: TFObras
               FieldName = 'presupuestos_id_presupuesto'
               Title.Alignment = taCenter
               Title.Caption = 'C'#243'digo Presupuesto'
-              Width = 80
+              Width = 83
               Visible = True
             end
             item
@@ -622,7 +608,7 @@ object FObras: TFObras
               FieldName = 'presupuestos_grupo'
               Title.Alignment = taCenter
               Title.Caption = 'Grupo Presupuesto'
-              Width = 80
+              Width = 83
               Visible = True
             end
             item
@@ -631,7 +617,7 @@ object FObras: TFObras
               FieldName = 'presupuestos_Id_Partida'
               Title.Alignment = taCenter
               Title.Caption = 'Partida Presupuesto'
-              Width = 80
+              Width = 83
               Visible = True
             end
             item
@@ -640,7 +626,7 @@ object FObras: TFObras
               FieldName = 'facturas_id_factura'
               Title.Alignment = taCenter
               Title.Caption = 'Factura'
-              Width = 54
+              Width = 55
               Visible = True
             end
             item
@@ -649,7 +635,117 @@ object FObras: TFObras
               FieldName = 'facturas_ano'
               Title.Alignment = taCenter
               Title.Caption = 'A'#241'o'
-              Width = 54
+              Width = 55
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'diasejecucion'
+              Title.Alignment = taCenter
+              Title.Caption = 'Dias'
+              Width = 55
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              ButtonStyle = cbsEllipsis
+              Expanded = False
+              FieldName = 'FechaComienzo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha Inicio'
+              Width = 55
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              ButtonStyle = cbsEllipsis
+              Expanded = False
+              FieldName = 'fechafin'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha Final'
+              Width = 55
+              Visible = True
+            end>
+        end
+        object rDBGrid3: TrDBGrid
+          AlignWithMargins = True
+          Left = 3
+          Top = 272
+          Width = 1322
+          Height = 68
+          Align = alBottom
+          DataSource = dsobras
+          TabOrder = 7
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          RowLines = 2
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'partidas'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMenuHighlight
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              Title.Alignment = taCenter
+              Title.Caption = 'Partidas'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 252
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'partidasejecutadas'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMenuHighlight
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              Title.Alignment = taCenter
+              Title.Caption = 'Partidas Ejecutadas'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 523
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'ImporteObra'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMenuHighlight
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              Title.Alignment = taCenter
+              Title.Caption = 'Total'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 252
+              Visible = True
+            end
+            item
+              Expanded = False
+              Width = 252
               Visible = True
             end>
         end
@@ -660,7 +756,7 @@ object FObras: TFObras
         object shellDocumentacion1: TRzShellList
           Left = 0
           Top = 0
-          Width = 1178
+          Width = 1328
           Height = 318
           Align = alClient
           IconOptions.AutoArrange = True
@@ -669,7 +765,7 @@ object FObras: TFObras
         object statDocumentacion: TStatusBar
           Left = 0
           Top = 318
-          Width = 1178
+          Width = 1328
           Height = 25
           Panels = <>
         end
@@ -680,14 +776,14 @@ object FObras: TFObras
         object statFotos: TStatusBar
           Left = 0
           Top = 318
-          Width = 1178
+          Width = 1328
           Height = 25
           Panels = <>
         end
         object shellFotos: TRzShellList
           Left = 0
           Top = 0
-          Width = 1178
+          Width = 1328
           Height = 318
           Align = alClient
           IconOptions.AutoArrange = True
@@ -701,7 +797,7 @@ object FObras: TFObras
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1172
+          Width = 1322
           Height = 33
           Align = alTop
           TabOrder = 0
@@ -737,7 +833,7 @@ object FObras: TFObras
           AlignWithMargins = True
           Left = 3
           Top = 98
-          Width = 1172
+          Width = 1322
           Height = 242
           Align = alClient
           DataSource = dslineasCertificaciones
@@ -747,47 +843,63 @@ object FObras: TFObras
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          RowLines = 2
           FooterRow.FooterVisible = True
           FooterRow.FieldFooterDefs.Strings = (
             'importe=%SUM '#8364';'
             'ImporteOrigen=%SUM '#8364';'
-            'ncertificacion=%COUNTVAL Certificaciones;')
+            'ncertificacion=%COUNTALL certificaciones;')
           OnFooterCellClick = rDBGridClientes1FooterCellClick
           Columns = <
             item
               Expanded = False
               FieldName = 'ncertificacion'
+              Width = 148
               Visible = True
             end
             item
               ButtonStyle = cbsEllipsis
               Expanded = False
               FieldName = 'fechacertificacion'
+              Width = 237
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'ImporteOrigen'
+              Width = 148
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'importe'
+              Width = 148
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'reten'
+              Width = 148
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'IVA'
+              Width = 148
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'total'
+              Width = 148
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'certificacion_id_certificacion'
+              Width = 148
               Visible = True
             end>
         end
@@ -795,7 +907,7 @@ object FObras: TFObras
           AlignWithMargins = True
           Left = 3
           Top = 42
-          Width = 1172
+          Width = 1322
           Height = 50
           Align = alTop
           Caption = 'Certificaci'#243'n '
@@ -884,7 +996,7 @@ object FObras: TFObras
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1172
+          Width = 1322
           Height = 32
           Align = alTop
           ParentShowHint = False
@@ -948,7 +1060,7 @@ object FObras: TFObras
         object rDBGrid1: TrDBGrid
           Left = 0
           Top = 38
-          Width = 1178
+          Width = 1328
           Height = 305
           Align = alClient
           DataSource = dsContactosObra
@@ -1264,7 +1376,7 @@ object FObras: TFObras
           end
         end
         object rGroupBox2: TrGroupBox
-          Left = 591
+          Left = 741
           Top = 0
           Width = 587
           Height = 343
@@ -1350,7 +1462,7 @@ object FObras: TFObras
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 1186
+      Width = 1336
       Height = 45
       ButtonHeight = 42
       ButtonWidth = 41
@@ -1390,17 +1502,9 @@ object FObras: TFObras
         ParentShowHint = False
         ShowHint = True
       end
-      object ToolButton3: TToolButton
-        AlignWithMargins = True
-        Left = 131
-        Top = 0
-        Action = actanadirlineaspresupuestos
-        ParentShowHint = False
-        ShowHint = True
-      end
       object ToolButton5: TToolButton
         AlignWithMargins = True
-        Left = 172
+        Left = 131
         Top = 0
         Caption = 'ToolButton5'
         Enabled = False
@@ -1409,29 +1513,21 @@ object FObras: TFObras
         ShowHint = True
       end
       object ToolButton7: TToolButton
-        Left = 213
+        Left = 172
         Top = 0
         Width = 8
         Caption = 'ToolButton7'
         ImageIndex = 5
         Style = tbsSeparator
       end
-      object ToolButton8: TToolButton
-        AlignWithMargins = True
-        Left = 221
-        Top = 0
-        Action = abrircarpeta
-        ParentShowHint = False
-        ShowHint = True
-      end
       object ToolButton10: TToolButton
-        Left = 262
+        Left = 180
         Top = 0
         Action = carpetadocumentacion
       end
       object ToolButton9: TToolButton
         AlignWithMargins = True
-        Left = 303
+        Left = 221
         Top = 0
         Action = cerrarpres
         ParentShowHint = False
@@ -1442,7 +1538,7 @@ object FObras: TFObras
       AlignWithMargins = True
       Left = 4
       Top = 688
-      Width = 400
+      Width = 971
       Height = 90
       Align = alLeft
       Anchors = [akLeft, akTop, akRight]
@@ -1452,7 +1548,7 @@ object FObras: TFObras
         AlignWithMargins = True
         Left = 5
         Top = 18
-        Width = 390
+        Width = 961
         Height = 67
         Align = alClient
         TabOrder = 0
@@ -1460,7 +1556,7 @@ object FObras: TFObras
     end
     object GroupBox5: TGroupBox
       AlignWithMargins = True
-      Left = 883
+      Left = 1033
       Top = 692
       Width = 307
       Height = 86
@@ -1528,9 +1624,10 @@ object FObras: TFObras
       OnExecute = abrircarpetaExecute
     end
     object abrirpresupuesto: TAction
-      Caption = 'Abrir Presupuesto'
       Hint = 'Abrir presupuesto'
-      ImageIndex = 13
+      ImageIndex = 32
+      OnExecute = abrirpresupuestoExecute
+      OnUpdate = abrirpresupuestoUpdate
     end
     object guardarobra: TAction
       Caption = 'Guardar'
@@ -1562,138 +1659,143 @@ object FObras: TFObras
       ImageIndex = 8
       OnExecute = carpetadocumentacionExecute
     end
+    object EjecutadoFechaFinlinea: TAction
+      Caption = 'EjecutadoFechaFinlinea'
+      OnExecute = EjecutadoFechaFinlineaExecute
+      OnUpdate = EjecutadoFechaFinlineaUpdate
+    end
   end
   object ImageList1: TImageList
     Left = 776
     Top = 320
     Bitmap = {
-      494C0101040008000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800680110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000008180D9001C18CD001C1AD5001D19
+      D4001C18D4001A16D4001410D3000F0AD1000F0AD0001410D3001914D4001B17
+      D4001C17D3001C17D3001A16CA00817FD6000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000B3FF0000B3FF0000B3
+      FF000D9CD9000D9CD9000D9CD9000D9CD9000D9CD9000D9CD9000D9CD9000D9C
+      D9000D9CD9000D9CD9000D9CD900000000001412D1001D1DF7001D1CF6001A19
+      F6001311F3002924F1005D57F200908DF500908CF3005A55EC002521E800110C
+      F0001813F7001B15F6001A16F700120ECE000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000F73D2000F73D200037F
+      F600000000008B8B8B00A0A0A000A5A5A500A8A8A800A9A9A900AAAAAA00A9A9
+      A900A7A7A700A3A3A3000000000000000000201FDC002023F5001C1FF3001818
+      F100807DF400F0EFFD00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EFEFFA007D7A
+      E5001310E5001A18F4001C1AF6001E1BD9000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000001377D30084B7E7001377
+      D300000000008F8F8F005D554400645A4500645A4500B3B3B3005D554400645A
+      4500645A4500ACACAC0000000000000000002123DE001F27F500191CF2009B98
+      F800FFFFFF00F5F3FC008E8BF2005858EB005757EA008C8AED00F4F3FA00FFFF
+      FF009694E5001313E3001C1EF7001F1EDC000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000167AD30000000000167A
+      D3000000000096969600B1B1B100B6B6B600BABABA00BDBDBD00BDBDBD00BCBC
+      BC00B9B9B900B5B5B50000000000000000002225E0001925F4008180F600FFFF
+      FF00D8D6FA003E3FF1000E13E6003C3FDB003D40E1000C0FE2003A3BE300D5D4
+      F500FFFFFF007A79DF00151AED002021DF000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000197ED400000000000F8D
+      F900000000009B9B9B005D554400645A4500645A4500C5C5C5005D554400645A
+      4500645A4500BDBDBD0000000000000000002228E2002E36F600F1EFFE00F1F0
+      FE003F42F100101FF2004347E400F7F5FB00F6F5F8004044DB000E1AF1003A3C
+      E100F0EFF900EFEEF800252ADE002023E2000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000001C81D5001C81D5001C81
+      D50000000000A0A0A000C0C0C0005D5544005D554400CCCCCC00CDCDCD005D55
+      44005D554400C3C3C30000000000000000001B22E400666AF800FFFFFF00908F
+      F7001828F300192DF100575AE400FFFFFF00FFFFFC005559E100182AF3001422
+      ED008A89E500FFFFFE006265E100191EE2000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000001F85D6001F85D6001796
+      FB0000000000A4A4A400C4C4C400CACACA00D0D0D000D3D3D300B7B7B700B5B5
+      B500B2B2B200ADADAD0000000000000000003239E9009CA0FB00FFFFFF006568
+      F5001930F3001D32F1005458E400FFFFFF00FFFEFB005256E0001A2FF200152A
+      F1006064E400FFFFFF009A9EEB003034E3000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000002388D7008BC0EA002388
+      D70000000000A7A7A7005D554400645A4500645A4500D9D9D900000000000000
+      0000000000000000000000000000000000005A5FED00B7BCFC00FFFFFF007175
+      F600243CF3001C35F0005053E300FFFFFF00FFFEFB004F53DF001C34F2002239
+      F2006C71E700FFFFFF00A9ADED00585BE9000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000258BD70000000000258B
+      D70000000000A7A7A700C9C9C900D0D0D000D7D7D700DCDCDC00000000000000
+      000000000000A4A4A4000000000000000000666FF000A0A5FB00FFFFFF00B4B3
+      FA005F73F7005971F6008087F200FFFFFF00FFFFFC007D84EA005870F6005B6F
+      F200B0AFEE00FFFFFE009197E9005F66EF000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000278ED8000000000021A1
+      FE0000000000A7A7A700000000000000000000000000BCBCBC00000000000000
+      0000A4A4A400A4A4A40000000000000000006F78F2007F8CF900FFFFFF00F7F6
+      FE00898FF700778FF90094A0FB00FBF8FF00F9F6F9008F9AF100728BF800828A
+      ED00F6F5FC00FFFFFE00737FEB00686FF2000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000002A90D8002A90D8002A90
+      D800000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000747DF3007D94F900BDBEFB00FFFF
+      FF00E8E7FD008B93F6007686F6008D94F5008B92EF007383F200878FEF00E7E6
+      F900FFFFFF00B6B7EF007389F5006C74F2000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000002B93D90026A7FF0026A7
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000007881F40087A3F9007D8DF700C7C5
+      FB00FFFFFF00F9F7FD00BEBDF7009BA0F5009B9FF400BCBCF400F8F7FC00FFFF
+      FF00BEBDEF007484EE00809BFB007079F2000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000002083D4001C82D5001C82D5001C82
+      D5001C82D5001C82D5001C82D5001C82D5001C82D5001C82D5001C82D5001C82
+      D5001C82D5001C82D5001C82D500000000007982F5008DA8FA008AA4FA008595
+      F800B6B7F900F6F3FE00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F5F3FC00B2B3
+      F0007C8DF000869FF90087A1F900757EF4000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000278DD80000000000278DD8000000
+      0000278DD80000000000278DD80000000000278DD80000000000278DD8000000
+      0000278DD80000000000278DD800000000006D74F7008DA9FA0090ABFA0090AB
+      FA00879FF9008B99F700A9AFF600C2C8F800C4CAF700AAB0F3008896F100859D
+      F6008EA9FB008DA8FA008BA6F9007075F6000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000D9CD9000D9CD9000D9C
+      D900000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000A9A6F8007076F6007881F6007982
+      F6007A84F6007A84F6007780F6007278F4007178F4007781F6007C85F7007C84
+      F6007C84F6007C84F600777BF500ADAAF8000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1827,11 +1929,11 @@ object FObras: TFObras
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
       2800000040000000200000000100010000000000000100000000000000000000
-      000000000000000000000000FFFFFF0000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000FFFFFFFFFFFF0000FFFFF9FFFC000000
+      000000000000000000000000FFFFFF00FFFF0000000000008001000000000000
+      88030000000000008803000000000000A803000000000000A803000000000000
+      88030000000000008803000000000000883F000000000000A83B000000000000
+      ABB30000000000008FFF0000000000008FFF0000000000000001000000000000
+      55550000000000008FFF000000000000FFFFFFFFFFFF0000FFFFF9FFFC000000
       FE00F6CF80000000FE00F6B700000000FE00F6B7000000008000F8B700000000
       8000FE8F000100008000FE3F000300008000FF7F000300008001FE3F00030000
       8003FEBF000300008007FC9F0FC30000807FFDDF0003000080FFFDDF80070000
@@ -1945,21 +2047,13 @@ object FObras: TFObras
     AfterEdit = FDObraAfterEdit
     AfterPost = FDObraAfterPost
     CachedUpdates = True
-    AfterApplyUpdates = FDObraAfterApplyUpdates
     Connection = DataModule1.FDConnection1
+    SchemaAdapter = FDSchemaCertificaciones
     SQL.Strings = (
-      
-        'select * from obras where id_cliente=:ID_cliente and id_obra=:ID' +
-        '_obra')
+      'select * from obras where id_obra=:ID_obra')
     Left = 16
     Top = 215
     ParamData = <
-      item
-        Name = 'ID_CLIENTE'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end
       item
         Name = 'ID_OBRA'
         DataType = ftInteger
@@ -2118,35 +2212,6 @@ object FObras: TFObras
       Origin = 'modelo_azulejo2'
     end
   end
-  object FDlineasobra: TFDQuery
-    AfterOpen = FDlineasobraAfterOpen
-    AfterInsert = FDlineasobraAfterInsert
-    AfterEdit = FDlineasobraAfterEdit
-    AfterPost = FDlineasobraAfterPost
-    AfterDelete = FDlineasobraAfterDelete
-    CachedUpdates = True
-    Aggregates = <
-      item
-        Name = 'SUMAIMPORTE'
-        Expression = 'SUM(TOTAL)'
-        Active = True
-      end>
-    AfterApplyUpdates = FDlineasobraAfterApplyUpdates
-    Connection = DataModule1.FDConnection1
-    SQL.Strings = (
-      
-        'select * from lineasobras where obras_id_obra=:ID_obra order by ' +
-        'id_lineaobra ASC')
-    Left = 952
-    Top = 247
-    ParamData = <
-      item
-        Name = 'ID_OBRA'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
-  end
   object fdCertificacion: TFDQuery
     AfterInsert = fdCertificacionAfterInsert
     AfterEdit = fdCertificacionAfterEdit
@@ -2256,8 +2321,8 @@ object FObras: TFObras
       
         'select * from lineascertificaciones where certificacion_id_certi' +
         'ficacion=:ID_cert')
-    Left = 555
-    Top = 580
+    Left = 523
+    Top = 564
     ParamData = <
       item
         Name = 'ID_CERT'
@@ -2323,13 +2388,13 @@ object FObras: TFObras
     UpdateOptions.UpdateMode = upWhereChanged
     AfterApplyUpdate = FDSchemaCertificacionesAfterApplyUpdate
     OnReconcileRow = FDSchemaCertificacionesReconcileRow
-    Left = 731
-    Top = 590
+    Left = 723
+    Top = 582
   end
   object dscertificacion: TDataSource
     DataSet = fdCertificacion
-    Left = 427
-    Top = 454
+    Left = 387
+    Top = 486
   end
   object dsobras: TDataSource
     DataSet = FDObra
@@ -2342,16 +2407,21 @@ object FObras: TFObras
     Top = 30
   end
   object fdqryContactosObra: TFDQuery
-    AfterOpen = fdqryContactosObraAfterOpen
+    AfterInsert = fdqryContactosObraAfterInsert
     AfterEdit = fdqryContactosObraAfterEdit
     AfterDelete = fdqryContactosObraAfterDelete
     CachedUpdates = True
+    IndexFieldNames = 'id_obra'
+    MasterSource = dsobras
+    MasterFields = 'ID_obra'
     Connection = DataModule1.FDConnection1
     SchemaAdapter = FDSchemaCertificaciones
+    FetchOptions.AssignedValues = [evDetailCascade]
+    FetchOptions.DetailCascade = True
     SQL.Strings = (
       'SELECT * FROM obrascontactos where id_obra=:idobra')
-    Left = 920
-    Top = 487
+    Left = 656
+    Top = 455
     ParamData = <
       item
         Name = 'IDOBRA'
@@ -2430,8 +2500,8 @@ object FObras: TFObras
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'select * from contactosclientes where id_cliente=:idcliente')
-    Left = 904
-    Top = 559
+    Left = 792
+    Top = 447
     ParamData = <
       item
         Name = 'IDCLIENTE'
@@ -2447,12 +2517,115 @@ object FObras: TFObras
   end
   object dslineasobra: TDataSource
     DataSet = FDlineasobra
-    Left = 876
-    Top = 242
+    Left = 156
+    Top = 482
   end
   object dslineasCertificaciones: TDataSource
     DataSet = fdlineasCertificaciones
     Left = 427
     Top = 704
+  end
+  object FDlineasobra: TFDQuery
+    AfterOpen = FDlineasobraAfterOpen
+    AfterInsert = FDlineasobraAfterInsert
+    AfterEdit = FDlineasobraAfterEdit
+    BeforePost = FDlineasobraBeforePost
+    AfterPost = FDlineasobraAfterPost
+    AfterDelete = FDlineasobraAfterDelete
+    CachedUpdates = True
+    IndexFieldNames = 'obras_ID_obra'
+    Aggregates = <
+      item
+        Name = 'SUMAIMPORTE'
+        Expression = 'SUM(TOTAL)'
+        Active = True
+      end>
+    AggregatesActive = True
+    MasterSource = dsobras
+    MasterFields = 'ID_obra'
+    DetailFields = 'obras_ID_obra'
+    Connection = DataModule1.FDConnection1
+    SchemaAdapter = FDSchemaCertificaciones
+    FetchOptions.AssignedValues = [evDetailCascade]
+    FetchOptions.DetailCascade = True
+    SQL.Strings = (
+      'select * from lineasobras where obras_id_obra=:ID_obra ')
+    Left = 40
+    Top = 463
+    ParamData = <
+      item
+        Name = 'ID_OBRA'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object FDlineasobraid_lineaobra: TIntegerField
+      FieldName = 'id_lineaobra'
+      Origin = 'id_lineaobra'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDlineasobradescripcion: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descripcion'
+      Origin = 'descripcion'
+      Size = 255
+    end
+    object FDlineasobratotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'total'
+      Origin = 'total'
+    end
+    object FDlineasobraejecutado: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'ejecutado'
+      Origin = 'ejecutado'
+    end
+    object FDlineasobraobras_ID_obra: TIntegerField
+      FieldName = 'obras_ID_obra'
+      Origin = 'obras_ID_obra'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDlineasobrapresupuestos_id_presupuesto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'presupuestos_id_presupuesto'
+      Origin = 'presupuestos_id_presupuesto'
+    end
+    object FDlineasobrapresupuestos_grupo: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'presupuestos_grupo'
+      Origin = 'presupuestos_grupo'
+    end
+    object FDlineasobrapresupuestos_Id_Partida: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'presupuestos_Id_Partida'
+      Origin = 'presupuestos_Id_Partida'
+    end
+    object FDlineasobrafacturas_id_factura: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'facturas_id_factura'
+      Origin = 'facturas_id_factura'
+    end
+    object FDlineasobrafacturas_ano: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'facturas_ano'
+      Origin = 'facturas_ano'
+    end
+    object FDlineasobradiasejecucion: TIntegerField
+      FieldName = 'diasejecucion'
+      Origin = 'diasejecucion'
+      Required = True
+    end
+    object FDlineasobrafechafin: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'fechafin'
+      Origin = 'fechafin'
+    end
+    object FDlineasobraFechaComienzo: TDateField
+      FieldName = 'FechaComienzo'
+      Origin = 'FechaComienzo'
+      Required = True
+    end
   end
 end

@@ -4,13 +4,6 @@ Coordinates=499,1812,79,58
 [GroupBox4]
 Coordinates=788,1812,79,58
 
-[ComboBox2]
-Coordinates=700,190,101,146
-ExplicitSubNodes=ItemIndex
-
-[Label1]
-Coordinates=604,1812,53,58
-
 [PageControl1]
 Coordinates=1253,1812,93,36
 
@@ -49,8 +42,9 @@ Visible=True
 Coordinates=10,1812,79,58
 
 []
-Coordinates=426,1,77,36
+Coordinates=604,1812,53,58
 Visible=True
+ExplicitSubNodes=ItemIndex
 
 [DataModule1.fdClientes]
 Coordinates=1151,10,152,234

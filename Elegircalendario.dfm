@@ -1,0 +1,30 @@
+object FElegirCalendario: TFElegirCalendario
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'Calendario'
+  ClientHeight = 249
+  ClientWidth = 194
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RzCalendar1: TRzCalendar
+    Left = 0
+    Top = 0
+    Width = 194
+    Height = 249
+    Align = alClient
+    BorderOuter = fsLowered
+    TabOrder = 0
+    OnDblClick = RzCalendar1DblClick
+    OnKeyPress = RzCalendar1KeyPress
+  end
+end

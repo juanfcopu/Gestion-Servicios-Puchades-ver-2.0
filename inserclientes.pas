@@ -20,8 +20,6 @@ type
     GroupBox4: TGroupBox;
     GridPanel2: TGridPanel;
     GroupBox5: TGroupBox;
-    Label1: TLabel;
-    ComboBox2: TComboBox;
     GroupBox2: TGroupBox;
     GridPanel3: TGridPanel;
     PageControl1: TPageControl;
@@ -57,6 +55,27 @@ type
     rDBEdit14: TrDBEdit;
     rDBLookupComboBox1: TrDBLookupComboBox;
     rDBComboBox1: TrDBComboBox;
+    rDBComboBox2: TrDBComboBox;
+    fdinsertarClientesIdContactos: TIntegerField;
+    fdinsertarClientesNombre: TStringField;
+    fdinsertarClientesDireccion: TStringField;
+    fdinsertarClientesCiudad: TStringField;
+    fdinsertarClientesTelefonoCasa: TIntegerField;
+    fdinsertarClientesTelefonoMovil: TIntegerField;
+    fdinsertarClientesmail: TStringField;
+    fdinsertarClientesNumFax: TIntegerField;
+    fdinsertarClientesCIF: TStringField;
+    fdinsertarClientesCodigoPostal: TStringField;
+    fdinsertarClientesidAdministrador: TIntegerField;
+    fdinsertarClientesCP: TBooleanField;
+    fdinsertarClientesIBAN: TStringField;
+    fdinsertarClientesbanco: TStringField;
+    fdinsertarClientesnombrefactura: TStringField;
+    fdinsertarClientesciffactura: TStringField;
+    fdinsertarClientesciudadfactura: TStringField;
+    fdinsertarClientesdireccionfactura: TStringField;
+    fdinsertarClientescodigopostalfactura: TStringField;
+    fdinsertarClientesfamilia: TIntegerField;
     procedure btcancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btaceptarClick(Sender: TObject);
@@ -73,6 +92,8 @@ type
     procedure fdcontactosAfterPost(DataSet: TDataSet);
     procedure fdcontactosAfterDelete(DataSet: TDataSet);
     procedure fdcontactosAfterInsert(DataSet: TDataSet);
+    procedure fdcontactosNewRecord(DataSet: TDataSet);
+    
   private
     { Private declarations }
   public
@@ -81,7 +102,7 @@ type
 
 var
   FInsertarCliente: TFInsertarCliente;
-
+  function genIdContactos:integer;
 implementation
 
 {$R *.dfm}
@@ -142,6 +163,13 @@ begin
 rDBGrid1.RecalculateSummaryResults(True);
 end;
 
+
+
+procedure TFInsertarCliente.fdcontactosNewRecord(DataSet: TDataSet);
+begin
+DataSet.FieldByName('idContactos').AsInteger:=genIdContactos;
+end;
+
 procedure TFInsertarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -156,6 +184,8 @@ end;
 
 procedure TFInsertarCliente.FormCreate(Sender: TObject);
 begin
+     fdinsertarClientesfamilia.OnSetText:=DataModule1.ClientesfamiliaSetText;
+     fdinsertarClientesfamilia.OnGetText:=DataModule1.fdClientesfamiliaGetText;
 
      if not fdadministradores.Active then fdadministradores.Active:=true;
 
@@ -195,6 +225,21 @@ if odSelected in State then
 
 
 DrawSeparatorTop:=True;
+end;
+
+function genIdContactos:integer;
+begin
+with DataModule1 do
+    begin
+    fq1.Close;
+    fq1.SQL.Clear;
+    Fq1.SQL.Add('Select max(idContactos) from clientes');
+    fq1.active:=True;
+    Result:=Fq1.Fields[0].AsInteger+1;
+    Fq1.Close;
+    end;
+
+
 end;
 
 end.

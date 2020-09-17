@@ -21,7 +21,7 @@ object configuracion: Tconfiguracion
     Top = 0
     Width = 726
     Height = 364
-    ActivePage = ts1
+    ActivePage = ts2
     Align = alClient
     TabOrder = 0
     OnChange = pgc1Change
@@ -166,6 +166,17 @@ object configuracion: Tconfiguracion
         TabOrder = 5
         OnClick = btCancelar2Click
       end
+      object lbPathThunderbird: TLabeledEdit
+        Left = 152
+        Top = 261
+        Width = 450
+        Height = 21
+        EditLabel.Width = 100
+        EditLabel.Height = 13
+        EditLabel.Caption = 'PATH THUNDERBIRD'
+        LabelPosition = lpLeft
+        TabOrder = 6
+      end
     end
     object tsIVA: TTabSheet
       Caption = 'I.V.A y Descuentos'
@@ -289,7 +300,7 @@ object configuracion: Tconfiguracion
             item
               Expanded = False
               FieldName = 'id_cuenta'
-              Title.Caption = 'Cuenta'
+              Title.Caption = 'C'#243'digo'
               Title.Font.Charset = DEFAULT_CHARSET
               Title.Font.Color = clWindowText
               Title.Font.Height = -13
@@ -301,7 +312,7 @@ object configuracion: Tconfiguracion
             item
               Expanded = False
               FieldName = 'descripcion'
-              Title.Caption = 'Descripci'#243'n'
+              Title.Caption = 'Categoria'
               Title.Font.Charset = DEFAULT_CHARSET
               Title.Font.Color = clWindowText
               Title.Font.Height = -13
@@ -330,7 +341,7 @@ object configuracion: Tconfiguracion
           DataField = 'id_cuenta'
           DataSource = ds1
           TabOrder = 0
-          DBEditLabel.OwnCaption = 'N'#186' de Cuenta'
+          DBEditLabel.OwnCaption = 'C'#243'digo Categoria'
           DBEditLabel.Position = lpLeftCenter
         end
         object rDBEdit2: TrDBEdit
@@ -381,11 +392,132 @@ object configuracion: Tconfiguracion
         end
       end
     end
+    object TabSheet1: TTabSheet
+      Caption = 'Categoria Compras'
+      ImageIndex = 5
+      object GroupBox1: TGroupBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 278
+        Height = 330
+        Align = alLeft
+        Anchors = [akTop, akRight, akBottom]
+        Caption = 'Edici'#243'n de cuentas'
+        TabOrder = 0
+        ExplicitTop = 32
+        ExplicitHeight = 301
+        object rDBEdit3: TrDBEdit
+          Left = 88
+          Top = 48
+          Width = 177
+          Height = 21
+          DataField = 'id_categoriacompra'
+          DataSource = ds2
+          ReadOnly = True
+          TabOrder = 0
+          DBEditLabel.OwnCaption = 'N'#186' de Cuenta'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBEdit4: TrDBEdit
+          Left = 72
+          Top = 91
+          Width = 193
+          Height = 21
+          DataField = 'descripcion'
+          DataSource = ds2
+          TabOrder = 1
+          DBEditLabel.OwnCaption = 'Descripci'#243'n'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object Button1: TButton
+          Left = 136
+          Top = 184
+          Width = 89
+          Height = 41
+          Caption = 'Guardar'
+          Enabled = False
+          TabOrder = 3
+          OnClick = Button1Click
+        end
+        object Button2: TButton
+          Left = 24
+          Top = 184
+          Width = 89
+          Height = 41
+          Caption = 'Nuevo'
+          Enabled = False
+          TabOrder = 2
+          OnClick = Button2Click
+        end
+      end
+      object GroupBox2: TGroupBox
+        AlignWithMargins = True
+        Left = 287
+        Top = 3
+        Width = 428
+        Height = 330
+        Align = alRight
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Caption = 'Maestro de Cuentas'
+        TabOrder = 1
+        ExplicitTop = 32
+        ExplicitHeight = 301
+        object rDBGrid_MS1: TrDBGrid_MS
+          AlignWithMargins = True
+          Left = 5
+          Top = 18
+          Width = 418
+          Height = 307
+          Align = alClient
+          DataSource = ds2
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'id_categoriacompra'
+              Title.Caption = 'C'#243'digo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 87
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'descripcion'
+              Title.Caption = 'Descripci'#243'n'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 293
+              Visible = True
+            end>
+        end
+      end
+    end
   end
   object ds1: TDataSource
     DataSet = DataModule1.fdqcuentas
     OnStateChange = ds1StateChange
-    Left = 588
-    Top = 24
+    Left = 364
+    Top = 8
+  end
+  object ds2: TDataSource
+    DataSet = DataModule1.fdcategoriascompras
+    OnStateChange = ds2StateChange
+    Left = 579
+    Top = 152
   end
 end

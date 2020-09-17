@@ -114,6 +114,8 @@ type
     fdlineasimporte: TFloatField;
     fdlineasnrecibo: TStringField;
     fdlineasFechaPago: TDateField;
+    fdlineasid_asiento: TIntegerField;
+    fdlineasfechacontable: TDateField;
 
 
 
@@ -139,15 +141,12 @@ type
     procedure fdqsegurosAfterInsert(DataSet: TDataSet);
     procedure FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);
     procedure rDBImage1Click(Sender: TObject);
-    procedure rDBFraccionamientoGetListItemProps(Sender: TObject;
-      Canvas: TCanvas; Index: Integer; State: TOwnerDrawState; var Rect: TRect;
-      var Text: string; ShowBmp: TBitmap; var DrawSeparatorTop,
-      DrawSeparatorBottom: Boolean);
     procedure guardarPDFExecute(Sender: TObject);
     procedure fdqsegurosestadoChange(Sender: TField);
     procedure fdqsegurosAfterOpen(DataSet: TDataSet);
     procedure activarSeguroExecute(Sender: TObject);
     procedure rDBTipoChange(Sender: TObject);
+    procedure FDSchemaAdapter1BeforeApplyUpdate(Sender: TObject);
   private
     { Private declarations }
      lst:TStringlist;
@@ -224,13 +223,13 @@ end;
 procedure TFSeguros.fdlineasAfterInsert(DataSet: TDataSet);
 begin
  case rDBFraccionamiento.ItemIndex of
-  3: fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat;
-  2:fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/2;
-  1:fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/4;
-  0  : fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/12;
+  3: fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/12;
+  2:fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/4;
+  1:fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat/2;
+  0  : fdlineasimporte.AsFloat:= fltfldfdqsegurostotal.AsFloat;
  end;
 
-
+  fdlineasid_asiento.AsInteger:=-10;
  actguardarseguro.Enabled:=True;
    Guardar.Enabled:=True;
    Shape1.Brush.Color:=clLime;
@@ -295,16 +294,6 @@ end else  begin
               else    ShowMessage('El archivo no existe.');
           end;
 
-
-end;
-
-procedure TFSeguros.rDBFraccionamientoGetListItemProps(Sender: TObject;
-  Canvas: TCanvas; Index: Integer; State: TOwnerDrawState; var Rect: TRect;
-  var Text: string; ShowBmp: TBitmap; var DrawSeparatorTop,
-  DrawSeparatorBottom: Boolean);
-begin
-
-Canvas.Font.Size:=9;
 
 end;
 
@@ -401,6 +390,40 @@ with Sender as TFDSchemaAdapter do CommitUpdates;
               shape1.Brush.Color:=clwhite;
               self.Caption:='S. '+fdqseguros.FieldByName('descripcion').AsString;
             end;
+end;
+
+procedure TFSeguros.FDSchemaAdapter1BeforeApplyUpdate(Sender: TObject);
+var cnp:Integer; tiposeguro:string;
+begin
+        if (fdqsegurostipo.AsString = 'RESPONSABILIDAD CIVIL') then
+         begin
+         cnp:=62500001;
+         tiposeguro:='SEGURO RESPONSABILIDAD CIVIL'
+         end
+         else  if (fdqsegurostipo.AsString = 'AUTOMOVIL') then
+         begin
+          cnp:=62500002            ;
+          tiposeguro:='SEGURO AUTOMOVIL';
+         end
+            else  begin
+                    cnp:=62500003;
+                    tiposeguro:='SEGURO VARIOS'
+                  end;
+
+                   if fdlineasid_asiento.AsInteger < 0 then
+                      begin
+                     fdlineas.Edit;
+                     fdlineasid_asiento.AsInteger:=DataModule1.generarAsiento(-1,cnp,Date,tiposeguro+' '+fdqsegurosNpoliza.AsString,fdlineasimporte.AsFloat,fdqsegurosNpoliza.AsString,true);
+                     fdlineas.Post;
+                     // ShowMessage('Se ha generado el asiento Nº '+fdfacturasid_asiento.AsString );
+
+                      end
+                      else begin
+                               DataModule1.modificarAsiento(fdlineasid_asiento.asinteger,cnp,Date,tiposeguro+' '+fdqsegurosNpoliza.AsString,fdlineasimporte.AsFloat,fdqsegurosNpoliza.AsString);
+                               //ShowMessage('Se ha modificado el asiento Nº '+fdfacturasid_asiento.AsString);
+                           end;
+
+
 end;
 
 procedure TFSeguros.FormClose(Sender: TObject; var Action: TCloseAction);

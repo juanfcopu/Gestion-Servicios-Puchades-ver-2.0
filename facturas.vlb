@@ -1,5 +1,5 @@
 ﻿[]
-Coordinates=63,459,93,36
+Coordinates=489,576,66,36
 Visible=True
 ExplicitSubNodes=Row;RowCount
 
@@ -72,9 +72,6 @@ Coordinates=701,398,84,36
 [DataModule1.fdpresupuestos]
 Coordinates=587,337,182,58
 
-[Shape2]
-Coordinates=579,459,59,36
-
 [EditCopy]
 Coordinates=282,205,67,36
 
@@ -131,9 +128,6 @@ Coordinates=425,56,79,36
 
 [DataModule1.fdadministradores]
 Coordinates=905,337,197,58
-
-[bndngslst1]
-Coordinates=302,170,77,36
 
 [fdfacturas]
 Coordinates=1268,130,87,300
@@ -218,9 +212,6 @@ Coordinates=627,576,66,36
 
 [rDBEdit3]
 Coordinates=558,576,66,36
-
-[rDBEdit6]
-Coordinates=489,576,66,36
 
 [fdlineasdescuento]
 Coordinates=600,1,118,36

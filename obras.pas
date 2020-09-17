@@ -48,10 +48,8 @@ type
     ToolButton4: TToolButton;
     ToolButton6: TToolButton;
     ToolButton2: TToolButton;
-    ToolButton3: TToolButton;
     ToolButton5: TToolButton;
     ToolButton7: TToolButton;
-    ToolButton8: TToolButton;
     ToolButton10: TToolButton;
     ToolButton9: TToolButton;
     GroupBox3: TGroupBox;
@@ -78,7 +76,6 @@ type
     Estadisticas: TTabSheet;
     FDCliente: TFDQuery;
     FDObra: TFDQuery;
-    FDlineasobra: TFDQuery;
     Shape1: TShape;
     FDClienteidcontactos: TFDAutoIncField;
     FDClientenombre: TStringField;
@@ -134,11 +131,8 @@ type
     rDBCIF: TrDBEdit;
     rDBNombre: TrDBEdit;
     rDBNumero: TrDBEdit;
-    rDBDescripcion: TrDBEdit;
     rDBDateTimeInicio: TrDBDateTimePicker;
     rDBDateTimeFinal: TrDBDateTimePicker;
-    rDBPartidas: TrDBEdit;
-    rDBTotalObra: TrDBEdit;
     rDBRuta: TrDBEdit;
     dscliente: TDataSource;
     fdqryContactosObra: TFDQuery;
@@ -217,9 +211,26 @@ type
     fdCertificacionimportecertificado: TSingleField;
     rDBEdit13: TrDBEdit;
     rDBEdit14: TrDBEdit;
-    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
-      Rect: TRect; State: TGridDrawState);
-    procedure CheckBox1Click(Sender: TObject);
+    rDBMemo1: TrDBMemo;
+    rDBGrid3: TrDBGrid;
+    FDlineasobra: TFDQuery;
+    FDlineasobraid_lineaobra: TIntegerField;
+    FDlineasobradescripcion: TStringField;
+    FDlineasobratotal: TFloatField;
+    FDlineasobraejecutado: TBooleanField;
+    FDlineasobraobras_ID_obra: TIntegerField;
+    FDlineasobrapresupuestos_id_presupuesto: TIntegerField;
+    FDlineasobrapresupuestos_grupo: TIntegerField;
+    FDlineasobrapresupuestos_Id_Partida: TIntegerField;
+    FDlineasobrafacturas_id_factura: TIntegerField;
+    FDlineasobrafacturas_ano: TIntegerField;
+    FDlineasobradiasejecucion: TIntegerField;
+    FDlineasobrafechafin: TDateField;
+    FDlineasobraFechaComienzo: TDateField;
+    ToolBar3: TToolBar;
+    ToolButton3: TToolButton;
+    btnEjecutadoFechaFinlinea: TToolButton;
+    EjecutadoFechaFinlinea: TAction;
     procedure cerrarClick(Sender: TObject);
     procedure GuardarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -292,7 +303,6 @@ type
     procedure ud1Click(Sender: TObject; Button: TUDBtnType);
     procedure fltfldCertificacionretencionValidate(Sender: TField);
     procedure btn5Click(Sender: TObject);
-    procedure fdqryContactosObraAfterOpen(DataSet: TDataSet);
     procedure fdqryContactosObraAfterEdit(DataSet: TDataSet);
     procedure fdqryContactosObraAfterDelete(DataSet: TDataSet);
     procedure PageControl1Change(Sender: TObject);
@@ -306,6 +316,12 @@ type
     procedure FDlineasobraAfterDelete(DataSet: TDataSet);
     procedure FDlineasobraAfterOpen(DataSet: TDataSet);
     procedure actFacturarExecute(Sender: TObject);
+    procedure abrirpresupuestoUpdate(Sender: TObject);
+    procedure abrirpresupuestoExecute(Sender: TObject);
+    procedure fdqryContactosObraAfterInsert(DataSet: TDataSet);
+    procedure FDlineasobraBeforePost(DataSet: TDataSet);
+    procedure EjecutadoFechaFinlineaExecute(Sender: TObject);
+    procedure EjecutadoFechaFinlineaUpdate(Sender: TObject);
 
   private
     { Private declarations }
@@ -315,6 +331,7 @@ type
     cargando:boolean;
     procedure carpetasdocumentacion(var ruta:string; var ok:boolean);
     procedure existelineasterminadas(dataset:TDataSet; var nlineas:integer);
+    procedure AsignarAlpresupuestoLaObra(obra,grupo,presu,partida:integer);
     { Public declarations }
   end;
 
@@ -424,7 +441,7 @@ fdCertificacion.Edit;
    fdCertificacion.FieldByName('importeFalta').AsFloat:=fdCertificacion.FieldByName('total').AsFloat-fdlineasCertificaciones.Aggregates[0].Value;
    fdCertificacion.Post;
 rDBGridClientes1.RecalculateSummaryResults(true);
-(DataSet as TFDQuery).AggregatesActive:=false;
+//(DataSet as TFDQuery).AggregatesActive:=false;
 end;
 
 procedure TFObras.fdlineasCertificacionesBeforeDelete(DataSet: TDataSet);
@@ -512,7 +529,7 @@ procedure TFObras.FDlineasobraAfterApplyUpdates(DataSet: TFDDataSet;
   AErrors: Integer);
 
 begin
-if AErrors = 0 then
+{if AErrors = 0 then
          begin
           fdlineasobra.CommitUpdates;
          if (not fdobra.UpdatesPending) and (not fdCertificacion.UpdatesPending) and (not fdlineasCertificaciones.UpdatesPending) then
@@ -537,7 +554,7 @@ if AErrors = 0 then
             end;
 
 
-         end;
+         end;    }
 end;
 
 procedure TFObras.FDlineasobraAfterDelete(DataSet: TDataSet);
@@ -555,8 +572,9 @@ procedure TFObras.FDlineasobraAfterInsert(DataSet: TDataSet);
 begin
 
    DataSet.FieldByName('Id_lineaobra').AsInteger:=DataSet.RecordCount+1;
-   DataSet.FieldByName('obras_ID_obra').AsInteger:=FDObra.FieldByName('ID_Obra').asinteger;
+   DataSet.FieldByName('diasejecucion').AsInteger:=1;
    DataSet.FieldByName('Descripcion').Asstring:='';
+   DataSet.FieldByName('fechaComienzo').AsDateTime:=Date;
    DataSet.FieldByName('Ejecutado').asboolean:=false;
    DataSet.FieldByName('Total').AsFloat:=0;
 
@@ -579,10 +597,21 @@ begin
       existelineasterminadas(dataset,nl);
       FDObra.FieldByName('partidasejecutadas').asinteger:=nl;
 
-      if FDObra.FieldByName('partidasejecutadas').asinteger = FDObra.FieldByName('partidas').asinteger then    FDObra.FieldByName('ejecutado').AsBoolean:= True
+      if FDObra.FieldByName('partidasejecutadas').asinteger = FDObra.FieldByName('partidas').asinteger then
+      begin
+      FDObra.FieldByName('ejecutado').AsBoolean:= True;
+      FDObra.FieldByName('fechafin').AsDateTime:=Date;
+      end
       else FDObra.FieldByName('ejecutado').asboolean:=False;
 
+      FDObra.Post;
       rDBGrid2.RecalculateSummaryResults(True);
+
+end;
+
+procedure TFObras.FDlineasobraBeforePost(DataSet: TDataSet);
+begin
+//if FDObra.State in [dsInsert, dsEdit] then FDObra.Post;
 
 end;
 
@@ -630,7 +659,7 @@ if AErrors = 0 then
             guardarobra.Enabled:=false;
             guardar.Enabled:=false;
             shape1.Brush.Color:=clwhite;
-          //  DataModule1.RefrescarDataSet(lst);
+           DataModule1.RefrescarDataSet(lst);
             end;
 
             carpetasdocumentacion(ruta,existe);
@@ -676,8 +705,8 @@ end;
 
 procedure TFObras.FDObraAfterPost(DataSet: TDataSet);
 begin
-Guardar.Enabled:=false;
-Shape1.Brush.Color:=clwhite;
+//Guardar.Enabled:=false;
+//Shape1.Brush.Color:=clwhite;
 
 end;
 
@@ -695,11 +724,14 @@ guardarobra.Enabled:=True;
      shape1.Brush.Color:=cllime;
 end;
 
-procedure TFObras.fdqryContactosObraAfterOpen(DataSet: TDataSet);
+procedure TFObras.fdqryContactosObraAfterInsert(DataSet: TDataSet);
 begin
-guardarobra.Enabled:=True;
+//fdqryContactosObraid_obra.AsInteger:=fdobra.FieldByName('id_obra').AsInteger;
+
+guardar.Enabled:=True;
      Guardar.Enabled:=true;
      shape1.Brush.Color:=cllime;
+
 end;
 
 procedure TFObras.FDSchemaCertificacionesAfterApplyUpdate(Sender: TObject);
@@ -707,9 +739,17 @@ begin
 
 
 with Sender as TFDSchemaAdapter do CommitUpdates;
- if ( not fdobra.UpdatesPending) and (not FDlineasobra.UpdatesPending) and ( not fdCertificacion.UpdatesPending) then
+
+       if  not TFDSchemaAdapter(Sender).UpdatesPending then
             begin
-                  guardarobra.Enabled:=false;
+             FDlineasobra.First;
+              while not FDlineasobra.eof do
+              begin
+                      //if  FDlineasobrapresupuestos_id_presupuesto.AsInteger=1 then
+                         AsignarAlpresupuestoLaObra(FDlineasobraobras_ID_obra.asinteger, FDlineasobrapresupuestos_grupo.asinteger,FDlineasobrapresupuestos_id_presupuesto.asinteger,FDlineasobrapresupuestos_Id_Partida.asinteger);
+                  FDlineasobra.Next;
+              end;
+             guardarobra.Enabled:=false;
              guardar.Enabled:=false;
               shape1.Brush.Color:=clwhite;
               self.Caption:='O. '+fdobra.FieldByName('id_obra').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
@@ -717,6 +757,39 @@ with Sender as TFDSchemaAdapter do CommitUpdates;
 
 
 end;
+
+procedure TFObras.AsignarAlpresupuestoLaObra(obra,grupo,presu,partida:integer);
+var fq1:TFDQuery;
+begin
+
+    try
+     fq1:=TFDQuery.create(self);
+     fq1.connection:=DataModule1.FDConnection1;
+     fq1.close;
+     fq1.SQL.clear;
+     fq1.SQL.Add('UPDATE lineaspresupuesto SET  obra=:OBRA WHERE presupuestos_grupo=:GRUPO AND presupuestos_id_presupuesto=:PRESU AND id_partida=:PARTIDA ');
+
+     fq1.ParamByName('OBRA').FDDataType:=dtInt16;
+     fq1.ParamByName('GRUPO').FDDataType:=dtInt16;
+     fq1.ParamByName('PRESU').FDDataType:=dtInt16;
+     fq1.ParamByName('PARTIDA').FDDataType:=dtInt16;
+
+
+     fq1.ParamByName('OBRA').Value:=obra;
+     fq1.ParamByName('GRUPO').Value:=grupo;
+     fq1.ParamByName('PRESU').Value:=presu;
+     fq1.ParamByName('PARTIDA').Value:=partida;
+
+     fq1.Prepare;
+     if fq1.prepared then fq1.ExecSQL;
+     fq1.Close;
+     fq1.Free;
+
+    except
+          raise;
+    end;
+end;
+
 
 procedure TFObras.FDSchemaCertificacionesReconcileRow(ASender: TObject;
   ARow: TFDDatSRow; var Action: TFDDAptReconcileAction);
@@ -746,23 +819,26 @@ procedure TFObras.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 
 if (fdobra.UpdatesPending) or (fdlineasobra.UpdatesPending) or (fdCertificacion.UpdatesPending) or (fdlineasCertificaciones.UpdatesPending) then
-       if Application.MessageBox('¿Guardar los cambios del presupuesto?','Guardar',MB_YESNO)=IDYES then
+       if Application.MessageBox('¿Guardar los cambios de la obra?','Guardar',MB_YESNO)=IDYES then
        begin
            GuardarClick(Sender);
        end
        else begin
-            fdlineasobra.CancelUpdates;
-            fdCertificacion.CancelUpdates;
-            fdlineasCertificaciones.CancelUpdates;
-            FDObra.CancelUpdates;
+           if FDlineasobra.active then fdlineasobra.CancelUpdates;
+           if fdlineasCertificaciones.Active then fdlineasCertificaciones.CancelUpdates;
+           if fdCertificacion.Active then fdCertificacion.CancelUpdates;
+           if fdqryContactosObra.Active then fdqryContactosObra.CancelUpdates;
+           if fdobra.Active then fdobra.CancelUpdates;
             end  ;
 
 
 FDCliente.Close;
-FDObra.close;
+fdobra.close;
 FDlineasobra.Close;
 fdlineasCertificaciones.Close;
 fdCertificacion.Close;
+fdqryContactosObra.close;
+fdqrycontactoscliente.Close;
 
 Action:=caFree;
 end;
@@ -770,48 +846,21 @@ end;
 procedure TFObras.GuardarClick(Sender: TObject);
 begin
 
+try
+
 if fdobra.state in [dsInsert] then
 begin
   fdobra.FieldByName('path').AsString:=DataModule1.ObtenerPathObra(fdcliente.fieldByName('Nombre').Asstring,fdobra.FieldByName('id_obra').AsInteger);
 
   if Length(fdobra.FieldByName('descripcion').asstring)=0 then fdobra.FieldByName('descripcion').asstring:='descripción';
 
+end;
 
-  if (fdobra.state in [dsInsert]) then
+if (fdobra.state in [dsInsert,dsEdit]) then
  begin
    fdobra.post;
  end;
 
-
- if fdobra.UpdatesPending then
- begin
-      fdobra.ApplyUpdates(1);
-
- end;
-
-  fdlineasobra.First ;
-  while not fdlineasobra.eof do
-  begin
-      fdlineasobra.edit;
-      fdlineasobra.FieldByName('obras_id_obra').AsInteger:=fdobra.FieldByName('id_obra').AsInteger;
-      fdlineasobra.post;
-      fdlineasobra.next;
-  end;
-
-
-
-end;
-
-
- if (FDObra.State in [dsEdit]) then
- begin
- fdobra.post;
- if fdobra.UpdatesPending then
- begin
-      fdobra.ApplyUpdates(1);
-
- end;
- end;
 
 
 
@@ -821,18 +870,14 @@ if (fdlineasobra.state in [dsEdit,dsInsert]) then
  end;
 
 
- if fdlineasobra.UpdatesPending then
-    begin
-         fdlineasobra.ApplyUpdates(1);
-
-    end;
-
-  
 
     if (fdCertificacion.State in [dsInsert,dsEdit]) then fdCertificacion.Post;
 
 
     if (fdlineasCertificaciones.State in [dsInsert,dsEdit]) then fdlineasCertificaciones.Post;
+
+    if (fdqryContactosObra.state) in [dsInsert,dsEdit] then fdqryContactosObra.Post;
+
 
 
     if FDSchemaCertificaciones.UpdatesPending then
@@ -840,6 +885,11 @@ if (fdlineasobra.state in [dsEdit,dsInsert]) then
       FDSchemaCertificaciones.ApplyUpdates(1);
     end;
 
+   
+
+except
+      raise;
+end;
 end;
 
 procedure TFObras.guardarobraExecute(Sender: TObject);
@@ -952,6 +1002,22 @@ begin
       showmessage('El directorio de la obra no existe.');
 end;
 
+procedure TFObras.abrirpresupuestoExecute(Sender: TObject);
+var pres:Tpresupuesto;
+begin
+pres:=Tpresupuesto.Create;
+pres.grupo:=FDlineasobrapresupuestos_grupo.AsInteger;
+pres.Npresupuesto:=FDlineasobrapresupuestos_id_presupuesto.AsInteger;
+
+DataModule1.editarpresupuesto2Execute(pres);
+pres.Free;
+end;
+
+procedure TFObras.abrirpresupuestoUpdate(Sender: TObject);
+begin
+(Sender as TAction).Enabled:=not FDlineasobra.FieldByName('presupuestos_Id_presupuesto').IsNull;
+end;
+
 procedure TFObras.actBorrarCertificacionExecute(Sender: TObject);
 begin
 if not (fdCertificacion.State in [dsEdit,dsInsert]) then
@@ -982,9 +1048,9 @@ end;
 procedure TFObras.actFacturarExecute(Sender: TObject);
 var SelLinObras:TFLineasObrasFacturas;
 begin
-    SelLinObras:=TFLineasObrasFacturas.Create(Self);
+    SelLinObras:=TFLineasObrasFacturas.Create(FDObra);
     SelLinObras.ShowModal;
-    SelLinObras.Close;
+
 end;
 
 procedure TFObras.actGuardarCertificacionExecute(Sender: TObject);
@@ -1014,7 +1080,7 @@ begin
 if fdCertificacion.recordcount < 1 then
 begin
   fdCertificacion.Insert;
-   fdCertificacion.FieldByName('obras_ID_obra').AsInteger:=FDObra.FieldByName('ID_Obra').asinteger;
+  // fdCertificacion.FieldByName('obras_ID_obra').AsInteger:=FDObra.FieldByName('ID_Obra').asinteger;
    fdCertificacion.FieldByName('retencion').Asinteger:=10;
    fdCertificacion.FieldByName('fechaFinretencion').AsDateTime:=Date;
    fdCertificacion.FieldByName('descripcion').AsString:= FDObra.FieldByName('Descripcion').asstring;
@@ -1244,118 +1310,6 @@ begin
 cerrarClick(Sender);
 end;
 
-procedure TFObras.CheckBox1Click(Sender: TObject);
-begin
-       if not (fdlineasobra.State in [dsEdit,dsInsert]) and (not cargando) then
-       begin
-            fdlineasobra.RecNo:=RowAct;
-            fdlineasobra.Edit;
-            fdlineasobra.FieldByName('ejecutado').AsBoolean:=(Sender as TCheckBox).Checked;
-            fdlineasobra.post;
-       end;
-end;
-
-
-
-procedure TFObras.StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
-  Rect: TRect; State: TGridDrawState);
-  var valor:double;   cb:TObject;  pt: TPoint;   coord : TGridCoord;
-begin
-
-if Arow = 0 then
-   begin
- (Sender as TStringGrid).Canvas.Brush.Color:=cl3DLight;
-   (Sender as TStringGrid).Canvas.Font.Style:=[fsbold];
-   (Sender as TStringGrid).Canvas.Font.size:=10;
-
-
-    end
-   else begin
-           (Sender as TStringGrid).Canvas.Brush.Color:=clWindow;
-           (Sender as TStringGrid).Canvas.Font.Style:=[];
-           (Sender as TStringGrid).Canvas.Font.size:=9;
-
-        end;
-
-
-    if Arow mod 2 =0 then     (Sender as TStringGrid).Canvas.Brush.Color:=clSilver;
-
-    if (ACol=2) and (Arow >0)then
-              begin
-                   if tryStrToFloat((Sender as TStringGrid).Cells[Acol,Arow],Valor) then
-                      if Valor > 80 then
-                                          (Sender as TStringGrid).Canvas.Font.color:=clblue;
-              end
-    else   (Sender as TStringGrid).Canvas.Font.color:=clblack ;
-
-
-
-
-
-
-  if (gdSelected in state) or (gdFocused in state) then
-      begin
-         (Sender as TStringGrid).Canvas.Font.style:=[fsBold];
-         (Sender as TStringGrid).Canvas.Brush.Color:=clMenu;
-      end;
-
-
-
-     if (Sender as TStringGrid).Cells[5,Arow] = 'True' then
-                    begin
-                        (Sender as TStringGrid).Canvas.Font.color:=clred;
-                        (Sender as TStringGrid).canvas.font.Style:=[fsBold]
-
-
-
-                    end ;
-
-
-      if (ACol=5) and (Arow>0) then  begin
-
-                        if (Sender as TStringGrid).Objects[Acol,Arow]=nil then
-                        begin
-                             cb:=TCheckBox.Create(Sender as TControl);
-                             (Sender as TStringGrid).Objects[Acol,Arow]:=cb;
-                             (cb as TCheckBox).parent:=lineas;
-                             (cb as TCheckBox).OnClick:=CheckBox1Click;
-
-                             (cb as TCheckBox).AllowGrayed:=False;
-                             (cb as TCheckBox).Checked:=False;
-                             (cb as TCheckBox).Height:=20;
-                             (cb as TCheckBox).Width:=15;
-                         end
-                         else  cb:=(Sender as TStringGrid).Objects[Acol,Arow];
-
-                            if ACol=5 then  if (Sender as TStringGrid).Cells[5,Arow] = 'True' then
-                            begin
-                                  RowAct:=Arow;
-                                (cb as TCheckBox).Checked:=true;
-
-                            end;
-
-
-
-
-                               (cb as TCheckBox).color:=(Sender as TStringGrid).Canvas.Brush.Color;
-                               (cb as TCheckBox).Left:=  Rect.Left+20;
-                               (cb as TCheckBox).Top:= Rect.Top+45;
-
-
-                        end;
-
-               (Sender as TStringGrid).Canvas.FillRect(Rect);
-                pt:=(Sender as TStringGrid).ScreenToClient(Mouse.CursorPos);
-    coord:=(Sender as TStringGrid).MouseCoord(pt.X,pt.y);
-
-    if (coord.X=3) or (coord.X=4) then (Sender as TStringGrid).Canvas.Font.Style:=[fsUnderline];
-
-  if (Acol<>5) or (ARow = 0) then (Sender as TStringGrid).Canvas.TextRect(Rect,Rect.Left+2,Rect.Top+3,(Sender as TStringGrid).Cells[Acol,Arow]);
-
-
-
-end;
-
 procedure TFObras.StringGrid1Click(Sender: TObject);
 var Pt:TPoint;   coord:  TGridCoord;    presu:Tpresupuesto;
 begin
@@ -1478,6 +1432,20 @@ end ;
 
 
 
+
+procedure TFObras.EjecutadoFechaFinlineaExecute(Sender: TObject);
+begin
+FDlineasobra.Edit;
+FDlineasobra.FieldByName('ejecutado').AsBoolean:=True;
+FDlineasobra.FieldByName('fechafin').AsDateTime:=date;
+FDlineasobra.Post;
+
+end;
+
+procedure TFObras.EjecutadoFechaFinlineaUpdate(Sender: TObject);
+begin
+(Sender as TAction).Enabled:=FDlineasobra.RecordCount > 0;
+end;
 
 procedure TFObras.existelineasterminadas(dataset:TDataSet; var nlineas:integer);
 var qy:TFDMemTable;

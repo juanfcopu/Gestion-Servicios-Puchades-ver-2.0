@@ -15,7 +15,7 @@ object listclientes: Tlistclientes
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
-  Font.Style = []
+  Font.Style = [fsBold]
   OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
@@ -46,15 +46,27 @@ object listclientes: Tlistclientes
         Height = 17
         Align = alTop
         Caption = 'Filtrar '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         OnClick = cbAgruparAdminClick
       end
       object chkCamposBusqueda: TCheckBox
         Left = 5
         Top = 41
-        Width = 116
+        Width = 132
         Height = 17
         Caption = 'Buscar por campos'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 1
         OnClick = chkCamposBusquedaClick
       end
@@ -74,7 +86,7 @@ object listclientes: Tlistclientes
         Width = 193
         Height = 21
         CharCase = ecUpperCase
-        EditLabel.Width = 42
+        EditLabel.Width = 37
         EditLabel.Height = 14
         EditLabel.BiDiMode = bdRightToLeft
         EditLabel.Caption = 'Cliente'
@@ -82,7 +94,7 @@ object listclientes: Tlistclientes
         EditLabel.Font.Color = clWindowText
         EditLabel.Font.Height = -12
         EditLabel.Font.Name = 'Tahoma'
-        EditLabel.Font.Style = [fsBold]
+        EditLabel.Font.Style = []
         EditLabel.ParentBiDiMode = False
         EditLabel.ParentFont = False
         LabelPosition = lpLeft
@@ -187,6 +199,27 @@ object listclientes: Tlistclientes
       ShowHint = True
       OnClick = btn7Click
     end
+    object ToolButton2: TToolButton
+      Left = 310
+      Top = 0
+      Caption = 'ToolButton2'
+      ImageIndex = 31
+      OnClick = ToolButton2Click
+    end
+    object ToolButton3: TToolButton
+      Left = 352
+      Top = 0
+      Caption = 'ToolButton3'
+      ImageIndex = 27
+      OnClick = ToolButton3Click
+    end
+    object ToolButton4: TToolButton
+      Left = 394
+      Top = 0
+      Caption = 'ToolButton4'
+      ImageIndex = 40
+      OnClick = ToolButton4Click
+    end
   end
   object rDBGridClientes1: TrDBGrid_MS
     Left = 0
@@ -209,7 +242,6 @@ object listclientes: Tlistclientes
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = [fsBold]
     OnDblClick = rDBGridClientes1DblClick
-    OptionsEx2.ActivateOptionsEx2 = True
     OptionsEx2.FixedCell.TitleExBtn = False
     OptionsEx2.FixedCell.FixedCols = 1
     SortFieldName = 'nombre'

@@ -58,12 +58,10 @@ type
     procedure btn1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn5Click(Sender: TObject);
-    procedure rb2trimestreClick(Sender: TObject);
-    procedure rb1TrimestresClick(Sender: TObject);
+
 
     procedure beBuscarChange(Sender: TObject);
-    procedure rb3trimestreClick(Sender: TObject);
-    procedure rb4trimestreClick(Sender: TObject);
+ 
     procedure RzComboBox1Change(Sender: TObject);
     procedure fdqnominasAfterDelete(DataSet: TDataSet);
     procedure fdqnominasAfterOpen(DataSet: TDataSet);
@@ -77,12 +75,19 @@ type
     procedure btn3Click(Sender: TObject);
     procedure fdq1AfterExecute(DataSet: TFDDataSet);
     procedure fdqnominasBeforePost(DataSet: TDataSet);
+    procedure fdnominasUpdateRecord(ASender: TDataSet;
+  ARequest: TFDUpdateRequest; var AAction: TFDErrorAction;
+  AOptions: TFDUpdateRowOptions);
+
+
+
   private
     { Private declarations }
+    inserciones:Integer;
+
   public
     { Public declarations }
-    inserciones:Integer;
-    estado:TDataSetState;
+
   end;
 
 var
@@ -94,7 +99,6 @@ uses
   DModule1, insernominas;
 
 {$R *.dfm}
-
 
 
 procedure Tlistnominas.fdq1AfterExecute(DataSet: TFDDataSet);
@@ -110,6 +114,7 @@ begin
 
               end;
     skUpdate: rzfieldstatus1.caption:='Se ha modificado el asiento Nº '+DataModule1.fdqnominasid_asiento.asstring;
+    skDelete: rzfieldstatus1.caption:='Se ha borrado el asiento Nº '+DataModule1.fdqnominasid_asiento.asstring;
     else      showmessage(Format('%d rows affected', [TFDQuery(DataSet).RowsAffected]));
     end;
 
@@ -118,7 +123,7 @@ end;
 
 procedure Tlistnominas.fdqnominasBeforePost(DataSet: TDataSet);
 begin
-estado:=Dataset.state;
+
    with DataModule1 do
  begin
 
@@ -132,8 +137,13 @@ estado:=Dataset.state;
                                                                generarAsiento(fdqnominasid_asiento.AsInteger,47510000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasirpf.asfloat,'NOMINAS',false);
                                                                generarAsiento(fdqnominasid_asiento.AsInteger,46500000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasTotalPercibir.asfloat,'NOMINAS',false);
 
+                                                    if fdqnominasid_asiento.AsInteger = -1 then
+
+                                                     DataSet.cancel;
 
                       end
+
+
                       else begin
                                modificarAsiento(fdqnominasid_asiento.AsInteger,64000001,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasimportedevengado.AsFloat,'NOMINAS');
                                modificarAsiento(fdqnominasid_asiento.AsInteger,64200000,fdqnominasfechanomina.AsDateTime,'NOMINA '+fdqnominasnombre.AsString+' - '+fdqnominasfechanomina.AsString,fltfldfdqnominasssocialEmpresa.AsFloat,'NOMINAS');
@@ -163,11 +173,6 @@ begin
 rDBGridClientes1.RecalculateSummaryResults(True);
  rDBRecView1.Options:=rDBRecView1.Options-[goEditing];
  rDBGridClientes1.RecalculateSummaryResults(True);
- case estado of
-
-  dsInsert : rzstatuspane1.Caption:=inserciones.ToString + ' nóminas insertadas';
-  dsEdit   : rzstatuspane1.Caption:='Se ha modificado la nomina '+ DataSet.FieldByName('nombre').AsString+' - '+ DataSet.FieldByName('fechanomina').asstring;
-  end;
 
 end;
 
@@ -252,6 +257,7 @@ begin
      ds1.DataSet.AfterCancel:=nil;
      ds1.DataSet.BeforePost:=nil;
      DataModule1.fq1.AfterExecute:=nil;
+     DataModule1.FDdiario.AfterExecute:=nil;
 
     ds1.dataset.Active:=false;
 fdqtrabajadores.Active:=false;
@@ -275,7 +281,7 @@ begin
      rbcliente.checked:=true;
 
      fdqtrabajadores.Active:=True;
-
+     DataModule1.FDdiario.Active:=True;
      DataModule1.fq1.AfterExecute:=fdq1AfterExecute;
 
      ds1.DataSet.AfterOpen:= fdqnominasAfterOpen;
@@ -284,7 +290,7 @@ begin
      ds1.DataSet.AfterPost:=fdqnominasAfterPost;
      ds1.DataSet.AfterInsert:=fdqnominasAfterInsert;
      ds1.DataSet.BeforePost:=fdqnominasBeforePost;
-
+     TFDQuery(ds1.DataSet).OnUpdateRecord:=fdnominasUpdateRecord;
 
      DataModule1.fdqnominasnombre.LookupDataSet:=fdqtrabajadores;
 
@@ -293,77 +299,6 @@ begin
         rGroupBox1.Minimized:=True;
 end;
 
-procedure Tlistnominas.rb2trimestreClick(Sender: TObject);
-var dt1,dt2:TDate;
-begin
- if TRadioButton(Sender).Checked then
-       begin
-       rDBGridClientes1.DataSource.DataSet.DisableControls;
-       ds1.DataSet.Filtered:=False;
-       dt1:=StrToDate('1/4/'+RzComboBox1.Text);
-       dt2:=StrToDate('30/6/'+RzComboBox1.Text);
-      ds1.DataSet.Filter:='fechanomina>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fechanomina<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
-
-       ds1.DataSet.Filtered:=True;
-       rDBGridClientes1.DataSource.DataSet.EnableControls;
-         rDBGridClientes1.RecalculateSummaryResults(true);
-       end;
-end;
-
-
-
-procedure Tlistnominas.rb3trimestreClick(Sender: TObject);
-var dt1,dt2:TDate;
-begin
- if TRadioButton(Sender).Checked then
-       begin
-       rDBGridClientes1.DataSource.DataSet.DisableControls;
-       ds1.DataSet.Filtered:=False;
-       dt1:=StrToDate('1/7/'+RzComboBox1.Text);
-       dt2:=StrToDate('30/9/'+RzComboBox1.Text);
-      ds1.DataSet.Filter:='fechanomina>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fechanomina<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
-
-       ds1.DataSet.Filtered:=True;
-        rDBGridClientes1.DataSource.DataSet.EnableControls;
-          rDBGridClientes1.RecalculateSummaryResults(true);
-       end;
-
-end;
-
-procedure Tlistnominas.rb4trimestreClick(Sender: TObject);
-var dt1,dt2:TDate;
-begin
- if TRadioButton(Sender).Checked then
-       begin
-       rDBGridClientes1.DataSource.DataSet.DisableControls;
-       ds1.DataSet.Filtered:=False;
-       dt1:=StrToDate('1/10/'+RzComboBox1.Text);
-       dt2:=StrToDate('31/12/'+RzComboBox1.Text);
-      ds1.DataSet.Filter:='fechanomina>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fechanomina<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
-
-       ds1.DataSet.Filtered:=True;
-       rDBGridClientes1.DataSource.DataSet.EnableControls;
-       rDBGridClientes1.RecalculateSummaryResults(true);
-       end;
-
-end;
-
-procedure Tlistnominas.rb1TrimestresClick(Sender: TObject);
-var dt1,dt2:TDate;
-begin
-   if TRadioButton(Sender).Checked then
-       begin
-       rDBGridClientes1.DataSource.DataSet.DisableControls;
-       ds1.DataSet.Filtered:=False;
-       dt1:=StrToDate('1/1/'+RzComboBox1.Text);
-       dt2:=StrToDate('31/3/'+RzComboBox1.Text);
-      ds1.DataSet.Filter:='fechanomina>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fechanomina<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
-
-       ds1.DataSet.Filtered:=True;
-        rDBGridClientes1.DataSource.DataSet.EnableControls;
-          rDBGridClientes1.RecalculateSummaryResults(true);
-       end;
-end;
 
 procedure Tlistnominas.rbTodasClick(Sender: TObject);
 var dt1,dt2:TDate;
@@ -371,10 +306,33 @@ begin
       if rbTodas.Checked then
        begin
        rDBGridClientes1.DataSource.DataSet.DisableControls;
+         case TRadioButton(Sender).Tag of
+            0:begin
+                dt1:=StrToDate('1/1/'+RzComboBox1.Text);
+                   dt2:=StrToDate('31/12/'+RzComboBox1.Text);
+
+              end;
+
+            1: begin
+                   dt1:=StrToDate('1/1/'+RzComboBox1.Text);
+                   dt2:=StrToDate('31/3/'+RzComboBox1.Text);
+                end;
+            2: begin
+                  dt1:=StrToDate('1/4/'+RzComboBox1.Text);
+                  dt2:=StrToDate('30/6/'+RzComboBox1.Text);
+                end;
+            3: begin
+                    dt1:=StrToDate('1/7/'+RzComboBox1.Text);
+                   dt2:=StrToDate('30/9/'+RzComboBox1.Text);
+               end;
+            4: begin
+                     dt1:=StrToDate('1/10/'+RzComboBox1.Text);
+                  dt2:=StrToDate('31/12/'+RzComboBox1.Text);
+                end;
+       end;
+
       ds1.DataSet.Filtered:=False;
-       dt1:=StrToDate('1/1/'+RzComboBox1.Text);
-       dt2:=StrToDate('31/12/'+RzComboBox1.Text);
-      ds1.DataSet.Filter:='fechanomina>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fechanomina<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
+        ds1.DataSet.Filter:='fechanomina>= {d '+FormatDateTime('yyyy-mm-dd',dt1)+'} and fechanomina<={d '+FormatDateTime('yyyy-mm-dd',dt2)+'}';
 
        ds1.DataSet.Filtered:=True;
        rDBGridClientes1.DataSource.DataSet.EnableControls;
@@ -402,7 +360,7 @@ begin
 if Key=#13 then begin
             ds1.DataSet.Post;
             ds1.DataSet.Insert;
-            //rDBRecView1.
+
                  end;
 
 end;
@@ -410,7 +368,7 @@ end;
 procedure Tlistnominas.fdqnominasAfterInsert(DataSet: TDataSet);
 begin
 
- Inc(inserciones);
+
  rDBRecView1.Options:=rDBRecView1.Options+[goEditing];
 end;
 
@@ -436,6 +394,33 @@ procedure Tlistnominas.RzComboBox1Change(Sender: TObject);
 
 begin
     rbTodasClick(Sender);
+end;
+
+
+procedure Tlistnominas.fdnominasUpdateRecord(ASender: TDataSet;
+  ARequest: TFDUpdateRequest; var AAction: TFDErrorAction;
+  AOptions: TFDUpdateRowOptions);
+
+begin
+
+ with DataModule1 do
+ begin
+
+    case ARequest  of
+      arInsert:  begin
+                    Inc(inserciones);
+                    rzstatuspane1.Caption:=inserciones.ToString + ' nominas insertadas';
+                    DataModule1.FDdiario.Refresh;
+                  end;
+
+       arUpdate: begin
+                  rzstatuspane1.Caption:='Se ha modificado la nomina '+ ASender.FieldByName('nombre').AsString+' - '+ ASender.FieldByName('fechanomina').asstring;
+
+                end;
+  end;
+
+ end;
+
 end;
 
 end.

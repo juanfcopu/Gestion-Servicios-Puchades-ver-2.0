@@ -119,7 +119,7 @@ object FFacturas: TFFacturas
       Left = 4
       Top = 154
       Width = 1121
-      Height = 135
+      Height = 87
       Align = alTop
       Caption = 'Datos Facturas'
       Enabled = False
@@ -130,18 +130,6 @@ object FFacturas: TFFacturas
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
-      DesignSize = (
-        1121
-        135)
-      object Shape2: TShape
-        Left = 41
-        Top = 97
-        Width = 932
-        Height = 2
-        Anchors = [akLeft, akTop, akRight]
-        Constraints.MaxWidth = 953
-        ExplicitWidth = 953
-      end
       object rDBEdit4: TrDBEdit
         Left = 75
         Top = 16
@@ -166,18 +154,6 @@ object FFacturas: TFFacturas
         DBEditLabel.OwnCaption = 'A'#241'o'
         DBEditLabel.Position = lpLeftCenter
       end
-      object rDBEdit6: TrDBEdit
-        Left = 370
-        Top = 16
-        Width = 419
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'Concepto'
-        DataSource = dsFacturas
-        TabOrder = 2
-        DBEditLabel.OwnCaption = 'Descripci'#243'n'
-        DBEditLabel.Position = lpLeftCenter
-      end
       object rDBEdit7: TrDBEdit
         Left = 511
         Top = 57
@@ -185,7 +161,8 @@ object FFacturas: TFFacturas
         Height = 21
         DataField = 'Iva'
         DataSource = dsFacturas
-        TabOrder = 7
+        ReadOnly = True
+        TabOrder = 6
         DBEditLabel.OwnCaption = 'I.V.A'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -196,7 +173,7 @@ object FFacturas: TFFacturas
         Height = 21
         Date = 43734.909575613430000000
         Time = 43734.909575613430000000
-        TabOrder = 5
+        TabOrder = 4
         DataField = 'FechaFactura'
         DataSource = dsFacturas
         DBEditLabel.OwnCaption = 'Fecha Factura'
@@ -211,7 +188,8 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'Total'
         DataSource = dsFacturas
-        TabOrder = 9
+        ReadOnly = True
+        TabOrder = 8
         DBEditLabel.OwnCaption = 'Total Factura'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -223,7 +201,8 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'TotalBruto'
         DataSource = dsFacturas
-        TabOrder = 6
+        ReadOnly = True
+        TabOrder = 5
         DBEditLabel.OwnCaption = 'SubTotal'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -235,7 +214,8 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'importeIVA'
         DataSource = dsFacturas
-        TabOrder = 8
+        ReadOnly = True
+        TabOrder = 7
         DBEditLabel.OwnCaption = 'Total I.V.A'
         DBEditLabel.Position = lpLeftCenter
       end
@@ -247,8 +227,21 @@ object FFacturas: TFFacturas
         CharCase = ecUpperCase
         DataField = 'id_asiento'
         DataSource = dsFacturas
-        TabOrder = 3
+        ReadOnly = True
+        TabOrder = 2
         DBEditLabel.OwnCaption = 'N'#186' Asiento'
+        DBEditLabel.Position = lpLeftCenter
+      end
+      object rDBMemo1: TrDBMemo
+        Left = 386
+        Top = 16
+        Width = 403
+        Height = 21
+        DataField = 'Concepto'
+        DataSource = dsFacturas
+        PopupMenu = rDBMemo1.pmSearch
+        ScrollBars = ssVertical
+        TabOrder = 9
         DBEditLabel.Position = lpLeftCenter
       end
     end
@@ -268,9 +261,8 @@ object FFacturas: TFFacturas
         AlignWithMargins = True
         Left = 0
         Top = 0
-        Hint = 'Guardar Presupuesto'
-        Caption = 'Guardar'
-        Enabled = False
+        Hint = 'Guardar factura'
+        Action = guardarfactura
         ImageIndex = 7
         ParentShowHint = False
         ShowHint = True
@@ -320,7 +312,7 @@ object FFacturas: TFFacturas
         Left = 172
         Top = 0
         Hint = 'Nueva obra'
-        Caption = 'Nueva obra'
+        Caption = 'Abrir Obra'
         ImageIndex = 22
         ParentShowHint = False
         ShowHint = True
@@ -366,9 +358,9 @@ object FFacturas: TFFacturas
     end
     object GroupBox3: TGroupBox
       Left = 1
-      Top = 717
+      Top = 541
       Width = 792
-      Height = 64
+      Height = 240
       Margins.Bottom = 30
       Align = alLeft
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -378,7 +370,7 @@ object FFacturas: TFFacturas
         Left = 2
         Top = 15
         Width = 788
-        Height = 47
+        Height = 223
         Align = alClient
         DataField = 'observaciones'
         DataSource = dsFacturas
@@ -402,15 +394,16 @@ object FFacturas: TFFacturas
     object GroupBox5: TGroupBox
       AlignWithMargins = True
       Left = 818
-      Top = 724
+      Top = 548
       Width = 307
-      Height = 54
+      Height = 230
       Margins.Top = 7
       Align = alRight
+      Anchors = [akRight, akBottom]
       TabOrder = 5
       DesignSize = (
         307
-        54)
+        230)
       object Shape1: TShape
         Left = 17
         Top = -2
@@ -454,9 +447,9 @@ object FFacturas: TFFacturas
     end
     object grp1: TGroupBox
       Left = 1
-      Top = 292
+      Top = 244
       Width = 1127
-      Height = 425
+      Height = 297
       Align = alTop
       Caption = 'L'#237'neas'
       Enabled = False
@@ -514,13 +507,37 @@ object FFacturas: TFFacturas
           BorderOuter = fsNone
           TabOrder = 0
         end
+        object ToolBar2: TToolBar
+          Left = 251
+          Top = 2
+          Width = 70
+          Height = 22
+          Caption = 'ToolBar2'
+          Images = ImageList1
+          TabOrder = 2
+          object ToolButton11: TToolButton
+            Left = 0
+            Top = 0
+            Action = EditCut
+          end
+          object ToolButton12: TToolButton
+            Left = 23
+            Top = 0
+            Action = EditCopy
+          end
+          object ToolButton13: TToolButton
+            Left = 46
+            Top = 0
+            Action = EditPaste
+          end
+        end
       end
       object rDBGridClientes1: TrDBGrid_MS
         AlignWithMargins = True
         Left = 5
         Top = 56
         Width = 1117
-        Height = 282
+        Height = 154
         Align = alClient
         DataSource = dslineas
         Font.Charset = DEFAULT_CHARSET
@@ -552,7 +569,7 @@ object FFacturas: TFFacturas
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 76
+            Width = 90
             Visible = True
           end
           item
@@ -564,7 +581,7 @@ object FFacturas: TFFacturas
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 437
+            Width = 515
             Visible = True
           end
           item
@@ -577,7 +594,7 @@ object FFacturas: TFFacturas
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 95
+            Width = 112
             Visible = True
           end
           item
@@ -590,7 +607,7 @@ object FFacturas: TFFacturas
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 76
+            Width = 90
             Visible = True
           end
           item
@@ -603,7 +620,7 @@ object FFacturas: TFFacturas
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 82
+            Width = 97
             Visible = True
           end
           item
@@ -616,26 +633,22 @@ object FFacturas: TFFacturas
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 76
+            Width = 90
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'facturas_ano'
-            Width = 94
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'facturas_idfactura'
-            Width = 130
+            FieldName = 'lineasobras_obras_ID_obra'
+            Title.Alignment = taCenter
+            Title.Caption = 'Obra'
+            Width = 75
             Visible = True
           end>
       end
       object rdbtotales1: TrDBGrid
         AlignWithMargins = True
         Left = 5
-        Top = 344
+        Top = 216
         Width = 1117
         Height = 76
         Align = alBottom
@@ -647,8 +660,6 @@ object FFacturas: TFFacturas
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = [fsBold]
-        OptionsEx = [dgFixColBtn, dgNotProcDblClick, dgUseTitlePopup, dgAutoPickListWidth]
-        OptionsEx2.ActivateOptionsEx2 = True
         OptionsEx2.FixedCell.TitleExBtn = False
         OptionsEx2.FixedCell.TitleBtn = False
         OptionsEx2.Editors.BoolGlyphs = False
@@ -780,6 +791,11 @@ object FFacturas: TFFacturas
           item
             Expanded = False
             FieldName = 'Total'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
             Title.Alignment = taCenter
             Title.Caption = 'Total Factura'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -792,15 +808,6 @@ object FFacturas: TFFacturas
           end>
       end
     end
-  end
-  object btn4: TButton
-    Left = 1016
-    Top = 251
-    Width = 75
-    Height = 25
-    Caption = 'btn4'
-    TabOrder = 1
-    OnClick = btn4Click
   end
   object fdCliente: TFDQuery
     Connection = DataModule1.FDConnection1
@@ -965,6 +972,11 @@ object FFacturas: TFFacturas
       FieldName = 'id_asiento'
       Origin = 'id_asiento'
     end
+    object fdfacturasacuenta: TSingleField
+      AutoGenerateValue = arDefault
+      FieldName = 'acuenta'
+      Origin = 'acuenta'
+    end
   end
   object fdlineas: TFDQuery
     AfterOpen = fdlineasAfterOpen
@@ -1065,16 +1077,26 @@ object FFacturas: TFFacturas
       Origin = 'nlinea'
       Required = True
     end
+    object fdlineaslineasobras_id_lineaobra: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'lineasobras_id_lineaobra'
+      Origin = 'lineasobras_id_lineaobra'
+    end
+    object fdlineaslineasobras_obras_ID_obra: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'lineasobras_obras_ID_obra'
+      Origin = 'lineasobras_obras_ID_obra'
+    end
   end
   object dialruta: TOpenDialog
     Left = 628
     Top = 148
   end
   object ImageList1: TImageList
-    Left = 664
-    Top = 433
+    Left = 696
+    Top = 377
     Bitmap = {
-      494C010104000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1376,12 +1398,11 @@ object FFacturas: TFFacturas
       Hint = 'Aprobar todos los presupuestos'
       ImageIndex = 3
     end
-  end
-  object bndngslst1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 20
-    Top = 5
+    object guardarfactura: TAction
+      Caption = 'guardarfactura'
+      OnExecute = guardarfacturaExecute
+      OnUpdate = guardarfacturaUpdate
+    end
   end
   object dsFacturas: TDataSource
     DataSet = fdfacturas
@@ -1396,12 +1417,12 @@ object FFacturas: TFFacturas
   object FDSchemaAdapter1: TFDSchemaAdapter
     BeforeApplyUpdate = FDSchemaAdapter1BeforeApplyUpdate
     AfterApplyUpdate = FDSchemaAdapter1AfterApplyUpdate
-    Left = 960
-    Top = 487
+    Left = 440
+    Top = 519
   end
   object dslineas: TDataSource
     DataSet = fdlineas
-    Left = 716
-    Top = 366
+    Left = 740
+    Top = 438
   end
 end

@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls,
   Vcl.StdCtrls, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
-  Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+  Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS;
 
 type
   Tlistadministradores = class(TForm)
@@ -16,10 +17,6 @@ type
     beBuscar: TButtonedEdit;
     GroupBox4: TGroupBox;
     cbOrdenarC: TCheckBox;
-    lvadministradores: TListView;
-    bndsrcdb1: TBindSourceDB;
-    bndngslst1: TBindingsList;
-    linkListaAdministradores: TLinkListControlToField;
     tlb1: TToolBar;
     btn1: TToolButton;
     btn2: TToolButton;
@@ -27,10 +24,10 @@ type
     btn4: TToolButton;
     btn5: TToolButton;
     btn6: TToolButton;
+    rdbgrid1: TrDBGrid_MS;
+    ds1: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure beBuscarChange(Sender: TObject);
-    procedure cbOrdenarCClick(Sender: TObject);
     procedure lvadministradoresDblClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
@@ -52,19 +49,6 @@ uses
 
 {$R *.dfm}
 
-procedure Tlistadministradores.beBuscarChange(Sender: TObject);
-
-var li:TListItem;
-begin
-li:=lvadministradores.FindCaption(0,beBuscar.Text,true,true,false);
-if li <> nil then
-      begin
-      lvadministradores.Selected:=li;
-      li.MakeVisible(True);
-      end
-else     showmessage('No existen resultados.');
-end;
-
 procedure Tlistadministradores.btn1Click(Sender: TObject);
 begin
 Close;
@@ -85,30 +69,17 @@ begin
 DataModule1.editarAdministradorExecute(DataModule1.fdadministradores);
 end;
 
-procedure Tlistadministradores.cbOrdenarCClick(Sender: TObject);
-begin
-if (Sender as TCheckBox).Checked then
-   begin
-        linkListaAdministradores.Active:=false;
-        linkListaAdministradores.FillHeaderFieldName:='';
-        DataModule1.fdadministradores.IndexFieldNames:='nombreapellidos';
-        DataModule1.fdadministradores.indexesActive:=true;
-
-        linkListaAdministradores.Active:=true;
-   end;
-end;
-
 procedure Tlistadministradores.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-DataModule1.fdadministradores.Active:=False;
+ds1.dataset.Active:=False;
 Action:=caFree;
 end;
 
 procedure Tlistadministradores.FormCreate(Sender: TObject);
 begin
-    DataModule1.fdAdministradores.Active:=true;
-     if DataModule1.fdClientes.RecordCount > 0 then  linklistaadministradores.Active:=true;
+    ds1.dataset.Active:=true;
+
 end;
 
 procedure Tlistadministradores.lvadministradoresDblClick(Sender: TObject);

@@ -52,6 +52,7 @@ type
     procedure btn4Click(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure lbed1Change(Sender: TObject);
+    procedure rDBGridClientes1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -183,6 +184,11 @@ begin
          
        end;
 
+end;
+
+procedure Tlistobras.rDBGridClientes1DblClick(Sender: TObject);
+begin
+DataModule1.editarObraexecute(DataModule1.fdobras)
 end;
 
 end.

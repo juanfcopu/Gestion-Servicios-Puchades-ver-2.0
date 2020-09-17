@@ -2,16 +2,14 @@ program GestionSPuchades;
 
 uses
   Vcl.Forms,
-  FPrincipal in 'FPrincipal.pas' {principal},
   DModule1 in 'DModule1.pas' {DataModule1: TDataModule},
-  listapresupuestos in 'listapresupuestos.pas' {listpresupuestos},
+  listalineaspresupuestos in 'listalineaspresupuestos.pas' {listlineaspresupuestos},
   clientes in 'clientes.pas' {FClientes},
   framePresupuestos in 'framePresupuestos.pas' {Frame1: TFrame},
   frameFacturas in 'frameFacturas.pas' {Frame2: TFrame},
   frameObras in 'frameObras.pas' {Frame3: TFrame},
   frameContactos in 'frameContactos.pas' {Frame4: TFrame},
-  facturas in 'facturas.pas' {FFacturas},
-  listaspagoseguros in 'listaspagoseguros.pas' {listpagosseguros},
+  listaproveedores in 'listaproveedores.pas' {Fproveedores},
   inserclientes in 'inserclientes.pas' {FInsertarCliente},
   obras in 'obras.pas' {FObras},
   listaobras in 'listaobras.pas' {listobras},
@@ -31,12 +29,25 @@ uses
   presupuestos in 'presupuestos.pas' {FPresupuestos},
   listaclientes in 'listaclientes.pas' {listclientes},
   companiasseguros in 'companiasseguros.pas' {FimagenesCompanias},
-  AcroPDFLib_TLB in '..\..\Embarcadero\Studio\19.0\Imports\AcroPDFLib_TLB.pas',
   EstadisticasGastos in 'EstadisticasGastos.pas' {FEstadisticasGastosVentas},
-  listafacturas in 'listafacturas.pas' {listfacturas},
+  asientos in 'asientos.pas' {FAsientos},
   listaseguros in 'listaseguros.pas' {listseguros},
   config in 'config.pas' {configuracion},
-  inserfacturascomparas in 'inserfacturascomparas.pas' {insertFacturasCompras};
+  inserfacturascomparas in 'inserfacturascomparas.pas' {insertFacturasCompras},
+  ClientesDatos in 'ClientesDatos.pas' {FclientesDatos},
+  editors in 'editors.pas',
+  objetos in 'objetos.pas',
+  bancos in 'bancos.pas' {FBancos},
+  movimientosbancos in 'movimientosbancos.pas' {FMovimientosBancarios},
+  DmoduleReports in 'DmoduleReports.pas' {DataModule2: TDataModule},
+  calendario in 'calendario.pas' {FCalendario},
+  listafacturas in 'listafacturas.pas' {listfacturas},
+  listastrabajadores in 'listastrabajadores.pas' {listtrabajadores},
+  facturas in 'facturas.pas' {FFacturas},
+  Elegircalendario in 'Elegircalendario.pas' {FElegirCalendario},
+  FPrincipal in 'FPrincipal.pas' {principal},
+  PrevisionPresupuestos in 'PrevisionPresupuestos.pas' {FPrevisionEjecucion},
+  listapresupuestos in 'listapresupuestos.pas' {listpresupuestos};
 
 {$R *.res}
 
@@ -44,7 +55,9 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Gestión Servicios Puchades';
-  Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(Tprincipal, principal);
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TDataModule2, DataModule2);
+  Application.CreateForm(Tlistpresupuestos, listpresupuestos);
   Application.Run;
 end.

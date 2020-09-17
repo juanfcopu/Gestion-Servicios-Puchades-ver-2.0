@@ -60,8 +60,16 @@ object FLineasObrasFacturas: TFLineasObrasFacturas
       ShowHint = True
       OnClick = btnselectodosClick
     end
-    object btn1: TToolButton
+    object btVista: TToolButton
       Left = 78
+      Top = 0
+      Caption = 'btVista'
+      ImageIndex = 22
+      Style = tbsCheck
+      OnClick = btVistaClick
+    end
+    object btn1: TToolButton
+      Left = 117
       Top = 0
       Width = 39
       AutoSize = True
@@ -70,17 +78,18 @@ object FLineasObrasFacturas: TFLineasObrasFacturas
       Style = tbsSeparator
     end
     object btaAceptar: TToolButton
-      Left = 117
+      Left = 156
       Top = 0
       Hint = 'Insertar'
       Caption = 'btaAceptar'
+      Enabled = False
       ImageIndex = 19
       ParentShowHint = False
       ShowHint = True
       OnClick = btaAceptarClick
     end
     object btCerrar: TToolButton
-      Left = 156
+      Left = 195
       Top = 0
       Hint = 'Cancelar'
       Caption = 'btCerrar'
@@ -115,14 +124,15 @@ object FLineasObrasFacturas: TFLineasObrasFacturas
     Top = 160
   end
   object fdqlobras: TFDQuery
+    AfterOpen = fdqlobrasAfterOpen
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       
-        'SELECT  O.id_obra, LO.id_lineaobra, LO.obras_ID_obra, LO.descrip' +
-        'cion,LO.Total,LO.facturas_id_factura,LO.facturas_ano,O.FechaComi' +
-        'enzo,O.FechaFin FROM lineasobras LO,obras O WHERE LO.obras_id_ob' +
-        'ra=O.id_obra AND O.id_Cliente=:IDCLIENTE AND LO.facturas_id_fact' +
-        'ura is null')
+        'SELECT O.ID_Cliente, O.descripcion as descripObra, O.id_obra, LO' +
+        '.id_lineaobra, LO.obras_ID_obra, LO.descripcion,LO.Total,LO.fact' +
+        'uras_id_factura,LO.facturas_ano,O.FechaComienzo,O.FechaFin FROM ' +
+        'lineasobras LO,obras O WHERE LO.obras_id_obra=O.id_obra AND O.id' +
+        '_cliente=:IDCLIENTE AND LO.facturas_id_factura is null')
     Left = 536
     Top = 184
     ParamData = <
@@ -132,5 +142,64 @@ object FLineasObrasFacturas: TFLineasObrasFacturas
         ParamType = ptInput
         Value = Null
       end>
+    object fdqlobrasid_lineaobra: TIntegerField
+      FieldName = 'id_lineaobra'
+      Origin = 'id_lineaobra'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqlobrasobras_ID_obra: TIntegerField
+      FieldName = 'obras_ID_obra'
+      Origin = 'obras_ID_obra'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqlobrasdescripcion: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descripcion'
+      Origin = 'descripcion'
+      Size = 255
+    end
+    object fdqlobrasTotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'Total'
+      Origin = 'Total'
+    end
+    object fdqlobrasfacturas_id_factura: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'facturas_id_factura'
+      Origin = 'facturas_id_factura'
+    end
+    object fdqlobrasfacturas_ano: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'facturas_ano'
+      Origin = 'facturas_ano'
+    end
+    object fdqlobrasFechaComienzo: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'FechaComienzo'
+      Origin = 'FechaComienzo'
+    end
+    object fdqlobrasFechaFin: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'FechaFin'
+      Origin = 'FechaFin'
+    end
+    object fdqlobrasid_obra: TFDAutoIncField
+      FieldName = 'id_obra'
+      Origin = 'id_obra'
+      ReadOnly = True
+    end
+    object fdqlobrasID_Cliente: TIntegerField
+      FieldName = 'ID_Cliente'
+      Origin = 'ID_Cliente'
+      Required = True
+    end
+    object fdqlobrasdescripObra: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'descripObra'
+      Origin = 'descripObra'
+      BlobType = ftMemo
+    end
   end
 end

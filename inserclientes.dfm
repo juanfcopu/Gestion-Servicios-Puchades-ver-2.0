@@ -116,7 +116,7 @@ object FInsertarCliente: TFInsertarCliente
         Width = 77
         Height = 21
         CharCase = ecUpperCase
-        DataField = 'IdContactos'
+        DataField = 'CodigoPostal'
         DataSource = dsinsertarcliente
         TabOrder = 3
         DBEditLabel.OwnCaption = 'C'#243'digo Postal'
@@ -185,37 +185,6 @@ object FInsertarCliente: TFInsertarCliente
         Align = alClient
         Caption = 'Familia y Administrador'
         TabOrder = 0
-        object Label1: TLabel
-          AlignWithMargins = True
-          Left = 19
-          Top = 25
-          Width = 32
-          Height = 13
-          Caption = 'Familia'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object ComboBox2: TComboBox
-          Left = 80
-          Top = 22
-          Width = 323
-          Height = 21
-          CharCase = ecUpperCase
-          ItemIndex = 0
-          TabOrder = 0
-          Text = 'COMUNIDAD DE PROPIETARIOS'
-          OnSelect = ComboBox2Select
-          Items.Strings = (
-            'COMUNIDAD DE PROPIETARIOS'
-            'COMUNIDAD DE BIENES'
-            'SOCIEDAD LIMITADA'
-            'PROPIETARIO  RESIDENCIA'
-            'PROPIETARIO 2'#186' RESIDENCIA')
-        end
         object rDBLookupComboBox1: TrDBLookupComboBox
           Left = 80
           Top = 53
@@ -227,11 +196,28 @@ object FInsertarCliente: TFInsertarCliente
           KeyField = 'idadministrador'
           ListField = 'nombreapellidos'
           ListSource = dsadministradores
-          TabOrder = 1
+          TabOrder = 0
           DBEditLabel.OwnCaption = 'Administrador'
           DBEditLabel.Position = lpLeftCenter
           BoundLabel.Position = lpTopRight
           EmptyDisplayValue = 'Vac'#237'o'
+        end
+        object rDBComboBox2: TrDBComboBox
+          Left = 80
+          Top = 26
+          Width = 321
+          Height = 21
+          DataField = 'familia'
+          DataSource = dsinsertarcliente
+          DropDownCount = 15
+          Items.Strings = (
+            'COMUNIDAD DE PROPIETARIOS'
+            'SOCIEDAD LIMITADA'
+            'COMUNIDAD DE BIENES'
+            'PROPIETARIO')
+          TabOrder = 1
+          BoundLabel.Caption = 'Familia'
+          BoundLabel.Position = lpLeftCenter
         end
       end
       object GroupBox2: TGroupBox
@@ -464,10 +450,6 @@ object FInsertarCliente: TFInsertarCliente
         object datoscontactos: TTabSheet
           Caption = 'Contactos'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object ctrlbr1: TControlBar
             Left = 0
             Top = 0
@@ -598,6 +580,7 @@ object FInsertarCliente: TFInsertarCliente
     end
   end
   object fdinsertarClientes: TFDQuery
+    OnNewRecord = fdcontactosNewRecord
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'select * from clientes where idContactos=:id_cliente')
@@ -610,6 +593,120 @@ object FInsertarCliente: TFInsertarCliente
         ParamType = ptInput
         Value = Null
       end>
+    object fdinsertarClientesIdContactos: TIntegerField
+      FieldName = 'IdContactos'
+      Origin = 'IdContactos'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdinsertarClientesNombre: TStringField
+      FieldName = 'Nombre'
+      Origin = 'Nombre'
+      Required = True
+      Size = 100
+    end
+    object fdinsertarClientesDireccion: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Direccion'
+      Origin = 'Direccion'
+      Size = 255
+    end
+    object fdinsertarClientesCiudad: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Ciudad'
+      Origin = 'Ciudad'
+      Size = 50
+    end
+    object fdinsertarClientesTelefonoCasa: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'TelefonoCasa'
+      Origin = 'TelefonoCasa'
+    end
+    object fdinsertarClientesTelefonoMovil: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'TelefonoMovil'
+      Origin = 'TelefonoMovil'
+    end
+    object fdinsertarClientesmail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'mail'
+      Origin = 'mail'
+      Size = 50
+    end
+    object fdinsertarClientesNumFax: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'NumFax'
+      Origin = 'NumFax'
+    end
+    object fdinsertarClientesCIF: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CIF'
+      Origin = 'CIF'
+      Size = 50
+    end
+    object fdinsertarClientesCodigoPostal: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CodigoPostal'
+      Origin = 'CodigoPostal'
+      Size = 50
+    end
+    object fdinsertarClientesidAdministrador: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'idAdministrador'
+      Origin = 'idAdministrador'
+    end
+    object fdinsertarClientesCP: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'CP'
+      Origin = 'CP'
+    end
+    object fdinsertarClientesIBAN: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'IBAN'
+      Origin = 'IBAN'
+      Size = 255
+    end
+    object fdinsertarClientesbanco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'banco'
+      Origin = 'banco'
+      Size = 100
+    end
+    object fdinsertarClientesnombrefactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nombrefactura'
+      Origin = 'nombrefactura'
+      Size = 100
+    end
+    object fdinsertarClientesciffactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ciffactura'
+      Origin = 'ciffactura'
+      Size = 50
+    end
+    object fdinsertarClientesciudadfactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ciudadfactura'
+      Origin = 'ciudadfactura'
+      Size = 50
+    end
+    object fdinsertarClientesdireccionfactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'direccionfactura'
+      Origin = 'direccionfactura'
+      Size = 255
+    end
+    object fdinsertarClientescodigopostalfactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codigopostalfactura'
+      Origin = 'codigopostalfactura'
+      Size = 50
+    end
+    object fdinsertarClientesfamilia: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'familia'
+      Origin = 'familia'
+    end
   end
   object fdadministradores: TFDQuery
     Connection = DataModule1.FDConnection1

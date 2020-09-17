@@ -7,7 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,System.DateUtils,
   Data.Bind.DBScope, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, RzStatus, RzDBStat,
+  RzPanel, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   Tlistfacturas = class(TForm)
@@ -26,7 +29,6 @@ type
     rbPagadas: TRadioButton;
     rbImpagadas: TRadioButton;
     rbTodas: TRadioButton;
-    stat1: TStatusBar;
     tlb1: TToolBar;
     btn1: TToolButton;
     btn2: TToolButton;
@@ -35,10 +37,15 @@ type
     btn5: TToolButton;
     rDBGridClientes1: TrDBGrid_MS;
     ds1: TDataSource;
+    RzStatusBar1: TRzStatusBar;
+    RzDBStateStatus1: TRzDBStateStatus;
+    ToolButton1: TToolButton;
+    btnExcel: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     procedure FormCreate(Sender: TObject);
 
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
         procedure rbTodasClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -47,8 +54,20 @@ type
     procedure rbPagadasClick(Sender: TObject);
     procedure rDBGridClientes1DblClick(Sender: TObject);
     procedure beBuscarChange(Sender: TObject);
+    procedure fdqfacturasAfterPost(DataSet: TDataSet);
+    procedure fdqfacturasAfterOpen(DataSet: TDataSet);
+    procedure fdqfacturasAfterDelete(DataSet: TDataSet);
+    procedure fdqfacturasBeforeDelete(DataSet: TDataSet);
+    procedure fdqfacturaFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+    procedure rDBGridClientes1FilterChanged(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure ToolButton2Click(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
+
   private
     { Private declarations }
+    asiento:Integer;
   public
     { Public declarations }
   end;
@@ -59,7 +78,7 @@ var
 implementation
 
 uses
-  DModule1;
+  DModule1,DmoduleReports;
 
 {$R *.dfm}
 
@@ -74,6 +93,10 @@ rDBGridClientes1.DataSource.DataSet.Filtered:=False;
 rDBGridClientes1.DataSource.DataSet.Filter:='nombre LIKE ''%'+TLabeledEdit(Sender).Text+'%''';
 rDBGridClientes1.DataSource.DataSet.Filtered:=True;
 rDBGridClientes1.DataSource.DataSet.EnableControls;
+
+rDBGridClientes1.RecalculateSummaryResults(true);
+
+if Length(TLabeledEdit(Sender).text)<1 then rDBGridclientes1.DataSource.DataSet.Filtered:=False;
 end;
 
 procedure Tlistfacturas.btn1Click(Sender: TObject);
@@ -90,40 +113,37 @@ if Application.MessageBox('¿Esta seguro de borrar la factura?','Borrar',MB_YESNO
 
    end;
 
+procedure Tlistfacturas.btnExcelClick(Sender: TObject);
+begin
+DataModule1.rXLSExport1.ExportDBTable(ds1.DataSet);
+end;
+
 procedure Tlistfacturas.Button1Click(Sender: TObject);
 var SQLstr,SQLstr2:string;
 begin
-
- SQLstr:='Select C.nombre, f.IdCliente, f.idfactura, f.concepto, f.pagada, f.FechaFactura, f.TotalBruto, f.iva, f.total, f.ano ';
- SQLstr2:='From facturas f, clientes C where C.idContactos=f.idCliente and f.FechaFactura>=:FechaIni and f.Fechafactura<=:FechaFin';
- DataModule1.fdfacturas.Close;
- DataModule1.fdfacturas.SQL.Clear;
- DataModule1.fdfacturas.SQL.Add(SQLstr+SQLstr2);
- DataModule1.fdfacturas.ParamByName('FechaIni').AsDateTime:=DateTimePicker1.Date;
- DataModule1.fdfacturas.ParamByName('FechaFin').AsDateTime:=DateTimePicker2.DateTime;
- DataModule1.fdfacturas.Active:=true;
-
+    ds1.DataSet.Filtered:=False;
+  ds1.DataSet.filter:= 'FechaFactura >={d '+FormatDateTime('yyyy-mm-dd', DateTimePicker1.Date)+'} and FechaFactura <= {d '+FormatDateTime('yyyy-mm-dd', DateTimePicker2.Date)+'}';
+  ds1.DataSet.Filtered:=True;
 end;
-
-procedure Tlistfacturas.Button2Click(Sender: TObject);
-var SQLstr,SQLstr2:string;
-begin
-{LinkListControlToField1.Active:=false;
- SQLstr:='Select C.nombre, O.Id_Cliente, O.id_Obra, O.descripcion, O.Ejecutado, O.FechaComienzo, O.ImporteObra, O.FechaFin ';
- SQLstr2:='From obras O, clientes C where C.idContactos=O.id_Cliente and O.FechaFin>=:FechaIni and O.FechaFin<=:FechaFin';
- DataModule1.fdObras.Close;
- DataModule1.fdObras.SQL.Clear;
- DataModule1.fdObras.SQL.Add(SQLstr+SQLstr2);
- DataModule1.fdObras.ParamByName('FechaIni').AsDateTime:=DateTimePicker3.DateTime;
- DataModule1.fdObras.ParamByName('FechaFin').AsDateTime:=DateTimePicker4.DateTime;
- DataModule1.fdObras.Active:=true;
- LinkListControlToField1.Active:=true;   }
-end;
-
 
 procedure Tlistfacturas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-DataModule1.fdfacturas.Close;
+ds1.DataSet.Cancel;
+     DataModule1.fq1.AfterExecute:=nil;
+     ds1.DataSet.AfterOpen:= nil;
+     ds1.DataSet.AfterPost:= nil;
+     ds1.DataSet.AfterDelete:=nil;
+     ds1.DataSet.AfterInsert:=nil;
+     ds1.DataSet.AfterCancel:=nil;
+     ds1.DataSet.AfterEdit:=nil;
+     ds1.DataSet.BeforeCancel:=nil;
+     ds1.DataSet.BeforeDelete:=nil;
+
+
+     ds1.DataSet.filtered:=False;
+     ds1.dataset.Active:=false;
+
+
 Action:=caFree;
 end;
 
@@ -131,7 +151,13 @@ procedure Tlistfacturas.FormCreate(Sender: TObject);
 begin
      DateTimePicker1.Date:=Date;
      DateTimePicker2.Date:=Date;
-    
+
+
+     ds1.DataSet.AfterOpen:= fdqfacturasAfterOpen;
+     ds1.DataSet.AfterPost:= fdqfacturasAfterPost;
+     ds1.DataSet.AfterDelete:=fdqfacturasAfterDelete;
+     ds1.DataSet.BeforeDelete:=fdqfacturasBeforeDelete;
+
 
      rbcliente.checked:=true;
      rbTodas.Checked:=True;
@@ -142,7 +168,7 @@ procedure Tlistfacturas.rbImpagadasClick(Sender: TObject);
 begin
  if rbImpagadas.Checked then
        begin
-
+        ds1.DataSet.Filtered:=False;
        ds1.DataSet.filter:= 'Pagada=False';
        ds1.DataSet.Filtered:=True;
 
@@ -155,7 +181,7 @@ procedure Tlistfacturas.rbPagadasClick(Sender: TObject);
 begin
    if rbPagadas.Checked then
        begin
-
+        ds1.DataSet.Filtered:=False;
        ds1.DataSet.filter:= 'Pagada=True';
        ds1.DataSet.filtered:=True;
 
@@ -166,7 +192,7 @@ procedure Tlistfacturas.rbTodasClick(Sender: TObject);
 begin
       if rbTodas.Checked then
        begin
-
+       ds1.DataSet.Filtered:=False;
        ds1.DataSet.filtered:=False;
        ds1.DataSet.Filter:='';
        end;
@@ -177,5 +203,64 @@ procedure Tlistfacturas.rDBGridClientes1DblClick(Sender: TObject);
 begin
 DataModule1.editarFacturaExecute(ds1.DataSet)   ;
 end;
+
+
+procedure Tlistfacturas.rDBGridClientes1FilterChanged(Sender: TObject);
+begin
+    rDBGridClientes1.RecalculateSummaryResults(True);
+end;
+
+procedure Tlistfacturas.ToolButton2Click(Sender: TObject);
+begin
+DataModule2.FDFacturasImpagadas.Active:=True;
+DataModule2.frxFacturasImpagadas.ShowReport(True);
+DataModule2.FDFacturasImpagadas.close;
+end;
+
+procedure Tlistfacturas.ToolButton3Click(Sender: TObject);
+begin
+DataModule2.FDfacturas.Active:=True;
+DataModule2.FDDetalleFacturas.Active:=True;
+DataModule2.frxFacturas.ShowReport(True);
+DataModule2.FDDetalleFacturas.close;
+DataModule2.FDFacturas.close;
+end;
+
+procedure Tlistfacturas.fdqfacturasAfterDelete(DataSet: TDataSet);
+
+begin
+DataModule1.BorrarAsiento(asiento);
+rDBGridClientes1.RecalculateSummaryResults(True);
+
+end;
+
+procedure Tlistfacturas.fdqfacturasBeforeDelete(DataSet: TDataSet);
+begin
+asiento:=DataSet.FieldByName('id_asiento').AsInteger;
+end;
+
+procedure Tlistfacturas.fdqfacturasAfterOpen(DataSet: TDataSet);
+begin
+rDBGridClientes1.RecalculateSummaryResults(True);
+end;
+
+
+
+procedure Tlistfacturas.fdqfacturasAfterPost(DataSet: TDataSet);
+
+begin
+
+ rDBGridClientes1.RecalculateSummaryResults(True);
+
+
+ end;
+
+ procedure Tlistfacturas.fdqfacturaFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+   rDBGridClientes1.RecalculateSummaryResults(true);
+end;
+
+
 
 end.

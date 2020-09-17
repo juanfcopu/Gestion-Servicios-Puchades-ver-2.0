@@ -1,9 +1,6 @@
 ﻿[FDGUIxWaitCursor1]
 Coordinates=192,1,113,33
 
-[FDPhysMySQLDriverLink1]
-Coordinates=192,53,144,33
-
 [FDConnection1]
 Coordinates=84,10,90,33
 
@@ -389,4 +386,7 @@ Coordinates=141,405,107,33
 
 [actPagosSeguros]
 Coordinates=0,0,70,33
+
+[FDMySQLDriverLink]
+Coordinates=192,53,144,33
 
