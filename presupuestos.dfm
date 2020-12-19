@@ -6,7 +6,7 @@ object FPresupuestos: TFPresupuestos
   ClientHeight = 782
   ClientWidth = 1169
   Color = clBtnFace
-  Constraints.MaxWidth = 1250
+  Constraints.MaxWidth = 1300
   DragKind = dkDock
   DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
@@ -391,27 +391,6 @@ object FPresupuestos: TFPresupuestos
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        object Label7: TLabel
-          Left = 828
-          Top = 339
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label9: TLabel
-          Left = 828
-          Top = 358
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
-        object Label12: TLabel
-          Left = 886
-          Top = 337
-          Width = 31
-          Height = 13
-          Caption = 'Label5'
-        end
         object ControlBar2: TControlBar
           AlignWithMargins = True
           Left = 3
@@ -501,7 +480,8 @@ object FPresupuestos: TFPresupuestos
             'Id_Partida=%COUNTVAL partidas;'
             'Total=%SUM '#8364';')
           FieldsAutoPickList.Strings = (
-            'Descripcion')
+            'Descripcion'
+            'tipo')
           OnLoadPickList = rDBGridClientesDBGridLineasLoadPickList
           Columns = <
             item
@@ -540,7 +520,7 @@ object FPresupuestos: TFPresupuestos
               Title.Font.Height = -12
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 80
+              Width = 74
               Visible = True
             end
             item
@@ -554,7 +534,7 @@ object FPresupuestos: TFPresupuestos
               Title.Font.Height = -12
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 87
+              Width = 74
               Visible = True
             end
             item
@@ -567,7 +547,7 @@ object FPresupuestos: TFPresupuestos
               Title.Font.Height = -12
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 87
+              Width = 67
               Visible = True
             end
             item
@@ -593,7 +573,35 @@ object FPresupuestos: TFPresupuestos
               Title.Font.Height = -12
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 54
+              Width = 48
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'tipo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 67
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'categoriades'
+              Title.Alignment = taCenter
+              Title.Caption = 'Categor'#237'a'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 118
               Visible = True
             end
             item
@@ -608,7 +616,7 @@ object FPresupuestos: TFPresupuestos
               Title.Font.Height = -12
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 103
+              Width = 57
               Visible = True
             end
             item
@@ -746,12 +754,26 @@ object FPresupuestos: TFPresupuestos
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1147
+          Width = 855
           Height = 248
           Align = alClient
           Enabled = False
           IconOptions.AutoArrange = True
+          MultiSelect = True
           TabOrder = 0
+          OnSelectItem = RzShellList2SelectItem
+        end
+        object rImageZoom1: TrImageZoom
+          AlignWithMargins = True
+          Left = 864
+          Top = 3
+          Width = 286
+          Height = 248
+          Align = alRight
+          DragCursor = crSizeAll
+          PopupMenu = rImageZoom1._ImagePopup
+          ReduceToFit = True
+          SaveInJPG = False
         end
       end
       object ts1: TTabSheet
@@ -1519,7 +1541,7 @@ object FPresupuestos: TFPresupuestos
     Left = 688
     Top = 441
     Bitmap = {
-      494C010104000800F40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1961,7 +1983,6 @@ object FPresupuestos: TFPresupuestos
     AfterOpen = fdlineas1AfterOpen
     AfterInsert = fdlineas1AfterInsert
     AfterEdit = fdlineas1AfterEdit
-    BeforePost = FdlineasBeforePost
     AfterPost = fdlineas1AfterPost
     AfterDelete = fdlineas1AfterDelete
     CachedUpdates = True
@@ -1974,9 +1995,15 @@ object FPresupuestos: TFPresupuestos
       end
       item
         Name = 'SUMAPROBADOS'
-        Expression = 'SUM(IF(APROVADO=TRUE,TOTAL,0))'
+        Expression = 'SUM(IIF(APROVADO=TRUE,TOTAL,0))'
+        Active = True
+      end
+      item
+        Name = 'TOTALAPROBADOS'
+        Expression = 'SUM(IIF(APROVADO=TRUE,1,0))'
         Active = True
       end>
+    AggregatesActive = True
     MasterSource = dspresupuesto
     MasterFields = 'id_presupuesto;grupo'
     Connection = DataModule1.FDConnection1
@@ -2042,6 +2069,27 @@ object FPresupuestos: TFPresupuestos
       FieldName = 'diasejecucion'
       Required = True
     end
+    object Fdlineastipo: TStringField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+      Required = True
+      FixedChar = True
+      Size = 8
+    end
+    object Fdlineascategoria: TIntegerField
+      FieldName = 'categoria'
+      Origin = 'categoria'
+      Required = True
+    end
+    object Fdlineascategoriades: TStringField
+      FieldKind = fkLookup
+      FieldName = 'categoriades'
+      LookupDataSet = fdcategoria
+      LookupKeyFields = 'id_categoriapresupuestos'
+      LookupResultField = 'descripcion'
+      KeyFields = 'categoria'
+      Lookup = True
+    end
   end
   object fdtrabajAsignados: TFDQuery
     AfterInsert = fdlineas1AfterEdit
@@ -2098,5 +2146,12 @@ object FPresupuestos: TFPresupuestos
         'true')
     Left = 728
     Top = 648
+  end
+  object fdcategoria: TFDQuery
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      'select * from categoriapresupuestos')
+    Left = 884
+    Top = 242
   end
 end

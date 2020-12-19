@@ -11,7 +11,8 @@ uses
   RzEdit, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls,Vcl.Themes,
   Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, rImprovedComps, VirtualTrees,
   Vcl.WinXCalendars,Dmodule1, RzSplit, Vcl.ToolWin, RzButton, RzDBNav,
-  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
+  Vcl.Menus;
 
 type
   TFCalendario = class(TForm)
@@ -22,7 +23,6 @@ type
     ds3: TDataSource;
     Button3: TButton;
     RzStatusBar1: TRzStatusBar;
-    RzToolbar1: TRzToolbar;
     fdcalendario: TFDQuery;
     fdcalendarioid_cal: TFDAutoIncField;
     fdcalendarioid_trabajador: TIntegerField;
@@ -63,6 +63,16 @@ type
     FDTrabajadoresid_trabajador: TFDAutoIncField;
     FDTrabajadoresnombre: TStringField;
     FDTrabajadoresdias: TIntegerField;
+    PopupMenu1: TPopupMenu;
+    EditarObra1: TMenuItem;
+    FinalizarPartidaObra1: TMenuItem;
+    CoolBar1: TCoolBar;
+    ToolBar1: TToolBar;
+    ToolBar2: TToolBar;
+    btn1: TToolButton;
+    btn2: TToolButton;
+    btn3: TToolButton;
+    btn4: TToolButton;
     procedure FormShow(Sender: TObject);
     procedure FDCalendarioAfterApplyUpdates(DataSet: TFDDataSet; AErrors: Integer);
     procedure RzCalendar1Change(Sender: TObject);
@@ -73,8 +83,6 @@ type
     procedure Button5Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure RzPanel1DockOver(Sender: TObject; Source: TDragDockObject; X,
-      Y: Integer; State: TDragState; var Accept: Boolean);
     procedure ToolButton1Click(Sender: TObject);
     procedure fdcalendarioclienteGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
@@ -83,11 +91,16 @@ type
     procedure revertirUpdate(Sender: TObject);
     procedure guardarUpdate(Sender: TObject);
     procedure FDTrabajadoresCalcFields(DataSet: TDataSet);
+    procedure EditarObra1Click(Sender: TObject);
+    procedure FinalizarPartidaObra1Click(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
   private
     { Private declarations }
+    fechacopia:TDate;
   public
     { Public declarations }
-    fechacopia:TDate;
+
   end;
 
 var
@@ -96,7 +109,7 @@ var
 implementation
 
 
-uses FPrincipal,Elegircalendario;
+uses FPrincipal,Elegircalendario,DmoduleReports;
 
 {$R *.dfm}
 
@@ -107,6 +120,23 @@ begin
 for I := 1 to StringGrid1.RowCount - 1 do
     for J:=0 to StringGrid1.ColCount-1 do
                  StringGrid1.Cells[J,I]:='';
+end;
+
+procedure TFCalendario.btn1Click(Sender: TObject);
+begin
+Close;
+end;
+
+procedure TFCalendario.btn2Click(Sender: TObject);
+begin
+DataModule2.fdtrabajadores.Active:=True;
+DataModule2.FDdetalleCalendario.ParamByName('FT').AsInteger:=MonthOf(RzCalendar1.Date);
+DataModule2.FDdetalleCalendario.ParamByName('FTA').AsInteger:=YearOf(RzCalendar1.Date);
+DataModule2.FDdetalleCalendario.Active:=True;
+DataModule2.frxCalendario.ShowReport(true);
+DataModule2.FDdetalleCalendario.Close;
+DataModule2.fdtrabajadores.Close;
+
 end;
 
 procedure TFCalendario.Button4Click(Sender: TObject);
@@ -132,7 +162,7 @@ diasdelmes:=DaysInMonth(rzCalendar1.date);
 
 PrimerdiaMes:= DayOfTheWeek(strtodate('1/'+MonthOf(rzCalendar1.date).ToString+'/'+YearOf(RzCalendar1.date).ToString));
 
-if (diasdelmes = 31) and (PrimerdiaMes > 5) then StringGrid1.RowCount:=7
+if  ((PrimerdiaMes > 5) and (diasdelmes=31)) or ((PrimerdiaMes > 6) and (diasdelmes=30)) then StringGrid1.RowCount:=7
 else StringGrid1.RowCount:=6;
 
 filtrodia:=fdcalendario.Filter;
@@ -180,8 +210,7 @@ var trabajador,obra,lineaobra:Integer; EleCal:TFElegirCalendario;
 begin
 fdcalendario.DisableControls;
 
- EleCal:=TFElegirCalendario.Create(Self);
- EleCal.ShowModal;
+ fechacopia:=DataModule1.DevolverFechaElegida;
 
 fdcalendario.First;
 while not fdcalendario.eof do
@@ -195,6 +224,7 @@ begin
  FDCalendariofecha_trabajo.AsDateTime:=fechacopia;
  FDCalendarioid_obra.asinteger:=obra;
  fdcalendarioid_lineaobra.AsInteger:=lineaobra;
+ fdcalendariohoras.AsInteger:=8;
  fdcalendario.Post;
  fdcalendario.Next;
 end;
@@ -202,6 +232,11 @@ end;
 
 fdcalendario.EnableControls ;
 
+end;
+
+procedure TFCalendario.EditarObra1Click(Sender: TObject);
+begin
+DataModule1.editarobraExecute(FDObras);
 end;
 
 procedure TFCalendario.FDCalendarioAfterApplyUpdates(DataSet: TFDDataSet; AErrors: Integer);
@@ -237,7 +272,56 @@ begin
 
 
 
-   //FDTrabajadoresdias.AsInteger:=
+
+end;
+
+procedure TFCalendario.FinalizarPartidaObra1Click(Sender: TObject);
+var fdq:TFDQuery;
+begin
+
+   //CERRAMOS LA LINEA DE OBRA
+   fdq:=TFDQuery.Create(Self);
+   fdq.Connection:=DataModule1.FDConnection1;
+   fdq.SQL.Clear;
+   fdq.SQL.Add('UPDATE lineasobras SET ejecutado=1, fechafin=:ffin WHERE obras_id_obra=:ob and id_lineaobra=:lin');
+   fdq.ParamByName('ob').AsInteger:=FDObras.FieldByName('id_obra').AsInteger;
+   fdq.ParamByName('lin').Asinteger:=FDObras.FieldByName('id_lineaobra').AsInteger;
+   MessageDlg('Elija la fecha del final de la obra. ',  mtInformation, [mbOK],  0);
+   fdq.ParamByName('ffin').AsDate:=DataModule1.DevolverFechaElegida;
+
+   fdq.Prepare;
+   fdq.ExecSQL;
+
+   case fdq.Command.CommandKind of
+    skUpdate: showmessage(Format(' Se ha finalizado %d linea de la obra correctamente', [fdq.RowsAffected]));
+    else      showmessage('Error. No se ha finalizado la linea de la.');
+    end;
+
+   fdq.close;
+
+  // CERRAMOS LA LINEA DE PRESUPUESTO
+
+  fdq.SQL.Clear;
+  fdq.SQL.Add('UPDATE lineaspresupuesto SET Ejecutado=1 WHERE presupuestos_id_presupuesto=:pres and presupuestos_grupo=:gr and id_partida=:id');
+
+  fdq.ParamByName('pres').Value:= FDobras.FieldByName('presupuestos_ID_presupuesto').AsInteger;
+  fdq.ParamByName('gr').Value:=FDobras.FieldByName('presupuestos_grupo').AsInteger;
+  fdq.ParamByName('id').Value:=FDobras.FieldByName('presupuestos_id_Partida').AsInteger;
+
+  fdq.Prepare;
+  fdq.ExecSQL;
+
+   case fdq.Command.CommandKind of
+    skUpdate: showmessage(Format(' Se ha finalizado %d linea de presupuesto correctamente', [fdq.RowsAffected]));
+    else      showmessage('Error. No se ha finalizado la linea del presupuesto.');
+    end;
+
+
+
+  fdq.Close;
+
+   fdq.Free;
+   FDObras.Refresh;
 end;
 
 procedure TFCalendario.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -264,7 +348,7 @@ begin
 
 FDTrabajadores.Active:=True;
 FDObras.Active:=True;
-FDCalendario.ParamByName('mes').AsInteger:=MonthOf(RzCalendar1.Date);
+
 FDCalendario.Active:=True;
 DataModule1.fdtrabajadores.Active:=True;
 Button4Click(Self);
@@ -300,13 +384,6 @@ FDCalendario.filter:='fecha_trabajo={d '+FormatDateTime('yyyy-mm-dd', RzCalendar
 FDCalendario.Filtered:=True;
 
 
-end;
-
-procedure TFCalendario.RzPanel1DockOver(Sender: TObject;
-  Source: TDragDockObject; X, Y: Integer; State: TDragState;
-  var Accept: Boolean);
-begin
-Accept:=True;
 end;
 
 procedure TFCalendario.StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;

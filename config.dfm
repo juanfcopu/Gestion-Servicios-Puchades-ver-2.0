@@ -21,7 +21,7 @@ object configuracion: Tconfiguracion
     Top = 0
     Width = 726
     Height = 364
-    ActivePage = ts2
+    ActivePage = tsServidor
     Align = alClient
     TabOrder = 0
     OnChange = pgc1Change
@@ -393,7 +393,7 @@ object configuracion: Tconfiguracion
       end
     end
     object TabSheet1: TTabSheet
-      Caption = 'Categoria Compras'
+      Caption = 'Categor'#237'a Compras'
       ImageIndex = 5
       object GroupBox1: TGroupBox
         AlignWithMargins = True
@@ -405,8 +405,6 @@ object configuracion: Tconfiguracion
         Anchors = [akTop, akRight, akBottom]
         Caption = 'Edici'#243'n de cuentas'
         TabOrder = 0
-        ExplicitTop = 32
-        ExplicitHeight = 301
         object rDBEdit3: TrDBEdit
           Left = 88
           Top = 48
@@ -461,8 +459,6 @@ object configuracion: Tconfiguracion
         Anchors = [akLeft, akTop, akRight, akBottom]
         Caption = 'Maestro de Cuentas'
         TabOrder = 1
-        ExplicitTop = 32
-        ExplicitHeight = 301
         object rDBGrid_MS1: TrDBGrid_MS
           AlignWithMargins = True
           Left = 5
@@ -507,11 +503,128 @@ object configuracion: Tconfiguracion
         end
       end
     end
+    object ts3: TTabSheet
+      Caption = 'Categor'#237'a Presupuestos'
+      ImageIndex = 6
+      object GroupBox3: TGroupBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 278
+        Height = 330
+        Align = alLeft
+        Anchors = [akTop, akRight, akBottom]
+        Caption = 'Edici'#243'n de cuentas'
+        TabOrder = 0
+        ExplicitLeft = 11
+        ExplicitTop = 6
+        object rDBEdit5: TrDBEdit
+          Left = 88
+          Top = 48
+          Width = 177
+          Height = 21
+          DataField = 'id_categoriapresupuestos'
+          DataSource = ds3
+          ReadOnly = True
+          TabOrder = 0
+          DBEditLabel.OwnCaption = 'N'#186' de Cuenta'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object rDBEdit6: TrDBEdit
+          Left = 72
+          Top = 91
+          Width = 193
+          Height = 21
+          DataField = 'descripcion'
+          DataSource = ds3
+          TabOrder = 1
+          DBEditLabel.OwnCaption = 'Descripci'#243'n'
+          DBEditLabel.Position = lpLeftCenter
+        end
+        object Button3: TButton
+          Left = 136
+          Top = 184
+          Width = 89
+          Height = 41
+          Caption = 'Guardar'
+          Enabled = False
+          TabOrder = 3
+          OnClick = Button3Click
+        end
+        object Button4: TButton
+          Left = 24
+          Top = 184
+          Width = 89
+          Height = 41
+          Caption = 'Nuevo'
+          Enabled = False
+          TabOrder = 2
+          OnClick = Button4Click
+        end
+      end
+      object GroupBox4: TGroupBox
+        AlignWithMargins = True
+        Left = 287
+        Top = 3
+        Width = 428
+        Height = 330
+        Align = alRight
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Caption = 'Maestro de Cuentas'
+        TabOrder = 1
+        ExplicitLeft = 290
+        ExplicitTop = 6
+        object rDBGrid_MS2: TrDBGrid_MS
+          AlignWithMargins = True
+          Left = 5
+          Top = 18
+          Width = 418
+          Height = 307
+          Align = alClient
+          DataSource = ds3
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'id_categoriapresupuestos'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'descripcion'
+              Title.Alignment = taCenter
+              Title.Caption = 'Descripci'#243'n'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 118
+              Visible = True
+            end>
+        end
+      end
+    end
   end
   object ds1: TDataSource
     DataSet = DataModule1.fdqcuentas
     OnStateChange = ds1StateChange
-    Left = 364
+    Left = 212
     Top = 8
   end
   object ds2: TDataSource
@@ -519,5 +632,11 @@ object configuracion: Tconfiguracion
     OnStateChange = ds2StateChange
     Left = 579
     Top = 152
+  end
+  object ds3: TDataSource
+    DataSet = DataModule1.fdcategoriapresupuestos
+    OnStateChange = ds3StateChange
+    Left = 592
+    Top = 24
   end
 end

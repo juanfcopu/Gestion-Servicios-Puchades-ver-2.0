@@ -130,7 +130,7 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
       Width = 755
       Height = 747
       Hint = ''
-      ActivePage = TabSheet2
+      ActivePage = TabSheet3
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -138,7 +138,7 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       TabStyle = tsSquareCorners
       OnChange = RzPageControl1Change
@@ -378,7 +378,6 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
         end
       end
       object TabSheet2: TRzTabSheet
-        OnShow = TabSheet2Show
         Caption = 'Cuentas de explotaci'#243'n'
         object rGroupBox1: TrGroupBox
           Left = 0
@@ -838,6 +837,97 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
           end
         end
       end
+      object TabSheet5: TRzTabSheet
+        Caption = 'Liquidaci'#243'n I.R.P.F Trabajadores'
+        object Image1: TImage
+          Left = 40
+          Top = 80
+          Width = 217
+          Height = 237
+        end
+        object LabeledEdit12: TLabeledEdit
+          Left = 126
+          Top = 22
+          Width = 121
+          Height = 24
+          EditLabel.Width = 56
+          EditLabel.Height = 16
+          EditLabel.Caption = 'Trimestre'
+          LabelPosition = lpLeft
+          TabOrder = 0
+        end
+        object LabeledEdit13: TLabeledEdit
+          Left = 328
+          Top = 22
+          Width = 121
+          Height = 24
+          EditLabel.Width = 22
+          EditLabel.Height = 16
+          EditLabel.Caption = 'A'#241'o'
+          LabelPosition = lpLeft
+          TabOrder = 1
+        end
+        object rdbIRPFTrab: TrDBGrid_MS
+          Left = 40
+          Top = 80
+          Width = 681
+          Height = 503
+          DataSource = dsIRPFTrab
+          TabOrder = 2
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          ColumnWidth = cwAutoWidth
+          TitleLines = 2
+          RowLines = 2
+          FooterRow.FooterVisible = True
+          FooterRow.FieldFooterDefs.Strings = (
+            'irpf=%SUM '#8364';')
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'id_trabajador'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 106
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Caption = 'Nombre'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 433
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'irpf'
+              Title.Alignment = taCenter
+              Title.Caption = 'I.R.P.F'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 102
+              Visible = True
+            end>
+        end
+      end
     end
   end
   object fdq1: TFDQuery
@@ -862,15 +952,15 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
   end
   object PrintDialog1: TPrintDialog
     Options = [poPrintToFile, poPageNums, poSelection, poWarning]
-    Left = 824
-    Top = 16
+    Left = 776
+    Top = 8
   end
   object FDcuentas: TFDQuery
     AfterScroll = FDcuentasAfterScroll
     Connection = DataModule1.FDConnection1
     SQL.Strings = (
       'select * from plancontable')
-    Left = 178
+    Left = 154
     Top = 392
   end
   object fddiario: TFDQuery
@@ -931,8 +1021,8 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
         'select CF.descripcion, Month(F.fecha), SUM(F.Importe)  from cate' +
         'goriafacturascompras CF, fproveedores F where F.categoria=CF.id_' +
         'categoriacompra GROUP BY CF.descripcion, Month(F.fecha)')
-    Left = 874
-    Top = 72
+    Left = 778
+    Top = 88
   end
   object ds: TDataSource
     DataSet = fdfacturacionmensual
@@ -970,7 +1060,6 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
       end>
   end
   object fdfacturaciontrimestral: TFDQuery
-    Active = True
     Aggregates = <
       item
         Name = 'SUMAGRE'
@@ -989,8 +1078,8 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
         'select Quarter(FechaFactura) as trimestre, SUM(baseimponible) as' +
         ' suma from facturas where Year(FechaFactura)=:ano group by Quart' +
         'er(FechaFactura), Year(FechaFactura)')
-    Left = 642
-    Top = 608
+    Left = 130
+    Top = 544
     ParamData = <
       item
         Name = 'ANO'
@@ -998,5 +1087,41 @@ object FEstadisticasGastosVentas: TFEstadisticasGastosVentas
         ParamType = ptInput
         Value = Null
       end>
+  end
+  object fdIRPFTrab: TFDQuery
+    AfterOpen = fdIRPFTrabAfterOpen
+    Connection = DataModule1.FDConnection1
+    SQL.Strings = (
+      
+        'select T.id_trabajador, T.nombre, SUM(N.irpf) as irpf from traba' +
+        'jadores T, nominas N where T.id_trabajador=N.trabajadores_id_tra' +
+        'bajador and Month(fechanomina) between :f1 and :f2 and Year(fech' +
+        'anomina)=:ano Group by T.id_trabajador,T.nombre')
+    Left = 418
+    Top = 600
+    ParamData = <
+      item
+        Name = 'F1'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'F2'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ANO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsIRPFTrab: TDataSource
+    DataSet = fdIRPFTrab
+    Left = 682
+    Top = 624
   end
 end

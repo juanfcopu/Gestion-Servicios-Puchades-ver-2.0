@@ -58,6 +58,15 @@ type
     GroupBox2: TGroupBox;
     rDBGrid_MS1: TrDBGrid_MS;
     ds2: TDataSource;
+    ts3: TTabSheet;
+    GroupBox3: TGroupBox;
+    rDBEdit5: TrDBEdit;
+    rDBEdit6: TrDBEdit;
+    Button3: TButton;
+    Button4: TButton;
+    GroupBox4: TGroupBox;
+    rDBGrid_MS2: TrDBGrid_MS;
+    ds3: TDataSource;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
@@ -76,6 +85,9 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ds2StateChange(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure ds3StateChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -187,6 +199,16 @@ begin
         if (ds2.DataSet.State in [dsBrowse]) then ds2.DataSet.Insert;
 end;
 
+procedure Tconfiguracion.Button3Click(Sender: TObject);
+begin
+if (ds3.DataSet.State in [dsInsert,dsEdit]) then ds3.DataSet.Post;
+end;
+
+procedure Tconfiguracion.Button4Click(Sender: TObject);
+begin
+   if (ds3.DataSet.State in [dsBrowse]) then ds3.DataSet.Insert;
+end;
+
 procedure Tconfiguracion.ds1StateChange(Sender: TObject);
 begin
     if TDataSource(Sender).DataSet.State in [dsInsert, dsEdit] then
@@ -213,8 +235,24 @@ begin
           end;
 end;
 
+procedure Tconfiguracion.ds3StateChange(Sender: TObject);
+begin
+if TDataSource(Sender).DataSet.State in [dsInsert, dsEdit] then
+    begin
+    Button3.Enabled:=True ;
+    Button4.Enabled:=False;
+    end
+    else begin
+          Button3.Enabled:=False;
+          button4.Enabled:=True;
+          end;
+end;
+
 procedure Tconfiguracion.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+ds1.DataSet.Close;
+ds2.DataSet.Close;
+ds3.DataSet.Close;
 Action:=caFree;
 end;
 
@@ -264,7 +302,12 @@ end;
 
 procedure Tconfiguracion.pgc1Change(Sender: TObject);
 begin
-if (TPageControl(Sender).ActivePageIndex=5) then  Ds2.dataset.active:=True;
+case TPageControl(Sender).ActivePageIndex of
+
+ 5:   Ds2.dataset.active:=True;
+ 6:   ds3.DataSet.Active:=True;
+ end;
+
 end;
 
 procedure Tconfiguracion.ts2Enter(Sender: TObject);

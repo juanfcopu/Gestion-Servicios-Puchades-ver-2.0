@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>GestionSPuchades.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -280,6 +280,10 @@
         </DCCReference>
         <DCCReference Include="listapresupuestos.pas">
             <Form>listpresupuestos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="plantillaspresupuestos.pas">
+            <Form>FPlantillasPresupuestos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

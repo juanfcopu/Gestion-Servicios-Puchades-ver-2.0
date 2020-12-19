@@ -69,98 +69,8 @@ uses
 {$R *.dfm}
 
 procedure TFLineasObrasFacturas.btaAceptarClick(Sender: TObject);
-var i:Integer;     iva,totalfactura:Double;  fdcliente,fdfactura,fdlineasobra:TFDQuery;
 begin
-          {
-                 fdlineasobra:=fdqlobras;
-
-                 fdfactura:=TFDQuery.Create(Self);
-                 fdfactura.Connection:=DataModule1.FDConnection1;
-                 fdfactura.SQL.Clear;
-                 fdfactura.SQL.Add('SELECT * FROM facturas');
-                 fdfactura.Open;
-
-                 fdcliente:=TFDQuery.Create(Self);
-                 fdcliente.Connection:=DataModule1.FDConnection1;
-                 fdcliente.SQL.Clear;
-                 fdcliente.SQL.Add('SELECT * FROM clientes WHERE idContactos=:contacto');
-                 fdcliente.ParamByName('contacto').AsInteger:=fdlineasobra.FieldByName('id_cliente').asinteger;
-                 fdcliente.Open;
-
-
-                 {
-                 fdlineasfactura:=TFDQuery.Create(Self);
-                 fdlineasfactura.Connection:=DataModule1.FDConnection1;
-                 fdlineasfactura.SQL.Clear;
-                 fdlineasfactura.SQL.Add('SELECT * FROM lineasfacturas');
-
-
-                 fdlineasfactura.UpdateOptions.KeyFields:='id_lineafactura;facturas_idfactura;facturas_ano';
-                  fdlineasfactura.Open;
-
-        iva:=DataModule1.IVA(fdcliente.FieldByName('familia').AsInteger);
-
-        fdfactura.Insert;
-        fdfactura.FieldByName('cantidad').Asfloat:=0;
-        fdfactura.FieldByName('ano').AsInteger:=YearOf(Date);
-        fdfactura.FieldByName('idfactura').AsInteger:=DataModule1.ObtenerNFactura(YearOf(Date));
-        fdfactura.FieldByName('EmisorFactura').AsInteger:=DataModule1.ObtenerIDEMPRESA;
-        fdfactura.Fieldbyname('concepto').asstring:=fdlineasobra.FieldByName('DescripObra').asstring;
-        fdfactura.Fieldbyname('Pagada').asboolean:=false;
-        fdfactura.Fieldbyname('TotalBruto').asfloat:=0;
-        fdfactura.FieldByName('iva').AsFloat:=(iva-1)*100 ;
-        fdfactura.FieldByName('importeIva').AsFloat:=0;
-        fdfactura.FieldByName('total').AsFloat:=0;
-        fdfactura.Fieldbyname('IdCliente').asinteger:=fdlineasobra.FieldByName('Id_Cliente').asinteger;
-        fdfactura.Fieldbyname('FechaFactura').asdatetime:=Date;
-        fdfactura.post;
-
-
-        for i:=0 to rDBGridClientes1.rBookmarks.Count-1 do
-        begin
-            begin
-                  fdlineasobra.GotoBookmark(rDBGridClientes1.rBookmarks.Items[i]);
-                  fdlineasfactura.refresh;
-                  fdlineasfactura.Insert;
-                //  fdlineasfactura.FieldByName('id_lineafactura').AsInteger:=i;
-                  fdlineasfactura.Fieldbyname('descripcion').asstring:=fdlineasobra.FieldByName('Descripcion').asstring;
-                  fdlineasfactura.Fieldbyname('total').asfloat:=fdlineasobra.FieldByName('Total').asfloat;
-
-                  totalfactura:=totalfactura+fdlineasfactura.Fieldbyname('total').asfloat;
-                  fdlineasfactura.Fieldbyname('facturas_Idfactura').asinteger:=fdfactura.FieldByName('Idfactura').asinteger;
-                  fdlineasfactura.Fieldbyname('facturas_ano').asinteger:=fdfactura.FieldByName('ano').asinteger;
-                  fdlineasfactura.Fieldbyname('iva').asfloat:=fdlineasobra.FieldByName('Total').asfloat*((iva-1)*100);
-                  fdlineasfactura.Fieldbyname('importe').AsFloat:=fdlineasobra.FieldByName('total').asfloat;
-                  fdlineasfactura.Fieldbyname('cantidad').asinteger:=1;
-                  fdlineasfactura.FieldByName('descuento').AsInteger:=0;
-                  fdlineasfactura.Fieldbyname('lineasobras_id_lineaobra').AsFloat:=fdlineasobra.FieldByName('id_lineaobra').asfloat;
-                  fdlineasfactura.Fieldbyname('lineasobras_obras_id_obra').AsFloat:=fdlineasobra.FieldByName('obras_ID_obra').asfloat;
-                  fdlineasfactura.FieldByName('nlinea').AsInteger:=i+1;
-
-                  FDlineasfactura.Post;
-
-                  fdlineasobra.Edit;
-                  fdlineasobra.FieldByName('facturas_id_factura').AsInteger:= fdfactura.FieldByName('Idfactura').asinteger;
-                  fdlineasobra.FieldByName('facturas_ano').AsInteger:= fdfactura.FieldByName('ano').asinteger;
-
-                  fdlineasobra.Post;
-            end;
-        end;
-           fdfactura.Edit;
-           fdfactura.Fieldbyname('TotalBruto').asfloat:=totalfactura;
-           fdfactura.Fieldbyname('baseimponible').asfloat:=totalfactura;
-           fdfactura.Fieldbyname('iva').asfloat:=(iva-1)*100;
-           fdfactura.FieldByName('importeIva').AsFloat:=totalfactura*(iva-1);
-           fdfactura.Fieldbyname('total').asfloat:=totalfactura+(totalfactura*(iva-1));
-           fdfactura.Post;
-
-
-
-
-
-
-            }
-     DataModule1.insertar2execute(Self);
+            DataModule1.insertar2execute(Self);
      Close;
 end;
 
@@ -170,7 +80,7 @@ Close;
 end;
 
 procedure TFLineasObrasFacturas.btndeselecTodosClick(Sender: TObject);
-var i:Integer;
+
 begin
      rDBGridClientes1.DeSelectAll;
 

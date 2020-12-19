@@ -868,6 +868,7 @@ if Assigned(Node) then
    nivel:=Sender.GetNodeLevel(Node);
 
 
+
 if Column=0 then
     begin
    case kind of

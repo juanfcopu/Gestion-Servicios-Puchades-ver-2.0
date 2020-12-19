@@ -306,6 +306,10 @@ object FInsertarCliente: TFInsertarCliente
         OnChanging = PageControl1Changing
         object datosFacturacion: TTabSheet
           Caption = 'Datos Facturaci'#243'n'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             AlignWithMargins = True
             Left = 3
@@ -450,6 +454,10 @@ object FInsertarCliente: TFInsertarCliente
         object datoscontactos: TTabSheet
           Caption = 'Contactos'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object ctrlbr1: TControlBar
             Left = 0
             Top = 0

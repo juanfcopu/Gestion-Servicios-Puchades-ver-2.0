@@ -29,7 +29,7 @@ object FclientesDatos: TFclientesDatos
         Control = ToolBar1
         ImageIndex = -1
         MinHeight = 35
-        Width = 1337
+        Width = 1342
       end>
     object ToolBar1: TToolBar
       Left = 11
@@ -370,7 +370,6 @@ object FclientesDatos: TFclientesDatos
       DragKind = dkDock
       DragMode = dmAutomatic
       TabOrder = 0
-      ExplicitWidth = 300
       object HeaderControl1: THeaderControl
         AlignWithMargins = True
         Left = 4

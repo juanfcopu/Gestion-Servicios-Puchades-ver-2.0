@@ -15,7 +15,8 @@ uses
   Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,System.Win.COMObj,
   Vcl.DBGrids, Vcl.Bind.Navigator, Data.Bind.Controls, Vcl.StdActns, Vcl.ImgList,
   System.ImageList, ShellCtrls, rDBGrid, rDBGrid_MS, RzPanel, RzDBNav, Vcl.Mask,
-  Vcl.DBCtrls, rDBComponents, RzListVw, RzShellCtrls;
+  Vcl.DBCtrls, rDBComponents, RzListVw, RzShellCtrls, rImageZoom,
+  Vcl.Imaging.jpeg, rImprovedComps;
 
 
 type
@@ -60,11 +61,9 @@ type
     cerrarpres: TAction;
     ToolButton10: TToolButton;
     carpetadocumentacion: TAction;
-    Label7: TLabel;
     dspresupuesto: TDataSource;
     BTBuscarCliente: TButton;
     btpath: TButton;
-    Label9: TLabel;
     ToolBar2: TToolBar;
     ImageList1: TImageList;
     ActionManager2: TActionManager;
@@ -77,7 +76,6 @@ type
     ToolBar3: TToolBar;
     ToolButton14: TToolButton;
     AprobarTodos: TAction;
-    Label12: TLabel;
     GroupBox3: TGroupBox;
     GroupBox5: TGroupBox;
     Shape1: TShape;
@@ -176,6 +174,11 @@ type
     fdtrabajAsignadosnombre: TStringField;
     ToolBar4: TToolBar;
     RzDBNavigator3: TRzDBNavigator;
+    rImageZoom1: TrImageZoom;
+    Fdlineastipo: TStringField;
+    fdcategoria: TFDQuery;
+    Fdlineascategoria: TIntegerField;
+    Fdlineascategoriades: TStringField;
 
 
 
@@ -202,9 +205,6 @@ type
     procedure btpathClick(Sender: TObject);
     procedure fdClienteAfterOpen(DataSet: TDataSet);
     procedure fdlineas1AfterPost(DataSet: TDataSet);
-    procedure LinkGridToDataSourceBindSourceDB3AssigningValue(Sender: TObject;
-      AssignValueRec: TBindingAssignValueRec; var Value: TValue;
-      var Handled: Boolean);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox1Mouseup(Sender: TObject; Button: TMouseButton;
@@ -233,9 +233,10 @@ type
     procedure rDBGridClientesDBGridLineasLoadPickList(Sender: TObject;
       DS: TDataSet; FieldName: string; PickList: TStrings);
     procedure FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);
-    procedure FdlineasBeforePost(DataSet: TDataSet);
     procedure dtmfldFechaPresupuestoChange(Sender: TField);
     procedure mfldPathChange(Sender: TField);
+    procedure RzShellList2SelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
 
   private
     { Private declarations }
@@ -248,8 +249,8 @@ type
     procedure carpetasdocumentacion(var ruta:string; var ok:boolean);
     procedure existelineasaprobados(dataset:TDataSet; var nlineas:integer);
     procedure luces(aprobado:boolean);
-    function AbrirFicheroPresupuesto(fichero:string):boolean;
-    function CrearFicheroPresupuesto(fichero:string):boolean;
+
+//    function CrearFicheroPresupuesto(fichero:string):boolean;
   end;
 
 
@@ -261,7 +262,7 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, listaclientes, SelectLineasPresupuestos;
+uses DModule1, listaclientes, SelectLineasPresupuestos, plantillaspresupuestos;
 
 
  procedure TFPresupuestos.luces(aprobado:boolean);
@@ -308,46 +309,24 @@ begin
    ToolButton8.Enabled:=FileExists(PATHUSER+fdpresupuesto.FieldByName('path').AsString);
 end;
 
-function TFPresupuestos.AbrirFicheroPresupuesto(fichero:string):boolean;
-var MSWord:Variant;
-begin
-   Result:=false;
-   if FileExists(fichero) then
-  begin
-  try
 
-
-      MsWord:=CreateOleObject('Word.Application');
-   except
-         on Exception do  MessageBox(Handle,
-           'No se puede abrir la aplicación Microsoft Word.',
-           'Error', MB_OK + MB_ICONSTOP);
-
-
-    end;
-     MSWord.Documents.Open(fichero);
-     MsWord.Visible:=True;
-     Result:=true;
-  end
-
-end;
-
-function TFPresupuestos.CrearFicheroPresupuesto(fichero:string):boolean;
-var MSWord:Variant;
-begin
-      Result:=false;
-     try
-            MSWord:=GetActiveOleOBject('Word.Application');
-         except
-            MsWord:=CreateOleObject('Word.Application');
-
-         end;
-
-         MSWord.Documents.Add(ExtractFilePath(application.ExeName)+PATHPLANTILLAS);
-         MSWord.ActiveDocument.SaveAs(fichero);
-         MsWord.Visible:=True;
-         Result:=true;
-end;
+//
+//function TFPresupuestos.CrearFicheroPresupuesto(fichero:string):boolean;
+//var MSWord:Variant;
+//begin
+//      Result:=false;
+//     try
+//            MSWord:=GetActiveOleOBject('Word.Application');
+//         except
+//            MsWord:=CreateOleObject('Word.Application');
+//
+//         end;
+//
+//         MSWord.Documents.Add(PATHPROGRAM+PATHPLANTILLAS);
+//         MSWord.ActiveDocument.SaveAs(fichero);
+//         MsWord.Visible:=True;
+//         Result:=true;
+//end;
 
 
 procedure TFPresupuestos.crearObraExecute(Sender: TObject);
@@ -366,16 +345,39 @@ ToolButton5.Enabled:=fdpresupuesto.FieldByName('Aprovado').AsBoolean;
 end;
 
 procedure TFPresupuestos.abrirpresupuestoExecute(Sender: TObject);
-var fichero:string;
+var extension,fichero,archivo,exten:string;      planpresu:TFPlantillasPresupuestos;
 begin
 
+  try
  fichero:=PATHUSER+fdpresupuesto.FieldByName('path').AsString;
 
-if not AbrirFicheroPresupuesto(fichero) then
+ extension:=ExtractFileExt(fichero);
+
+
+if not DataModule1.AbrirFicheroPresupuesto(fichero,extension) then
    if application.MessageBox('El presupuesto no existe. ¿Desea crearlo?', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))=IDOK      then
       begin
-         if CrearFicheroPresupuesto(fichero) then  spdocumento.Brush.color:=cllime;
+         planpresu:=TFPlantillasPresupuestos.Create(Self);
+         planpresu.ShowModal;
+         archivo:=planpresu.rStringGridEd1.Cells[1,planpresu.rStringGridEd1.Row];
+
+         exten:=ExtractFileExt(archivo);
+         delete(fichero,Pos(extension,fichero),Length(extension));
+         fichero:=fichero+exten;
+
+         if DataModule1.CrearFicheroPresupuesto(fichero,archivo) then
+         begin
+         delete(fichero,Pos(PATHUSER,fichero),Length(PATHUSER));
+
+         fdpresupuesto.Edit;
+         fdpresupuesto.FieldByName('path').AsString:=fichero;
+         fdpresupuesto.Post;
+         spdocumento.Brush.color:=cllime;
+         end;
       end;
+  except
+
+  end;
 end;
 
 procedure TFPresupuestos.abrirpresupuestoUpdate(Sender: TObject);
@@ -622,10 +624,8 @@ begin
              guardarpresupuesto.Enabled:=false;
              guardar.Enabled:=false;
              shape1.Brush.Color:=clwhite;
-           //  DataModule1.RefrescarDataSet(lst);
-
-            end;
-
+             end;
+          DataModule1.RefrescarDataSet(lst);
          end;
 
 end;
@@ -704,24 +704,24 @@ rDBGridClientesDBGridLineas.RecalculateSummaryResults(True);
 end;
 
 procedure TFPresupuestos.fdlineas1AfterPost(DataSet: TDataSet);
- var nl:integer;
+
 begin
 
       if not (fdpresupuesto.state in [dsInsert, dsEdit]) then fdpresupuesto.edit;
-
+     begin
       fdpresupuesto.FieldByName('partidas').asinteger:=fdlineas.RecordCount;
       fdpresupuesto.FieldByName('total').asstring:=VarToStr(fdlineas.Aggregates.AggregateByName('SUMATOTAL').Value);
-      fdpresupuesto.FieldByName('totalAprobado').asstring:=VarToStr(fdlineas.Aggregates.AggregateByName('SUMAPROBADOS').Value);
+     fdpresupuesto.FieldByName('totalAprobado').asstring:=VarToStr(fdlineas.Aggregates.AggregateByName('SUMAPROBADOS').Value);
+      fdpresupuesto.FieldByName('partidasAprobadas').asinteger:=fdlineas.Aggregates.AggregateByName('TOTALAPROBADOS').Value;
 
-     existelineasaprobados(dataset,nl);
-      fdpresupuesto.FieldByName('partidasAprobadas').asinteger:=nl;
 
-     if nl>0 then
+         if fdpresupuesto.FieldByName('partidasAprobadas').asinteger > 0 then
                    fdpresupuesto.FieldByName('Aprovado').AsBoolean:=true
 
              else             fdpresupuesto.FieldByName('Aprovado').AsBoolean:=false;
 
-
+          fdpresupuesto.Post;
+    end;
           rDBGridClientesDBGridLineas.RecalculateSummaryResults(True);
           luces(fdpresupuesto.FieldByName('Aprovado').AsBoolean);
 end;
@@ -735,15 +735,9 @@ fdlineasfecha_aprobado.clear;
 
 end;
 
-procedure TFPresupuestos.FdlineasBeforePost(DataSet: TDataSet);
-begin
-//if fdpresupuesto.State in [dsInsert, dsEdit] then fdpresupuesto.Post;
-
-end;
-
 procedure TFPresupuestos.fdpresupuestoAfterApplyUpdates(DataSet: TFDDataSet;
   AErrors: Integer);
-  var ruta:string; existe:boolean;  fichero:string;
+  var archivo,exten,ruta:string; existe:boolean;  fichero:string; planpresu:TFPlantillasPresupuestos ;
 begin
 if AErrors = 0 then
     begin
@@ -780,8 +774,13 @@ if AErrors = 0 then
            if not FileExists(fichero) then
             if application.MessageBox('El presupuesto no existe. ¿Desea crearlo?', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))=IDOK      then
             begin
+                   planpresu:=TFPlantillasPresupuestos.Create(Self);
+         planpresu.ShowModal;
+         archivo:=planpresu.rStringGridEd1.Cells[1,planpresu.rStringGridEd1.Row];
 
-                 if CrearFicheroPresupuesto(fichero) then
+         exten:=ExtractFileExt(archivo);
+         fichero:=ExtractFileName(fichero)+exten;
+                 if DataModule1.CrearFicheroPresupuesto(fichero,archivo) then
                   spdocumento.Brush.Color:=clLime;
 
             end;
@@ -847,9 +846,14 @@ begin
   fdpresupuesto.FieldByName('path').AsString:=DataModule1.ObtenerPathPresupuesto(fdcliente.fieldByName('Nombre').Asstring,fdpresupuesto.FieldByName('id_presupuesto').AsInteger,fdpresupuesto.FieldByName('fechapresupuesto').AsDateTime);
 
   if Length(fdpresupuesto.FieldByName('descripcion').asstring)=0 then fdpresupuesto.FieldByName('descripcion').asstring:='descripción';
+
+  fdpresupuesto.Post;
+
     self.Caption:='P. '+fdpresupuesto.FieldByName('id_Presupuesto').AsString+ ' '+(fdcliente).FieldByName('nombre').Asstring;
 
  end;
+
+
 
 
 
@@ -858,11 +862,11 @@ if (fdpresupuesto.state in [dsInsert, dsEdit]) then
    fdpresupuesto.post;
  end;
 
-
-if (fdlineas.state in [dsEdit,dsInsert]) then
+ if (fdlineas.state in [dsEdit,dsInsert]) then
  begin
    fdlineas.post;
  end;
+
 
  if (fdtrabajAsignados.state in [dsEdit,dsInsert]) then
  begin
@@ -898,18 +902,28 @@ begin
 if FileExists(fichero) then
   begin
   try
-    MSWord:=GetActiveOleOBject('Word.Application');
+    MSWord:=DataModule1.DevolverOleOffice(extension);
     except
-      MsWord:=CreateOleObject('Word.Application');
+      ShowMessage('No se puede abrir la aplicación Office.');
     end;
 
+    if (LowerCase(extension)='.docx') or (LowerCase(extension)='doc') then
+     begin
      MSWord.Documents.Open(fichero);
      MSWord.ActiveDocument.SaveAs2(ruta+nombresinext+'.pdf',17);
-     ShellExecute(0, 'open', nil, nil, Pchar(ruta), SW_SHOW);
      MSWord.ActiveDocument.close;
+     end
+     else
+     begin
+     MSWord.Workbooks.Open(fichero);
+     MSWord.ActiveWorkbook.ExportAsFixedFormat(0,ruta+nombresinext+'.pdf');
+     MSWord.ActiveWorkBook.close;
+
+     end;
+
 
   end
-  else showmessage('El documento Word que contine el presupuesto, no existe.')
+  else showmessage('El documento Office que contine el presupuesto, no existe.')
 
 end;
 
@@ -921,13 +935,6 @@ end;
 procedure TFPresupuestos.guardarpresupuestoExecute(Sender: TObject);
 begin
 GuardarClick(Sender);
-end;
-
-procedure TFPresupuestos.LinkGridToDataSourceBindSourceDB3AssigningValue(
-  Sender: TObject; AssignValueRec: TBindingAssignValueRec; var Value: TValue;
-  var Handled: Boolean);
-begin
-  label9.caption:=Sender.ClassName;
 end;
 
 procedure TFPresupuestos.mailExecute(Sender: TObject);
@@ -953,14 +960,24 @@ begin
 if FileExists(fichero) then
   begin
   try
-    MSWord:=GetActiveOleOBject('Word.Application');
+    MSWord:=DataModule1.DevolverOleOffice(extension);
     except
-      MsWord:=CreateOleObject('Word.Application');
+      ShowMessage('No se puede abrir la aplicación Office.');
     end;
 
+    if (LowerCase(extension)='.docx') or (LowerCase(extension)='doc') then
+     begin
      MSWord.Documents.Open(fichero);
      MSWord.ActiveDocument.SaveAs2(ruta+nombresinext+'.pdf',17);
      MSWord.ActiveDocument.close;
+     end
+     else
+     begin
+     MSWord.Workbooks.Open(fichero);
+     MSWord.ActiveWorkbook.ExportAsFixedFormat(0,ruta+nombresinext+'.pdf');
+     MSWord.ActiveWorkBook.close;
+
+     end;
 
      fdq:=TFDQuery.Create(Self);
      fdq.connection:=DataModule1.FDConnection1;
@@ -1049,6 +1066,24 @@ procedure TFPresupuestos.rDBGridClientesDBGridLineasLoadPickList(
   Sender: TObject; DS: TDataSet; FieldName: string; PickList: TStrings);
 begin
   // PickList.LoadFromFile('p.txt');
+
+  if FieldName='tipo' then
+    begin
+       PickList.Add('INTERIOR');
+       PickList.Add('EXTERIOR');
+    end;
+
+end;
+
+procedure TFPresupuestos.RzShellList2SelectItem(Sender: TObject;
+  Item: TListItem; Selected: Boolean);
+begin
+
+ if Selected then
+
+  rImageZoom1.Picture.LoadFromFile(TRzShellList(Sender).SelectedItem.PathName);
+
+
 end;
 
 procedure TFPresupuestos.fdpresupuestoAfterInsert(DataSet: TDataSet);
@@ -1129,6 +1164,7 @@ end;
 
 procedure TFPresupuestos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+fdcategoria.Close;
 action:=caFree;
 end;
 
@@ -1138,6 +1174,7 @@ end;
 
 procedure TFPresupuestos.FormCreate(Sender: TObject);
 begin
+fdcategoria.Active:=True;
 lst:=TStringList.Create;
 lst.add('fdpresupuesto');
 lst.add('fdlineas')           ;

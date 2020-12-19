@@ -82,7 +82,6 @@ type
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure PageControl1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure LabeledEdit10Change(Sender: TObject);
     procedure rDBComboBox1GetListItemProps(Sender: TObject; Canvas: TCanvas;
       Index: Integer; State: TOwnerDrawState; var Rect: TRect; var Text: string;
       ShowBmp: TBitmap; var DrawSeparatorTop, DrawSeparatorBottom: Boolean);
@@ -188,12 +187,6 @@ begin
      fdinsertarClientesfamilia.OnGetText:=DataModule1.fdClientesfamiliaGetText;
 
      if not fdadministradores.Active then fdadministradores.Active:=true;
-
-end;
-
-procedure TFInsertarCliente.LabeledEdit10Change(Sender: TObject);
-var suma:integer;
-begin
 
 end;
 

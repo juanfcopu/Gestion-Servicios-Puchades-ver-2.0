@@ -10,7 +10,7 @@ uses
   Vcl.ExtCtrls, Vcl.ToolWin, FireDAC.Stan.Intf, FireDAC.Stan.Option, System.DateUtils ,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS;
+  FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, Vcl.Menus;
 
 type
   Tlistpresupuestos = class(TForm)
@@ -39,6 +39,17 @@ type
     btnmail: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
+    btn6: TToolButton;
+    btn7: TToolButton;
+    ToolButton4: TToolButton;
+    btn8: TToolButton;
+    pm1: TPopupMenu;
+    pabrir: TMenuItem;
+    pmail: TMenuItem;
+    btnobra: TToolButton;
+    pobra: TMenuItem;
+    pcliente: TMenuItem;
+    btn9: TToolButton;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure cbaprobadoClick(Sender: TObject);
@@ -51,8 +62,6 @@ type
     procedure rb1Click(Sender: TObject);
     procedure rb2Click(Sender: TObject);
     procedure rDBGridClientes1DblClick(Sender: TObject);
-    procedure fdqpresupuestosFilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
     procedure fdqpresupuestosAfterDelete(DataSet: TDataSet);
     procedure fdqpresupuestosAfterOpen(DataSet: TDataSet) ;
     procedure fdqpresupuestosAfterPost(DataSet: TDataSet);
@@ -61,6 +70,10 @@ type
     procedure ToolButton2Click(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
     procedure FormClose2(Sender: TObject; var Action: TCloseAction);
+    procedure btn7Click(Sender: TObject);
+    procedure ToolButton4Click(Sender: TObject);
+    procedure btnobraClick(Sender: TObject);
+    procedure btn9Click(Sender: TObject);
   private
     { Private declarations }
     function DevolverTrabajadores(npresu,grupo:integer):string;
@@ -77,7 +90,7 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1, DmoduleReports, clientes, FPrincipal;
+uses DModule1, DmoduleReports, clientes, FPrincipal,SelectLineasPresupuestos;
 
 
 
@@ -105,6 +118,16 @@ begin
        end
 
 
+end;
+
+procedure Tlistpresupuestos.btn7Click(Sender: TObject);
+begin
+DataModule1.editarclienteExecute(ds1.dataset);
+end;
+
+procedure Tlistpresupuestos.btn9Click(Sender: TObject);
+begin
+DataModule2.frxPresupuestoTipo.ShowReport(True);
 end;
 
 procedure Tlistpresupuestos.btnmailClick(Sender: TObject);
@@ -169,6 +192,14 @@ if FileExists(fichero) then
 
 end;
 
+procedure Tlistpresupuestos.btnobraClick(Sender: TObject);
+var SelLinPres:TFLineasPresupuestoObra;
+begin
+    SelLinPres:=TFLineasPresupuestoObra.Create(ds1.dataset);
+    SelLinPres.ShowModal;
+
+end;
+
 procedure Tlistpresupuestos.Button1Click(Sender: TObject);
 var SQLstr,SQLstr2:string;
 begin
@@ -208,11 +239,14 @@ end;
 procedure Tlistpresupuestos.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-DataModule1.fdpresupuestos.Active:=false;
 ds1.DataSet.AfterOpen:= nil;
      ds1.DataSet.AfterPost:= nil;
      ds1.DataSet.AfterDelete:=nil;
      ds1.dataset.onfilterrecord:=nil;
+
+
+ds1.DataSet.Close;
+ds1.DataSet.filtered:=False;
 
 Action:=cafree;
 end;
@@ -294,7 +328,7 @@ begin
      ds1.DataSet.AfterOpen:= fdqpresupuestosAfterOpen;
      ds1.DataSet.AfterPost:= fdqpresupuestosAfterPost;
      ds1.DataSet.AfterDelete:=fdqpresupuestosAfterDelete;
-     ds1.dataset.onfilterrecord:=fdqpresupuestosFilterRecord;
+
 
 
      DataModule1.fdpresupuestos.Active:=true;
@@ -310,6 +344,10 @@ rDBGridClientes1.DataSource.DataSet.Filtered:=False;
 rDBGridClientes1.DataSource.DataSet.Filter:='nombre LIKE ''%'+TLabeledEdit(Sender).Text+'%''';
 rDBGridClientes1.DataSource.DataSet.Filtered:=True;
 rDBGridClientes1.DataSource.DataSet.EnableControls;
+
+  rDBGridClientes1.RecalculateSummaryResults(true);
+
+ if Length(TLabeledEdit(Sender).text)<1 then rDBGridClientes1.DataSource.DataSet.Filtered:=False;
 end;
 
 procedure Tlistpresupuestos.rb1Click(Sender: TObject);
@@ -369,6 +407,20 @@ begin
  DataModule1.rXLSExport1.ExportDBTable(rDBGridClientes1);
 end;
 
+procedure Tlistpresupuestos.ToolButton4Click(Sender: TObject);
+var fichero,extension:string;
+begin
+
+ fichero:=PATHUSER+ds1.DataSet.FieldByName('path').AsString;
+ extension:=ExtractFileExt(fichero);
+
+if not DataModule1.AbrirFicheroPresupuesto(fichero,extension) then
+   application.MessageBox('El presupuesto no existe y no se puede abrir.', 'Aviso',(MB_OKCANCEL+MB_ICONQUESTION))
+
+end;
+
+
+
 procedure Tlistpresupuestos.fdqpresupuestosAfterOpen(DataSet: TDataSet) ;
 begin
      rDBGridClientes1.RecalculateSummaryResults(true);
@@ -380,12 +432,6 @@ begin
 end;
 
 procedure Tlistpresupuestos.fdqpresupuestosAfterDelete(DataSet: TDataSet);
-begin
-  rDBGridClientes1.RecalculateSummaryResults(true);
-end;
-
-procedure Tlistpresupuestos.fdqpresupuestosFilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
 begin
   rDBGridClientes1.RecalculateSummaryResults(true);
 end;

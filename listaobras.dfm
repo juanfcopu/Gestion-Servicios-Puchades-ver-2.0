@@ -332,6 +332,51 @@ object listobras: Tlistobras
       ImageIndex = 29
       OnClick = btn5Click
     end
+    object btn9: TToolButton
+      Left = 176
+      Top = 0
+      Width = 8
+      Caption = 'btn9'
+      ImageIndex = 25
+      Style = tbsSeparator
+    end
+    object btn10: TToolButton
+      Left = 184
+      Top = 0
+      Caption = 'btn10'
+      ImageIndex = 40
+      OnClick = btn10Click
+    end
+    object btn6: TToolButton
+      Left = 226
+      Top = 0
+      Width = 8
+      Caption = 'btn6'
+      ImageIndex = 30
+      Style = tbsSeparator
+    end
+    object btn8: TToolButton
+      Left = 234
+      Top = 0
+      Caption = 'btn8'
+      ImageIndex = 24
+      OnClick = btn8Click
+    end
+    object btn7: TToolButton
+      Left = 276
+      Top = 0
+      Width = 8
+      Caption = 'btn7'
+      ImageIndex = 31
+      Style = tbsSeparator
+    end
+    object ToolButton1: TToolButton
+      Left = 284
+      Top = 0
+      Caption = 'ToolButton1'
+      ImageIndex = 43
+      OnClick = ToolButton1Click
+    end
   end
   object rDBGridClientes1: TrDBGrid_MS
     Left = 0
@@ -341,6 +386,7 @@ object listobras: Tlistobras
     Align = alClient
     DataSource = ds1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    PopupMenu = pm1
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -443,5 +489,20 @@ object listobras: Tlistobras
     DataSet = DataModule1.fdobras
     Left = 1224
     Top = 288
+  end
+  object pm1: TPopupMenu
+    Images = DataModule1.ImageList1
+    Left = 1104
+    Top = 83
+    object pcliente: TMenuItem
+      Caption = 'Abrir cliente'
+      ImageIndex = 24
+      OnClick = btn8Click
+    end
+    object pfactura: TMenuItem
+      Caption = 'Facturar'
+      ImageIndex = 40
+      OnClick = btn10Click
+    end
   end
 end

@@ -19,6 +19,8 @@ object listpresupuestos: Tlistpresupuestos
   OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -233,26 +235,70 @@ object listpresupuestos: Tlistpresupuestos
       ImageIndex = 34
       Style = tbsSeparator
     end
-    object ToolButton3: TToolButton
-      Left = 184
-      Top = 0
-      Caption = 'ToolButton3'
-      ImageIndex = 43
-      OnClick = ToolButton3Click
-    end
     object btnmail: TToolButton
-      Left = 226
+      Left = 184
       Top = 0
       Caption = 'btnmail'
       ImageIndex = 12
       OnClick = btnmailClick
     end
-    object ToolButton2: TToolButton
+    object ToolButton4: TToolButton
+      Left = 226
+      Top = 0
+      Caption = 'ToolButton4'
+      ImageIndex = 13
+      OnClick = ToolButton4Click
+    end
+    object btnobra: TToolButton
       Left = 268
       Top = 0
+      Caption = 'btnobra'
+      ImageIndex = 22
+      OnClick = btnobraClick
+    end
+    object btn6: TToolButton
+      Left = 310
+      Top = 0
+      Width = 8
+      Caption = 'btn6'
+      ImageIndex = 14
+      Style = tbsSeparator
+    end
+    object btn7: TToolButton
+      Left = 318
+      Top = 0
+      Caption = 'btn7'
+      ImageIndex = 24
+      OnClick = btn7Click
+    end
+    object btn8: TToolButton
+      Left = 360
+      Top = 0
+      Width = 8
+      Caption = 'btn8'
+      ImageIndex = 67
+      Style = tbsSeparator
+    end
+    object ToolButton2: TToolButton
+      Left = 368
+      Top = 0
       Caption = 'ToolButton2'
-      ImageIndex = 13
+      ImageIndex = 66
       OnClick = ToolButton2Click
+    end
+    object btn9: TToolButton
+      Left = 410
+      Top = 0
+      Caption = 'btn9'
+      ImageIndex = 68
+      OnClick = btn9Click
+    end
+    object ToolButton3: TToolButton
+      Left = 452
+      Top = 0
+      Caption = 'ToolButton3'
+      ImageIndex = 43
+      OnClick = ToolButton3Click
     end
   end
   object stat1: TStatusBar
@@ -271,6 +317,7 @@ object listpresupuestos: Tlistpresupuestos
     Align = alClient
     DataSource = ds1
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+    PopupMenu = pm1
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -312,7 +359,7 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 61
+        Width = 58
         Visible = True
       end
       item
@@ -324,7 +371,7 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 274
+        Width = 262
         Visible = True
       end
       item
@@ -339,7 +386,7 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 140
+        Width = 134
         Visible = True
       end
       item
@@ -351,7 +398,7 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 437
+        Width = 419
         Visible = True
       end
       item
@@ -363,7 +410,7 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 101
+        Width = 97
         Visible = True
       end
       item
@@ -376,7 +423,21 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 112
+        Width = 86
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ejecutado'
+        Title.Alignment = taCenter
+        Title.Caption = 'Ejecutado'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -13
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 73
         Visible = True
       end
       item
@@ -389,13 +450,38 @@ object listpresupuestos: Tlistpresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 158
+        Width = 151
         Visible = True
       end>
   end
   object ds1: TDataSource
     DataSet = DataModule1.fdpresupuestos
-    Left = 1240
-    Top = 408
+    Left = 472
+    Top = 464
+  end
+  object pm1: TPopupMenu
+    Images = DataModule1.ImageList1
+    Left = 824
+    Top = 75
+    object pabrir: TMenuItem
+      Caption = 'Abrir presupuesto'
+      ImageIndex = 13
+      OnClick = ToolButton4Click
+    end
+    object pmail: TMenuItem
+      Caption = 'Enviar presupuesto'
+      ImageIndex = 12
+      OnClick = btnmailClick
+    end
+    object pobra: TMenuItem
+      Caption = 'Crear Obra'
+      ImageIndex = 22
+      OnClick = btnobraClick
+    end
+    object pcliente: TMenuItem
+      Caption = 'Abrir cliente'
+      ImageIndex = 24
+      OnClick = btn7Click
+    end
   end
 end

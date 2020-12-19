@@ -112,6 +112,15 @@ object FFacturas: TFFacturas
           DBEditLabel.OwnCaption = 'Nombre'
           DBEditLabel.Position = lpLeftCenter
         end
+        object Button1: TButton
+          Left = 864
+          Top = 40
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          TabOrder = 4
+          OnClick = Button1Click
+        end
       end
     end
     object GroupBox2: TGroupBox
@@ -244,6 +253,20 @@ object FFacturas: TFFacturas
         TabOrder = 9
         DBEditLabel.Position = lpLeftCenter
       end
+      object rDBEdit6: TrDBEdit
+        Left = 1058
+        Top = 38
+        Width = 60
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'obra'
+        DataSource = dsFacturas
+        ReadOnly = True
+        TabOrder = 10
+        Visible = False
+        DBEditLabel.OwnCaption = 'Obra'
+        DBEditLabel.Visible = False
+      end
     end
     object ToolBar1: TToolBar
       AlignWithMargins = True
@@ -281,9 +304,10 @@ object FFacturas: TFFacturas
         Top = 0
         Hint = 'Abrir presupuesto'
         Caption = 'Abrir Presupuesto'
-        ImageIndex = 13
+        ImageIndex = 57
         ParentShowHint = False
         ShowHint = True
+        OnClick = ToolButton6Click
       end
       object ToolButton2: TToolButton
         AlignWithMargins = True
@@ -291,10 +315,10 @@ object FFacturas: TFFacturas
         Top = 0
         Hint = 'Guardar en PDF'
         Caption = 'PDF'
-        Enabled = False
         ImageIndex = 11
         ParentShowHint = False
         ShowHint = True
+        OnClick = ToolButton2Click
       end
       object ToolButton3: TToolButton
         AlignWithMargins = True
@@ -529,6 +553,22 @@ object FFacturas: TFFacturas
             Left = 46
             Top = 0
             Action = EditPaste
+          end
+        end
+        object tlb2: TToolBar
+          Left = 375
+          Top = 2
+          Width = 150
+          Height = 48
+          ButtonHeight = 30
+          ButtonWidth = 31
+          Caption = 'tlb2'
+          Images = DataModule1.icopeque
+          TabOrder = 3
+          object btn4: TToolButton
+            Left = 0
+            Top = 0
+            Action = abrirObra
           end
         end
       end
@@ -857,9 +897,6 @@ object FFacturas: TFFacturas
     AfterEdit = fdfacturasAfterEdit
     AfterDelete = fdfacturasAfterDelete
     CachedUpdates = True
-    IndexFieldNames = 'idCliente'
-    MasterSource = dsCliente
-    MasterFields = 'idcontactos'
     Connection = DataModule1.FDConnection1
     SchemaAdapter = FDSchemaAdapter1
     UpdateOptions.AssignedValues = [uvUpdateMode]
@@ -976,6 +1013,26 @@ object FFacturas: TFFacturas
       AutoGenerateValue = arDefault
       FieldName = 'acuenta'
       Origin = 'acuenta'
+    end
+    object fdfacturastipo: TIntegerField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+      Required = True
+    end
+    object fdfacturasobra: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'obra'
+      Origin = 'obra'
+    end
+    object fdfacturascertificacion: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'certificacion'
+      Origin = 'certificacion'
+    end
+    object fdfacturaslineacertificacion: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'lineacertificacion'
+      Origin = 'lineacertificacion'
     end
   end
   object fdlineas: TFDQuery
@@ -1096,7 +1153,7 @@ object FFacturas: TFFacturas
     Left = 696
     Top = 377
     Bitmap = {
-      494C010104000800E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1402,6 +1459,12 @@ object FFacturas: TFFacturas
       Caption = 'guardarfactura'
       OnExecute = guardarfacturaExecute
       OnUpdate = guardarfacturaUpdate
+    end
+    object abrirObra: TAction
+      Caption = 'abrirObra'
+      ImageIndex = 5
+      OnExecute = abrirObraExecute
+      OnUpdate = abrirObraUpdate
     end
   end
   object dsFacturas: TDataSource

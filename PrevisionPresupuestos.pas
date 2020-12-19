@@ -50,6 +50,10 @@ type
     procedure rb1Click(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+   procedure fdprevisionpresupuestosAfterOpen(DataSet: TDataSet) ;
+     procedure fdprevisionpresupuestosAfterPost(DataSet: TDataSet) ;
+    procedure fdprevisionpresupuestosAfterDelete(DataSet: TDataSet) ;
+    procedure fdprevisionpresupuestosFilterRecord(DataSet: TDataSet;  var Accept: Boolean);
   private
     { Private declarations }
   public
@@ -101,6 +105,12 @@ begin
  ano:=YearOf(date);
 
 rComboBoxEx1.text:=IntToStr(ano);
+
+ds1.DataSet.AfterOpen:= fdprevisionpresupuestosAfterOpen;
+//     ds1.DataSet.AfterPost:= fdprevisionpresupuestosAfterPost;
+//     ds1.DataSet.AfterDelete:=fdprevisionpresupuestosAfterDelete;
+//     ds1.dataset.onfilterrecord:=fdprevisionpresupuestosFilterRecord;
+
 fdtrabajadores.Active:=True;
 ds1.DataSet.Active:=true;
 end;
@@ -128,5 +138,28 @@ procedure TFPrevisionEjecucion.ToolButton3Click(Sender: TObject);
 begin
  DataModule1.rXLSExport1.ExportDBTable(rDBGrid_MS1);
 end;
+
+procedure TFPrevisionEjecucion.fdprevisionpresupuestosAfterOpen(DataSet: TDataSet) ;
+begin
+     rDBGrid_MS1.RecalculateSummaryResults(true);
+end;
+
+procedure TFPrevisionEjecucion.fdprevisionpresupuestosAfterPost(DataSet: TDataSet) ;
+begin
+    rDBGrid_MS1.RecalculateSummaryResults(true);
+end;
+
+procedure TFPrevisionEjecucion.fdprevisionpresupuestosAfterDelete(DataSet: TDataSet) ;
+begin
+  rDBGrid_MS1.RecalculateSummaryResults(true);
+end;
+
+procedure TFPrevisionEjecucion.fdprevisionpresupuestosFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+  rDBGrid_MS1.RecalculateSummaryResults(true);
+end;
+
+
 
 end.

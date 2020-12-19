@@ -31,6 +31,10 @@ type
     RzPanel1: TRzPanel;
     ListBox1: TListBox;
     PageControl2: TRzPageControl;
+    Label1: TLabel;
+    CharFacturacion: TDBChart;
+    RzGroup9: TRzGroup;
+    RzGroupController1: TRzGroupController;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure pagecontrol2Close(Sender: TObject; var AllowClose: Boolean);

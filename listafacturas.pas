@@ -43,6 +43,9 @@ type
     btnExcel: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
+    btn6: TToolButton;
+    btn7: TToolButton;
+    btnImprimir: TToolButton;
     procedure FormCreate(Sender: TObject);
 
     procedure Button1Click(Sender: TObject);
@@ -64,6 +67,8 @@ type
     procedure btnExcelClick(Sender: TObject);
     procedure ToolButton2Click(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
+    procedure btn7Click(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -113,13 +118,33 @@ if Application.MessageBox('¿Esta seguro de borrar la factura?','Borrar',MB_YESNO
 
    end;
 
+procedure Tlistfacturas.btn7Click(Sender: TObject);
+begin
+DataModule1.editarclienteExecute(ds1.dataset);
+end;
+
 procedure Tlistfacturas.btnExcelClick(Sender: TObject);
 begin
 DataModule1.rXLSExport1.ExportDBTable(ds1.DataSet);
 end;
 
+procedure Tlistfacturas.btnImprimirClick(Sender: TObject);
+begin
+DataModule2.FDfacturas.Filtered:=false;
+DataModule2.FDfacturas.Filter:=DataModule1.fdfacturas.Filter;
+DataModule2.FDfacturas.Filtered:=true;
+
+
+
+DataModule2.frxFacturas.ShowReport(true);
+
+
+
+
+end;
+
 procedure Tlistfacturas.Button1Click(Sender: TObject);
-var SQLstr,SQLstr2:string;
+
 begin
     ds1.DataSet.Filtered:=False;
   ds1.DataSet.filter:= 'FechaFactura >={d '+FormatDateTime('yyyy-mm-dd', DateTimePicker1.Date)+'} and FechaFactura <= {d '+FormatDateTime('yyyy-mm-dd', DateTimePicker2.Date)+'}';

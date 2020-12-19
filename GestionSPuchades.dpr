@@ -47,7 +47,8 @@ uses
   Elegircalendario in 'Elegircalendario.pas' {FElegirCalendario},
   FPrincipal in 'FPrincipal.pas' {principal},
   PrevisionPresupuestos in 'PrevisionPresupuestos.pas' {FPrevisionEjecucion},
-  listapresupuestos in 'listapresupuestos.pas' {listpresupuestos};
+  listapresupuestos in 'listapresupuestos.pas' {listpresupuestos},
+  plantillaspresupuestos in 'plantillaspresupuestos.pas' {FPlantillasPresupuestos};
 
 {$R *.res}
 

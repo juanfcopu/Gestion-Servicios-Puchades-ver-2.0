@@ -298,6 +298,28 @@ object listfacturas: Tlistfacturas
       ImageIndex = 45
       OnClick = ToolButton3Click
     end
+    object btnImprimir: TToolButton
+      Left = 310
+      Top = 0
+      Caption = 'btnImprimir'
+      ImageIndex = 57
+      OnClick = btnImprimirClick
+    end
+    object btn6: TToolButton
+      Left = 352
+      Top = 0
+      Width = 8
+      Caption = 'btn6'
+      ImageIndex = 46
+      Style = tbsSeparator
+    end
+    object btn7: TToolButton
+      Left = 360
+      Top = 0
+      Caption = 'btn7'
+      ImageIndex = 24
+      OnClick = btn7Click
+    end
   end
   object rDBGridClientes1: TrDBGrid_MS
     Left = 0

@@ -119,6 +119,15 @@ type
     ToolButton12: TToolButton;
     ToolButton13: TToolButton;
     fdfacturasacuenta: TSingleField;
+    fdfacturastipo: TIntegerField;
+    fdfacturasobra: TIntegerField;
+    fdfacturascertificacion: TIntegerField;
+    fdfacturaslineacertificacion: TIntegerField;
+    rDBEdit6: TrDBEdit;
+    Button1: TButton;
+    tlb2: TToolBar;
+    btn4: TToolButton;
+    abrirObra: TAction;
     procedure GuardarClick(Sender: TObject);
 
     procedure cerrarClick(Sender: TObject);
@@ -145,11 +154,16 @@ type
     procedure fdlineasBeforeInsert(DataSet: TDataSet);
     procedure fdlineasdescuentoChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
-    procedure AsignarAlaObraFactura(nfactura,ano,obra,partida:integer);
+    procedure AsignarAlaObraFactura(nfactura,ano,obra,partida,linea,tipofactura:integer);
     procedure guardarfacturaExecute(Sender: TObject);
     procedure guardarfacturaUpdate(Sender: TObject);
-
-
+    procedure Button1Click(Sender: TObject);
+    procedure ToolButton6Click(Sender: TObject);
+    procedure ToolButton2Click(Sender: TObject);
+    procedure PrepararImprimir;
+    procedure abrirObraExecute(Sender: TObject);
+    procedure abrirObraUpdate(Sender: TObject);
+    procedure ActualizarPreciosObra(importe:double;obra,partida,tipofactura:integer);
 
     
   private
@@ -170,13 +184,13 @@ type
 
 
 var
-  FFacturas: TFFacturas;
+  FFacturas: TFFacturas; ActualizarImportesLineas:boolean;
 
 implementation
 
 {$R *.dfm}
 
-uses DModule1, listaclientes, SelectLineasPresupuestos,objetos;
+uses DModule1, listaclientes, SelectLineasPresupuestos,objetos, DmoduleReports;
 
 
 
@@ -189,11 +203,71 @@ uses DModule1, listaclientes, SelectLineasPresupuestos,objetos;
  end;
 
 
+procedure TFFacturas.ToolButton2Click(Sender: TObject);
+begin
+PrepararImprimir;
+DataModule2.frxFacturas.ShowReport(true);
+
+DataModule2.frxFacturas.Export(DataModule2.frxPDFExport1);
 
 
 
+end;
+
+procedure TFFacturas.PrepararImprimir;
+var fact,an:Integer;
+begin
+fact:=fdfacturas.FieldByName('idfactura').asinteger;
+an:=fdfacturas.FieldByName('ano').AsInteger;
+
+DataModule2.FDfacturas.Filtered:=false;
+DataModule2.FDfacturas.Filter:='idfactura={e '+fact.ToString+'} and ano={e '+an.ToString+'}';
 
 
+DataModule2.FDfacturas.Filtered:=true;
+
+
+
+end;
+
+
+procedure TFFacturas.ToolButton6Click(Sender: TObject);
+
+begin
+PrepararImprimir;
+
+
+
+DataModule2.frxFacturas.ShowReport(true);
+end;
+
+procedure TFFacturas.abrirObraExecute(Sender: TObject);
+var fd:TFDQuery;
+begin
+if not fdlineaslineasobras_obras_ID_obra.IsNull then
+begin
+  fd:=TFDQuery.Create(Self);
+  fd.Connection:=DataModule1.FDConnection1;
+  fd.SQL.Clear;
+  fd.SQL.Text:='SELECT * FROM obras O, clientes C WHERE O.id_cliente=C.idContactos and id_obra=:obr';
+  fd.ParamByName('obr').AsInteger:=fdlineaslineasobras_obras_ID_obra.AsInteger;
+  fd.Active:=True;
+
+  DataModule1.editarobraExecute(fd);
+
+  fd.Active:=False;
+  fd.Free;
+
+
+
+end;
+
+end;
+
+procedure TFFacturas.abrirObraUpdate(Sender: TObject);
+begin
+TAction(Sender).enabled:= not fdlineaslineasobras_obras_ID_obra.IsNull;
+end;
 
 procedure TFFacturas.AceptarClick(Sender: TObject);
 begin
@@ -201,12 +275,10 @@ Guardar.Click;
 Close;
 end;
 
+
 procedure TFFacturas.BTBuscarClienteClick(Sender: TObject);
 var lclientes:Tlistclientes; fdclen:TfdQuery;
 begin
-
-
-
     fdclen:=TFDQuery.Create(Sender as TControl);
     fdclen.Connection:=DataModule1.FDConnection1;
     fdclen.SQL.Add('Select c.idContactos, c.nombre, c.CIF, c.direccion, c.CodigoPostal, c.Ciudad, a.nombreapellidos,c.idAdministrador from clientes c, administradores a where c.idAdministrador=a.idAdministrador order by c.idAdministrador,c.nombre');
@@ -236,6 +308,14 @@ begin
     grp1.Enabled:=True;
 end;
 
+
+procedure TFFacturas.Button1Click(Sender: TObject);
+begin
+fdcliente.Close;
+fdcliente.ParamByName('id_cliente').AsInteger:=64;
+fdcliente.Active:=true;
+end;
+
 procedure TFFacturas.cerrarClick(Sender: TObject);
 begin
    if (fdfacturas.UpdatesPending) or (fdlineas.UpdatesPending)  then
@@ -256,28 +336,25 @@ cerrarClick(Sender);
 end;
 
 
-
-
-
-
-
 procedure TFFacturas.fdfacturasAfterDelete(DataSet: TDataSet);
 begin
 Guardar.Enabled:=true;
 Shape1.Brush.Color:=cllime;
 end;
 
+
 procedure TFFacturas.fdfacturasAfterEdit(DataSet: TDataSet);
 begin
-  Guardar.Enabled:=true;
+Guardar.Enabled:=true;
 Shape1.Brush.Color:=cllime;
 end;
+
 
 procedure TFFacturas.fdfacturasAfterInsert(DataSet: TDataSet);
 var tasaIva:Real;
 begin
 fdfacturasidFactura.Value:=-200;
-fdfacturasid_asiento.Value:=-100;
+//fdfacturasid_asiento.Value:=-100;
 fdfacturasidCliente.Value:=fdClienteidcontactos.Value;
 fdfacturasFechaFactura.Value:=Date;
 fdfacturasano.Value:=YearOf(Date);
@@ -286,7 +363,7 @@ fdfacturascantidad.value:=1;
 fdfacturaspagada.Value:=False;
 tasaIva:=(DataModule1.IVA(fdClientefamilia.value)-1)*100;
 fdfacturasIva.Value:=Round(tasaIva);
-
+fdfacturastipo.asinteger:=0;
 
 fdfacturasTotal.Value:=0;
 fdfacturasTotalBruto.Value:=0;
@@ -384,12 +461,13 @@ procedure TFFacturas.fdlineasimporteChange(Sender: TField);
 begin
 fdlineastotal.asfloat:=(fdlineasimporte.asfloat*fdlineascantidad.asfloat)-((fdlineasdescuento.AsFloat/100)*(fdlineasimporte.AsFloat*fdlineascantidad.asfloat));
 fdlineasiva.asfloat:=fdlineastotal.asfloat*(fdfacturasiva.asfloat/100);
-
+ActualizarImportesLineas:=True;
 end;
 
 procedure TFFacturas.GuardarClick(Sender: TObject);
 
 begin
+try
 
 if (fdfacturas.state in [dsInsert, dsEdit]) then
  begin
@@ -406,6 +484,10 @@ if (fdlineas.state in [dsEdit,dsInsert]) then
          FDSchemaAdapter1.ApplyUpdates(1);
 
     end;
+except
+        raise;
+
+end;
 
 end;
 
@@ -425,24 +507,63 @@ ToolButton1.Enabled:=  not (fdfacturas.State in [dsInsert]);
 end;
 
 procedure TFFacturas.FDSchemaAdapter1AfterApplyUpdate(Sender: TObject);
+var cnpIVA,cnpVentas,asiento:Integer;
 begin
 try
 with Sender as TFDSchemaAdapter do CommitUpdates;
-
-       if  not TFDSchemaAdapter(Sender).UpdatesPending then
+        if  not TFDSchemaAdapter(Sender).UpdatesPending then
             begin
+
+             if (fdfacturasIva.AsInteger = 10) then
+                  begin
+                  cnpIVA:=47700010;
+                  cnpVentas:=70000010;
+                  end
+                   else begin
+                    cnpIVA:=47700021;
+                    cnpVentas:=70000021;
+                   end;
+
+                   if fdfacturasid_asiento.IsNull then
+                      begin
+
+                      asiento:=DataModule1.generarAsiento(-1,cnpIVA,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldIVA.AsFloat, fdfacturasidFactura.asstring+ fdfacturasano.asstring,true);
+                      DataModule1.generarAsiento(asiento,cnpVentas,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldfacturasbaseimponible.AsFloat, fdfacturasidFactura.asstring+ fdfacturasano.asstring,false);
+
+                     // ShowMessage('Se ha generado el asiento Nº '+fdfacturasid_asiento.AsString );
+
+                      end
+                      else begin
+                               DataModule1.modificarAsiento(fdfacturasid_asiento.asinteger,cnpIVA,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldIVA.AsFloat,fdfacturasidFactura.asstring+ fdfacturasano.asstring);
+                               DataModule1.modificarAsiento(fdfacturasid_asiento.asinteger,cnpVentas,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldfacturasbaseimponible.AsFloat,fdfacturasidFactura.asstring+ fdfacturasano.asstring);
+                               //ShowMessage('Se ha modificado el asiento Nº '+fdfacturasid_asiento.AsString);
+                           end;
+
+
+
+            if fdfacturas.FieldByName('tipo').AsInteger=0 then  // TIPO FACTURA NORMAL
+             begin
+             fdlineas.DisableControls;
              FDlineas.First;
               while not FDlineas.eof do
               begin
-                      //if  FDlineasobrapresupuestos_id_presupuesto.AsInteger=1 then
-                         AsignarAlaObraFactura(fdlineasfacturas_idfactura.AsInteger,fdlineasfacturas_ano.asinteger, fdlineaslineasobras_obras_ID_obra.asinteger,fdlineaslineasobras_id_lineaobra.AsInteger);
-                  FDlineas.Next;
+                        AsignarAlaObraFactura(fdlineasfacturas_idfactura.AsInteger,fdlineasfacturas_ano.asinteger, fdlineaslineasobras_obras_ID_obra.asinteger,fdlineaslineasobras_id_lineaobra.AsInteger,0,0);
+                       if ActualizarImportesLineas then ActualizarPreciosObra(fdlineastotal.AsFloat,fdlineaslineasobras_obras_ID_obra.asinteger,fdlineaslineasobras_id_lineaobra.AsInteger,0);
+                        FDlineas.Next;
               end;
-             guardarfactura.Enabled:=false;
-             guardar.Enabled:=false;
+             fdlineas.EnableControls;
+             end else  AsignarAlaObraFactura(fdfacturasidFactura.AsInteger,fdfacturasano.asinteger, fdfacturasobra.asinteger,fdfacturascertificacion.AsInteger,fdfacturaslineacertificacion.AsInteger,1);
+
+
+              guardarfactura.Enabled:=false;
+              guardar.Enabled:=false;
               shape1.Brush.Color:=clwhite;
               self.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+' - '+fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
             end;
+
+
+
+
             except
                   raise;
             end;
@@ -461,7 +582,7 @@ begin
    else begin
            fdfacturas.Edit;
            if fdlineasfacturas_idfactura.CurValue=-200 then  fdfacturasidFactura.AsInteger:=DataModule1.ObtenerNFactura(fdfacturasano.asinteger);
-
+            {
             if (fdfacturasIva.AsInteger = 10) then
                   begin
                   cnpIVA:=47700010;
@@ -485,9 +606,9 @@ begin
                                DataModule1.modificarAsiento(fdfacturasid_asiento.asinteger,cnpVentas,Date,'FACTURA VENTAS '+fdClientenombre.AsString,fltfldfacturasbaseimponible.AsFloat,fdfacturasidFactura.asstring+ fdfacturasano.asstring);
                                //ShowMessage('Se ha modificado el asiento Nº '+fdfacturasid_asiento.AsString);
                            end;
-
+                                 }
                fdfacturas.Post;
-               Self.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+ ' - ' +fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
+           //    Self.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+ ' - ' +fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
           end  ;
 
     except
@@ -509,7 +630,7 @@ end;
 
 procedure TFFacturas.FormCreate(Sender: TObject);
 begin
-
+ActualizarImportesLineas:=False;
 ShowScrollBar(rdbtotales1.Handle,SB_BOTH,false);
 end;
 
@@ -518,7 +639,7 @@ begin
   GroupBox5.Margins.Bottom:=GroupBox5.Height-Guardar.Height-20;
 end;
 
-procedure TFFacturas.AsignarAlaObraFactura(nfactura,ano,obra,partida:integer);
+procedure TFFacturas.ActualizarPreciosObra(importe:double;obra,partida,tipofactura:integer);
 var fq1:TFDQuery;
 begin
 
@@ -527,18 +648,74 @@ begin
      fq1.connection:=DataModule1.FDConnection1;
      fq1.close;
      fq1.SQL.clear;
-     fq1.SQL.Add('UPDATE lineasobras SET  facturas_id_factura=:FACTURA, facturas_ano=:ANO  WHERE obras_ID_Obra=:OBRA AND id_lineaobra=:PARTIDA');
+
+     if tipofactura=0 then
+          begin
+          fq1.SQL.Add('UPDATE lineasobras SET  total=:IMPORTE  WHERE obras_ID_Obra=:OBRA AND id_lineaobra=:PARTIDA') ;
+          fq1.ParamByName('OBRA').FDDataType:=dtInt16;
+          fq1.ParamByName('OBRA').Value:=obra;
+
+    // else fq1.SQL.Add('UPDATE lineascertificaciones SET id_factura=:FACTURA,  ano=:ANO WHERE certificacion_id_certificacion=:PARTIDA AND id_lineacertificacion=:LINEA');
+
+
+     fq1.ParamByName('IMPORTE').FDDataType:=dtDouble;
+     fq1.ParamByName('IMPORTE').Value:=importe ;
+
+     fq1.ParamByName('PARTIDA').FDDataType:=dtInt16;
+     fq1.ParamByName('PARTIDA').Value:=partida;
+
+     fq1.Prepare;
+     if fq1.prepared then fq1.ExecSQL;
+
+
+        fq1.SQL.Clear;
+        fq1.SQL.Add('UPDATE obras SET ImporteObra= (SELECT SUM(total) FROM lineasobras WHERE obras_ID_Obra=:OBRA ) WHERE id_obra=:OBRA') ;
+        fq1.ParamByName('OBRA').FDDataType:=dtInt16;
+          fq1.ParamByName('OBRA').Value:=obra;
+          fq1.Prepare;
+        if fq1.prepared then fq1.ExecSQL;
+
+          end;
+     fq1.Free;
+    except
+        raise;
+    end;
+end;
+
+
+procedure TFFacturas.AsignarAlaObraFactura(nfactura,ano,obra,partida,linea,tipofactura:integer);
+var fq1:TFDQuery;
+begin
+
+    try
+     fq1:=TFDQuery.create(self);
+     fq1.connection:=DataModule1.FDConnection1;
+     fq1.close;
+     fq1.SQL.clear;
+
+     if tipofactura=0 then
+          begin
+          fq1.SQL.Add('UPDATE lineasobras SET  facturas_id_factura=:FACTURA, facturas_ano=:ANO  WHERE obras_ID_Obra=:OBRA AND id_lineaobra=:PARTIDA') ;
+          fq1.ParamByName('OBRA').FDDataType:=dtInt16;
+          fq1.ParamByName('OBRA').Value:=obra;
+          end
+     else fq1.SQL.Add('UPDATE lineascertificaciones SET id_factura=:FACTURA,  ano=:ANO WHERE certificacion_id_certificacion=:PARTIDA AND id_lineacertificacion=:LINEA');
+
 
      fq1.ParamByName('FACTURA').FDDataType:=dtInt16;
+     fq1.ParamByName('FACTURA').Value:=nfactura ;
      fq1.ParamByName('ANO').FDDataType:=dtInt16;
-     fq1.ParamByName('OBRA').FDDataType:=dtInt16;
+      fq1.ParamByName('ANO').Value:=ano;
+
      fq1.ParamByName('PARTIDA').FDDataType:=dtInt16;
-
-
-     fq1.ParamByName('FACTURA').Value:=nfactura;
-     fq1.ParamByName('ANO').Value:=ano;
-     fq1.ParamByName('OBRA').Value:=obra;
      fq1.ParamByName('PARTIDA').Value:=partida;
+
+    if tipofactura=1 then
+       begin
+     fq1.ParamByName('LINEA').FDDataType:=dtInt16;
+     fq1.ParamByName('LINEA').Value:=linea;
+        end;
+
 
      fq1.Prepare;
      if fq1.prepared then fq1.ExecSQL;

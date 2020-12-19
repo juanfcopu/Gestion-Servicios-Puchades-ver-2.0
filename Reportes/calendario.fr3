@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.6.18" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44092,8370263079" ReportOptions.Description.Text="" ReportOptions.LastChange="44093,9113223495" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBDataset7" DataSetName="frxCalendario"/>
+    <item DataSet="frxDBDataset6" DataSetName="frxTrabajadores"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" PrintIfEmpty="False" HGuides.Text="" VGuides.Text="">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="120,94496" Left="0" Top="18,89765" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset6" DataSetName="frxTrabajadores" FooterAfterEach="True" RowCount="0" StartNewPage="True">
+      <TfrxMemoView Name="frxTrabajadoresNIE" Left="302,3624" Top="26,45671" Width="400,63018" Height="18,89765" DataField="NIE" DataSet="frxDBDataset6" DataSetName="frxTrabajadores" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Fill.BackColor="12632256" ParentFont="False" Text="[frxTrabajadores.&#34;NIE&#34;]"/>
+      <TfrxMemoView Name="frxTrabajadoresNombre" Left="26,45671" Top="26,45671" Width="275,90569" Height="18,89765" DataField="Nombre" DataSet="frxDBDataset6" DataSetName="frxTrabajadores" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" Fill.BackColor="12632256" ParentFont="False" Text="[frxTrabajadores.&#34;Nombre&#34;]"/>
+      <TfrxMemoView Name="frxCalendariofecha_trabajo" Left="26,45671" Top="60,47248" Width="166,29932" Height="18,89765" DataField="fecha_trabajo" DataSet="frxDBDataset7" DataSetName="frxCalendario" DisplayFormat.FormatStr="mmmm, yyyy" DisplayFormat.Kind="fkDateTime" Font.Charset="1" Font.Color="0" Font.Height="-15" Font.Name="Arial" Font.Style="4" ParentFont="False" Text="[frxCalendario.&#34;fecha_trabajo&#34;]"/>
+      <TfrxMemoView Name="Memo2" Left="11,33859" Top="94,48825" Width="79,37013" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Código"/>
+      <TfrxMemoView Name="Memo3" Left="102,04731" Top="94,48825" Width="79,37013" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="Obra"/>
+      <TfrxMemoView Name="Memo4" Left="283,46475" Top="94,48825" Width="79,37013" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="Descripción"/>
+      <TfrxMemoView Name="Memo5" Left="502,67749" Top="94,48825" Width="98,26778" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="Fecha Trabajo"/>
+      <TfrxMemoView Name="Memo6" Left="627,40198" Top="94,48825" Width="79,37013" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Horas"/>
+      <TfrxLineView Name="Line2" Left="3,77953" Top="117,16543" Width="710,55164" Height="0" Color="0" Diagonal="True"/>
+    </TfrxMasterData>
+    <TfrxDetailData Name="DetailData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="34,0157480314961" Left="0" Top="162,51979" Width="718,1107" AllowSplit="True" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset7" DataSetName="frxCalendario" RowCount="0" Stretched="True">
+      <TfrxMemoView Name="frxCalendarioid_obra" Left="11,33859" Top="7,55905999999999" Width="79,37013" Height="18,89765" DataField="id_obra" DataSet="frxDBDataset7" DataSetName="frxCalendario" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="[frxCalendario.&#34;id_obra&#34;]"/>
+      <TfrxMemoView Name="frxCalendarioNombre" Left="102,04731" Top="7,55905999999999" Width="177,63791" Height="18,89765" StretchMode="smActualHeight" DataField="Nombre" DataSet="frxDBDataset7" DataSetName="frxCalendario" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[frxCalendario.&#34;Nombre&#34;]"/>
+      <TfrxMemoView Name="frxCalendariodescripcion_1" Left="283,46475" Top="7,55905999999999" Width="215,43296591" Height="18,89765" StretchMode="smMaxHeight" DataField="descripcion_1" DataSet="frxDBDataset7" DataSetName="frxCalendario" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" ParentFont="False" WordBreak="True" Text="[frxCalendario.&#34;descripcion_1&#34;]"/>
+      <TfrxMemoView Name="frxCalendariohoras" Left="627,40198" Top="7,55905999999999" Width="79,37013" Height="18,89765" DataField="horas" DataSet="frxDBDataset7" DataSetName="frxCalendario" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="[frxCalendario.&#34;horas&#34;]"/>
+      <TfrxMemoView Name="frxCalendariofecha_trabajo1" Left="502,67749" Top="7,55905999999999" Width="79,37013" Height="18,89765" DataField="fecha_trabajo" DataSet="frxDBDataset7" DataSetName="frxCalendario" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="[frxCalendario.&#34;fecha_trabajo&#34;]"/>
+    </TfrxDetailData>
+    <TfrxFooter Name="Footer1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="45,35436" Left="0" Top="219,21274" Width="718,1107">
+      <TfrxLineView Name="Line1" Left="11,33859" Top="3,77952999999999" Width="691,65399" Height="0" Color="0" Diagonal="True"/>
+      <TfrxMemoView Name="Memo1" Left="514,01608" Top="15,11812" Width="192,75603" Height="18,89765" Text="Total horas: [SUM(&#60;frxCalendario.&#34;horas&#34;&#62;,DetailData1,0)]"/>
+      <TfrxMemoView Name="COUNT" Left="158,74026" Top="15,11812" Width="211,65368" Height="18,89765" Text="Días : [SUM(&#60;frxCalendario.&#34;horas&#34;&#62;,DetailData1,0)/8]"/>
+    </TfrxFooter>
+  </TfrxReportPage>
+</TfrxReport>

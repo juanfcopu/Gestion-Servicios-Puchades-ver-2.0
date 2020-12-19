@@ -7,8 +7,8 @@
     <Transaction>2017/11/29 14:01:48.000.187,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\FPrincipal.dfm=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2017/11/29 14:02:09.000.202,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\GestionSPuchades.dproj=C:\Users\juanpu\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2017/11/29 18:10:31.000.835,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
+    <Transaction>2017/11/29 18:11:14.000.021,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\DModule1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2017/11/29 18:14:01.000.437,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
     <Transaction>2017/11/29 18:35:41.000.720,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\BOTONES.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
     <Transaction>2017/11/29 18:35:41.000.720,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\BOTONES.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.dfm</Transaction>
@@ -27,11 +27,11 @@
     <Transaction>2017/12/07 22:02:14.000.702,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\framePresupuestos.pas</Transaction>
     <Transaction>2017/12/07 22:02:14.000.702,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\framePresupuestos.dfm</Transaction>
     <Transaction>2017/12/08 14:32:06.000.945,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
-    <Transaction>2017/12/08 14:37:20.000.638,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameFacturas.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.dfm</Transaction>
     <Transaction>2017/12/08 14:37:20.000.638,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameFacturas.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
+    <Transaction>2017/12/08 14:37:20.000.638,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameFacturas.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.dfm</Transaction>
     <Transaction>2017/12/08 14:49:45.000.468,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.pas</Transaction>
-    <Transaction>2017/12/08 14:52:54.000.098,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameObras.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.dfm</Transaction>
     <Transaction>2017/12/08 14:52:54.000.098,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameObras.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.pas</Transaction>
+    <Transaction>2017/12/08 14:52:54.000.098,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameObras.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.dfm</Transaction>
     <Transaction>2017/12/08 14:56:51.000.363,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit4.pas</Transaction>
     <Transaction>2017/12/08 14:58:52.000.029,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameContactos.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit4.dfm</Transaction>
     <Transaction>2017/12/08 14:58:52.000.029,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\frameContactos.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit4.pas</Transaction>
@@ -41,8 +41,8 @@
     <Transaction>2017/12/13 21:17:47.000.347,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2017/12/13 21:19:03.000.665,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.pas</Transaction>
     <Transaction>2017/12/13 21:19:03.000.665,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.dfm</Transaction>
-    <Transaction>2018/01/02 20:45:02.000.098,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.dfm</Transaction>
     <Transaction>2018/01/02 20:45:02.000.098,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas</Transaction>
+    <Transaction>2018/01/02 20:45:02.000.098,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.dfm</Transaction>
     <Transaction>2018/01/02 21:21:10.000.319,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas</Transaction>
     <Transaction>2018/01/07 14:55:06.000.353,=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2018/01/07 19:32:03.000.278,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\inserclientes.dfm</Transaction>
@@ -57,8 +57,8 @@
     <Transaction>2018/04/26 09:06:38.000.503,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobras.dfm=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobra.dfm</Transaction>
     <Transaction>2018/04/26 09:06:38.000.503,C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobras.pas=C:\Users\juanpu\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobra.pas</Transaction>
     <Transaction>2018/11/10 20:35:42.000.709,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2018/11/10 20:47:46.000.938,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\SelectLineasPresupuestos.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2018/11/10 20:47:46.000.938,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\SelectLineasPresupuestos.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
+    <Transaction>2018/11/10 20:47:46.000.938,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\SelectLineasPresupuestos.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2018/12/13 20:55:01.000.417,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2018/12/13 21:04:17.000.742,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\config.pas</Transaction>
     <Transaction>2018/12/13 21:04:17.000.742,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\config.dfm</Transaction>
@@ -74,8 +74,8 @@
     <Transaction>2019/04/29 20:14:41.000.053,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2019/04/29 20:16:08.000.662,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Empresa.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2019/04/29 20:16:08.000.662,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Empresa.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2019/04/29 21:12:09.000.848,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\facturas.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.dfm</Transaction>
     <Transaction>2019/04/29 21:12:09.000.848,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\facturas.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.pas</Transaction>
+    <Transaction>2019/04/29 21:12:09.000.848,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\facturas.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.dfm</Transaction>
     <Transaction>2019/05/04 17:48:12.000.168,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobras.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas</Transaction>
     <Transaction>2019/05/04 17:48:12.000.168,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobras.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.dfm</Transaction>
     <Transaction>2019/05/04 17:49:26.000.896,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaobras.pas</Transaction>
@@ -89,8 +89,8 @@
     <Transaction>2019/10/22 21:13:25.000.186,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\SelectLineasobras.pas</Transaction>
     <Transaction>2019/10/22 22:47:33.000.828,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.pas</Transaction>
     <Transaction>2019/10/25 19:47:50.000.412,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas</Transaction>
-    <Transaction>2019/10/27 21:25:35.000.185,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturascompras.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.dfm</Transaction>
     <Transaction>2019/10/27 21:25:35.000.185,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturascompras.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas</Transaction>
+    <Transaction>2019/10/27 21:25:35.000.185,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturascompras.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.dfm</Transaction>
     <Transaction>2019/11/02 20:31:46.000.726,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listanominas.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturascompras.dfm</Transaction>
     <Transaction>2019/11/02 20:31:46.000.726,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listanominas.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturascompras.pas</Transaction>
     <Transaction>2019/11/02 20:55:58.000.879,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturascompras.pas</Transaction>
@@ -101,29 +101,29 @@
     <Transaction>2019/11/06 22:38:35.000.458,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\insernominas.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\inserfacturascomparas.pas</Transaction>
     <Transaction>2019/11/06 22:41:14.000.950,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\insernominas.pas</Transaction>
     <Transaction>2019/11/08 17:39:43.000.679,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listasegurossociales.pas</Transaction>
-    <Transaction>2019/11/15 21:13:52.000.933,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\seguros.pas</Transaction>
     <Transaction>2019/11/15 21:13:52.000.933,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\seguros.dfm</Transaction>
+    <Transaction>2019/11/15 21:13:52.000.933,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\seguros.pas</Transaction>
     <Transaction>2019/11/15 21:14:41.000.698,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\presupuestos.pas</Transaction>
-    <Transaction>2019/11/23 18:03:46.000.644,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaseguros.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas</Transaction>
     <Transaction>2019/11/23 18:03:46.000.644,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaseguros.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.dfm</Transaction>
+    <Transaction>2019/11/23 18:03:46.000.644,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaseguros.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas</Transaction>
     <Transaction>2019/11/23 18:04:34.000.485,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaclientes.pas</Transaction>
     <Transaction>2019/11/23 19:57:08.000.813,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2019/11/23 19:58:23.000.504,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\compañiasseguros.dfm</Transaction>
     <Transaction>2019/11/23 19:58:23.000.504,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\compañiasseguros.pas</Transaction>
-    <Transaction>2019/11/23 19:59:04.000.582,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\compañiasseguros.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\companiasseguros.dfm</Transaction>
     <Transaction>2019/11/23 19:59:04.000.582,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\compañiasseguros.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\companiasseguros.pas</Transaction>
+    <Transaction>2019/11/23 19:59:04.000.582,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\compañiasseguros.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\companiasseguros.dfm</Transaction>
     <Transaction>2019/12/07 20:01:00.000.200,=C:\Users\juanf\Documents\Embarcadero\Studio\19.0\Imports\AcroPDFLib_TLB.pas</Transaction>
     <Transaction>2019/12/14 18:57:47.000.668,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2019/12/14 18:59:38.000.578,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\EstadisticasGastos.dfm</Transaction>
     <Transaction>2019/12/14 18:59:38.000.578,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\EstadisticasGastos.pas</Transaction>
     <Transaction>2020/02/16 14:50:01.000.510,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas</Transaction>
     <Transaction>2020/03/20 13:35:49.000.303,=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2020/03/20 13:41:18.000.261,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\resumen.pas</Transaction>
     <Transaction>2020/03/20 13:41:18.000.261,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\resumen.dfm</Transaction>
+    <Transaction>2020/03/20 13:41:18.000.261,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\resumen.pas</Transaction>
     <Transaction>2020/03/21 18:55:43.000.398,C:\Users\juanf\Documents\GitHub\Gestion-Servicios-Puchades-ver-2.0\resumen.pas=</Transaction>
     <Transaction>2020/05/20 21:14:20.000.609,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2020/05/20 21:16:17.000.004,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\ClientesDatos.dfm</Transaction>
     <Transaction>2020/05/20 21:16:17.000.004,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\ClientesDatos.pas</Transaction>
+    <Transaction>2020/05/20 21:16:17.000.004,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\ClientesDatos.dfm</Transaction>
     <Transaction>2020/05/29 21:30:14.000.415,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\editors.pas</Transaction>
     <Transaction>2020/06/04 18:26:07.000.091,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
     <Transaction>2020/06/04 18:27:14.000.083,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
@@ -132,16 +132,16 @@
     <Transaction>2020/06/12 20:53:15.000.067,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\bancos.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/06/12 20:53:15.000.067,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\bancos.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2020/06/12 23:48:34.000.828,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2020/06/12 23:48:48.000.066,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\movimientosbancos.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2020/06/12 23:48:48.000.066,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\movimientosbancos.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2020/06/20 21:17:06.000.548,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaspagoseguros.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listastrabajadores.dfm</Transaction>
+    <Transaction>2020/06/12 23:48:48.000.066,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\movimientosbancos.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
     <Transaction>2020/06/20 21:17:06.000.548,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaspagoseguros.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listastrabajadores.pas</Transaction>
+    <Transaction>2020/06/20 21:17:06.000.548,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaspagoseguros.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listastrabajadores.dfm</Transaction>
     <Transaction>2020/07/05 21:33:49.000.787,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2020/07/05 21:35:13.000.805,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\calendario.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/07/05 21:35:13.000.805,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\calendario.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
+    <Transaction>2020/07/05 21:35:13.000.805,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\calendario.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/07/06 14:03:39.000.980,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
-    <Transaction>2020/07/06 14:05:34.000.760,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaproveedores.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/07/06 14:05:34.000.760,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaproveedores.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
+    <Transaction>2020/07/06 14:05:34.000.760,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listaproveedores.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/07/06 22:23:23.000.915,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas</Transaction>
     <Transaction>2020/07/06 22:23:59.000.114,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\DmoduleReports.pas</Transaction>
     <Transaction>2020/07/06 22:23:59.000.114,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit2.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\DmoduleReports.dfm</Transaction>
@@ -152,8 +152,8 @@
     <Transaction>2020/07/10 22:00:58.000.558,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.pas</Transaction>
     <Transaction>2020/07/10 22:01:11.000.350,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\calendario.dfm</Transaction>
     <Transaction>2020/07/10 22:01:11.000.350,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit3.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\calendario.pas</Transaction>
-    <Transaction>2020/07/20 23:06:29.000.484,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\asientos.pas</Transaction>
     <Transaction>2020/07/20 23:06:29.000.484,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\asientos.dfm</Transaction>
+    <Transaction>2020/07/20 23:06:29.000.484,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\asientos.pas</Transaction>
     <Transaction>2020/07/28 22:07:12.000.797,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listafacturas.pas</Transaction>
     <Transaction>2020/07/28 22:32:43.000.709,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listastrabajadores.pas</Transaction>
     <Transaction>2020/08/16 22:32:16.000.850,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
@@ -164,9 +164,12 @@
     <Transaction>2020/09/08 21:49:30.000.158,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/09/08 21:56:09.000.605,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\PrevisionPresupuestos.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
     <Transaction>2020/09/08 21:56:09.000.605,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\PrevisionPresupuestos.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm</Transaction>
-    <Transaction>2020/09/11 19:37:48.000.796,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listalineaspresupuestos.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.dfm</Transaction>
     <Transaction>2020/09/11 19:37:48.000.796,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listalineaspresupuestos.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.pas</Transaction>
+    <Transaction>2020/09/11 19:37:48.000.796,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listalineaspresupuestos.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.dfm</Transaction>
     <Transaction>2020/09/11 20:01:55.000.777,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\listapresupuestos.pas</Transaction>
+    <Transaction>2020/11/29 00:28:40.000.402,=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas</Transaction>
+    <Transaction>2020/11/29 00:30:32.000.596,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.dfm=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\plantillaspresupuestos.dfm</Transaction>
+    <Transaction>2020/11/29 00:30:32.000.596,C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\Unit1.pas=C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puchades-ver-2.0\plantillaspresupuestos.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="administradores.pas"/>
@@ -255,6 +258,8 @@
     <File Path="SelectLineasobras.dfm"/>
     <File Path="SelectLineasPresupuestos.pas"/>
     <File Path="SelectLineasPresupuestos.dfm"/>
+    <File Path="plantillaspresupuestos.pas"/>
+    <File Path="plantillaspresupuestos.dfm"/>
   </ProjectSortOrder>
 	<BT_BuildType>Debug</BT_BuildType>
 </BorlandProject>

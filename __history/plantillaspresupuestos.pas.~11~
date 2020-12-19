@@ -1,0 +1,45 @@
+unit plantillaspresupuestos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RzPanel, Vcl.ExtCtrls, Vcl.Grids, System.IOUtils,  System.types,
+  rStringGridEd;
+
+type
+  TFPlantillasPresupuestos = class(TForm)
+    rztlbr1: TRzToolbar;
+    RzPanel1: TRzPanel;
+    RzStatusBar1: TRzStatusBar;
+    rStringGridEd1: TrStringGridEd;
+    RzPanel2: TRzPanel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FPlantillasPresupuestos: TFPlantillasPresupuestos;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFPlantillasPresupuestos.FormCreate(Sender: TObject);
+var direc:TDirectory; lst:TstringDynArray; i:integer;
+begin
+    lst:=direc.GetFiles(GetCurrentDir+'\Plantillas');
+
+    for i := 0 to High(lst) do
+    begin
+    rStringGridEd1.StringCells[1,i]:=lst[i];
+    rStringGridEd1.StringCells[0,i]:=ExtractFileName(lst[i]);
+    end;
+
+
+end;
+
+end.

@@ -9,12 +9,15 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
   ClientHeight = 615
   ClientWidth = 1414
   Color = clBtnFace
+  DragKind = dkDock
+  DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose2
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -75,7 +78,6 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 407
       object Label2: TLabel
         Left = 16
         Top = 16
@@ -276,7 +278,7 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 61
+        Width = 73
         Visible = True
       end
       item
@@ -288,7 +290,7 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 274
+        Width = 326
         Visible = True
       end
       item
@@ -303,7 +305,7 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 140
+        Width = 167
         Visible = True
       end
       item
@@ -317,6 +319,7 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
         Title.Font.Height = -13
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
+        Width = 76
         Visible = True
       end
       item
@@ -328,7 +331,7 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 437
+        Width = 521
         Visible = True
       end
       item
@@ -340,13 +343,13 @@ object listlineaspresupuestos: Tlistlineaspresupuestos
         Title.Font.Height = -12
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 101
+        Width = 120
         Visible = True
       end>
   end
   object ds1: TDataSource
     DataSet = DataModule1.FDlineaspresupuestos
-    Left = 1240
-    Top = 408
+    Left = 312
+    Top = 296
   end
 end

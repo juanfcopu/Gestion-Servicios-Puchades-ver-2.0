@@ -98,6 +98,13 @@ tNumfac=record
     RzLabel2: TRzLabel;
     RzLabel3: TRzLabel;
     RzLabel4: TRzLabel;
+    TabSheet5: TRzTabSheet;
+    LabeledEdit12: TLabeledEdit;
+    LabeledEdit13: TLabeledEdit;
+    rdbIRPFTrab: TrDBGrid_MS;
+    fdIRPFTrab: TFDQuery;
+    dsIRPFTrab: TDataSource;
+    Image1: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure rComboBoxEx1Change(Sender: TObject);
@@ -121,11 +128,11 @@ tNumfac=record
     procedure Button2Click(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
-    procedure TabSheet2Show(Sender: TObject);
     procedure FDcuentasAfterScroll(DataSet: TDataSet);
     procedure fddiarioAfterOpen(DataSet: TDataSet);
     procedure fddiarioAfterPost(DataSet: TDataSet);
     procedure fddiarioAfterRefresh(DataSet: TDataSet);
+    procedure fdIRPFTrabAfterOpen(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -199,6 +206,10 @@ begin
   LabeledEdit9.Text:=LabeledEdit2.Text;
   LabeledEdit11.Text:=rComboBoxEx2.Text ;
   LabeledEdit10.Text:=LabeledEdit1.Text;
+  LabeledEdit13.Text:=rComboBoxEx2.Text ;
+  LabeledEdit12.Text:=LabeledEdit1.Text;
+
+
 
   DataModule1.ObtenerMesesTrimestre(trimestre,m1,m2);
 
@@ -524,7 +535,9 @@ DataModule1.ObtenerMesesTrimestre(TrComboBoxEx(Sender).ItemIndex+1, m1,m2);
                fddiario.ParamByName('f1').Asinteger:= m1;
                fddiario.ParamByName('f2').asinteger:= m2;
                fddiario.ParamByName('ano').asinteger:= ano;
+
                fddiario.Active:=True;
+              FDcuentas.Active:=True;
       end;
 
 
@@ -542,6 +555,14 @@ DataModule1.ObtenerMesesTrimestre(TrComboBoxEx(Sender).ItemIndex+1, m1,m2);
 
 
       end;
+
+     4:   begin
+               fdIRPFTrab.Close;
+               fdIRPFTrab.ParamByName('f1').Asinteger:= m1;
+               fdIRPFTrab.ParamByName('f2').asinteger:= m2;
+               fdIRPFTrab.ParamByName('ano').asinteger:= ano;
+               fdIRPFTrab.Active:=True;
+          end;
 
 
   end;
@@ -835,12 +856,6 @@ RzStringGrid2.Cells[4,5]:='21 %';
 
 end;
 
-procedure TFEstadisticasGastosVentas.TabSheet2Show(Sender: TObject);
-begin
-FDcuentas.Active:=True;
-fddiario.Active:=True;
-end;
-
 procedure TFEstadisticasGastosVentas.TabSheet3Show(Sender: TObject);
 begin
 RzStringGrid1.ColWidths[0]:=150;
@@ -872,19 +887,35 @@ RzStringGrid1.Cells[4,5]:='21 %';
 end;
 
 procedure TFEstadisticasGastosVentas.ToolButton1Click(Sender: TObject);
-
+  var scalaX,scalaY:Double; MyRect:TRect;
 begin
+
+
+  image1.Height:=rzPageControl1.ActivePage.Height;
+  image1.Width:=rzPageControl1.ActivePage.Width;
+  rzPageControl1.ActivePage.PaintTo(Image1.Canvas.Handle,10,10);
+
+
 PrintDialog1.Options := [poPageNums, poSelection];
 PrintDialog1.FromPage := 1;
 
 if PrintDialog1.Execute then
 
+  Printer.beginDoc;
 
 
+   scalaX := GetDeviceCaps(Printer.Handle, LOGPIXELSX) / PixelsPerInch;
 
-Printer.beginDoc;
-rzPageControl1.Pages[1].PaintTo(Printer.canvas,250,100);
-Printer.EndDoc;
+   scalaY := GetDeviceCaps(Printer.Handle, LOGPIXELSY) / pixelsperinch;
+
+     MyRect.Left := 0;
+        MyRect.Top := 0;
+        MyRect.Right := trunc(image1.Width * scalaX);
+        MyRect.Bottom := trunc(image1.Height * scalaY);
+        Printer.Canvas.CopyMode := cmSrcCopy;
+        Printer.Canvas.FillRect(MyRect);
+    Printer.Canvas.StretchDraw(MyRect,image1.Picture.Bitmap);
+   Printer.EndDoc;
 
 
 end;
@@ -1368,6 +1399,11 @@ end;
 procedure TFEstadisticasGastosVentas.fddiarioAfterRefresh(DataSet: TDataSet);
 begin
 rdbdiario.RecalculateSummaryResults(true);
+end;
+
+procedure TFEstadisticasGastosVentas.fdIRPFTrabAfterOpen(DataSet: TDataSet);
+begin
+rdbIRPFTrab.RecalculateSummaryResults(True);
 end;
 
 procedure TFEstadisticasGastosVentas.FormClose(Sender: TObject;

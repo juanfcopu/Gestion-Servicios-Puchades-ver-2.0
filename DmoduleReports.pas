@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, frxExportPDF,
-  frxExportDOCX, frxExportXLSX;
+  frxExportDOCX, frxExportXLSX, frxDCtrl;
 
 type
   TDataModule2 = class(TDataModule)
@@ -29,6 +29,28 @@ type
     FDDetalleFacturas: TFDQuery;
     dsfacturas: TDataSource;
     frxDBDataset5: TfrxDBDataset;
+    fdtrabajadores: TFDQuery;
+    frxDBDataset6: TfrxDBDataset;
+    frxCalendario: TfrxReport;
+    FDdetalleCalendario: TFDQuery;
+    dstrabajadores: TDataSource;
+    frxDBDataset7: TfrxDBDataset;
+    frxDialogControls1: TfrxDialogControls;
+    fdobras: TFDQuery;
+    fdcostes: TFDQuery;
+    frxDBDataset8: TfrxDBDataset;
+    frxDBDataset9: TfrxDBDataset;
+    frxcostesobra: TfrxReport;
+    dsobras: TDataSource;
+    FDDetallePresupuestosTIPO: TFDQuery;
+    frxPresupuestoTipo: TfrxReport;
+    frxDBDataset10: TfrxDBDataset;
+    FDPresupuestosPorFecha: TFDQuery;
+    frxPresupuestosPorFecha: TfrxReport;
+    frxDBDataset11: TfrxDBDataset;
+    FDObrasSinFacturar: TFDQuery;
+    frxDBDataset12: TfrxDBDataset;
+    frxObrasSinFacturar: TfrxReport;
   private
     { Private declarations }
   public

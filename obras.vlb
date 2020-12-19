@@ -90,9 +90,6 @@ Coordinates=69,557,68,33
 [ToolButton10]
 Coordinates=881,540,80,33
 
-[Memo1]
-Coordinates=610,260,53,51
-
 [carpetadocumentacion]
 Coordinates=946,482,127,33
 
@@ -144,9 +141,6 @@ Coordinates=255,631,61,33
 [ToolButton12]
 Coordinates=285,540,80,33
 
-[GroupBox3]
-Coordinates=667,309,70,51
-
 [certificaciones]
 Coordinates=769,540,86,33
 
@@ -166,7 +160,7 @@ Coordinates=382,20,62,33
 Coordinates=772,110,52,33
 
 []
-Coordinates=689,670,79,33
+Coordinates=667,309,70,51
 Visible=True
 ExplicitSubNodes=Position
 

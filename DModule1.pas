@@ -3,13 +3,13 @@ unit DModule1;
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, Vcl.Dialogs,
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, Vcl.Dialogs,  System.IOutils,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,FireDAC.Stan.Consts,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet,System.DateUtils ,
   FireDAC.Comp.Client, Vcl.ImgList, Vcl.Controls, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,Vcl.Graphics,Vcl.ComCtrls,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,Vcl.Graphics,Vcl.ComCtrls, System.Win.COMObj,
   Vcl.ExtCtrls,System.StrUtils, FireDAC.Phys.MySQLDef, System.ImageList, System.Types,
   FireDAC.VCLUI.Login, FireDAC.Moni.Base, FireDAC.Moni.RemoteClient, System.IniFiles, listafacturas, SelectLineasobras,RzTabs,
   rDBGrid, rDBGridSorter_FireDac,inserclientes, rXLSExport,System.variants,
@@ -236,6 +236,38 @@ type
     FDlineaspresupuestosgrupo: TIntegerField;
     FDlineaspresupuestosTotal: TFloatField;
     FDlineaspresupuestosid_partida: TIntegerField;
+    nuevo3: TAction;
+    fdcategoriapresupuestos: TFDQuery;
+    fdpresupuestosejecutado: TBooleanField;
+    fdfacturasEmisorFactura: TIntegerField;
+    fdfacturasobservaciones: TMemoField;
+    fdfacturastipo: TIntegerField;
+    fdfacturasobra: TIntegerField;
+    fdfacturascertificacion: TIntegerField;
+    fdfacturaslineacertificacion: TIntegerField;
+    fdfacturasDireccion: TStringField;
+    fdfacturasCiudad: TStringField;
+    fdfacturasTelefonoCasa: TIntegerField;
+    fdfacturasTelefonoMovil: TIntegerField;
+    fdfacturasmail: TStringField;
+    fdfacturasNumFax: TIntegerField;
+    fdfacturasCodigoPostal: TStringField;
+    fdfacturasidAdministrador: TIntegerField;
+    fdfacturasCP: TBooleanField;
+    fdfacturasIBAN: TStringField;
+    fdfacturasbanco: TStringField;
+    fdfacturasnombrefactura: TStringField;
+    fdfacturasciffactura: TStringField;
+    fdfacturasciudadfactura: TStringField;
+    fdfacturasdireccionfactura: TStringField;
+    fdfacturascodigopostalfactura: TStringField;
+    fdfacturasfamilia: TIntegerField;
+    IpresupuestosAprovadosFecha: TAction;
+    IpresupuestosTipo: TAction;
+    IPresupuestosAprovados: TAction;
+    ICostesObras: TAction;
+    IFacturasImpagadas: TAction;
+    IObrasSinFactura: TAction;
     procedure crearclientesExecute(Sender: TObject);
     procedure listaclientesExecute(Sender: TObject);
     procedure insertarpresupuestoExecute(Sender: TObject);
@@ -296,6 +328,14 @@ type
     procedure FDConnection1Lost(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure previsionejecucionExecute(Sender: TObject);
+    procedure nuevo3Execute(Sender: TObject);
+    procedure fdfacturasAfterRefresh(DataSet: TDataSet);
+    procedure IpresupuestosAprovadosFechaExecute(Sender: TObject);
+    procedure IPresupuestosAprovadosExecute(Sender: TObject);
+    procedure IpresupuestosTipoExecute(Sender: TObject);
+    procedure ICostesObrasExecute(Sender: TObject);
+    procedure IFacturasImpagadasExecute(Sender: TObject);
+    procedure IObrasSinFacturaExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -329,7 +369,13 @@ type
   procedure fdClientesfamiliaGetText(Sender: TField; var Text: string; DisplayText: Boolean);
     function BorrarAsiento(asientos:Integer):boolean;
     procedure BorrarStringgrid(stgr:TStringGrid);
+    function AbrirFicheroPresupuesto(fichero,extension:string):boolean;
+    function CrearFicheroPresupuesto(fichero,archivo:string):boolean;
+    function DevolverFechaElegida:TDate;
+    function DevolverOleOffice(extension:string):Variant;
     end;
+
+
 
 Tpresupuesto = class(TObject)
    NPresupuesto:Integer;
@@ -355,11 +401,59 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses  FPrincipal, listaclientes, presupuestos,
-  listapresupuestos,listaproveedores,PrevisionPresupuestos, listastrabajadores, calendario, obras,bancos, movimientosbancos , listaobras,clientes,listaspagoseguros,EstadisticasGastos,listafacturascompras,listaseguros,listasegurossociales, SelectLineasPresupuestos, config, listaadministradores, administradores, inseradministradores, Empresa, listanominas, facturas, seguros, ClientesDatos, asientos;
+uses  FPrincipal, listaclientes, presupuestos, Elegircalendario,  plantillaspresupuestos,
+  listapresupuestos,listaproveedores,PrevisionPresupuestos, listastrabajadores, calendario, obras,bancos, movimientosbancos , listaobras,clientes,listaspagoseguros,EstadisticasGastos,listafacturascompras,listaseguros,listasegurossociales, SelectLineasPresupuestos, config, listaadministradores, administradores, inseradministradores, Empresa, listanominas, facturas, seguros, ClientesDatos, asientos,
+  DmoduleReports;
 
 {$R *.dfm}
 
+
+function TDataModule1.DevolverOleOffice(extension:string):Variant;
+
+begin
+   if (LowerCase(extension) ='.doc') or (LowerCase(extension)='.docx') then   Result:=CreateOleObject('Word.Application')
+       else Result:=CreateOleObject('Excel.Application');
+end;
+
+
+function TDataModule1.AbrirFicheroPresupuesto(fichero,extension:string):boolean;
+var MSWord:Variant;
+begin
+   Result:=false;
+   if FileExists(fichero) then
+  begin
+  try
+       if (LowerCase(extension) ='.doc') or (LowerCase(extension)='.docx') then   MsWord:=CreateOleObject('Word.Application')
+       else MSWord:=CreateOleObject('Excel.Application');
+   except
+         on Exception do  MessageDlg('No se puede abrir la aplicación Microsoft Offiece.',
+           mtError, [mbOK], 0);
+
+
+    end;
+       if (LowerCase(extension) ='.doc') or (LowerCase(extension)='.docx') then  MSWord.Documents.Open(fichero)
+       else MSWord.Workbooks.Open(fichero);
+
+
+
+     MsWord.Visible:=True;
+     Result:=true;
+  end
+
+end;
+
+
+function TDataModule1.CrearFicheroPresupuesto(fichero, archivo:string):boolean;
+var MSWord:Variant;     f:TFile;  extension:string;
+begin
+      Result:=false;
+
+            extension:=ExtractFileExt(fichero);
+            f.Copy(archivo,fichero);
+      if AbrirFicheroPresupuesto(fichero,extension) then
+
+         Result:=true;
+end;
 
 
 procedure TDataModule1.BorrarStringgrid(stgr:TStringGrid);
@@ -412,7 +506,7 @@ case mes of
 end;
 
 function TDataModule1.generarAsiento(nasiento,cnta:Integer;fech:TDate;concep:string;impt:real;docum:string;genasiento:boolean):integer;
-
+var nfactura,ano:integer;
 begin
       Result :=-1;
 
@@ -477,7 +571,33 @@ begin
      fq1.Prepare;
      if fq1.prepared then fq1.ExecSQL;
 
-     fq1.close;
+     if cnta = 47700010 then
+     begin
+       nfactura:=StrToInt(Copy(docum,0,Length(docum)-4));
+       ano:= strtoint((copy(docum,Length(docum)-3,4)));
+
+       fq1.close;
+       fq1.SQL.clear;
+       fq1.SQL.Add('UPDATE facturas SET id_asiento=:ASI WHERE idFactura=:FACT and ano=:ANO');
+       fq1.ParamByName('ASI').FDDataType:=dtWideString;
+       fq1.ParamByName('ASI').FDDataType:=dtInt16;
+       fq1.ParamByName('FACT').FDDataType:=dtWideString;
+       fq1.ParamByName('FACT').FDDataType:=dtInt16;
+       fq1.ParamByName('ANO').FDDataType:=dtWideString;
+       fq1.ParamByName('ANO').FDDataType:=dtInt16;
+
+       fq1.ParamByName('ASI').Value:=Result;
+       fq1.ParamByName('FACT').Value:=nfactura;
+       fq1.ParamByName('ANO').Value:=ano;
+
+
+       fq1.Prepare;
+     if fq1.prepared then fq1.ExecSQL;
+
+
+     end;
+
+     fq1.Close;
 
 
 end;
@@ -618,7 +738,6 @@ begin
 
             end;
         end;
-
           fd1:=TFDQuery.Create(Self);
           fd1.Connection:=DataModule1.FDConnection1;
           fd1.SQL.Clear;
@@ -645,6 +764,73 @@ begin
 
 obr.Show;
 obr.ManualDock(principal.PageControl2);
+end;
+
+procedure TDataModule1.nuevo3Execute(Sender: TObject);   // inserta factura por certificación de obra
+var fact:TFFacturas; TSelObras:TFObras;
+begin
+  if Sender is TFObras then TSelObras:=TFObras(Sender)
+       else begin
+             showmessage(' Error en el tipo de formulario.');
+
+             Exit;
+            end;
+
+
+
+
+
+    fact:=TFFacturas.Create(Self);
+    with fact do
+    begin
+          if not fdfacturas.Active then
+          begin
+          fdcliente.ParamByName('id_cliente').AsInteger:=TSelObras.FDObra.FieldByName('id_Cliente').AsInteger;
+          fdcliente.Active:=true;
+          GroupBox2.Enabled:=True;
+          grp1.Enabled:=True;
+
+          end;
+
+
+          fdfacturas.active:=True;
+          fdfacturas.Insert;
+            fdfacturas.FieldByName('retencion').AsInteger:=TSelObras.fdCertificacion.FieldByName('retencion').asinteger;
+            fdfacturas.FieldByName('tipo').AsInteger:=1; // TIPO FACTURA CERTIFICACION
+            fdfacturas.FieldByName('obra').AsInteger:= TSelObras.fdtncfldFDObraID_obra.AsInteger;
+            fdfacturas.FieldByName('certificacion').AsInteger:=TSelObras.fdCertificacionescertificacion_id_certificacion.asinteger;
+            fdfacturas.FieldByName('lineacertificacion').AsInteger:=TSelObras.fdCertificacionesid_lineacertificacion.asinteger;
+
+          fact.Caption:='F. '+fdfacturas.FieldByName('idfactura').AsString+ ' - ' +fdfacturas.FieldByName('ano').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
+          fdfacturas.post;
+          if not fdlineas.Active then  fdlineas.Active:=True;
+
+                  fdlineas.Insert;
+
+                  fdlineas.Fieldbyname('descripcion').asstring:=TSelObras.fdCertificacionesncertificacion.AsString+' CERTIFICACIÓN '+TSelObras.fdobra.FieldByName('Descripcion').asstring;
+
+                  fdlineas.Fieldbyname('facturas_Idfactura').asinteger:=fdfacturas.FieldByName('Idfactura').asinteger;
+                  fdlineas.Fieldbyname('facturas_ano').asinteger:=fdfacturas.FieldByName('ano').asinteger;
+
+                  fdlineas.Fieldbyname('importe').AsFloat:=TSelObras.fdlineasCertificaciones.FieldByName('importe').asfloat;
+                  fdlineas.Fieldbyname('total').AsFloat:=TSelObras.fdlineasCertificaciones.FieldByName('importe').asfloat;
+
+
+
+
+                  FDlineas.Post;
+
+
+
+        end;
+
+fact.Show;
+fact.ManualDock(principal.PageControl2);
+end;
+
+procedure TDataModule1.fdfacturasAfterRefresh(DataSet: TDataSet);
+begin
+DataSet.First;
 end;
 
 procedure TDataModule1.fdfacturascomprasimporteChange(Sender: TField);
@@ -761,6 +947,15 @@ begin
   end;
 
   Result := nil;
+end;
+
+function TDataModule1.DevolverFechaElegida:TDate;
+var EleCal:TFElegirCalendario;
+begin
+
+EleCal:=TFElegirCalendario.Create(Self);
+EleCal.ShowModal;
+Result:=EleCal.RzCalendar1.Date;
 end;
 
 
@@ -1100,6 +1295,26 @@ begin
    else showmessage('El presupuesto no esta aprobado, no se puede crear la obra.');
 end;
 
+procedure TDataModule1.IObrasSinFacturaExecute(Sender: TObject);
+begin
+DataModule2.frxObrasSinFacturar.ShowReport(true);
+end;
+
+procedure TDataModule1.IPresupuestosAprovadosExecute(Sender: TObject);
+begin
+DataModule2.frxPresupuestosAprobados.ShowReport(true);
+end;
+
+procedure TDataModule1.IpresupuestosAprovadosFechaExecute(Sender: TObject);
+begin
+DataModule2.frxPresupuestosPorFecha.ShowReport(true);
+end;
+
+procedure TDataModule1.IpresupuestosTipoExecute(Sender: TObject);
+begin
+ DataModule2.frxPresupuestoTipo.ShowReport(true);
+end;
+
 function TDataModule1.IVA(tipo:integer):real;
 begin
   case tipo of
@@ -1234,6 +1449,13 @@ fact:=TFFacturas.Create(Self);
           fdlineas.ParamByName('ano').AsInteger:=(Sender as TFDQuery).FieldByName('ano').AsInteger;
          fdlineas.open;
          end;
+
+         if Length(rDBEdit6.Text) > 0  then
+         begin
+          rDBEdit6.Visible:=True;
+          rDBEdit6.DBEditLabel.Visible:=True;
+         end;
+
        Show;
             ManualDock(principal.PageControl2);
 
@@ -1297,7 +1519,11 @@ obr:=TFObras.Create(Self);
 
          end;
 
-         
+
+
+
+
+
 
 
             Show;
@@ -1315,9 +1541,11 @@ begin
  begin
    NPresupuesto:=(Sender as Tpresupuesto).NPresupuesto;
    Grupo:=(Sender as Tpresupuesto).grupo;
- end;
+ end else  begin
+           MessageDlg('No se puede abrir el presupuesto.',  mtError, [mbOK],0);
 
- //if PaginaEnPageControl(principal.PageControl2,'P. '+(Sender as TFDQuery).FieldByName('id_Presupuesto').asstring+' '+(Sender as TFDQuery).FieldByName('nombre').Asstring) then Exit;
+            Exit;
+           end;
 
 
 pres:=TFPresupuestos.Create(Self);
@@ -1470,25 +1698,39 @@ end;
 procedure TDataModule1.FDConnection1Error(ASender, AInitiator: TObject;
   var AException: Exception);
 begin
+
+
  if AException is EFDException then
+    begin
     case  EFDException(AException).FDCode of
        er_FD_ClntDbLoginAborted: begin
                                     ShowMessage('Autentificación cancelada.');
 
                                   end;
-    end;
-
+         else ShowMessage(AException.Message);
+    end
+    end
+  else
  if AException is EFDDBEngineException then
-
+   begin
    case EFDDBEngineException(AException).Kind of
-          ekUserPwdInvalid:ShowMessage('Acceso denegado. Nombre de usuario o contraseña no validos.');
+          ekUserPwdInvalid:begin
+                          timercambios.Enabled:=False;
+                          ShowMessage('Acceso denegado. Nombre de usuario o contraseña no validos.');
+                          end;
           ekServerGone:begin
                           timercambios.Enabled:=False;
                           principal.RzFieldStatus1.Caption:='Desconectado';
                           ShowMessage('No se puede acceder al Servidor.');
 
                        end;
-   end;
+
+         else ShowMessage(AException.Message);
+   end
+
+   end else ShowMessage(AException.Message);
+
+
 
 end;
 
@@ -1545,7 +1787,7 @@ function TDataModule1.ObtenerPathObra(cliente:string;numero:integer):string;
 
 function TDataModule1.ObtenerPathPresupuesto(cliente:string;numero:integer;fecha:TDateTime):string;
 begin
-     Result:='\PRESUPUESTOS '+IntToStr(YearOf(fecha))+'\'+inttostr(numero)+'. '+cliente+'.doc';
+     Result:='\PRESUPUESTOS '+IntToStr(YearOf(fecha))+'\'+inttostr(numero)+'. '+cliente+'.docx';
 
 end;
 
@@ -1568,6 +1810,16 @@ begin
 end;
 
 
+procedure TDataModule1.ICostesObrasExecute(Sender: TObject);
+begin
+DataModule2.frxcostesobra.ShowReport(true);
+end;
+
+procedure TDataModule1.IFacturasImpagadasExecute(Sender: TObject);
+begin
+DataModule2.frxFacturasImpagadas.ShowReport(True);
+end;
+
 procedure TDataModule1.RefrescarDataSet(lquery:TStringlist);
 var i: integer;  cambios:boolean;
 begin
@@ -1589,8 +1841,10 @@ begin
 end;
 
  procedure TDataModule1.RefrescarDataSetTodos;
- var  j: Integer;    bookmk:TBookmark;
+ var  j: Integer;
 begin
+
+principal.Label1.Caption:='Actualizado: '+ TimeToStr(Time);
 principal.ListBox1.Items.clear;
 
 for j := 0 to DataModule1.FDConnection1.DataSetCount - 1 do
@@ -1744,11 +1998,6 @@ if PaginaEnPageControl(principal.PageControl2,'Cliente '+fdCli.FieldByName('nomb
  cliDatos:=TFClientesDatos.Create(Self);
     with cliDatos do
     begin
-     {
-      lstobras:=TStringList.Create;
-      lstobras.Add('fdobras');
-      lstobras.Add('fdlineasobras')  ; }
-
 
       fdclientes.ParamByName('id_cliente').AsInteger:=fdCli.FieldByName('IdContactos').AsInteger;
       fdclientes.Active:=true;
@@ -1941,6 +2190,9 @@ obr:=TFObras.Create(TControl(Sender));
                    if not fdlineasobra.Active then   fdlineasobra.Active:=true;
                    fdlineasobra.AggregatesActive:=true;
 
+
+
+
                end;
 
             Show;
@@ -2008,10 +2260,10 @@ begin
             if PaginaEnPageControl(principal.PageControl2,'Lista Clientes') then Exit;
             listaclientes:=TlistClientes.Create(Sender as Tcomponent);
 
+             listaclientes.Show;
               listaclientes.ManualDock(principal.PageControl2);
-            listaclientes.Show;
-         //   principal.PageControl2.ActivePageIndex := principal.PageControl2.PageCount -1;
 
+        
 end;
 
 

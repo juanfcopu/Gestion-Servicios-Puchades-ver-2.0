@@ -14,7 +14,7 @@ uses
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Buttons, Vcl.Bind.Navigator,
   Vcl.ExtCtrls, Vcl.Grids,shellapi, System.ImageList, ShellCtrls, RzListVw,
   RzShellCtrls,Vcl.FileCtrl, Vcl.Mask, Vcl.ActnCtrls, rDBGrid, RzPanel, RzDBNav,
-  Vcl.DBCtrls, rDBComponents, rImprovedComps, RzGroupBar, rDBGrid_MS;
+  Vcl.DBCtrls, rDBComponents, rImprovedComps, RzGroupBar, rDBGrid_MS, rImageZoom;
 
 type
   TFObras = class(TForm)
@@ -52,8 +52,6 @@ type
     ToolButton7: TToolButton;
     ToolButton10: TToolButton;
     ToolButton9: TToolButton;
-    GroupBox3: TGroupBox;
-    Memo1: TMemo;
     GroupBox5: TGroupBox;
     Guardar: TButton;
     cerrar: TButton;
@@ -231,6 +229,40 @@ type
     ToolButton3: TToolButton;
     btnEjecutadoFechaFinlinea: TToolButton;
     EjecutadoFechaFinlinea: TAction;
+    btn1: TToolButton;
+    GroupBox6: TGroupBox;
+    Memo2: TMemo;
+    ToolButton8: TToolButton;
+    TabCalendario: TTabSheet;
+    RzGroupBox2: TRzGroupBox;
+    rDBEdit16: TrDBEdit;
+    rDBEdit17: TrDBEdit;
+    rDBEdit19: TrDBEdit;
+    ctrlbr3: TControlBar;
+    rzdbnvgtr1: TRzDBNavigator;
+    rdbgrid4: TrDBGrid_MS;
+    fdcalendario: TFDQuery;
+    dscalendario: TDataSource;
+    fdcalendarioid_obra: TIntegerField;
+    fdcalendariohoras: TFMTBCDField;
+    fdcalendarionombre: TStringField;
+    fdcalendariototalhoras: TIntegerField;
+    fdcalendarioNTrabajadores: TLargeintField;
+    fdcalendariototaldias: TIntegerField;
+    fdcalendariocoste: TFloatField;
+    fdcalendariopreciohora: TFloatField;
+    rDBEdit15: TrDBEdit;
+    rDBEdit18: TrDBEdit;
+    rDBEdit20: TrDBEdit;
+    rDBEdit21: TrDBEdit;
+    fdcalendariocostetotal: TFloatField;
+    fdcalendariorendimiento: TFloatField;
+    rDBEdit22: TrDBEdit;
+    FDObraEObra: TSingleField;
+    rImageZoom1: TrImageZoom;
+    fdlineasCertificacionesid_factura: TIntegerField;
+    fdlineasCertificacionesano: TIntegerField;
+    actfacturacertificacion: TAction;
     procedure cerrarClick(Sender: TObject);
     procedure GuardarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -274,7 +306,6 @@ type
     procedure fdCertificacionAfterApplyUpdates(DataSet: TFDDataSet;
       AErrors: Integer);
     procedure lbedCertOrigenChange(Sender: TObject);
-    procedure edtRetencionChange(Sender: TObject);
     procedure fdlineasCertificacionesCalcFields(DataSet: TDataSet);
     procedure fdlineasCertificacionesBeforeInsert(DataSet: TDataSet);
     procedure fdlineasCertificacionesAfterInsert(DataSet: TDataSet);
@@ -287,8 +318,6 @@ type
     procedure FDSchemaCertificacionesAfterApplyUpdate(Sender: TObject);
     procedure FDSchemaCertificacionesReconcileRow(ASender: TObject;
       ARow: TFDDatSRow; var Action: TFDDAptReconcileAction);
-    procedure ud1ChangingEx(Sender: TObject; var AllowChange: Boolean;
-      NewValue: Integer; Direction: TUpDownDirection);
     procedure fltfldCertificacionretencionChange(Sender: TField);
     procedure actNuevaCertificacionUpdate(Sender: TObject);
     procedure actNuevaCertificacionExecute(Sender: TObject);
@@ -322,6 +351,14 @@ type
     procedure FDlineasobraBeforePost(DataSet: TDataSet);
     procedure EjecutadoFechaFinlineaExecute(Sender: TObject);
     procedure EjecutadoFechaFinlineaUpdate(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure ToolButton8Click(Sender: TObject);
+    procedure fdcalendarioCalcFields(DataSet: TDataSet);
+    procedure fdcalendarioAfterOpen(DataSet: TDataSet);
+    procedure shellFotosSelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
+    procedure actfacturacertificacionExecute(Sender: TObject);
+    procedure actfacturacertificacionUpdate(Sender: TObject);
 
   private
     { Private declarations }
@@ -699,6 +736,7 @@ FDObra.FieldByName('id_cliente').AsInteger:=FDCliente.FieldByName('IdContactos')
                    fdobra.FieldByName('partidas').asinteger:=0;
                    fdobra.FieldByName('ImporteObra').AsFloat:=0;
                    fdobra.FieldByName('Ejecutado').Asboolean:=false;
+                   fdobra.FieldByName('Eobra').AsFloat:=20;
 Guardar.Enabled:=true;
 Shape1.Brush.Color:=cllime;
 end;
@@ -807,7 +845,8 @@ end;
 
 procedure TFObras.fltfldCertificacionretencionChange(Sender: TField);
 begin
-//edtEdRetencionEuros.Text:=FloatToStr(fltfldFDObraImporteObra.Value*(Sender.NewValue/100))
+if fdCertificacion.State in [dsEdit] then
+fdCertificaciontotalretencion.AsFloat:=(fltfldCertificacionretencion.asfloat*fltfldCertificaciontotal.AsFloat)/100;
 end;
 
 procedure TFObras.fltfldCertificacionretencionValidate(Sender: TField);
@@ -981,6 +1020,18 @@ begin
          end;
 
    end;
+
+    if TPageControl(Sender).ActivePageIndex = 6 then
+   begin
+
+   if not fdcalendario.Active then
+   begin
+       fdcalendario.ParamByName('idobra').AsInteger:=fdobra.FieldByName('id_obra').AsInteger;
+       fdcalendario.Open;
+   end;
+
+   end;
+
 end;
 
 
@@ -988,6 +1039,13 @@ procedure TFObras.rDBGridClientes1FooterCellClick(Sender: TObject;
   ACol: Integer; Column: TColumn);
 begin
    ShowMessage(Column.Field.AsString);
+end;
+
+procedure TFObras.shellFotosSelectItem(Sender: TObject; Item: TListItem;
+  Selected: Boolean);
+begin
+ rImageZoom1.Picture.LoadFromFile(TRzShellList(Sender).SelectedItem.PathName);
+
 end;
 
 procedure TFObras.abrircarpetaExecute(Sender: TObject);
@@ -1045,6 +1103,16 @@ begin
 (Sender as TAction).Enabled:=(not (fdlineasCertificaciones.State in [dsInsert,dsEdit])) and (not(fdlineasCertificaciones.IsEmpty));
 end;
 
+procedure TFObras.actfacturacertificacionExecute(Sender: TObject);
+begin
+DataModule1.nuevo3Execute(Self);
+end;
+
+procedure TFObras.actfacturacertificacionUpdate(Sender: TObject);
+begin
+(Sender as TAction).Enabled:=fdlineasCertificacionesid_factura.IsNull;
+end;
+
 procedure TFObras.actFacturarExecute(Sender: TObject);
 var SelLinObras:TFLineasObrasFacturas;
 begin
@@ -1080,8 +1148,8 @@ begin
 if fdCertificacion.recordcount < 1 then
 begin
   fdCertificacion.Insert;
-  // fdCertificacion.FieldByName('obras_ID_obra').AsInteger:=FDObra.FieldByName('ID_Obra').asinteger;
-   fdCertificacion.FieldByName('retencion').Asinteger:=10;
+
+   fdCertificacion.FieldByName('retencion').Asinteger:=0;
    fdCertificacion.FieldByName('fechaFinretencion').AsDateTime:=Date;
    fdCertificacion.FieldByName('descripcion').AsString:= FDObra.FieldByName('Descripcion').asstring;
 
@@ -1089,8 +1157,8 @@ begin
   else
   fdCertificacion.FieldByName('total').AsFloat:=0;
   fdCertificaciontotalretencion.AsFloat:=fltfldCertificaciontotal.AsFloat * (fltfldCertificacionretencion.AsFloat/100);
-                                                           fdCertificacion.FieldByName('importecertificado').Asfloat:=0;
-                                                           fdCertificacion.FieldByName('importeFalta').Asfloat:=fdCertificacion.FieldByName('total').AsFloat;;
+  fdCertificacion.FieldByName('importecertificado').Asfloat:=0;
+  fdCertificacion.FieldByName('importeFalta').Asfloat:=fdCertificacion.FieldByName('total').AsFloat;;
 
   fdCertificacion.Post;
 
@@ -1103,12 +1171,11 @@ begin
 end;
 
 
- 
+
 
 if not (fdlineasCertificaciones.State in [dsEdit,dsInsert]) then
 begin
   fdlineasCertificaciones.Insert;
-
 end;
 end;
 
@@ -1154,6 +1221,11 @@ begin
 
      Self.Caption:='O. '+fdobra.FieldByName('id_obra').AsString+' '+fdCliente.FieldByName('nombre').Asstring;
 
+end;
+
+procedure TFObras.btn1Click(Sender: TObject);
+begin
+DataModule1.nuevo3Execute(Self);
 end;
 
 procedure TFObras.btn5Click(Sender: TObject);
@@ -1223,9 +1295,10 @@ end;
 
 if not (fdlineasCertificaciones.State in [dsEdit,dsInsert]) then
 begin
+  ShowMessage('Establezca la retención que se aplicara a las certificaciones. Mas tarde no se podra cambiar.');
   fdlineasCertificaciones.Insert;
   fdlineasCertificaciones.FieldByName('certificacion_id_certificacion').AsInteger:=fdCertificacion.FieldByName('id_certificacion').AsInteger;
-  //btnNuevaCerti.Enabled:=False;
+ // btnNuevaCerti.Enabled:=False;
 end;
 end;
 
@@ -1382,19 +1455,30 @@ begin
   if Acol=5 then CanSelect:=false;
 end;
 
-procedure TFObras.ud1ChangingEx(Sender: TObject; var AllowChange: Boolean;
-  NewValue: Integer; Direction: TUpDownDirection);
+procedure TFObras.ToolButton8Click(Sender: TObject);
+var fd1:TFDQuery;
 begin
-{
-AllowChange:=True; {
-if not fdCertificacion.IsEmpty then
-if not (fdCertificacion.State in [dsInsert,dsEdit]) then
-begin
- fdCertificacion.Edit;
- fltfldCertificacionretencion.Value:=NewValue;
- fdCertificacion.Post;
-end;
-{edtEdRetencionEuros.Text:=FloatToStr(fltfldFDObraImporteObra.Value*(newValue/100));}
+  fd1:=TFDQuery.Create(Self);
+  fd1.Connection:=DataModule1.FDConnection1;
+  fd1.SQL.Clear;
+  fd1.SQL.Add('UPDATE lineaspresupuesto SET Ejecutado=1 WHERE presupuestos_id_presupuesto=:pres and presupuestos_grupo=:gr and id_partida=:id');
+
+  fd1.ParamByName('pres').Value:= FDlineasobra.FieldByName('presupuestos_ID_presupuesto').AsInteger;
+  fd1.ParamByName('gr').Value:=FDlineasobra.FieldByName('presupuestos_grupo').AsInteger;
+  fd1.ParamByName('id').Value:=FDlineasobra.FieldByName('presupuestos_id_Partida').AsInteger;
+
+  fd1.Prepare;
+  fd1.ExecSQL;
+
+   case fd1.Command.CommandKind of
+    skUpdate: showmessage(Format(' Se ha finalizado %d linea de presupuesto correctamente', [fd1.RowsAffected]));
+    else      showmessage('Error. No se ha finalizado la linea del presupuesto.');
+    end;
+
+
+
+  fd1.Close;
+  fd1.Free;
 end;
 
 procedure TFObras.ud1Click(Sender: TObject; Button: TUDBtnType);
@@ -1406,38 +1490,14 @@ begin
  //fltfldCertificacionretencion.Value:=ud1.Position;
  fdCertificacion.Post;
 end;
-//edtEdRetencionEuros.Text:=FloatToStr(fltfldFDObraImporteObra.Value*(ud1.Position/100));
+
 end;
-
-procedure TFObras.edtRetencionChange(Sender: TObject);
-begin
-{
-lbedCertOrigenChange(Sender);
-
-if not fdCertificacion.IsEmpty then
-
-if not (fdCertificacion.State in [dsInsert,dsEdit]) then
-begin
- fdCertificacion.Edit;
- fltfldCertificacionretencion.Value:=ud1.Position;
- fdCertificacion.Post;
-end;
-edtEdRetencionEuros.Text:=FloatToStr(fltfldFDObraImporteObra.Value*(ud1.position/100));
- }
-
-end ;
-
-
-
-
-
-
 
 procedure TFObras.EjecutadoFechaFinlineaExecute(Sender: TObject);
 begin
 FDlineasobra.Edit;
 FDlineasobra.FieldByName('ejecutado').AsBoolean:=True;
-FDlineasobra.FieldByName('fechafin').AsDateTime:=date;
+FDlineasobra.FieldByName('fechafin').AsDateTime:=DataModule1.DevolverFechaElegida;
 FDlineasobra.Post;
 
 end;
@@ -1459,6 +1519,22 @@ begin
     nlineas:=qy.RecordCount;
     qy.Active:=false;
     qy.free;
+end;
+
+procedure TFObras.fdcalendarioAfterOpen(DataSet: TDataSet);
+begin
+rdbgrid4.RecalculateSummaryResults(true);
+end;
+
+procedure TFObras.fdcalendarioCalcFields(DataSet: TDataSet);
+begin
+DataSet.FieldByName('totalhoras').AsInteger:=TFDQuery(DataSet).Aggregates.AggregateByName('Thoras').Value;
+DataSet.FieldByName('totaldias').AsInteger:= Integer(TFDQuery(DataSet).Aggregates.AggregateByName('Thoras').Value) mod 8 ;
+DataSet.FieldByName('preciohora').Asfloat:= FDObra.FieldByName('Eobra').asfloat ;
+DataSet.FieldByName('coste').Asfloat:= DataSet.FieldByName('horas').asinteger * Double(DataSet.FieldByName('preciohora').Asfloat);
+DataSet.FieldByName('costetotal').Asfloat:= Integer(TFDQuery(DataSet).Aggregates.AggregateByName('Thoras').Value) * Double(DataSet.FieldByName('preciohora').Asfloat);
+DataSet.FieldByName('rendimiento').Asfloat:= FDObra.FieldByName('ImporteObra').AsFloat -   Dataset.FieldByName('costetotal').Asfloat;
+//rdbgrid4.RecalculateSummaryResults(true);
 end;
 
 procedure TFObras.fdCertificacionAfterApplyUpdates(DataSet: TFDDataSet;
@@ -1496,10 +1572,13 @@ end;
 
 procedure TFObras.fdCertificacionesimporteChange(Sender: TField);
 begin
-if Sender.DataSet.State in [dsInsert] then fdCertificacionesImporteOrigen.AsFloat:=fdCertificacionimportecertificado.AsFloat+fdcertificacionesimporte.AsFloat
- else
-  if Sender.DataSet.State in [dsEdit] then fdCertificacionesImporteOrigen.AsFloat:=fdCertificacionesImporteOrigen.AsFloat+fdcertificacionesimporte.AsFloat;
-
+if Sender.DataSet.State in [dsInsert] then
+  fdCertificacionesImporteOrigen.AsFloat:=fdCertificacionimportecertificado.AsFloat+fdcertificacionesimporte.AsFloat
+  else
+  if Sender.DataSet.State in [dsEdit] then
+   begin
+    fdCertificacionesImporteOrigen.AsFloat:=fdCertificacionesImporteOrigen.AsFloat+fdcertificacionesimporte.AsFloat;
+   end;
 
 
 

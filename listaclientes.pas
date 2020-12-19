@@ -185,7 +185,7 @@ end;
 
 procedure Tlistclientes.ToolButton2Click(Sender: TObject);
 begin
-   DataModule1.insertarpresupuestoExecute(ds1.DataSet);
+DataModule1.insertarpresupuestoExecute(ds1.DataSet);
 end;
 
 procedure Tlistclientes.ToolButton3Click(Sender: TObject);

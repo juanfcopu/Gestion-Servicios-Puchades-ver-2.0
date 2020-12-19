@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,System.DateUtils,
   Data.Bind.DBScope, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls, Vcl.ExtCtrls,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, Vcl.Menus;
 
 type
   Tlistobras = class(TForm)
@@ -39,6 +39,15 @@ type
     ds1: TDataSource;
     lbed1: TLabeledEdit;
     rDBGridClientes1: TrDBGrid_MS;
+    btn6: TToolButton;
+    ToolButton1: TToolButton;
+    btn7: TToolButton;
+    btn8: TToolButton;
+    btn9: TToolButton;
+    btn10: TToolButton;
+    pm1: TPopupMenu;
+    pcliente: TMenuItem;
+    pfactura: TMenuItem;
     procedure FormCreate(Sender: TObject);
 
     procedure Button1Click(Sender: TObject);
@@ -53,6 +62,9 @@ type
     procedure btn5Click(Sender: TObject);
     procedure lbed1Change(Sender: TObject);
     procedure rDBGridClientes1DblClick(Sender: TObject);
+    procedure btn8Click(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure btn10Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -66,10 +78,18 @@ implementation
 
 {$R *.dfm}
 
-uses DModule1;
+uses DModule1,SelectLineasobras;
 
 
 
+
+procedure Tlistobras.btn10Click(Sender: TObject);
+var SelLinObras:TFLineasObrasFacturas;
+begin
+    SelLinObras:=TFLineasObrasFacturas.Create(ds1.dataset);
+    SelLinObras.ShowModal;
+
+end;
 
 procedure Tlistobras.btn1Click(Sender: TObject);
 begin
@@ -94,6 +114,11 @@ if Application.MessageBox('¿Esta seguro de borrar la obra?','Borrar',MB_YESNO)=I
        end
 
    end;
+
+procedure Tlistobras.btn8Click(Sender: TObject);
+begin
+DataModule1.editarclienteExecute(ds1.dataset);
+end;
 
 procedure Tlistobras.Button1Click(Sender: TObject);
 var SQLstr,SQLstr2:string;
@@ -189,6 +214,11 @@ end;
 procedure Tlistobras.rDBGridClientes1DblClick(Sender: TObject);
 begin
 DataModule1.editarObraexecute(DataModule1.fdobras)
+end;
+
+procedure Tlistobras.ToolButton1Click(Sender: TObject);
+begin
+DataModule1.rXLSExport1.ExportDBTable(ds1.DataSet);
 end;
 
 end.

@@ -35,7 +35,7 @@ end;
 
 procedure TFElegirCalendario.RzCalendar1DblClick(Sender: TObject);
 begin
-FCalendario.fechacopia:=RzCalendar1.Date;
+
 Close;
 end;
 

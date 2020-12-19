@@ -72,7 +72,7 @@ uses
 {$R *.dfm}
 
 procedure TFLineasPresupuestoObra.btaAceptarClick(Sender: TObject);
-var i:Integer;   totalobra:Double;   fdobra,fdlineasobra,fdlineaspresu:TFDQuery;
+//var  totalobra:Double;   fdobra,fdlineasobra,fdlineaspresu:TFDQuery;
 begin
 
         {
