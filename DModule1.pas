@@ -268,6 +268,7 @@ type
     ICostesObras: TAction;
     IFacturasImpagadas: TAction;
     IObrasSinFactura: TAction;
+    actCopiarFotos: TAction;
     procedure crearclientesExecute(Sender: TObject);
     procedure listaclientesExecute(Sender: TObject);
     procedure insertarpresupuestoExecute(Sender: TObject);
@@ -336,6 +337,7 @@ type
     procedure ICostesObrasExecute(Sender: TObject);
     procedure IFacturasImpagadasExecute(Sender: TObject);
     procedure IObrasSinFacturaExecute(Sender: TObject);
+    procedure actCopiarFotosExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -403,7 +405,7 @@ implementation
 
 uses  FPrincipal, listaclientes, presupuestos, Elegircalendario,  plantillaspresupuestos,
   listapresupuestos,listaproveedores,PrevisionPresupuestos, listastrabajadores, calendario, obras,bancos, movimientosbancos , listaobras,clientes,listaspagoseguros,EstadisticasGastos,listafacturascompras,listaseguros,listasegurossociales, SelectLineasPresupuestos, config, listaadministradores, administradores, inseradministradores, Empresa, listanominas, facturas, seguros, ClientesDatos, asientos,
-  DmoduleReports;
+  DmoduleReports, copiarfotos;
 
 {$R *.dfm}
 
@@ -1038,6 +1040,14 @@ begin
      conf.ShowModal;
      conf.Close;
 
+end;
+
+procedure TDataModule1.actCopiarFotosExecute(Sender: TObject);
+var cpfotos:TFcopiarFotos;
+begin
+     cpfotos:=TFcopiarFotos.Create(Self);
+     cpfotos.ShowModal;
+     cpfotos.Close;
 end;
 
 procedure TDataModule1.actEditarSeguroExecute(Sender: TObject);

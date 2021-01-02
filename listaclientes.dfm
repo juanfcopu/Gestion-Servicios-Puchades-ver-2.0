@@ -82,7 +82,7 @@ object listclientes: Tlistclientes
       TabOrder = 0
       object lbed1: TLabeledEdit
         Left = 56
-        Top = 29
+        Top = 37
         Width = 193
         Height = 21
         CharCase = ecUpperCase

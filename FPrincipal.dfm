@@ -308,6 +308,17 @@ object principal: Tprincipal
         Caption = 'Entidades'
         ParentColor = False
       end
+      object RzGroup10: TRzGroup
+        Items = <
+          item
+            Action = DataModule1.actCopiarFotos
+          end>
+        Opened = True
+        OpenedHeight = 47
+        DividerVisible = False
+        Caption = 'Herramientas'
+        ParentColor = False
+      end
     end
     object PageControl2: TRzPageControl
       Left = 0

@@ -48,7 +48,8 @@ uses
   FPrincipal in 'FPrincipal.pas' {principal},
   PrevisionPresupuestos in 'PrevisionPresupuestos.pas' {FPrevisionEjecucion},
   listapresupuestos in 'listapresupuestos.pas' {listpresupuestos},
-  plantillaspresupuestos in 'plantillaspresupuestos.pas' {FPlantillasPresupuestos};
+  plantillaspresupuestos in 'plantillaspresupuestos.pas' {FPlantillasPresupuestos},
+  copiarfotos in 'copiarfotos.pas' {FcopiarFotos};
 
 {$R *.res}
 
@@ -60,5 +61,6 @@ begin
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TDataModule2, DataModule2);
   Application.CreateForm(Tlistpresupuestos, listpresupuestos);
+  Application.CreateForm(TFcopiarFotos, FcopiarFotos);
   Application.Run;
 end.

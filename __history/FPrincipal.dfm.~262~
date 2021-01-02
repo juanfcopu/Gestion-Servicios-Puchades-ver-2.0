@@ -85,7 +85,7 @@ object principal: Tprincipal
     AlignWithMargins = True
     Left = 3
     Top = 32
-    Width = 1188
+    Width = 1205
     Height = 823
     Position = 243
     Percent = 20
@@ -225,6 +225,38 @@ object principal: Tprincipal
         Caption = 'Gastos'
         ParentColor = False
       end
+      object RzGroup9: TRzGroup
+        GroupController = RzGroupController1
+        Items = <
+          item
+            Action = DataModule1.IPresupuestosAprovados
+          end
+          item
+            Action = DataModule1.IpresupuestosAprovadosFecha
+          end
+          item
+            Action = DataModule1.IpresupuestosTipo
+          end
+          item
+            Action = DataModule1.IObrasSinFactura
+          end
+          item
+            Action = DataModule1.ICostesObras
+          end
+          item
+            Action = DataModule1.IFacturasImpagadas
+          end>
+        Opened = True
+        OpenedHeight = 147
+        Caption = 'Informes'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
       object RzGroup6: TRzGroup
         CaptionHeight = 30
         CaptionImageIndex = 14
@@ -280,7 +312,7 @@ object principal: Tprincipal
     object PageControl2: TRzPageControl
       Left = 0
       Top = 0
-      Width = 941
+      Width = 958
       Height = 823
       Hint = ''
       Align = alClient
@@ -295,18 +327,17 @@ object principal: Tprincipal
     end
   end
   object RzPanel1: TRzPanel
-    AlignWithMargins = True
-    Left = 1197
-    Top = 32
-    Width = 185
-    Height = 823
+    Left = 1211
+    Top = 29
+    Width = 174
+    Height = 829
     Align = alRight
     DockSite = True
     TabOrder = 3
     object Label1: TLabel
       Left = 4
       Top = 4
-      Width = 177
+      Width = 166
       Height = 21
       Align = alTop
       AutoSize = False
@@ -322,12 +353,15 @@ object principal: Tprincipal
       ParentFont = False
       Transparent = False
       Layout = tlCenter
+      ExplicitLeft = 2
+      ExplicitTop = 2
+      ExplicitWidth = 2
     end
     object ListBox1: TListBox
       AlignWithMargins = True
       Left = 7
       Top = 28
-      Width = 171
+      Width = 160
       Height = 129
       Align = alTop
       DragKind = dkDock
@@ -335,9 +369,32 @@ object principal: Tprincipal
       ItemHeight = 13
       TabOrder = 0
     end
+    object CharFacturacion: TDBChart
+      AlignWithMargins = True
+      Left = 7
+      Top = 163
+      Width = 160
+      Height = 214
+      Title.Text.Strings = (
+        'TDBChart')
+      Align = alTop
+      TabOrder = 1
+      DefaultCanvas = 'TGDIPlusCanvas'
+      ColorPaletteIndex = 13
+    end
   end
   object AppEvent1: TApplicationEvents
     Left = 1318
     Top = 42
+  end
+  object RzGroupController1: TRzGroupController
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Left = 554
+    Top = 624
   end
 end

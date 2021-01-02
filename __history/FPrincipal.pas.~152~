@@ -31,6 +31,10 @@ type
     RzPanel1: TRzPanel;
     ListBox1: TListBox;
     PageControl2: TRzPageControl;
+    Label1: TLabel;
+    CharFacturacion: TDBChart;
+    RzGroup9: TRzGroup;
+    RzGroupController1: TRzGroupController;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure pagecontrol2Close(Sender: TObject; var AllowClose: Boolean);
@@ -58,8 +62,13 @@ var I:Integer; f:TCustomForm;
 begin
 for I :=0 to PageControl2.PageCount - 1 do
    begin
+
+
+    if (PageControl2.Pages[I].Controls[0] is TCustomForm) then
+     begin
      f:=TCustomForm(PageControl2.Pages[I].Controls[0]);
-    f.Close;
+     f.Close;
+     end;
    end;
 
 {for I:=0 to DataModule1.FDConnection1.DataSetCount-1  do
@@ -70,7 +79,7 @@ for I :=0 to PageControl2.PageCount - 1 do
 
     end;}
 
- DataModule1.FDConnection1.Connected:=False;
+ //DataModule1.FDConnection1.Connected:=False;
 
 end;
 

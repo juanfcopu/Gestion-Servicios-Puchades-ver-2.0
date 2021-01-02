@@ -1,0 +1,130 @@
+unit copiarfotos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RzPanel, Vcl.ExtCtrls, RzButton,
+  Vcl.StdCtrls, RzCmboBx, RzShellCtrls, Vcl.ComCtrls, RzListVw, Vcl.WinXCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, rDBGrid, rDBGrid_MS, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList, Vcl.ImgList;
+
+type
+  TFcopiarFotos = class(TForm)
+    RzToolbar1: TRzToolbar;
+    RzStatusBar1: TRzStatusBar;
+    Panel1: TPanel;
+    Splitter1: TSplitter;
+    pnl1: TPanel;
+    RzShellList1: TRzShellList;
+    RzShellCombo1: TRzShellCombo;
+    RzToolButton1: TRzToolButton;
+    RzToolButton2: TRzToolButton;
+    RzToolButton3: TRzToolButton;
+    RzSpacer1: TRzSpacer;
+    Panel2: TPanel;
+    ToggleSwitch1: TToggleSwitch;
+    rdbgrid1: TrDBGrid_MS;
+    edbuscar: TEdit;
+    ds1: TDataSource;
+    fdobraspresupuestos: TFDQuery;
+    Button1: TButton;
+    ImageList1: TImageList;
+    procedure RzToolButton1Click(Sender: TObject);
+    procedure RzToolButton2Click(Sender: TObject);
+    procedure RzToolButton3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ToggleSwitch1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure fdobraspresupuestosAfterScroll(DataSet: TDataSet);
+    procedure edbuscarChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FcopiarFotos: TFcopiarFotos;
+
+implementation
+
+uses
+  DModule1;
+
+{$R *.dfm}
+
+procedure TFcopiarFotos.edbuscarChange(Sender: TObject);
+begin
+fdobraspresupuestos.DisableControls;
+fdobraspresupuestos.Filtered:=False;
+fdobraspresupuestos.Filter:='nombre LIKE ''%'+edbuscar.Text+'%''';
+fdobraspresupuestos.Filtered:=True;
+fdobraspresupuestos.EnableControls;
+
+
+ if Length(edbuscar.text)<1 then fdobraspresupuestos.Filtered:=False;
+end;
+
+procedure TFcopiarFotos.fdobraspresupuestosAfterScroll(DataSet: TDataSet);
+var path:string;
+begin
+if ToggleSwitch1.State = tssOff then
+path:= PATHDOCPRESUPUESTOS+'\'+fdobraspresupuestos.FieldByName('numero').asstring+'\Fotos'
+else
+path:= PATHDOCOBRAS+'\'+fdobraspresupuestos.FieldByName('nombre').asstring+'\'+fdobraspresupuestos.FieldByName('numero').asstring+'\Fotos';
+
+
+if DirectoryExists(path)  then   RzShellCombo1.SelectedFolder.PathName:= path;
+end;
+
+procedure TFcopiarFotos.FormActivate(Sender: TObject);
+begin
+  ToggleSwitch1Click(ToggleSwitch1);
+end;
+
+procedure TFcopiarFotos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+ fdobraspresupuestos.close;
+Action:=caFree;
+end;
+
+procedure TFcopiarFotos.RzToolButton1Click(Sender: TObject);
+begin
+RzShellList1.ViewStyle:=vsIcon;
+end;
+
+procedure TFcopiarFotos.RzToolButton2Click(Sender: TObject);
+begin
+RzShellList1.ViewStyle:=vsList;
+
+end;
+
+procedure TFcopiarFotos.RzToolButton3Click(Sender: TObject);
+begin
+RzShellList1.ViewStyle:=vsReport;
+
+end;
+
+procedure TFcopiarFotos.ToggleSwitch1Click(Sender: TObject);
+var SQL:string;
+begin
+
+ if ToggleSwitch1.State = tssOff then
+    SQL:='Select CONCAT(P.id_presupuesto,P.grupo) as numero,C.nombre, LP.descripcion from clientes C, presupuestos P, lineaspresupuesto LP where C.idContactos=P.id_clientePrev and P.id_presupuesto=LP.presupuestos_id_presupuesto and P.grupo=LP.presupuestos_grupo'
+    else
+     SQL:='Select O.id_obra as numero,C.nombre, LO.descripcion,O.path from clientes C, obras O, lineasobras LO where C.idContactos=O.id_cliente and O.id_obra=LO.obras_id_obra';
+
+ fdobraspresupuestos.close;
+ fdobraspresupuestos.SQL.Clear;
+ fdobraspresupuestos.Open(SQL);
+
+
+
+
+
+end;
+
+end.

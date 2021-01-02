@@ -239,6 +239,36 @@ type
     nuevo3: TAction;
     fdcategoriapresupuestos: TFDQuery;
     fdpresupuestosejecutado: TBooleanField;
+    fdfacturasEmisorFactura: TIntegerField;
+    fdfacturasobservaciones: TMemoField;
+    fdfacturastipo: TIntegerField;
+    fdfacturasobra: TIntegerField;
+    fdfacturascertificacion: TIntegerField;
+    fdfacturaslineacertificacion: TIntegerField;
+    fdfacturasDireccion: TStringField;
+    fdfacturasCiudad: TStringField;
+    fdfacturasTelefonoCasa: TIntegerField;
+    fdfacturasTelefonoMovil: TIntegerField;
+    fdfacturasmail: TStringField;
+    fdfacturasNumFax: TIntegerField;
+    fdfacturasCodigoPostal: TStringField;
+    fdfacturasidAdministrador: TIntegerField;
+    fdfacturasCP: TBooleanField;
+    fdfacturasIBAN: TStringField;
+    fdfacturasbanco: TStringField;
+    fdfacturasnombrefactura: TStringField;
+    fdfacturasciffactura: TStringField;
+    fdfacturasciudadfactura: TStringField;
+    fdfacturasdireccionfactura: TStringField;
+    fdfacturascodigopostalfactura: TStringField;
+    fdfacturasfamilia: TIntegerField;
+    IpresupuestosAprovadosFecha: TAction;
+    IpresupuestosTipo: TAction;
+    IPresupuestosAprovados: TAction;
+    ICostesObras: TAction;
+    IFacturasImpagadas: TAction;
+    IObrasSinFactura: TAction;
+    actCopiarFotos: TAction;
     procedure crearclientesExecute(Sender: TObject);
     procedure listaclientesExecute(Sender: TObject);
     procedure insertarpresupuestoExecute(Sender: TObject);
@@ -301,6 +331,12 @@ type
     procedure previsionejecucionExecute(Sender: TObject);
     procedure nuevo3Execute(Sender: TObject);
     procedure fdfacturasAfterRefresh(DataSet: TDataSet);
+    procedure IpresupuestosAprovadosFechaExecute(Sender: TObject);
+    procedure IPresupuestosAprovadosExecute(Sender: TObject);
+    procedure IpresupuestosTipoExecute(Sender: TObject);
+    procedure ICostesObrasExecute(Sender: TObject);
+    procedure IFacturasImpagadasExecute(Sender: TObject);
+    procedure IObrasSinFacturaExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -367,7 +403,8 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses  FPrincipal, listaclientes, presupuestos, Elegircalendario,  plantillaspresupuestos,
-  listapresupuestos,listaproveedores,PrevisionPresupuestos, listastrabajadores, calendario, obras,bancos, movimientosbancos , listaobras,clientes,listaspagoseguros,EstadisticasGastos,listafacturascompras,listaseguros,listasegurossociales, SelectLineasPresupuestos, config, listaadministradores, administradores, inseradministradores, Empresa, listanominas, facturas, seguros, ClientesDatos, asientos;
+  listapresupuestos,listaproveedores,PrevisionPresupuestos, listastrabajadores, calendario, obras,bancos, movimientosbancos , listaobras,clientes,listaspagoseguros,EstadisticasGastos,listafacturascompras,listaseguros,listasegurossociales, SelectLineasPresupuestos, config, listaadministradores, administradores, inseradministradores, Empresa, listanominas, facturas, seguros, ClientesDatos, asientos,
+  DmoduleReports;
 
 {$R *.dfm}
 
@@ -1259,6 +1296,26 @@ begin
    else showmessage('El presupuesto no esta aprobado, no se puede crear la obra.');
 end;
 
+procedure TDataModule1.IObrasSinFacturaExecute(Sender: TObject);
+begin
+DataModule2.frxObrasSinFacturar.ShowReport(true);
+end;
+
+procedure TDataModule1.IPresupuestosAprovadosExecute(Sender: TObject);
+begin
+DataModule2.frxPresupuestosAprobados.ShowReport(true);
+end;
+
+procedure TDataModule1.IpresupuestosAprovadosFechaExecute(Sender: TObject);
+begin
+DataModule2.frxPresupuestosPorFecha.ShowReport(true);
+end;
+
+procedure TDataModule1.IpresupuestosTipoExecute(Sender: TObject);
+begin
+ DataModule2.frxPresupuestoTipo.ShowReport(true);
+end;
+
 function TDataModule1.IVA(tipo:integer):real;
 begin
   case tipo of
@@ -1753,6 +1810,16 @@ begin
 
 end;
 
+
+procedure TDataModule1.ICostesObrasExecute(Sender: TObject);
+begin
+DataModule2.frxcostesobra.ShowReport(true);
+end;
+
+procedure TDataModule1.IFacturasImpagadasExecute(Sender: TObject);
+begin
+DataModule2.frxFacturasImpagadas.ShowReport(True);
+end;
 
 procedure TDataModule1.RefrescarDataSet(lquery:TStringlist);
 var i: integer;  cambios:boolean;
