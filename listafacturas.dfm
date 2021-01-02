@@ -288,7 +288,7 @@ object listfacturas: Tlistfacturas
       Left = 226
       Top = 0
       Caption = 'ToolButton2'
-      ImageIndex = 44
+      ImageIndex = 69
       OnClick = ToolButton2Click
     end
     object ToolButton3: TToolButton

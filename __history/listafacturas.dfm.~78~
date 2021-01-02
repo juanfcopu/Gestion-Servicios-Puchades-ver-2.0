@@ -284,6 +284,42 @@ object listfacturas: Tlistfacturas
       ShowHint = True
       OnClick = btnExcelClick
     end
+    object ToolButton2: TToolButton
+      Left = 226
+      Top = 0
+      Caption = 'ToolButton2'
+      ImageIndex = 44
+      OnClick = ToolButton2Click
+    end
+    object ToolButton3: TToolButton
+      Left = 268
+      Top = 0
+      Caption = 'ToolButton3'
+      ImageIndex = 45
+      OnClick = ToolButton3Click
+    end
+    object btnImprimir: TToolButton
+      Left = 310
+      Top = 0
+      Caption = 'btnImprimir'
+      ImageIndex = 57
+      OnClick = btnImprimirClick
+    end
+    object btn6: TToolButton
+      Left = 352
+      Top = 0
+      Width = 8
+      Caption = 'btn6'
+      ImageIndex = 46
+      Style = tbsSeparator
+    end
+    object btn7: TToolButton
+      Left = 360
+      Top = 0
+      Caption = 'btn7'
+      ImageIndex = 24
+      OnClick = btn7Click
+    end
   end
   object rDBGridClientes1: TrDBGrid_MS
     Left = 0
@@ -499,9 +535,5 @@ object listfacturas: Tlistfacturas
     DataSet = DataModule1.fdfacturas
     Left = 1104
     Top = 336
-  end
-  object FDQuery1: TFDQuery
-    Left = 1096
-    Top = 440
   end
 end

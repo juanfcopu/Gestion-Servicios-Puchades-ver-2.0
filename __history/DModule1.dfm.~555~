@@ -6,9 +6,6 @@ object DataModule1: TDataModule1
   Width = 1368
   object FDMySQLDriverLink: TFDPhysMySQLDriverLink
     DriverID = 'MySQL'
-    VendorLib = 
-      'C:\Users\juanf\OneDrive\Documentos\GitHub\Gestion-Servicios-Puch' +
-      'ades-ver-2.0\Win32\Release\libmysql.dll'
     Left = 180
     Top = 32
   end
@@ -47,7 +44,7 @@ object DataModule1: TDataModule1
     Left = 488
     Top = 32
     Bitmap = {
-      494C01014500C002940420002000FFFFFFFF2000FFFFFFFFFFFFFFFF424D3600
+      494C01014500C002980420002000FFFFFFFF2000FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004002000001002000000000000080
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -9496,6 +9493,36 @@ object DataModule1: TDataModule1
       Caption = 'nuevo3'
       OnExecute = nuevo3Execute
     end
+    object IpresupuestosAprovadosFecha: TAction
+      Category = 'Informes'
+      Caption = 'Presupuestos aprovados por fecha'
+      OnExecute = IpresupuestosAprovadosFechaExecute
+    end
+    object IpresupuestosTipo: TAction
+      Category = 'Informes'
+      Caption = 'Presupuestos aprobados por tipo'
+      OnExecute = IpresupuestosTipoExecute
+    end
+    object IPresupuestosAprovados: TAction
+      Category = 'Informes'
+      Caption = 'Presupuestos aprobados'
+      OnExecute = IPresupuestosAprovadosExecute
+    end
+    object ICostesObras: TAction
+      Category = 'Informes'
+      Caption = 'Costes obras'
+      OnExecute = ICostesObrasExecute
+    end
+    object IFacturasImpagadas: TAction
+      Category = 'Informes'
+      Caption = 'Facturas impagadas'
+      OnExecute = IFacturasImpagadasExecute
+    end
+    object IObrasSinFactura: TAction
+      Category = 'Informes'
+      Caption = 'Obras sin factura'
+      OnExecute = IObrasSinFacturaExecute
+    end
   end
   object fdClientes: TFDQuery
     Indexes = <
@@ -9663,7 +9690,7 @@ object DataModule1: TDataModule1
     Left = 160
     Top = 168
     Bitmap = {
-      494C010115002000940318001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115002000980318001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000006000000090000000010020000000000000D8
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -11567,11 +11594,7 @@ object DataModule1: TDataModule1
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     SQL.Strings = (
-      
-        'select f.idfactura, c.Nombre,c.IdContactos,f.id_asiento, f.idcli' +
-        'ente,f.ano,f.cantidad,f.acuenta, f.fechafactura, f.concepto, f.t' +
-        'otalbruto, f.iva,f.total,f.pagada,c.cif,f.importeIVA,f.retencion' +
-        ',f.importeRetencion,baseimponible'
+      'select *'
       'from facturas f, clientes c'
       'where c.idcontactos=f.IdCliente ')
     Left = 744
@@ -11655,6 +11678,167 @@ object DataModule1: TDataModule1
       AutoGenerateValue = arDefault
       FieldName = 'id_asiento'
       Origin = 'id_asiento'
+    end
+    object fdfacturasEmisorFactura: TIntegerField
+      FieldName = 'EmisorFactura'
+      Origin = 'EmisorFactura'
+      Required = True
+    end
+    object fdfacturasobservaciones: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'observaciones'
+      Origin = 'observaciones'
+      BlobType = ftMemo
+    end
+    object fdfacturastipo: TIntegerField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+      Required = True
+    end
+    object fdfacturasobra: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'obra'
+      Origin = 'obra'
+    end
+    object fdfacturascertificacion: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'certificacion'
+      Origin = 'certificacion'
+    end
+    object fdfacturaslineacertificacion: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'lineacertificacion'
+      Origin = 'lineacertificacion'
+    end
+    object fdfacturasDireccion: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Direccion'
+      Origin = 'Direccion'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 255
+    end
+    object fdfacturasCiudad: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Ciudad'
+      Origin = 'Ciudad'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object fdfacturasTelefonoCasa: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'TelefonoCasa'
+      Origin = 'TelefonoCasa'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object fdfacturasTelefonoMovil: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'TelefonoMovil'
+      Origin = 'TelefonoMovil'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object fdfacturasmail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'mail'
+      Origin = 'mail'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object fdfacturasNumFax: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'NumFax'
+      Origin = 'NumFax'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object fdfacturasCodigoPostal: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CodigoPostal'
+      Origin = 'CodigoPostal'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object fdfacturasidAdministrador: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'idAdministrador'
+      Origin = 'idAdministrador'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object fdfacturasCP: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'CP'
+      Origin = 'CP'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object fdfacturasIBAN: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'IBAN'
+      Origin = 'IBAN'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 255
+    end
+    object fdfacturasbanco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'banco'
+      Origin = 'banco'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object fdfacturasnombrefactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nombrefactura'
+      Origin = 'nombrefactura'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object fdfacturasciffactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ciffactura'
+      Origin = 'ciffactura'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object fdfacturasciudadfactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ciudadfactura'
+      Origin = 'ciudadfactura'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object fdfacturasdireccionfactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'direccionfactura'
+      Origin = 'direccionfactura'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 255
+    end
+    object fdfacturascodigopostalfactura: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codigopostalfactura'
+      Origin = 'codigopostalfactura'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object fdfacturasfamilia: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'familia'
+      Origin = 'familia'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object rDBGridSorter_FireDac1: TrDBGridSorter_FireDac
@@ -12268,7 +12452,7 @@ object DataModule1: TDataModule1
     Left = 488
     Top = 112
     Bitmap = {
-      494C0101160018008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010116001800900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000CB64130000000000000000000000

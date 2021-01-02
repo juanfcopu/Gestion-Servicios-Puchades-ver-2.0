@@ -323,8 +323,6 @@ object principal: Tprincipal
       TabStyle = tsSquareCorners
       OnClose = pagecontrol2Close
       OnDockOver = PageControl2DockOver
-      ExplicitLeft = 1
-      ExplicitTop = -3
       FixedDimension = 19
     end
   end
